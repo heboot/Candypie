@@ -1,37 +1,21 @@
 package com.gdlife.candypie.activitys.common;
 
-import android.support.annotation.NonNull;
-import android.support.v4.widget.DrawerLayout;
-import android.view.Gravity;
+import android.support.v4.content.ContextCompat;
 import android.view.KeyEvent;
 import android.view.View;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.faceunity.FURenderer;
-import com.gdlife.candypie.MAPP;
 import com.gdlife.candypie.R;
 import com.gdlife.candypie.base.BaseActivity;
-import com.gdlife.candypie.common.MValue;
-import com.gdlife.candypie.common.NumEventKeys;
 import com.gdlife.candypie.databinding.ActivityMainBinding;
 import com.gdlife.candypie.fragments.index.IndexFragment;
 import com.gdlife.candypie.fragments.message.MessageContainerFragment;
 import com.gdlife.candypie.fragments.my.MyFragment;
 import com.gdlife.candypie.fragments.rank.RankContainerFragment;
-import com.gdlife.candypie.fragments.rank.RankListFragment;
-import com.gdlife.candypie.serivce.LeftMenuService;
 import com.gdlife.candypie.serivce.PushService;
 import com.gdlife.candypie.serivce.UserService;
 import com.gdlife.candypie.utils.DialogUtils;
-import com.gdlife.candypie.utils.ImageUtils;
-import com.gdlife.candypie.utils.IntentUtils;
 import com.gdlife.candypie.utils.PermissionUtils;
-import com.gdlife.candypie.utils.StringUtils;
-import com.gdlife.candypie.utils.ani.IndexAniUtils;
-import com.heboot.event.DiscoverEvent;
 import com.heboot.event.MessageEvent;
 import com.heboot.event.NormalEvent;
 import com.heboot.event.UserEvent;
@@ -39,15 +23,10 @@ import com.heboot.utils.MStatusBarUtils;
 import com.netease.nimlib.sdk.NIMClient;
 import com.netease.nimlib.sdk.msg.MsgService;
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
-import com.umeng.analytics.MobclickAgent;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 import me.yokeyword.fragmentation.ISupportFragment;
-import me.yokeyword.fragmentation.SupportHelper;
 
 
 public class MainActivity extends BaseActivity<ActivityMainBinding> {
@@ -66,10 +45,6 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
 
     private ISupportFragment currentFragment;
 
-    private List<ImageView> bottomIcons = new ArrayList<>();
-
-    private List<TextView> bottomTvs = new ArrayList<>();
-
     @Override
     protected int getLayoutId() {
         return R.layout.activity_main;
@@ -77,17 +52,15 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
 
     @Override
     public void initUI() {
-        QMUIStatusBarHelper.translucent(this, 0x80221B33);
+        QMUIStatusBarHelper.translucent(this);
         MStatusBarUtils.setActivityNOLightMode(this);
         permissionUtils = new PermissionUtils();
         pushService = new PushService();
         setSwipeBackEnable(false);
         initBottomMenu();
-
+        setUnreadText();
         mDelegate.loadMultipleRootFragment(binding.flytContainer.getId(), 0, indexFragment, rankContainerFragment, messageContainerFragment, myFragment);
-
         currentFragment = indexFragment;
-//        mDelegate.loadRootFragment(binding.flytContainer.getId(), indexFragment);
     }
 
     @Override
@@ -95,6 +68,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
         FURenderer.initFURenderer(this);
         pushService.initHuawei(this);
         DialogUtils.showIndexDialog(this, permissionUtils, false, null);
+
     }
 
     @Override
@@ -181,9 +155,22 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
         binding.includeBottomMenu.includeMenuRank.ivImg.setBackgroundResource(R.drawable.selector_bottom_menu_rank);
         binding.includeBottomMenu.includeMenuMsg.ivImg.setBackgroundResource(R.drawable.selector_bottom_menu_msg);
         binding.includeBottomMenu.includeMenuMy.ivImg.setBackgroundResource(R.drawable.selector_bottom_menu_my);
+
+
+        binding.includeBottomMenu.includeMenuIndex.tvMenuName.setText("首页");
+        binding.includeBottomMenu.includeMenuRank.tvMenuName.setText("榜单");
+        binding.includeBottomMenu.includeMenuMsg.tvMenuName.setText("消息");
+        binding.includeBottomMenu.includeMenuMy.tvMenuName.setText("我的");
+
         binding.includeBottomMenu.includeMenuIndex.ivImg.setSelected(true);
+
     }
 
+    /**
+     * 选择底部菜单
+     *
+     * @param index
+     */
     private void checkBottomMenu(int index) {
         switch (index) {
             case 0:
@@ -191,24 +178,40 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
                 binding.includeBottomMenu.includeMenuRank.ivImg.setBackgroundResource(R.drawable.icon_bottom_menu_rank_normal);
                 binding.includeBottomMenu.includeMenuMsg.ivImg.setBackgroundResource(R.drawable.icon_bottom_menu_msg_normal);
                 binding.includeBottomMenu.includeMenuMy.ivImg.setBackgroundResource(R.drawable.icon_bottom_menu_my_normal);
+                binding.includeBottomMenu.includeMenuIndex.tvMenuName.setTextColor(ContextCompat.getColor(this, R.color.theme_color));
+                binding.includeBottomMenu.includeMenuRank.tvMenuName.setTextColor(ContextCompat.getColor(this, R.color.color_898A9E));
+                binding.includeBottomMenu.includeMenuMsg.tvMenuName.setTextColor(ContextCompat.getColor(this, R.color.color_898A9E));
+                binding.includeBottomMenu.includeMenuMy.tvMenuName.setTextColor(ContextCompat.getColor(this, R.color.color_898A9E));
                 break;
             case 1:
                 binding.includeBottomMenu.includeMenuIndex.ivImg.setBackgroundResource(R.drawable.icon_bottom_menu_main_normal);
                 binding.includeBottomMenu.includeMenuRank.ivImg.setBackgroundResource(R.drawable.icon_bottom_menu_rank_fouse);
                 binding.includeBottomMenu.includeMenuMsg.ivImg.setBackgroundResource(R.drawable.icon_bottom_menu_msg_normal);
                 binding.includeBottomMenu.includeMenuMy.ivImg.setBackgroundResource(R.drawable.icon_bottom_menu_my_normal);
+                binding.includeBottomMenu.includeMenuIndex.tvMenuName.setTextColor(ContextCompat.getColor(this, R.color.color_898A9E));
+                binding.includeBottomMenu.includeMenuRank.tvMenuName.setTextColor(ContextCompat.getColor(this, R.color.theme_color));
+                binding.includeBottomMenu.includeMenuMsg.tvMenuName.setTextColor(ContextCompat.getColor(this, R.color.color_898A9E));
+                binding.includeBottomMenu.includeMenuMy.tvMenuName.setTextColor(ContextCompat.getColor(this, R.color.color_898A9E));
                 break;
             case 2:
                 binding.includeBottomMenu.includeMenuIndex.ivImg.setBackgroundResource(R.drawable.icon_bottom_menu_main_normal);
                 binding.includeBottomMenu.includeMenuRank.ivImg.setBackgroundResource(R.drawable.icon_bottom_menu_rank_normal);
                 binding.includeBottomMenu.includeMenuMsg.ivImg.setBackgroundResource(R.drawable.icon_bottom_menu_msg_fouse);
                 binding.includeBottomMenu.includeMenuMy.ivImg.setBackgroundResource(R.drawable.icon_bottom_menu_my_normal);
+                binding.includeBottomMenu.includeMenuIndex.tvMenuName.setTextColor(ContextCompat.getColor(this, R.color.color_898A9E));
+                binding.includeBottomMenu.includeMenuRank.tvMenuName.setTextColor(ContextCompat.getColor(this, R.color.color_898A9E));
+                binding.includeBottomMenu.includeMenuMsg.tvMenuName.setTextColor(ContextCompat.getColor(this, R.color.theme_color));
+                binding.includeBottomMenu.includeMenuMy.tvMenuName.setTextColor(ContextCompat.getColor(this, R.color.color_898A9E));
                 break;
             case 3:
                 binding.includeBottomMenu.includeMenuIndex.ivImg.setBackgroundResource(R.drawable.icon_bottom_menu_main_normal);
                 binding.includeBottomMenu.includeMenuRank.ivImg.setBackgroundResource(R.drawable.icon_bottom_menu_rank_normal);
                 binding.includeBottomMenu.includeMenuMsg.ivImg.setBackgroundResource(R.drawable.icon_bottom_menu_msg_normal);
                 binding.includeBottomMenu.includeMenuMy.ivImg.setBackgroundResource(R.drawable.icon_bottom_menu_my_fouse);
+                binding.includeBottomMenu.includeMenuIndex.tvMenuName.setTextColor(ContextCompat.getColor(this, R.color.color_898A9E));
+                binding.includeBottomMenu.includeMenuRank.tvMenuName.setTextColor(ContextCompat.getColor(this, R.color.color_898A9E));
+                binding.includeBottomMenu.includeMenuMsg.tvMenuName.setTextColor(ContextCompat.getColor(this, R.color.color_898A9E));
+                binding.includeBottomMenu.includeMenuMy.tvMenuName.setTextColor(ContextCompat.getColor(this, R.color.theme_color));
                 break;
         }
     }
@@ -220,12 +223,12 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
             if (unread > 99) {
                 unread = 99;
             }
-            binding.includeBottomMenu.tvUnread2.setText(String.valueOf(unread));
-            binding.includeBottomMenu.tvUnread2.setVisibility(View.VISIBLE);
+            binding.includeBottomMenu.includeMenuMsg.tvUnread2.setText(String.valueOf(unread));
+            binding.includeBottomMenu.includeMenuMsg.tvUnread2.setVisibility(View.VISIBLE);
 
 
         } else {
-            binding.includeBottomMenu.tvUnread2.setVisibility(View.INVISIBLE);
+            binding.includeBottomMenu.includeMenuMsg.tvUnread2.setVisibility(View.INVISIBLE);
 
         }
     }
@@ -233,6 +236,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
 
     @Override
     public void onBackPressedSupport() {
+
     }
 
 

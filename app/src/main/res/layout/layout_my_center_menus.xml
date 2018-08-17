@@ -283,7 +283,6 @@
             android:id="@+id/iv_banner"
             android:layout_width="match_parent"
             android:layout_height="@dimen/y96"
-            android:background="@color/robot_link_element_text_blue"
             android:shadowColor="@color/color_343445"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"

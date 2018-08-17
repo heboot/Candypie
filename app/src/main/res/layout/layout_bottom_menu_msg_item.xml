@@ -27,5 +27,19 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/iv_img" />
 
+        <TextView
+            android:id="@+id/tv_unread2"
+            android:layout_width="@dimen/x15"
+            android:layout_height="@dimen/y15"
+            android:layout_marginTop="@dimen/y2"
+            android:background="@drawable/bg_oval_red"
+            android:gravity="center"
+            android:text="1"
+            android:textColor="@color/white"
+            android:textSize="@dimen/x10"
+            app:layout_constraintRight_toRightOf="@+id/iv_img"
+            app:layout_constraintTop_toTopOf="@+id/iv_img"
+
+            />
     </android.support.constraint.ConstraintLayout>
 </layout>

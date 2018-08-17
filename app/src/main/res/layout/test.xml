@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <com.qmuiteam.qmui.layout.QMUILinearLayout
+        android:layout_width="0dp"
+        android:layout_height="@dimen/y100"
+        android:layout_marginTop="@dimen/y100"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:qmui_borderColor="?attr/qmui_config_color_separator"
+        app:qmui_outerNormalColor="?attr/qmui_config_color_background"
+        app:qmui_shadowAlpha="1"
+        app:qmui_shadowElevation="22dp"
+        app:qmui_showBorderOnlyBeforeL="true"></com.qmuiteam.qmui.layout.QMUILinearLayout>
+</android.support.constraint.ConstraintLayout>
