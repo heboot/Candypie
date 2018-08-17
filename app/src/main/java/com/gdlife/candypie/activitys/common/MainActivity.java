@@ -1,5 +1,8 @@
 package com.gdlife.candypie.activitys.common;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.v4.content.ContextCompat;
 import android.view.KeyEvent;
 import android.view.View;
@@ -14,13 +17,17 @@ import com.gdlife.candypie.fragments.my.MyFragment;
 import com.gdlife.candypie.fragments.rank.RankContainerFragment;
 import com.gdlife.candypie.serivce.PushService;
 import com.gdlife.candypie.serivce.UserService;
+import com.gdlife.candypie.serivce.aservice.ForegroundService;
 import com.gdlife.candypie.serivce.theme.VideoChatService;
 import com.gdlife.candypie.utils.DialogUtils;
 import com.gdlife.candypie.utils.PermissionUtils;
+import com.gdlife.candypie.utils.ScreenManager;
+import com.gdlife.candypie.utils.ScreenReceiverUtil;
 import com.heboot.entity.User;
 import com.heboot.event.MessageEvent;
 import com.heboot.event.NormalEvent;
 import com.heboot.event.UserEvent;
+import com.heboot.utils.LogUtil;
 import com.heboot.utils.MStatusBarUtils;
 import com.netease.nimlib.sdk.NIMClient;
 import com.netease.nimlib.sdk.msg.MsgService;
@@ -49,6 +56,15 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
 
     private VideoChatService videoChatService;
 
+
+    /**
+     * 保活相关
+     */
+    // 动态注册锁屏等广播
+    private ScreenReceiverUtil mScreenListener;
+    // 1像素Activity管理类
+    private ScreenManager mScreenManager;
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_main;
@@ -65,12 +81,17 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
         setUnreadText();
         mDelegate.loadMultipleRootFragment(binding.flytContainer.getId(), 0, indexFragment, rankContainerFragment, messageContainerFragment, myFragment);
         currentFragment = indexFragment;
+        startFService();
     }
 
     @Override
     public void initData() {
         pushService.initHuawei(this);
         DialogUtils.showIndexDialog(this, permissionUtils, false, null);
+
+        mScreenListener = new ScreenReceiverUtil(this);
+        mScreenManager = ScreenManager.getScreenManagerInstance(this);
+        mScreenListener.setScreenReceiverListener(mScreenListenerer);
 
     }
 
@@ -219,6 +240,18 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
         }
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+        LogUtil.e(TAG, "onSaveInstanceState");
+        super.onSaveInstanceState(outState, outPersistentState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        LogUtil.e(TAG, "onRestoreInstanceState");
+        super.onRestoreInstanceState(savedInstanceState);
+    }
+
     private void setUnreadText() {
         int unread = NIMClient.getService(MsgService.class)
                 .getTotalUnreadCount();
@@ -250,6 +283,16 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
 
     }
 
+    private void startFService() {
+        Intent intent = new Intent(this, ForegroundService.class);
+        startService(intent);
+    }
+
+    private void stopFService() {
+        Intent intent = new Intent(this, ForegroundService.class);
+        stopService(intent);
+    }
+
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -258,4 +301,35 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
         }
         return true;
     }
+
+    @Override
+    protected void onDestroy() {
+        stopFService();
+        super.onDestroy();
+    }
+
+    private ScreenReceiverUtil.SreenStateListener mScreenListenerer = new ScreenReceiverUtil.SreenStateListener() {
+        @Override
+        public void onSreenOn() {
+            // 移除"1像素"
+            mScreenManager.finishActivity();
+        }
+
+        @Override
+        public void onSreenOff() {
+            // 接到锁屏广播，将SportsActivity切换到可见模式
+            // "咕咚"、"乐动力"、"悦动圈"就是这么做滴
+//            Intent intent = new Intent(SportsActivity.this,SportsActivity.class);
+//            startActivity(intent);
+            // 如果你觉得，直接跳出SportActivity很不爽
+            // 那么，我们就制造个"1像素"惨案
+            mScreenManager.startActivity();
+        }
+
+        @Override
+        public void onUserPresent() {
+            // 解锁，暂不用，保留
+        }
+    };
+
 }

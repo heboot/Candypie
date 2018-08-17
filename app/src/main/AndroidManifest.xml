@@ -350,6 +350,15 @@
             android:process=":error_activity"
             android:screenOrientation="portrait"></activity>
 
+        <activity
+            android:name=".activitys.common.SinglePixelActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize|navigation|keyboard"
+            android:excludeFromRecents="true"
+            android:finishOnTaskLaunch="false"
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait"
+            android:theme="@style/SingleActivityStyle"></activity>
+
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"
@@ -546,6 +555,19 @@
                 <category android:name="com.gdlife.candypie" />
             </intent-filter>
         </receiver>
+
+
+        <service
+            android:name=".serivce.aservice.ForegroundService"
+            android:enabled="true"
+            android:exported="true"
+            android:process=":foreground_service" />
+
+        <service
+            android:name=".serivce.aservice.CancelNoticeService"
+            android:enabled="true"
+            android:exported="true"
+            android:process=":service" />
 
 
         <meta-data
