@@ -290,25 +290,25 @@ public class MyFragment extends BaseFragment<FragmentMyBinding> {
             return;
         }
 
-        MyBottomMenuModel meiyan = new MyBottomMenuModel("meiyan", R.drawable.icon_my_menu_meiyan);
+        MyBottomMenuModel meiyan = new MyBottomMenuModel("美颜设置", R.drawable.icon_my_menu_meiyan);
         myBottomMenuModels.add(meiyan);
 
-        MyBottomMenuModel uploadVideo = new MyBottomMenuModel("uploadVideo", R.drawable.icon_my_menu_uploadvideo);
+        MyBottomMenuModel uploadVideo = new MyBottomMenuModel("上传视频", R.drawable.icon_my_menu_uploadvideo);
         myBottomMenuModels.add(uploadVideo);
 
-        MyBottomMenuModel fav = new MyBottomMenuModel("fav", R.drawable.icon_my_menu_fav);
+        MyBottomMenuModel fav = new MyBottomMenuModel("我的收藏", R.drawable.icon_my_menu_fav);
         myBottomMenuModels.add(fav);
 
-        MyBottomMenuModel setting = new MyBottomMenuModel("setting", R.drawable.icon_my_menu_setting);
+        MyBottomMenuModel setting = new MyBottomMenuModel("设置", R.drawable.icon_my_menu_setting);
         myBottomMenuModels.add(setting);
 
-        MyBottomMenuModel zhinan = new MyBottomMenuModel("zhinan", R.drawable.icon_my_menu_zhinan);
+        MyBottomMenuModel zhinan = new MyBottomMenuModel("新手指南", R.drawable.icon_my_menu_zhinan);
         myBottomMenuModels.add(zhinan);
 
-        MyBottomMenuModel qa = new MyBottomMenuModel("qa", R.drawable.icon_my_menu_qa);
+        MyBottomMenuModel qa = new MyBottomMenuModel("常见问题", R.drawable.icon_my_menu_qa);
         myBottomMenuModels.add(qa);
 
-        MyBottomMenuModel feeback = new MyBottomMenuModel("feeback", R.drawable.icon_my_menu_feedback);
+        MyBottomMenuModel feeback = new MyBottomMenuModel("意见反馈", R.drawable.icon_my_menu_feedback);
         myBottomMenuModels.add(feeback);
 
         binding.includeMyMenuBottom.rvList.setLayoutManager(new GridLayoutManager(_mActivity, 3));

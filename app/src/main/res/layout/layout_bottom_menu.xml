@@ -4,28 +4,16 @@
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/color_EDEDF3">
+        android:layout_height="wrap_content">
 
 
         <!--android:background="@drawable/bg_rect_white_top_6"-->
-        <com.qmuiteam.qmui.layout.QMUILinearLayout
-            android:id="@+id/testlayout"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/y20"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:qmui_borderColor="?attr/qmui_config_color_separator"
-            app:qmui_outerNormalColor="?attr/qmui_config_color_background"
-            app:qmui_showBorderOnlyBeforeL="true"></com.qmuiteam.qmui.layout.QMUILinearLayout>
+
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="@dimen/y50"
-            android:elevation="@dimen/y6"
             android:orientation="horizontal"
-            android:paddingTop="@dimen/y2"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"

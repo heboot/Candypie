@@ -29,7 +29,6 @@ public class MessageOrderAdapter extends BaseQuickAdapter<OrderListBean.ListBean
 
     private ConfigBean.ServiceItemsConfigBean.ListBean listBean;
 
-    //item_order_rob
     public MessageOrderAdapter(int layoutResId, List<OrderListBean.ListBean> list) {
         super(layoutResId, list);
     }
@@ -122,6 +121,11 @@ public class MessageOrderAdapter extends BaseQuickAdapter<OrderListBean.ListBean
                 IntentUtils.toUserInfoActivity(v.getContext(), MValue.USER_INFO_TYPE_NORMAL, MValue.USER_INFO_TYPE_NORMAL, s.getUser(), null, null);
             }
         });
+
+        binding.getRoot().setOnClickListener((v) -> {
+            IntentUtils.toOrderDetailActivity(v.getContext(), s.getId(), true);
+        });
+
 
     }
 

@@ -6,8 +6,7 @@
     <android.support.constraint.ConstraintLayout
         android:id="@+id/clyt_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white">
+        android:layout_height="match_parent">
 
         <FrameLayout
             android:id="@+id/flyt_container"
@@ -17,6 +16,15 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"></FrameLayout>
+
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y56"
+            android:background="@drawable/bg_bottom_menu"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"></View>
 
         <include
             android:id="@+id/include_bottom_menu"

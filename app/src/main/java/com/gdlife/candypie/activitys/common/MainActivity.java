@@ -62,7 +62,6 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
         mDelegate.loadMultipleRootFragment(binding.flytContainer.getId(), 0, indexFragment, rankContainerFragment, messageContainerFragment, myFragment);
         currentFragment = indexFragment;
 
-        binding.includeBottomMenu.testlayout.setRadiusAndShadow(getResources().getDimensionPixelOffset(R.dimen.x6), getResources().getDimensionPixelOffset(R.dimen.y4), 0.7f);
 
     }
 
