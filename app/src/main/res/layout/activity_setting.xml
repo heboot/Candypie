@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/include_toolbar"
+            layout="@layout/layout_toolbar"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y60"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></include>
+
+
+        <include
+            android:id="@+id/include_notification"
+            layout="@layout/layout_setting_item"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x15"
+            android:layout_marginTop="@dimen/y10"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/include_toolbar"></include>
+
+        <View
+            android:id="@+id/line_notification"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y1"
+            android:layout_marginLeft="@dimen/x15"
+            android:background="@color/color_EDEDF3"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/include_notification"></View>
+
+        <!--<include-->
+        <!--android:id="@+id/include_record"-->
+        <!--layout="@layout/layout_setting_item"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginLeft="@dimen/x15"-->
+        <!--android:layout_marginTop="@dimen/y10"-->
+        <!--app:layout_constraintLeft_toLeftOf="parent"-->
+        <!--app:layout_constraintRight_toRightOf="parent"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/line_notification"></include>-->
+
+        <!--<View-->
+        <!--android:id="@+id/line_record"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="@dimen/y1"-->
+        <!--android:layout_marginLeft="@dimen/x15"-->
+        <!--android:background="@color/color_EDEDF3"-->
+        <!--app:layout_constraintLeft_toLeftOf="parent"-->
+        <!--app:layout_constraintRight_toRightOf="parent"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/include_record"></View>-->
+
+
+        <include
+            android:id="@+id/include_black"
+            layout="@layout/layout_setting_item"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x15"
+            android:layout_marginTop="@dimen/y10"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/line_notification"></include>
+
+        <View
+            android:id="@+id/line_black"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y1"
+            android:layout_marginLeft="@dimen/x15"
+            android:background="@color/color_EDEDF3"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/include_black"></View>
+
+
+        <!--<include-->
+        <!--android:id="@+id/include_cache"-->
+        <!--layout="@layout/layout_setting_item"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginLeft="@dimen/x15"-->
+        <!--android:layout_marginTop="@dimen/y10"-->
+        <!--app:layout_constraintLeft_toLeftOf="parent"-->
+        <!--app:layout_constraintRight_toRightOf="parent"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/line_black"></include>-->
+
+        <!--<View-->
+        <!--android:id="@+id/line_cache"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="@dimen/y1"-->
+        <!--android:layout_marginLeft="@dimen/x15"-->
+        <!--android:background="@color/color_EDEDF3"-->
+        <!--app:layout_constraintLeft_toLeftOf="parent"-->
+        <!--app:layout_constraintRight_toRightOf="parent"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/include_cache"></View>-->
+
+        <include
+            android:id="@+id/include_about"
+            layout="@layout/layout_setting_item"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x15"
+            android:layout_marginTop="@dimen/y10"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/line_report"></include>
+
+        <View
+            android:id="@+id/line_about"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y1"
+            android:layout_marginLeft="@dimen/x15"
+            android:background="@color/color_EDEDF3"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/include_about"></View>
+
+        <include
+            android:id="@+id/include_report"
+            layout="@layout/layout_setting_item"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x15"
+            android:layout_marginTop="@dimen/y10"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/line_black"></include>
+
+        <View
+            android:id="@+id/line_report"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y1"
+            android:layout_marginLeft="@dimen/x15"
+            android:background="@color/color_EDEDF3"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/include_report"></View>
+
+        <TextView
+
+            android:id="@+id/btn_bottom"
+            android:layout_width="@dimen/x314"
+            android:layout_height="@dimen/y48"
+            android:layout_marginBottom="@dimen/y50"
+            android:layout_marginTop="@dimen/y32"
+            android:background="@drawable/bg_setting_exit"
+            android:checked="false"
+            android:gravity="center"
+            android:text="退出登录"
+            android:textColor="@color/theme_color"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

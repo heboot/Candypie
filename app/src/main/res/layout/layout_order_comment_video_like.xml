@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/clyt_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/clyt_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_rect_white_top_10"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+
+            <TextView
+                android:id="@+id/tv_comment_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y30"
+                android:text="@string/order_comment_likevideo_tip"
+                android:textColor="@color/color_343445"
+                android:textSize="@dimen/x18"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/line"
+                android:layout_width="1px"
+                android:layout_height="1px"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"></View>
+
+            <ImageView
+                android:id="@+id/iv_nolike"
+                android:layout_width="@dimen/x40"
+                android:layout_height="@dimen/y56"
+                android:layout_marginTop="@dimen/y20"
+                android:background="@drawable/selector_order_comment_chou"
+                app:layout_constraintLeft_toLeftOf="@+id/tv_nolike"
+                app:layout_constraintRight_toRightOf="@+id/tv_nolike"
+                app:layout_constraintTop_toBottomOf="@+id/tv_comment_title" />
+
+            <TextView
+                android:id="@+id/tv_nolike"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/x40"
+                android:layout_marginTop="@dimen/y10"
+                android:text="@string/order_comment_likevideo_content1"
+                android:textSize="@dimen/x14"
+                app:layout_constraintRight_toLeftOf="@+id/line"
+                app:layout_constraintTop_toBottomOf="@+id/iv_nolike" />
+
+            <ImageView
+                android:id="@+id/iv_like"
+                android:layout_width="@dimen/x40"
+                android:layout_height="@dimen/y56"
+                android:layout_marginTop="@dimen/y20"
+                android:background="@drawable/selector_order_comment_mei"
+                app:layout_constraintLeft_toLeftOf="@+id/tv_like"
+                app:layout_constraintRight_toRightOf="@+id/tv_like"
+                app:layout_constraintTop_toBottomOf="@+id/tv_comment_title" />
+
+            <TextView
+                android:id="@+id/tv_like"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x40"
+                android:layout_marginTop="@dimen/y10"
+                android:text="@string/order_comment_likevideo_content2"
+                android:textSize="@dimen/x14"
+                app:layout_constraintLeft_toRightOf="@+id/line"
+                app:layout_constraintTop_toBottomOf="@+id/iv_like" />
+
+
+            <TextView
+                android:id="@+id/tv_taidu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y50"
+                android:text="@string/order_comment_likevideo_tip2"
+                android:textSize="@dimen/x18"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_like" />
+
+
+            <me.zhanghai.android.materialratingbar.MaterialRatingBar
+                android:id="@+id/rb_comment"
+                style="@style/comment_ratingbar"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/y25"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="@dimen/x87"
+                android:layout_marginRight="@dimen/x87"
+                android:layout_marginTop="@dimen/y20"
+
+                android:maxHeight="@dimen/y20"
+                android:minHeight="@dimen/y16"
+
+                android:stepSize="1"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+
+                app:layout_constraintTop_toBottomOf="@+id/tv_taidu"
+
+                android:backgroundTint="@color/color_898A9E"
+                android:progressBackgroundTint="@color/color_898A9E"
+                android:progressTint="@color/color_FFBF63"
+                app:mrb_progressBackgroundTint="@color/color_D6D6DF"
+                app:mrb_secondaryProgressTint="@color/color_FFBF63" />
+
+            <!--style="@style/Widget.MaterialRatingBar.RatingBar"-->
+
+            <TextView
+                android:id="@+id/btn_bottom"
+                android:layout_width="@dimen/x314"
+                android:layout_height="@dimen/y48"
+                android:layout_marginBottom="@dimen/y40"
+                android:layout_marginTop="@dimen/y29"
+                android:background="@drawable/selector_bottom_button"
+                android:checked="false"
+                android:elevation="@dimen/x4"
+                android:enabled="false"
+                android:gravity="center"
+                android:text="@string/noname_commit"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rb_comment" />
+
+        </android.support.constraint.ConstraintLayout>
+
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

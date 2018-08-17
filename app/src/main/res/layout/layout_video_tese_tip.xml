@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="info1"
+            type="String"></variable>
+
+        <variable
+            name="info2"
+            type="String"></variable>
+
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="@dimen/x300"
+        android:layout_height="wrap_content"
+        android:alpha="0"
+        android:background="@drawable/bg_video_gift_gradient">
+
+        <TextView
+            android:id="@+id/tv1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x16"
+            android:layout_marginTop="@dimen/y13"
+            android:text="@{info1+`:`}"
+            android:textColor="@color/color_FFDE42"
+            android:textSize="@dimen/x17"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x16"
+            android:layout_marginRight="@dimen/x16"
+            android:layout_marginTop="@dimen/y13"
+            android:gravity="left|center_vertical"
+            android:text="@{`                  ` + info2}"
+            android:textColor="@color/white"
+            android:textSize="@dimen/x17"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

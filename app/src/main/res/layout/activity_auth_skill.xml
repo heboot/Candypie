@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/include_toolbar"
+            layout="@layout/layout_toolbar"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y60"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></include>
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/y10"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/include_toolbar">
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <TextView
+                    android:id="@+id/tv_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x16"
+                    android:layout_marginTop="@dimen/y21"
+                    android:text="@string/add_skill_video"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/sv_player"
+                    android:layout_width="@dimen/x344"
+                    android:layout_height="@dimen/y192"
+                    android:layout_marginTop="@dimen/y10"
+                    android:background="@color/color_EDEDF3"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_title" />
+
+                <ImageView
+                    android:id="@+id/iv_record"
+                    android:layout_width="@dimen/x40"
+                    android:layout_height="@dimen/y34"
+                    android:layout_marginTop="@dimen/y62"
+                    android:background="@drawable/ic_record"
+                    app:layout_constraintLeft_toLeftOf="@+id/sv_player"
+                    app:layout_constraintRight_toRightOf="@+id/sv_player"
+                    app:layout_constraintTop_toTopOf="@+id/sv_player" />
+
+                <TextView
+                    android:id="@+id/tv_clickup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y12"
+                    android:text="@string/click_upload"
+                    android:textColor="@color/color_898A9E"
+                    android:textSize="@dimen/x16"
+                    app:layout_constraintLeft_toLeftOf="@+id/sv_player"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/iv_record" />
+
+
+                <TextView
+                    android:id="@+id/tv_title2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x16"
+                    android:layout_marginTop="@dimen/y21"
+                    android:text="@string/add_skill_photo"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/sv_player" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_list"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y10"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_title2"></android.support.v7.widget.RecyclerView>
+
+                <ImageView
+                    android:id="@+id/iv_p1"
+                    android:layout_width="@dimen/x5"
+                    android:layout_height="@dimen/y5"
+                    android:layout_marginLeft="@dimen/x16"
+                    android:background="@drawable/bg_oval_343445"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_auth_tip1"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tv_auth_tip1" />
+
+                <TextView
+                    android:id="@+id/tv_auth_tip1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x10"
+                    android:layout_marginTop="@dimen/y24"
+                    android:text="@string/auth_skill_tip1"
+                    android:textColor="@color/color_898A9E"
+                    android:textSize="14sp"
+                    app:layout_constraintLeft_toRightOf="@+id/iv_p2"
+                    app:layout_constraintTop_toBottomOf="@+id/rv_list" />
+
+
+                <ImageView
+                    android:id="@+id/iv_p2"
+                    android:layout_width="@dimen/x5"
+                    android:layout_height="@dimen/y5"
+                    android:layout_marginLeft="@dimen/x16"
+                    android:background="@drawable/bg_oval_343445"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_auth_tip2"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tv_auth_tip2" />
+
+                <TextView
+                    android:id="@+id/tv_auth_tip2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x10"
+                    android:layout_marginTop="@dimen/y10"
+                    android:text="@string/auth_skill_tip2"
+                    android:textColor="@color/color_898A9E"
+                    android:textSize="14sp"
+                    app:layout_constraintLeft_toRightOf="@+id/iv_p2"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_auth_tip1" />
+
+                <TextView
+                    android:id="@+id/btn_bottom"
+                    android:layout_width="@dimen/x314"
+                    android:layout_height="@dimen/y48"
+                    android:layout_marginTop="@dimen/y25"
+                    android:background="@drawable/selector_bottom_button"
+                    android:checked="false"
+                    android:elevation="@dimen/x4"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_auth_tip2" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/y20"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/btn_bottom"></View>
+            </android.support.constraint.ConstraintLayout>
+        </android.support.v4.widget.NestedScrollView>
+    </android.support.constraint.ConstraintLayout>
+</layout>

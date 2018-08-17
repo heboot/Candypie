@@ -1,0 +1,76 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+//apply from: "config.gradle"
+buildscript {
+    ext.kotlin_version = '1.2.30'
+    repositories {
+        google()
+        maven{url 'http://maven.aliyun.com/nexus/content/groups/public/'}
+        jcenter(){url 'http://jcenter.bintray.com/'}
+        mavenCentral()
+        maven { url "https://jitpack.io" }
+        maven { url 'http://developer.huawei.com/repo' }
+//        maven { url 'https://fabric-artifacts.s3.amazonaws.com/public' }
+//        maven {
+//            url "http://mvn.mob.com/android"
+//        }
+    }
+    apply from: 'config.gradle'
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.1.0'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7'
+        classpath 'com.google.gms:google-services:3.1.1'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+//        classpath "org.jetbrains.kotlin:kotlin-android-extensions:$kotlin_version"
+        // 注册MobSDK
+//        classpath "com.mob.sdk:MobSDK:+"
+        classpath "com.mob.sdk:MobSDK:2018.0319.1724"
+    }
+}
+
+//configurations.all {
+//    resolutionStrategy.cacheDynamicVersionsFor 0, 'seconds'
+//}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        maven{url 'http://maven.aliyun.com/nexus/content/groups/public/'}
+        maven { url "https://jitpack.io" }
+        maven { url 'http://developer.huawei.com/repo' }
+//        maven {
+//            url "http://mvn.mob.com/android"
+//        }
+    }
+    subprojects {
+        project.configurations.all {
+            resolutionStrategy.eachDependency { details ->
+                if (details.requested.group == 'com.android.support'
+                        && !details.requested.name.contains('multidex')) {
+//&& !details.requested.name.contains('recyclerview') && !details.requested.name.contains('v4')
+                    details.useVersion "24.2.1"//24.2.1
+                }
+//                else if (details.requested.group == 'com.android.support' && !details.requested.name.contains('multidex') && details.requested.name.contains('recyclerview')) {
+////&& details.requested.name.contains('recyclerview')  && details.requested.name.contains('v4')
+//                    details.useVersion "25.4.0"//24.2.1
+//                } else if (details.requested.group == 'com.android.support' && !details.requested.name.contains('multidex') && details.requested.name.contains('v4')) {
+////&& details.requested.name.contains('recyclerview')  && details.requested.name.contains('v4')
+//                    details.useVersion "25.4.0"//24.2.1
+//                }
+            }
+        }
+    }
+}
+
+//task clean(type: Delete) {
+//    delete rootProject.buildDir
+//}
+//ext {
+//    supportVersion = "24.2.1"
+//}
+
+
+
+
+

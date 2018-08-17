@@ -1,0 +1,78 @@
+apply plugin: 'com.android.library'
+def config = rootProject.ext.android
+android {
+    compileSdkVersion config.COMPILE_SDK_VERSION
+    buildToolsVersion config.BUILD_TOOLS_VERSION
+    defaultConfig {
+        minSdkVersion 14
+        targetSdkVersion config.TARGET_SDK_VERSION
+        versionCode config.VERSION_CODE
+        versionName config.VERSION_NAME
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+    buildTypes {
+        release {
+            //"/yihaocar/"
+            buildConfigField 'String', 'HTTP_SERVER', "\"http://www.icandypie.com/\""
+            buildConfigField 'String', 'URL_VER', "\"\""
+            buildConfigField 'String', 'HELP_URL', "\"http://www.guodonglife.cn/public/static/help/\""
+            minifyEnabled config.MINIFY_DISABLED
+            debuggable config.DEBUGENABLE
+            buildConfigField 'Integer', 'LOC_TIME', "300000"
+            buildConfigField 'boolean', 'LOGDEBUG', "true"
+//            signingConfig signingConfigs.releaseConfig
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+//            buildConfigField 'String', 'BUGLY_APPID', "\"5025108b4a\""
+            buildConfigField 'String', 'CURRENT_CHANNEL', "\"\""
+            buildConfigField 'Long', 'TRACK_ID', "142806l"
+            buildConfigField 'Integer', 'gatherInterval', "5"
+            buildConfigField 'Integer', 'packInterval', "30"
+        }
+        debug {
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            minifyEnabled config.MINIFY_DISABLED
+            debuggable true
+            buildConfigField 'String', 'HELP_URL', "\"http://www.guodonglife.cn/public/static/help/\""
+            buildConfigField 'String', 'HTTP_SERVER', "\"http://www.guodonglife.cn/\""
+            buildConfigField 'String', 'URL_VER', "\"\""
+            buildConfigField 'boolean', 'LOGDEBUG', "true"
+            buildConfigField 'Integer', 'LOC_TIME', "30000"
+//            signingConfig signingConfigs.releaseConfig
+//            buildConfigField 'String', 'BUGLY_APPID', "\"e9013b6142\""
+            buildConfigField 'String', 'CURRENT_CHANNEL', "\"\""
+            buildConfigField 'Long', 'TRACK_ID', "154034l"
+            buildConfigField 'Integer', 'gatherInterval', "1"
+            buildConfigField 'Integer', 'packInterval', "2"
+        }
+    }
+
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation rootProject.ext.dependencies["support-v7"]
+    testImplementation rootProject.ext.dependencies["junit"]
+    // 网络请求
+
+//    implementation('com.squareup.retrofit2:retrofit:2.1.0') {
+//        exclude module: 'com.squareup.okhttp3:okhttp:3.4.1'
+//        exclude module: 'com.squareup.okio:okio:1.9.0'
+//    }
+    implementation rootProject.ext.dependencies["okhttp"]
+    implementation rootProject.ext.dependencies["externalOKIO"]
+    implementation rootProject.ext.dependencies["okhttp_log"]
+    implementation rootProject.ext.dependencies["retrofit"]
+    implementation rootProject.ext.dependencies["retrofit_converter"]
+    implementation rootProject.ext.dependencies["retrofit_adapter"]
+
+
+    api rootProject.ext.dependencies["fastjson"]
+
+
+    //美颜模块
+    api project(path: ':library:faceunity_unit')
+
+}

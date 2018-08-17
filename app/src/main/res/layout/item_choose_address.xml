@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/x16"
+        android:paddingTop="@dimen/y10">
+
+
+        <ImageView
+            android:id="@+id/iv_img"
+            android:layout_width="@dimen/x75"
+            android:layout_height="@dimen/y75"
+            android:scaleType="centerCrop" />
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x16"
+            android:layout_marginRight="@dimen/x16"
+            android:ellipsize="end"
+            android:maxEms="16"
+            android:maxLines="1"
+            android:text="北京"
+            android:textColor="@color/color_343445"
+            android:textSize="@dimen/x17"
+            app:layout_constraintLeft_toRightOf="@+id/iv_img"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <!--<RatingBar-->
+        <!--android:id="@+id/rb"-->
+        <!--style="@style/yogaCourseRatingBar"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="@dimen/y12"-->
+        <!--android:layout_marginLeft="@dimen/x16"-->
+        <!--android:layout_marginTop="@dimen/y5"-->
+        <!--android:isIndicator="true"-->
+        <!--android:numStars="5"-->
+        <!--android:rating="1"-->
+        <!--app:layout_constraintLeft_toRightOf="@+id/iv_img"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/tv_name" />-->
+
+        <include
+            android:id="@+id/rb"
+            style="@style/yogaCourseRatingBar"
+            layout="@layout/layout_chooseaddress_rating_star"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x16"
+            android:layout_marginTop="@dimen/y5"
+            app:layout_constraintLeft_toRightOf="@+id/iv_img"
+            app:layout_constraintTop_toBottomOf="@+id/tv_name" />
+
+
+        <TextView
+            android:id="@+id/tv_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x16"
+            android:layout_marginTop="@dimen/y1"
+            android:text="北京"
+            android:textColor="@color/color_343445"
+            android:textSize="@dimen/x14"
+            app:layout_constraintLeft_toRightOf="@+id/rb"
+            app:layout_constraintTop_toBottomOf="@+id/tv_name" />
+
+        <TextView
+            android:id="@+id/tv_info2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x16"
+            android:layout_marginTop="@dimen/y1"
+            android:textColor="@color/color_898A9E"
+            android:textSize="@dimen/x13"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_img"
+            app:layout_constraintLeft_toRightOf="@+id/iv_img" />
+
+
+        <ImageView
+            android:layout_width="@dimen/x7"
+            android:layout_height="@dimen/y10"
+            android:layout_marginRight="@dimen/x6"
+            android:background="@drawable/icon_address"
+            app:layout_constraintBottom_toBottomOf="@+id/distance"
+            app:layout_constraintRight_toLeftOf="@+id/distance"
+            app:layout_constraintTop_toTopOf="@+id/distance" />
+
+        <TextView
+            android:id="@+id/distance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x16"
+            android:layout_marginRight="@dimen/x16"
+            android:layout_marginTop="@dimen/y1"
+            android:text="北京"
+            android:textColor="@color/color_898A9E"
+            android:textSize="@dimen/x13"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_img"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y1"
+            android:layout_marginTop="@dimen/y10"
+            android:background="@color/line_color"
+            app:layout_constraintTop_toBottomOf="@+id/iv_img"></View>
+    </android.support.constraint.ConstraintLayout>
+</layout>

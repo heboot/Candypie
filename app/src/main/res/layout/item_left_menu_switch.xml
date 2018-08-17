@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:alpha="0"
+        android:paddingBottom="@dimen/y15"
+        android:paddingTop="@dimen/y15">
+
+        <ImageView
+            android:id="@+id/iv_img"
+            android:layout_width="@dimen/x21"
+            android:layout_height="@dimen/y21"
+            android:background="@color/qmui_config_color_red"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_menu"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_menu" />
+
+        <TextView
+            android:id="@+id/tv_menu"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y22"
+            android:layout_marginLeft="@dimen/x15"
+            android:gravity="left|center_vertical"
+            android:text="11111"
+            android:textColor="@color/color_343445"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/iv_img"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.suke.widget.SwitchButton
+            android:id="@+id/sb_video_enable"
+            android:layout_width="@dimen/x50"
+            android:layout_height="@dimen/y26"
+            android:layout_marginLeft="@dimen/x20"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/tv_menu"
+            app:layout_constraintTop_toTopOf="parent"
+            app:sb_background="@color/color_898A9E"
+            app:sb_border_width="0dp"
+            app:sb_checked="true"
+            app:sb_checked_color="@color/theme_color"
+            app:sb_show_indicator="false"
+            app:sb_uncheck_color="@color/color_898A9E" />
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

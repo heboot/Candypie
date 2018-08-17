@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+
+        <View
+            android:id="@+id/v_line"
+            android:layout_width="@dimen/x1"
+            android:layout_height="@dimen/y1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"></View>
+
+        <TextView
+            android:id="@+id/tv_woman"
+            android:layout_width="@dimen/x60"
+            android:layout_height="@dimen/y60"
+            android:layout_marginRight="@dimen/x21"
+            android:background="@drawable/selector_bg_select_sex_woman"
+            android:gravity="center"
+            android:text="女"
+            android:textColor="@drawable/selector_font_select_sex"
+            android:textSize="@dimen/x22"
+            app:layout_constraintRight_toLeftOf="@+id/v_line"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_man"
+            android:layout_width="@dimen/x60"
+            android:layout_height="@dimen/y60"
+            android:layout_marginLeft="@dimen/x21"
+            android:background="@drawable/selector_bg_select_sex_man"
+            android:gravity="center"
+            android:text="男"
+            android:textColor="@drawable/selector_font_select_sex"
+            android:textSize="@dimen/x22"
+            app:layout_constraintLeft_toRightOf="@+id/v_line"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

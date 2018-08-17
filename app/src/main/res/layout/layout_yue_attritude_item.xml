@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_marginTop="@dimen/y30"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <CheckBox
+            android:gravity="center"
+            android:button="@null"
+            android:id="@+id/tv_text"
+            android:textSize="@dimen/x18"
+            android:textColor="@drawable/selector_font_yue_attitude"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_width="@dimen/x220"
+            android:layout_height="@dimen/y49" />
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

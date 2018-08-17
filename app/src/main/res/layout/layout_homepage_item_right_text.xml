@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="content"
+            type="String"></variable>
+
+        <import type="com.gdlife.candypie.utils.StringUtils"></import>
+
+
+    </data>
+
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/y22"
+        android:paddingTop="@dimen/y22">
+
+        <include
+            android:id="@+id/include_title"
+            layout="@layout/layout_text_title_343445_18"
+            android:layout_width="@dimen/x150"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></include>
+
+        <TextView
+            android:id="@+id/tv_right"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/x16"
+            android:gravity="right|center"
+            android:maxLines="1"
+            android:text="@{content}"
+            android:textColor="@drawable/selector_font_edituserinfo"
+            android:textSize="18sp"
+            app:layout_constraintLeft_toRightOf="@+id/include_title"
+            app:layout_constraintRight_toLeftOf="@+id/iv_arrow" />
+
+        <ImageView
+            android:id="@+id/iv_arrow"
+            android:layout_width="@dimen/x5"
+            android:layout_height="@dimen/y9"
+            android:layout_marginRight="@dimen/x16"
+            android:background="@drawable/icon_arrow_right_gray"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

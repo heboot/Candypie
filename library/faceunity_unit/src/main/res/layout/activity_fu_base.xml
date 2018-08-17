@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.opengl.GLSurfaceView
+        android:id="@+id/fu_base_gl_surface"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <ImageView
+        android:id="@+id/fu_base_top_background"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
+        android:src="@drawable/fu_base_top_background"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/fu_base_back"
+        android:layout_width="@dimen/x30"
+        android:layout_height="@dimen/x29"
+        android:layout_marginLeft="@dimen/x16"
+        android:layout_marginTop="@dimen/x20"
+        android:background="@color/transparent"
+        android:onClick="onClick"
+        android:scaleType="centerInside"
+        android:src="@drawable/back_show"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RadioGroup
+        android:id="@+id/fu_base_input_type_radio_group"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/x26"
+        android:layout_marginLeft="@dimen/x28"
+        android:background="@drawable/fu_base_input_type_radio_group_background"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/fu_base_back"
+        app:layout_constraintLeft_toRightOf="@+id/fu_base_back"
+        app:layout_constraintTop_toTopOf="@+id/fu_base_back">
+
+        <com.heboot.faceunity_unit.fulivedemo.ui.XfermodeRadioButton
+            android:id="@+id/fu_base_input_type_double"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/fu_base_input_type_radio_left_background"
+            android:button="@null"
+            android:checked="true"
+            android:gravity="center"
+            app:text_size_xfermode="@dimen/text_size_22"
+            app:text_xfermode="双输入" />
+
+        <com.heboot.faceunity_unit.fulivedemo.ui.XfermodeRadioButton
+            android:id="@+id/fu_base_input_type_single"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/fu_base_input_type_radio_right_background"
+            android:button="@null"
+            android:checked="false"
+            android:gravity="center"
+            app:text_size_xfermode="@dimen/text_size_22"
+            app:text_xfermode="单输入" />
+    </RadioGroup>
+
+    <ImageButton
+        android:id="@+id/fu_base_select_data"
+        android:layout_width="@dimen/x29"
+        android:layout_height="@dimen/x28"
+        android:layout_marginRight="@dimen/x33"
+        android:layout_marginTop="@dimen/x20"
+        android:background="@color/transparent"
+        android:onClick="onClick"
+        android:scaleType="centerInside"
+        android:src="@drawable/photo"
+        android:visibility="gone"
+        app:layout_constraintRight_toLeftOf="@+id/fu_base_debug"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <android.support.v7.widget.AppCompatCheckBox
+        android:id="@+id/fu_base_debug"
+        android:layout_width="@dimen/x30"
+        android:layout_height="@dimen/x28"
+        android:layout_marginRight="@dimen/x33"
+        android:layout_marginTop="@dimen/x20"
+        android:background="@drawable/debug"
+        android:button="@null"
+        android:checked="false"
+        android:visibility="gone"
+        app:layout_constraintRight_toLeftOf="@+id/fu_base_camera_change"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/fu_base_camera_change"
+        android:layout_width="@dimen/x33"
+        android:layout_height="@dimen/x27"
+        android:layout_marginRight="@dimen/x16"
+        android:layout_marginTop="@dimen/x21"
+        android:background="@color/transparent"
+        android:onClick="onClick"
+        android:scaleType="centerInside"
+        android:src="@drawable/camera_change"
+        app:layout_constraintRight_toLeftOf="@+id/tv_basic"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_basic"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/y30"
+        android:layout_marginRight="@dimen/x12"
+        android:layout_marginTop="@dimen/x21"
+        android:background="@drawable/bg_rect_online_bg"
+        android:gravity="center"
+        android:paddingLeft="@dimen/x5"
+        android:paddingRight="@dimen/x5"
+        android:text="标准美颜"
+        android:textColor="@color/white"
+        app:layout_constraintRight_toLeftOf="@+id/tv_gaoji"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_gaoji"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/y30"
+        android:layout_marginRight="@dimen/x12"
+        android:layout_marginTop="@dimen/x21"
+        android:background="@drawable/bg_rect_online_bg"
+        android:gravity="center"
+        android:paddingLeft="@dimen/x5"
+        android:paddingRight="@dimen/x5"
+        android:text="高级美颜"
+        android:textColor="@color/white"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_normal"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/y30"
+        android:layout_marginRight="@dimen/x12"
+        android:layout_marginTop="@dimen/x10"
+        android:background="@drawable/bg_rect_online_bg"
+        android:gravity="center"
+        android:paddingLeft="@dimen/x5"
+        android:paddingRight="@dimen/x5"
+        android:text="恢复默认"
+        android:textColor="@color/white"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_gaoji" />
+
+    <ImageView
+        android:id="@+id/fu_base_height_img"
+        android:layout_width="@dimen/x30"
+        android:layout_height="@dimen/x40"
+        android:layout_marginRight="@dimen/x5"
+        android:layout_marginTop="@dimen/x16"
+        android:paddingBottom="@dimen/x10"
+        android:paddingLeft="@dimen/x10"
+        android:paddingTop="@dimen/x10"
+        android:scaleType="centerInside"
+        android:src="@drawable/performance_normal"
+        android:visibility="gone"
+        app:layout_constraintRight_toLeftOf="@+id/fu_base_height"
+        app:layout_constraintTop_toBottomOf="@+id/fu_base_camera_change" />
+
+    <android.support.v7.widget.AppCompatCheckBox
+        android:id="@+id/fu_base_height"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/x17"
+        android:button="@null"
+        android:checked="false"
+        android:text="性能优先"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/text_size_24"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/fu_base_height_img"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/fu_base_height_img" />
+
+    <TextView
+        android:id="@+id/fu_base_debug_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/x15"
+        android:layout_marginTop="@dimen/x15"
+        android:background="@drawable/fu_beauty_debug_text_background"
+        android:padding="@dimen/x5"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/x28"
+        android:visibility="gone"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fu_base_back" />
+
+    <TextView
+        android:id="@+id/fu_base_is_tracking_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/x279"
+        android:gravity="center"
+        android:text="未检测到人脸"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/x26"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/fu_base_effect_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/x78"
+        android:gravity="center"
+        android:text=""
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/x26"
+        android:visibility="invisible"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fu_base_is_tracking_text" />
+
+    <com.heboot.faceunity_unit.fulivedemo.ui.RecordBtn
+        android:id="@+id/fu_base_take_pic"
+        android:layout_width="@dimen/x83"
+        android:layout_height="@dimen/x83"
+        android:layout_marginBottom="@dimen/x27"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/fu_base_bottom"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_goneMarginBottom="@dimen/x27" />
+
+    <ViewStub
+        android:id="@+id/fu_base_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent" />
+</android.support.constraint.ConstraintLayout>

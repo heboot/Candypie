@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="from"
+            type="String"></variable>
+
+        <import type="android.view.View"></import>
+
+        <import type="com.gdlife.candypie.common.MValue"></import>
+
+        <variable
+            name="user"
+            type="com.heboot.entity.User"></variable>
+
+        <import type="com.gdlife.candypie.serivce.UserService"></import>
+
+
+    </data>
+
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:focusable="true"
+
+            android:focusableInTouchMode="true"
+            android:paddingBottom="@dimen/y20">
+
+            <include
+                android:id="@+id/include_userinfo"
+                layout="@layout/layout_user_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_goneMarginTop="@dimen/y20"></include>
+
+            <View
+                android:id="@+id/line_sign_1"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/y1"
+                android:layout_marginLeft="@dimen/x16"
+                android:layout_marginTop="@dimen/y25"
+                android:background="@color/line_color"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/include_userinfo"></View>
+
+            <include
+                android:id="@+id/include_signature"
+                layout="@layout/layout_homepage_item"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/y22"
+                android:layout_marginLeft="@dimen/x15"
+                android:layout_marginRight="@dimen/x15"
+                android:layout_marginTop="@dimen/y25"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/line_sign_1"></include>
+
+            <com.qmuiteam.qmui.widget.QMUIFloatLayout
+                android:id="@+id/qfyt_container_meet_tag"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x15"
+                android:layout_marginRight="@dimen/x21"
+                android:layout_marginTop="@dimen/y20"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/include_signature"
+                app:qmui_childHorizontalSpacing="@dimen/x14"
+                app:qmui_childVerticalSpacing="@dimen/y10"></com.qmuiteam.qmui.widget.QMUIFloatLayout>
+
+            <!--<include-->
+            <!--android:id="@+id/include_meet_tag"-->
+            <!--layout="@layout/layout_homepage_meet_tag"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="@dimen/y26"-->
+            <!--app:layout_constraintLeft_toLeftOf="parent"-->
+            <!--app:layout_constraintRight_toRightOf="parent"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/include_signature"></include>-->
+
+            <View
+                android:id="@+id/line_sign"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/y1"
+                android:layout_marginLeft="@dimen/x16"
+                android:layout_marginTop="@dimen/y30"
+                android:background="@color/line_color"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/qfyt_container_meet_tag"></View>
+
+            <include
+                android:id="@+id/include_videos"
+                layout="@layout/layout_homepage_videos"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y25"
+                android:visibility="@{user.video_list == null || user.video_list.size() == 0 ?(UserService.isMe(user)?View.VISIBLE:View.GONE):View.VISIBLE }"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/line_sign"></include>
+
+            <include
+                android:id="@+id/include_index_visit"
+                layout="@layout/layout_homepage_visit"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/y80"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/include_videos"></include>
+
+            <include
+                android:id="@+id/include_comment_tags"
+                layout="@layout/layout_homepage_comment_tags"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/include_index_visit"></include>
+
+            <include
+                android:id="@+id/include_ver"
+                layout="@layout/layout_homepage_ver"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x16"
+                android:layout_marginTop="@dimen/y10"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/include_comment_tags"></include>
+
+            <View
+                android:id="@+id/line"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/y1"
+                android:layout_marginLeft="@dimen/x16"
+                android:layout_marginTop="@dimen/y30"
+                android:background="@color/line_color"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/include_ver"></View>
+
+
+            <include
+                android:id="@+id/include_skill"
+                layout="@layout/layout_homepage_skill"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/y22"
+                android:layout_marginTop="@dimen/y5"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/line"></include>
+
+
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

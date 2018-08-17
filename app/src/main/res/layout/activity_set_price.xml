@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include
+            android:id="@+id/include_toolbar"
+            layout="@layout/layout_toolbar"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y60"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></include>
+
+
+        <com.qmuiteam.qmui.widget.QMUIRadiusImageView
+            android:id="@+id/iv_img_video"
+            android:layout_width="@dimen/x40"
+            android:layout_height="@dimen/y40"
+            android:layout_marginLeft="@dimen/x16"
+            android:layout_marginTop="@dimen/y30"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/include_toolbar"
+            app:qmui_border_width="0dp"
+            app:qmui_is_circle="true" />
+
+        <TextView
+            android:id="@+id/tv_title_videochat_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x10"
+            android:text="@string/chat_video"
+            android:textColor="@color/color_343445"
+            android:textSize="@dimen/x18"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_img_video"
+            app:layout_constraintLeft_toRightOf="@+id/iv_img_video"
+            app:layout_constraintTop_toTopOf="@+id/iv_img_video" />
+
+        <TextView
+            android:id="@+id/tv_go_set_video_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/x10"
+            android:text="@string/set_price_gotoset"
+            android:textColor="@color/color_898A9E"
+            android:textSize="@dimen/x15"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_img_video"
+            app:layout_constraintRight_toLeftOf="@+id/iv_arrow1"
+            app:layout_constraintTop_toTopOf="@+id/iv_img_video" />
+
+        <LinearLayout
+            android:id="@+id/llyt_selected_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/x10"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_img_video"
+            app:layout_constraintRight_toLeftOf="@+id/iv_arrow1"
+            app:layout_constraintTop_toTopOf="@+id/iv_img_video">
+
+            <TextView
+                android:id="@+id/tv_video_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/color_343445"
+                android:textSize="@dimen/x16" />
+
+            <ImageView
+                android:layout_width="@dimen/x12"
+                android:layout_height="@dimen/y10"
+                android:background="@drawable/icon_coin" />
+
+            <TextView
+                android:id="@+id/tv_video_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/unit_minute"
+                android:textColor="@color/color_343445"
+                android:textSize="@dimen/x16" />
+
+
+        </LinearLayout>
+
+
+        <ImageView
+            android:id="@+id/iv_arrow1"
+            android:layout_width="@dimen/x5"
+            android:layout_height="@dimen/y9"
+            android:layout_marginRight="@dimen/x18"
+            android:background="@drawable/icon_arrow_right_gray"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_img_video"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/iv_img_video" />
+
+
+        <View
+            android:id="@+id/v1"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y1"
+            android:layout_marginLeft="@dimen/x16"
+            android:layout_marginTop="@dimen/y20"
+            android:background="@color/line_color"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_img_video"></View>
+
+        <View
+            android:id="@+id/v_set_video_price"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y80"
+            android:layout_marginTop="@dimen/y10"
+            app:layout_constraintTop_toBottomOf="@+id/include_toolbar"></View>
+
+
+        <com.qmuiteam.qmui.widget.QMUIRadiusImageView
+            android:id="@+id/iv_img_video_tags"
+            android:layout_width="@dimen/x40"
+            android:layout_height="@dimen/y40"
+            android:layout_marginLeft="@dimen/x16"
+            android:layout_marginTop="@dimen/y20"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/v1"
+            app:qmui_border_width="0dp"
+            app:qmui_is_circle="true" />
+
+        <TextView
+            android:id="@+id/tv_title_videochat_tags"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x10"
+            android:text="@string/set_price_video_tags"
+            android:textColor="@color/color_343445"
+            android:textSize="@dimen/x18"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_img_video_tags"
+            app:layout_constraintLeft_toRightOf="@+id/iv_img_video_tags"
+            app:layout_constraintTop_toTopOf="@+id/iv_img_video_tags" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/x10"
+            android:text="@string/set_price_to_choose"
+            android:textColor="@color/color_898A9E"
+            android:textSize="@dimen/x15"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_img_video_tags"
+            app:layout_constraintRight_toLeftOf="@+id/iv_arrow2"
+            app:layout_constraintTop_toTopOf="@+id/iv_img_video_tags" />
+
+        <com.qmuiteam.qmui.widget.QMUIFloatLayout
+            android:id="@+id/qfl_container"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/x16"
+            android:layout_marginTop="@dimen/y10"
+            app:layout_constraintLeft_toLeftOf="@+id/tv_title_videochat_tags"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_img_video_tags"></com.qmuiteam.qmui.widget.QMUIFloatLayout>
+
+
+        <ImageView
+            android:id="@+id/iv_arrow2"
+            android:layout_width="@dimen/x5"
+            android:layout_height="@dimen/y9"
+            android:layout_marginRight="@dimen/x18"
+            android:background="@drawable/icon_arrow_right_gray"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_img_video_tags"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/iv_img_video_tags" />
+
+        <View
+            android:id="@+id/v_set_video_tag"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y80"
+            app:layout_constraintTop_toBottomOf="@+id/v1"></View>
+
+        <View
+            android:id="@+id/v2"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y1"
+            android:layout_marginLeft="@dimen/x16"
+            android:layout_marginTop="@dimen/y20"
+            android:background="@color/line_color"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/qfl_container"></View>
+    </android.support.constraint.ConstraintLayout>
+</layout>

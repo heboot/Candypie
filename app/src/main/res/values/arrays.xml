@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="ball1">#FFD91C</color>
+    <color name="ball2">#FF4B4A</color>
+    <color name="ball3">#3D8EFF</color>
+
+    <integer-array name="colors">
+        <item>@color/ball1</item>
+        <item>@color/ball2</item>
+        <item>@color/ball3</item>
+    </integer-array>
+
+    <integer name="max_height">210</integer>
+    <integer name="min_height">160</integer>
+
+    <integer name="max_kg">150</integer>
+    <integer name="min_kg">40</integer>
+
+    <string-array name="names">
+        <item>a</item>
+        <item>b</item>
+        <item>c</item>
+        <item>d</item>
+        <item>e</item>
+        <item>f</item>
+        <!--<item>sports</item>-->
+        <!--<item>words</item>-->
+
+    </string-array>
+
+    <string-array name="icons">
+        <item>action</item>
+        <item>adventure</item>
+        <item>combat</item>
+        <item>moba</item>
+        <item>other</item>
+        <item>role</item>
+        <!--<item>sports</item>-->
+        <!--<item>words</item>-->
+
+    </string-array>
+
+</resources>

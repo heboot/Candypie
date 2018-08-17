@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.v4.widget.DrawerLayout
+        android:id="@+id/dlyt_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/clyt_container0"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white">
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/clyt_normal_index"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/clyt_container1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/iv_logo"
+                        android:layout_width="@dimen/x117"
+                        android:layout_height="@dimen/y26"
+                        android:layout_marginTop="@dimen/y33"
+                        android:background="@drawable/index_logo"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/iv_to_servicer_index"
+                        android:layout_width="@dimen/x20"
+                        android:layout_height="@dimen/y17"
+                        android:layout_marginRight="@dimen/x16"
+                        android:background="@drawable/icon_switch_role"
+                        app:layout_constraintBottom_toBottomOf="@+id/iv_logo"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/iv_logo" />
+
+                    <TextView
+                        android:id="@+id/tv_to_auth"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/x16"
+                        android:text="认证"
+                        android:textColor="@color/color_343445"
+                        android:textSize="@dimen/x16"
+                        app:layout_constraintBottom_toBottomOf="@+id/iv_logo"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/iv_logo" />
+
+                    <ImageView
+                        android:id="@+id/v_to_servicer_index"
+                        android:layout_width="@dimen/x80"
+                        android:layout_height="@dimen/y87"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/iv_my"
+                        android:layout_width="@dimen/x17"
+                        android:layout_height="@dimen/y18"
+                        android:layout_marginLeft="@dimen/x15"
+                        android:background="@drawable/icon_my_black"
+                        app:layout_constraintBottom_toBottomOf="@+id/iv_logo"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/iv_logo" />
+
+
+                    <ImageView
+                        android:id="@+id/v_my"
+                        android:layout_width="@dimen/x47"
+                        android:layout_height="@dimen/y37"
+                        app:layout_constraintBottom_toBottomOf="@+id/iv_logo"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/iv_logo" />
+
+                    <ImageView
+                        android:id="@+id/iv_unread"
+                        android:layout_width="@dimen/x18"
+                        android:layout_height="@dimen/y18"
+                        android:layout_marginLeft="@dimen/x29"
+                        android:layout_marginTop="@dimen/y33"
+                        android:background="@drawable/icon_red_tip"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_unread"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/y15"
+                        android:layout_marginTop="@dimen/y30"
+                        android:gravity="center"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/x9"
+                        app:layout_constraintBottom_toBottomOf="@+id/iv_unread"
+                        app:layout_constraintLeft_toLeftOf="@+id/iv_unread"
+                        app:layout_constraintRight_toRightOf="@+id/iv_unread"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <!--<android.support.constraint.ConstraintLayout-->
+                    <!--android:id="@+id/iv_banner"-->
+                    <!--android:layout_width="343dp"-->
+                    <!--android:layout_height="88dp"-->
+                    <!--android:layout_marginTop="35dp"-->
+                    <!--android:elevation="4dp"-->
+                    <!--android:shadowColor="@color/black"-->
+                    <!--app:layout_constraintLeft_toLeftOf="parent"-->
+                    <!--app:layout_constraintRight_toRightOf="parent"-->
+                    <!--app:layout_constraintTop_toBottomOf="@+id/iv_logo">-->
+
+
+                    <!--<com.qmuiteam.qmui.widget.QMUIRadiusImageView-->
+                    <!--android:id="@+id/iv_banner"-->
+                    <!--android:layout_width="343dp"-->
+                    <!--android:layout_height="88dp"-->
+                    <!--android:layout_marginTop="35dp"-->
+                    <!--android:elevation="4dp"-->
+                    <!--android:shadowColor="@color/black"-->
+                    <!--android:src="@drawable/qifen1"-->
+                    <!--app:layout_constraintLeft_toLeftOf="parent"-->
+                    <!--app:layout_constraintRight_toRightOf="parent"-->
+                    <!--app:layout_constraintTop_toBottomOf="@+id/iv_logo"-->
+                    <!--app:qmui_corner_radius="44dp"-->
+                    <!--app:qmui_is_circle="false" />-->
+
+
+                    <!--android:background="@color/white"-->
+                    <!--android:elevation="4dp"-->
+
+                    <com.youth.banner.Banner
+                        android:id="@+id/iv_banner"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/y92"
+                        android:layout_marginLeft="@dimen/x16"
+                        android:layout_marginRight="@dimen/x16"
+                        android:layout_marginTop="@dimen/y26"
+                        android:background="@drawable/bg_rect_banner"
+                        android:elevation="@dimen/x4"
+                        android:shadowColor="@color/color_343445"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/iv_logo" />
+
+
+                    <!--</android.support.constraint.ConstraintLayout>-->
+
+                    <android.support.constraint.ConstraintLayout
+                        android:id="@+id/clyt_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginTop="@dimen/y38"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/iv_banner">
+
+
+                        <ImageView
+                            android:id="@+id/iv1"
+                            android:layout_width="@dimen/x375"
+                            android:layout_height="@dimen/y375"
+                            android:visibility="gone"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/iv2"
+                            android:layout_width="@dimen/x284"
+                            android:layout_height="@dimen/y284"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toBottomOf="@+id/iv1"
+                            app:layout_constraintLeft_toLeftOf="@+id/iv1"
+                            app:layout_constraintRight_toRightOf="@+id/iv1"
+                            app:layout_constraintTop_toTopOf="@+id/iv1" />
+
+                        <ImageView
+                            android:id="@+id/left3"
+                            android:layout_width="@dimen/x44"
+                            android:layout_height="@dimen/y44"
+                            android:layout_marginLeft="@dimen/x46"
+                            android:layout_marginTop="@dimen/y41"
+                            android:visibility="gone"
+                            app:layout_constraintLeft_toLeftOf="@+id/iv1"
+                            app:layout_constraintTop_toBottomOf="@+id/left2" />
+
+                        <ImageView
+                            android:id="@+id/left2"
+                            android:layout_width="@dimen/x44"
+                            android:layout_height="@dimen/y44"
+                            android:layout_marginLeft="@dimen/x58"
+                            android:layout_marginTop="@dimen/y12"
+                            android:visibility="gone"
+                            app:layout_constraintLeft_toLeftOf="@+id/iv1"
+                            app:layout_constraintTop_toBottomOf="@+id/left1" />
+
+                        <ImageView
+                            android:id="@+id/left1"
+                            android:layout_width="@dimen/x44"
+                            android:layout_height="@dimen/y44"
+                            android:layout_marginBottom="@dimen/y233"
+                            android:layout_marginLeft="@dimen/x120"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toBottomOf="@+id/iv2"
+                            app:layout_constraintLeft_toLeftOf="@+id/iv1" />
+
+
+                        <ImageView
+                            android:id="@+id/right3"
+                            android:layout_width="@dimen/x44"
+                            android:layout_height="@dimen/y44"
+                            android:layout_marginRight="@dimen/x46"
+                            android:layout_marginTop="@dimen/y41"
+                            android:visibility="gone"
+                            app:layout_constraintRight_toRightOf="@+id/iv1"
+                            app:layout_constraintTop_toBottomOf="@+id/left2" />
+
+                        <ImageView
+                            android:id="@+id/right2"
+                            android:layout_width="@dimen/x44"
+                            android:layout_height="@dimen/y44"
+                            android:layout_marginRight="@dimen/x58"
+                            android:layout_marginTop="@dimen/y12"
+                            android:visibility="gone"
+                            app:layout_constraintRight_toRightOf="@+id/iv1"
+                            app:layout_constraintTop_toBottomOf="@+id/right1" />
+
+                        <ImageView
+                            android:id="@+id/right1"
+                            android:layout_width="@dimen/x44"
+                            android:layout_height="@dimen/y44"
+                            android:layout_marginBottom="@dimen/y233"
+                            android:layout_marginRight="@dimen/x120"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toBottomOf="@+id/iv2"
+                            app:layout_constraintRight_toRightOf="@+id/iv1" />
+
+                        <RelativeLayout
+                            android:visibility="gone"
+                            android:id="@+id/iv_menu_normal"
+                            android:layout_width="@dimen/x130"
+                            android:layout_height="@dimen/y130"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="@+id/iv1"
+                            app:layout_constraintLeft_toLeftOf="@+id/iv1"
+                            app:layout_constraintRight_toRightOf="@+id/iv1"
+                            app:layout_constraintTop_toTopOf="@+id/iv1">
+
+                        </RelativeLayout>
+
+                        <include
+                            android:id="@+id/include_menu"
+                            layout="@layout/layout_index_menu"
+                            android:layout_width="@dimen/x375"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"></include>
+
+
+                        <RelativeLayout
+
+                            android:id="@+id/iv_menu_pop"
+                            android:layout_width="@dimen/x75"
+                            android:layout_height="@dimen/y75"
+                            android:layout_marginTop="@dimen/y52"
+                            android:visibility="invisible"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/include_menu">
+
+
+                            <!--<ImageView-->
+                            <!--android:id="@+id/iv_index_close_menu"-->
+                            <!--android:layout_width="@dimen/x18"-->
+                            <!--android:layout_height="@dimen/y18"-->
+                            <!--android:background="@drawable/icon_index_close_menu" />-->
+
+                        </RelativeLayout>
+
+
+                    </android.support.constraint.ConstraintLayout>
+
+
+                </android.support.constraint.ConstraintLayout>
+
+                <ImageView
+                    android:id="@+id/iv_notification"
+                    android:layout_width="@dimen/x22"
+                    android:layout_height="@dimen/y22"
+                    android:layout_marginLeft="@dimen/x16"
+                    android:background="@drawable/icon_notification_index"
+                    app:layout_constraintBottom_toBottomOf="@+id/ttt"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/ttt" />
+
+                <com.gdlife.candypie.widget.LooperTextView
+                    android:id="@+id/ttt"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/y30"
+                    android:layout_marginBottom="@dimen/x16"
+                    android:layout_marginLeft="@dimen/x10"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toRightOf="@+id/iv_notification"
+                    app:layout_constraintRight_toRightOf="parent"></com.gdlife.candypie.widget.LooperTextView>
+
+            </android.support.constraint.ConstraintLayout>
+
+            <!--<include-->
+            <!--android:id="@+id/include_aa"-->
+            <!--layout="@layout/activity_index_serivicer"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="0dp"-->
+            <!--android:visibility="gone"-->
+            <!--app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--app:layout_constraintLeft_toLeftOf="parent"-->
+            <!--app:layout_constraintRight_toRightOf="parent"-->
+            <!--app:layout_constraintTop_toTopOf="parent"></include>-->
+
+        </android.support.constraint.ConstraintLayout>
+
+
+        <include
+            android:id="@+id/include_left"
+            layout="@layout/layout_leftmenu_head"></include>
+
+
+    </android.support.v4.widget.DrawerLayout>
+</layout>

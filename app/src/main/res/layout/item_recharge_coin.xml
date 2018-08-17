@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/clyt_container"
+        android:layout_width="@dimen/x110"
+        android:layout_height="@dimen/y70"
+        android:layout_marginLeft="@dimen/x7"
+        android:layout_marginTop="@dimen/y7"
+        android:background="@drawable/selector_bg_recharge_coin">
+
+        <LinearLayout
+            android:id="@+id/llyt_money"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/y14"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/iv_icon"
+                android:layout_width="@dimen/x17"
+                android:layout_height="@dimen/y15"
+                android:background="@drawable/icon_coin"
+                app:layout_constraintRight_toLeftOf="@+id/tv_money"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <TextView
+                android:id="@+id/tv_money"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x5"
+                android:text="111"
+                android:textColor="@drawable/selector_font_recharge"
+                android:textSize="@dimen/x18"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_coin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="111"
+            android:textColor="@drawable/selector_font_recharge"
+            android:textSize="@dimen/x14"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/llyt_money" />
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

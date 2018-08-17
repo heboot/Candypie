@@ -1,0 +1,16 @@
+include ':app', ':library:faceunity_unit',
+        ':library:http',
+
+        ':library:picture_library',
+        ':library:ucrop',
+
+        ':library:AliyunSnapn:snap_demo',
+        ':library:AliyunSnapn:snap_core',
+        ':library:RecyclerView',
+        ':library:PushSDK',
+        ':library:ImageLibrary',
+        ':library:MUtils',
+        ':library:Librarys',
+        ':library:uikit',
+        ':library:SwipeBackLayout',
+        ':library:faceunity'

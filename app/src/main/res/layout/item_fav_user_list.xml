@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="user"
+            type="com.heboot.entity.User"></variable>
+
+        <import type="com.gdlife.candypie.serivce.UserService"></import>
+    </data>
+
+    <com.daimajia.swipe.SwipeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/swipeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y100">
+
+        <!-- Bottom View Start-->
+        <LinearLayout
+            android:id="@+id/bottom_wrapper"
+            android:layout_width="@dimen/x100"
+            android:layout_height="match_parent"
+            android:background="@color/theme_color"
+            android:weightSum="1">
+
+            <TextView
+                android:id="@+id/tv_action"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="取消收藏"
+                android:textColor="@color/white" />
+
+            <!--What you want to show-->
+        </LinearLayout>
+        <!-- Bottom View End-->
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/clyt_container"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y100"
+            android:background="@color/white"
+            android:paddingLeft="@dimen/x20">
+
+
+            <com.qmuiteam.qmui.widget.QMUIRadiusImageView
+                android:id="@+id/qiv_head"
+                android:layout_width="@dimen/x60"
+                android:layout_height="@dimen/y60"
+                android:showAvatar="@{user.avatar}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:qmui_border_width="0dp"
+                app:qmui_is_circle="true" />
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x20"
+                android:layout_marginTop="@dimen/y3"
+                android:text="@{user.nickname}"
+                android:textColor="@color/color_343445"
+                android:textSize="@dimen/x17"
+                app:layout_constraintBottom_toTopOf="@+id/baseline"
+                app:layout_constraintLeft_toRightOf="@+id/qiv_head" />
+
+
+            <include
+                android:id="@+id/include_sexage"
+                layout="@layout/layout_sex_age"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x5"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_name"
+                app:layout_constraintLeft_toRightOf="@+id/tv_name"
+                app:layout_constraintTop_toTopOf="@+id/tv_name"></include>
+
+            <!--<ImageView-->
+            <!--android:layout_width="@dimen/x7"-->
+            <!--android:layout_height="@dimen/y9"-->
+            <!--android:layout_marginLeft="@dimen/x5"-->
+            <!--android:background="@{user == null?null:(user.sex ==0 ? @drawable/icon_sex_woman:@drawable/icon_sex_man)}"-->
+            <!--app:layout_constraintBottom_toBottomOf="@+id/tv_name"-->
+            <!--app:layout_constraintLeft_toRightOf="@+id/tv_name"-->
+            <!--app:layout_constraintTop_toTopOf="@+id/tv_name" />-->
+
+            <View
+                android:id="@+id/baseline"
+                android:layout_width="1dp"
+                android:layout_height="1px"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"></View>
+
+            <TextView
+                android:id="@+id/tv_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y3"
+                android:textColor="@color/color_57586C"
+                android:textSize="13sp"
+                app:layout_constraintLeft_toLeftOf="@+id/tv_name"
+                app:layout_constraintTop_toBottomOf="@+id/baseline" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="@dimen/y1"
+                android:layout_marginTop="@dimen/y19"
+                android:background="@color/line_color"
+                app:layout_constraintLeft_toLeftOf="@+id/tv_name"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/qiv_head"></View>
+
+
+        </android.support.constraint.ConstraintLayout>
+    </com.daimajia.swipe.SwipeLayout>
+</layout>

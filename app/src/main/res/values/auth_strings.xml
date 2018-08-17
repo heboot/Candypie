@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="auth_index_tip1">接受视频聊天或线下邀约，便可轻松赚钱</string>
+
+    <string name="auth_index_tip2">大方录制、突出自己特色，会提高出单率</string>
+
+    <string name="auth_index_record">录制视频</string>
+
+    <string name="after_auth">稍后认证</string>
+
+    <string name="after_auth_tips">身份证不在身边，稍后再进行身份认证</string>
+
+    <string name="page_title_auth_id">身份认证</string>
+
+    <string name="page_title_auth_skill">技能认证</string>
+
+    <string name="add_skill">添加技能</string>
+
+    <string name="add_skill_video">添加技能视频</string>
+
+    <string name="add_skill_photo">添加技能照片</string>
+
+    <string name="auth_skill_tip1">请上传技能相关的视频、照片</string>
+
+    <string name="auth_skill_tip2">上传的视频、照片用于通过技能审核，不公开展示</string>
+
+    <string name="auth_index_tip">用视频展示自己</string>
+
+    <string name="del_tip">确定要删除吗?</string>
+
+    <string name="commit_authid">提交，仅供审核不对外展示</string>
+
+    <string name="auth_id_face_tip">上传手持身份证正面照片一张，请确保信息清晰可见</string>
+
+    <string name="auth_id_tip">上传身份证正面照片一张，请确保信息清晰可见</string>
+
+    <string name="click_upload">点击上传</string>
+
+    <string name="do_auth">立即认证</string>
+
+    <string name="commit_auth">提交</string>
+
+    <string name="commit_auth_suc">申请提交成功,请耐心等待审核结果</string>
+
+    <string name="auth_ing">正在审核中...</string>
+
+    <string name="left_service_tip_kpi">我的成长</string>
+
+    <string name="left_service_tip_auth">视频认证</string>
+
+</resources>

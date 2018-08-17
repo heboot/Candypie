@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/include_toolbar"
+            layout="@layout/layout_toolbar"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y60"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></include>
+
+        <View
+            android:id="@+id/baseline"
+            android:layout_width="@dimen/x32"
+            android:layout_height="1dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"></View>
+
+        <ImageView
+            android:id="@+id/iv_idface_sample"
+            android:layout_width="@dimen/x140"
+            android:layout_height="@dimen/y140"
+            android:layout_marginTop="@dimen/y36"
+            android:background="@drawable/icon_avatar_normal"
+            app:layout_constraintRight_toLeftOf="@+id/baseline"
+            app:layout_constraintTop_toBottomOf="@+id/include_toolbar" />
+
+        <include
+            layout="@layout/layout_auth_id_img"
+            android:id="@+id/iv_idface"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/y25"
+            app:layout_constraintLeft_toRightOf="@+id/baseline"
+            app:layout_constraintTop_toBottomOf="@+id/include_toolbar" />
+
+
+        <ImageView
+            android:id="@+id/iv_p1"
+            android:layout_width="@dimen/x5"
+            android:layout_height="@dimen/y5"
+            android:background="@drawable/bg_oval_343445"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_auth_tip1"
+            app:layout_constraintLeft_toLeftOf="@+id/iv_idface_sample"
+            app:layout_constraintTop_toTopOf="@+id/tv_auth_tip1" />
+
+        <TextView
+            android:id="@+id/tv_auth_tip1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x10"
+            android:layout_marginTop="@dimen/y24"
+            android:text="@string/auth_id_face_tip"
+            android:textColor="@color/color_343445"
+            android:textSize="@dimen/x14"
+            app:layout_constraintLeft_toRightOf="@+id/iv_p1"
+            app:layout_constraintTop_toBottomOf="@+id/iv_idface_sample" />
+
+
+        <ImageView
+            android:id="@+id/iv_id_sample"
+            android:layout_width="@dimen/x140"
+            android:layout_height="@dimen/y140"
+            android:layout_marginTop="@dimen/y36"
+            android:background="@drawable/icon_avatar_normal"
+            app:layout_constraintRight_toLeftOf="@+id/baseline"
+            app:layout_constraintTop_toBottomOf="@+id/tv_auth_tip1" />
+
+        <include
+            android:id="@+id/iv_id"
+            layout="@layout/layout_auth_id_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/y25"
+            app:layout_constraintLeft_toRightOf="@+id/baseline"
+            app:layout_constraintTop_toBottomOf="@+id/tv_auth_tip1" />
+
+        <ImageView
+            android:id="@+id/iv_p2"
+            android:layout_width="@dimen/x5"
+            android:layout_height="@dimen/y5"
+            android:background="@drawable/bg_oval_343445"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_auth_tip2"
+            app:layout_constraintLeft_toLeftOf="@+id/iv_id_sample"
+            app:layout_constraintTop_toTopOf="@+id/tv_auth_tip2" />
+
+        <TextView
+            android:id="@+id/tv_auth_tip2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x10"
+            android:layout_marginTop="@dimen/y24"
+            android:text="@string/auth_id_tip"
+            android:textColor="@color/color_343445"
+            android:textSize="@dimen/x14"
+            app:layout_constraintLeft_toRightOf="@+id/iv_p2"
+            app:layout_constraintTop_toBottomOf="@+id/iv_id_sample" />
+
+
+        <TextView
+
+            android:id="@+id/btn_bottom"
+            android:layout_width="@dimen/x314"
+            android:layout_height="@dimen/y48"
+            android:layout_marginTop="@dimen/y48"
+            android:background="@drawable/selector_bottom_button"
+            android:checked="false"
+            android:elevation="@dimen/x4"
+            android:gravity="center"
+            android:text="@string/commit_authid"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_auth_tip2" />
+
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

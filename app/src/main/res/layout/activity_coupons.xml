@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tl="http://schemas.android.com/apk/res-auto">
+
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <View
+            android:id="@+id/vt"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y70"
+            android:background="@color/white"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </View>
+
+        <include
+            android:id="@+id/include_toolbar"
+            layout="@layout/layout_toolbar"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y60"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></include>
+
+
+        <com.flyco.tablayout.SlidingTabLayout
+            android:id="@+id/st_title"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y40"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/vt"
+            tl:tl_indicator_color="@color/theme_color"
+            tl:tl_indicator_width="@dimen/x36"
+            tl:tl_tab_space_equal="true"
+            tl:tl_textSelectColor="@color/theme_color"
+            tl:tl_textUnselectColor="@color/color_898A9E"
+            tl:tl_textsize="@dimen/x15"
+            tl:tl_underline_height="@dimen/y5"></com.flyco.tablayout.SlidingTabLayout>
+
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/rv_list"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/color_EDEDF3"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/st_title"></android.support.v4.view.ViewPager>
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

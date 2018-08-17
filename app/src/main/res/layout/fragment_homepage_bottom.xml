@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="from"
+            type="String"></variable>
+
+        <variable
+            name="user"
+            type="com.heboot.entity.User"></variable>
+
+        <import type="android.view.View"></import>
+
+        <import type="com.gdlife.candypie.common.MValue"></import>
+
+        <import type="com.gdlife.candypie.serivce.UserService"></import>
+
+    </data>
+
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <!--android:layout_marginTop="@dimen/y565"-->
+        <android.support.v4.widget.NestedScrollView
+            android:id="@+id/sv_container"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/y15"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/include_toolbar">
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:paddingBottom="@dimen/y20">
+
+                <include
+                    android:id="@+id/layout_homepage_content"
+                    layout="@layout/layout_homepage_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/include_point"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"></include>
+
+            </android.support.constraint.ConstraintLayout>
+
+
+        </android.support.v4.widget.NestedScrollView>
+
+        <include
+            android:id="@+id/include_toolbar"
+            layout="@layout/layout_toolbar"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y60"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></include>
+
+
+        <View
+            android:id="@+id/v_top"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y70"
+            android:background="@color/white"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></View>
+
+        <ImageView
+            android:id="@+id/iv_share"
+            android:layout_width="@dimen/x30"
+            android:layout_height="@dimen/y30"
+            android:layout_marginRight="@dimen/x10"
+            android:layout_marginTop="@dimen/y20"
+            android:background="@drawable/icon_share_black"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/v_top"
+            app:layout_constraintRight_toLeftOf="@+id/iv_more"
+            app:layout_constraintTop_toTopOf="@+id/v_top" />
+
+        <ImageView
+            android:id="@+id/iv_more"
+            android:layout_width="@dimen/x30"
+            android:layout_height="@dimen/y30"
+            android:layout_marginRight="@dimen/x16"
+            android:layout_marginTop="@dimen/y20"
+            android:background="@drawable/icon_homepage_more_black"
+            app:layout_constraintBottom_toBottomOf="@+id/v_top"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/v_top" />
+
+        <View
+            android:id="@+id/v_more"
+            android:layout_width="@dimen/x60"
+            android:layout_height="@dimen/y60"
+            app:layout_constraintBottom_toBottomOf="@+id/v_top"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/v_top" />
+
+        <View
+            android:id="@+id/v_bottom"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y60"
+            android:background="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"></View>
+
+        <View
+            android:id="@+id/v_bottom1"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y24"
+            android:background="@drawable/bg_homepage_white_gradient"
+            app:layout_constraintBottom_toTopOf="@+id/v_bottom"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"></View>
+
+        <TextView
+            android:id="@+id/tv_left"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y40"
+            android:layout_marginBottom="@dimen/y10"
+            android:layout_marginLeft="@dimen/x16"
+            android:layout_marginTop="@dimen/y30"
+            android:background="@drawable/bg_rect_border_themecolor_"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/x69"
+            android:textColor="@color/theme_color"
+            android:textSize="16sp"
+            android:visibility="@{!from.equals(MValue.FROM_MY) ? View.VISIBLE: View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/baseline" />
+
+        <LinearLayout
+            android:id="@+id/llyt_selected_price"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y40"
+            android:layout_marginBottom="@dimen/y10"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/iv_fav"
+            app:layout_constraintRight_toRightOf="@+id/tv_left">
+
+            <TextView
+                android:id="@+id/tv_video_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/theme_color"
+                android:textSize="@dimen/x16" />
+
+            <ImageView
+                android:layout_width="@dimen/x12"
+                android:layout_height="@dimen/y10"
+                android:layout_marginLeft="@dimen/x2"
+                android:background="@drawable/icon_coin" />
+
+            <TextView
+                android:id="@+id/tv_video_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" /分钟"
+                android:textColor="@color/theme_color"
+                android:textSize="@dimen/x16" />
+
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/baseline"
+            android:layout_width="@dimen/x23"
+            android:layout_height="1dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"></View>
+
+
+        <ImageView
+            android:id="@+id/iv_fav"
+            android:layout_width="@dimen/x26"
+            android:layout_height="@dimen/y23"
+            android:layout_marginLeft="@dimen/x30"
+            android:background="@drawable/icon_discover_video_chat"
+            android:visibility="@{!from.equals(MValue.FROM_MY) ? View.VISIBLE: View.GONE}"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_left"
+            app:layout_constraintLeft_toLeftOf="@+id/tv_left"
+            app:layout_constraintTop_toTopOf="@+id/tv_left" />
+
+
+        <ImageView
+            android:id="@+id/iv_toyue"
+            android:layout_width="@dimen/x40"
+            android:layout_height="@dimen/y40"
+            android:layout_marginBottom="@dimen/y10"
+            android:layout_marginRight="@dimen/x26"
+            android:background="@drawable/icon_userinfo_yue"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/iv_tochat" />
+
+
+        <ImageView
+            android:id="@+id/iv_tochat"
+            android:layout_width="@dimen/x40"
+            android:layout_height="@dimen/y40"
+            android:layout_marginBottom="@dimen/y10"
+            android:layout_marginRight="@dimen/x26"
+            android:background="@drawable/icon_userinfo_tochat_shen"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+
+        <!--<TextView-->
+        <!--android:id="@+id/tv_right"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="@dimen/y40"-->
+        <!--android:layout_marginBottom="@dimen/y20"-->
+        <!--android:layout_marginRight="@dimen/x16"-->
+        <!--android:layout_marginTop="@dimen/y30"-->
+        <!--android:background="@drawable/bg_rect_bottom_button"-->
+        <!--android:gravity="center"-->
+        <!--android:text="@string/fav"-->
+        <!--android:textColor="@color/white"-->
+        <!--android:textSize="16sp"-->
+        <!--android:visibility="@{!from.equals(MValue.FROM_MY) ? View.VISIBLE: View.GONE}"-->
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--app:layout_constraintLeft_toRightOf="@id/baseline"-->
+        <!--app:layout_constraintRight_toRightOf="parent" />-->
+
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

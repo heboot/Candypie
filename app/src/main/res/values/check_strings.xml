@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="check_error_mobile">手机号不正确</string>
+
+    <string name="check_error_pwd">密码不正确</string>
+
+    <string name="check_error_nick">昵称不正确</string>
+
+    <string name="check_error_birthday">生日不正确</string>
+
+    <string name="check_error_protol">请先接受用户协议</string>
+
+    <string name="check_error_idface">请上传手持身份证照片</string>
+
+    <string name="check_error_id">请上身份证照片</string>
+
+    <string name="check_auth_userinfo">请先完善个人资料</string>
+
+    <string name="check_auth_userid_auth">你还未进行身份认证，\n不能提交</string>
+
+    <string name="input_sign_tip">最少%1$s个字符，最多%2$s个字符</string>
+
+    <string name="open_wanmei">开启蜜糖派完整体验</string>
+
+    <string name="open_permission">立即开启</string>
+
+    <string name="permit_notification_tip">允许通知</string>
+
+    <string name="permit_loc_tip">允许定位</string>
+
+    <string name="open_status_off">未开启</string>
+</resources>

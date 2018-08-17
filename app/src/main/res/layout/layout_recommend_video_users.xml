@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="recommendData"
+            type="com.heboot.bean.index.IndexRecommendConfigBean"></variable>
+
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent">
+
+            <View
+                android:id="@+id/v1"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/y60"
+                android:background="@drawable/bg_rect_white_top_12"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"></View>
+
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/v2"></View>
+
+            <View
+                android:layout_width="@dimen/x13"
+                android:layout_height="@dimen/y13"
+                android:layout_marginRight="@dimen/x16"
+                android:background="@drawable/icon_select_close"
+                app:layout_constraintBottom_toBottomOf="@+id/v1"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/v1"></View>
+
+            <View
+                android:id="@+id/v_close"
+                android:layout_width="@dimen/x53"
+                android:layout_height="@dimen/y33"
+                app:layout_constraintBottom_toBottomOf="@+id/v1"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/v1"></View>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{recommendData.title}"
+                android:textColor="@color/color_343445"
+                android:textSize="@dimen/x20"
+                app:layout_constraintBottom_toBottomOf="@+id/v1"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/v1" />
+
+            <View
+                android:id="@+id/v2"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/y1"
+                android:background="@color/line_color"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/v1"></View>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y24"
+                android:text="@{recommendData.content}"
+                android:textColor="@color/color_898A9E"
+                android:textSize="@dimen/x16"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/v2" />
+
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_list"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y50"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/v2"></android.support.v7.widget.RecyclerView>
+
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="@dimen/y30"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rv_list"></View>
+        </android.support.constraint.ConstraintLayout>
+    </android.support.constraint.ConstraintLayout>
+</layout>

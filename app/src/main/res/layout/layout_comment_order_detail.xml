@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <ImageView
+            android:id="@+id/iv_comment"
+            android:layout_width="@dimen/x44"
+            android:layout_height="@dimen/y44"
+            android:layout_marginLeft="@dimen/x10"
+            android:layout_marginTop="@dimen/y34"
+            app:layout_constraintLeft_toLeftOf="@+id/tv_title"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title" />
+
+        <me.zhanghai.android.materialratingbar.MaterialRatingBar
+            android:id="@+id/rb_comment"
+            style="@style/Widget.MaterialRatingBar.RatingBar.Indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/y16"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="@dimen/x24"
+            android:progress="50"
+            android:progressTint="#FFBF63"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_comment"
+            app:layout_constraintLeft_toRightOf="@+id/iv_comment"
+            app:layout_constraintTop_toTopOf="@+id/iv_comment"
+            app:mrb_progressBackgroundTint="@color/color_D6D6DF"
+            app:mrb_secondaryProgressTint="@color/transparent" />
+
+        <TextView
+            android:id="@+id/tv_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x24"
+            android:textColor="@color/color_343445"
+            android:textSize="@dimen/x18"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_comment"
+            app:layout_constraintLeft_toRightOf="@+id/iv_comment"
+            app:layout_constraintTop_toTopOf="@+id/iv_comment" />
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

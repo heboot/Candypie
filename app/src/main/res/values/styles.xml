@@ -1,0 +1,91 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="QMUI.Compat">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@color/white</item>
+    </style>
+
+
+    <!-- 自定义loading dialog -->
+    <style name="zhezhao_dialog" parent="android:style/Theme.Dialog">
+        <item name="android:background">#33000000</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+
+    <style name="WelcomeTheme" parent="AppTheme">
+        <!-- 欢迎页背景引用刚才写好的 -->
+        <item name="android:windowBackground">@drawable/welcome</item>
+        <item name="android:windowFullscreen">true</item>
+        <!-- <item name="android:windowIsTranslucent">true</item> --> <!-- 透明背景不要了 -->
+    </style>
+
+    <style name="IndexUserListTheme" parent="AppTheme">
+        <!-- 欢迎页背景引用刚才写好的 -->
+        <item name="android:statusBarColor">#80221B33</item>
+        <!-- <item name="android:windowIsTranslucent">true</item> --> <!-- 透明背景不要了 -->
+    </style>
+
+    <style name="yogaCourseRatingBar" parent="@android:style/Widget.RatingBar">
+        <!--<item name="android:progressDrawable">@drawable/bg_rating</item>-->
+        <item name="android:progressDrawable">@drawable/bg_rating</item>
+        <item name="android:minHeight">@dimen/y16</item>
+        <item name="android:minWidth">@dimen/y16</item>
+        <item name="android:maxWidth">@dimen/y16</item>
+        <item name="android:maxHeight">@dimen/y16</item>
+    </style>
+
+    <style name="comment_ratingbar" parent="@android:style/Widget.RatingBar">
+        <item name="android:minHeight">@dimen/y12</item>
+        <item name="android:maxHeight">@dimen/y12</item>
+    </style>
+
+    <style name="giftDialogStyle" parent="@android:style/Theme.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowTitleStyle">@null</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+
+    <style name="AppRootTheme" parent="Base.Theme.AppCompat.Light" />
+
+    <style name="AppRootTheme.Compat" parent="Base.Theme.AppCompat.Light" />
+
+    <!--<style name="AppConfigTheme" parent="AppBaseTheme">-->
+    <!--<item name="android:colorPrimary">?attr/qmui_config_color_blue</item>-->
+    <!--<item name="android:colorPrimaryDark">?attr/qmui_config_color_blue</item>-->
+    <!--<item name="android:colorAccent">?attr/qmui_config_color_blue</item>-->
+    <!--<item name="android:textColorPrimary">?attr/qmui_config_color_blue</item>-->
+    <!--<item name="android:textColorSecondary">?attr/qmui_config_color_blue-->
+    <!--</item> &lt;!&ndash;返回箭头也是用这个颜色&ndash;&gt;-->
+    <!--<item name="android:windowBackground">@color/black</item>-->
+    <!--<item name="android:navigationBarColor">?attr/qmui_config_color_black</item>-->
+    <!--<item name="android:colorControlNormal">@color/qmui_config_color_white</item>-->
+    <!--<item name="android:editTextColor">?attr/qmui_config_color_black</item>-->
+    <!--&lt;!&ndash; 该行会影响顶部条收起时效果,为false时，状态栏颜色不会被改变 &ndash;&gt;-->
+    <!--<item name="android:windowDrawsSystemBarBackgrounds">true</item>-->
+    <!--</style>-->
+
+    <!--<style name="AppConfigTheme.Compat" parent="AppBaseTheme.Compat">-->
+    <!--<item name="colorPrimary">?attr/qmui_config_color_blue</item>-->
+    <!--<item name="colorPrimaryDark">?attr/qmui_config_color_blue</item>-->
+    <!--<item name="colorAccent">?attr/qmui_config_color_blue</item>-->
+    <!--<item name="colorControlNormal">@color/qmui_config_color_white</item>-->
+    <!--<item name="android:textColorPrimary">?attr/qmui_config_color_blue</item>-->
+    <!--<item name="android:textColorSecondary">?attr/qmui_config_color_blue-->
+    <!--</item> &lt;!&ndash;返回箭头也是用这个颜色&ndash;&gt;-->
+    <!--<item name="android:windowBackground">@color/black</item>-->
+    <!--<item name="android:editTextColor">?attr/qmui_config_color_black</item>-->
+    <!--</style>-->
+
+</resources>

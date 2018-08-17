@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tl="http://schemas.android.com/apk/res-auto">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/dlyt_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/clyt_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <!--<android.support.v4.widget.SwipeRefreshLayout-->
+            <!--android:id="@+id/sryt_index"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="0dp"-->
+            <!--app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--app:layout_constraintLeft_toLeftOf="parent"-->
+            <!--app:layout_constraintRight_toRightOf="parent"-->
+            <!--app:layout_constraintTop_toTopOf="parent">-->
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/clyt_topbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y69"
+                    android:background="@drawable/bg_gradient_indexv5_top"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_scrollFlags="scroll|enterAlways|snap">
+
+
+                </android.support.constraint.ConstraintLayout>
+
+                <!--<android.support.v7.widget.RecyclerView-->
+                <!--android:id="@+id/rv_list"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="0dp"-->
+                <!--app:layout_behavior="@string/appbar_scrolling_view_behavior"-->
+                <!--app:layout_constraintBottom_toBottomOf="parent"-->
+                <!--app:layout_constraintLeft_toLeftOf="parent"-->
+                <!--app:layout_constraintRight_toRightOf="parent"-->
+                <!--app:layout_constraintTop_toTopOf="parent"></android.support.v7.widget.RecyclerView>-->
+
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/rv_list"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="@dimen/y64"
+                    android:background="@drawable/bg_rect_white_top_6"
+                    android:paddingTop="@dimen/y3"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"></android.support.v4.view.ViewPager>
+
+
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/clyt_topbar2"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y69"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/iv_logo2"
+                        android:layout_width="@dimen/x117"
+                        android:layout_height="@dimen/y26"
+                        android:layout_marginTop="@dimen/y28"
+                        android:background="@drawable/logo_white"
+                        android:visibility="invisible"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                    <View
+                        android:id="@+id/v_search2"
+                        android:layout_width="@dimen/x20"
+                        android:layout_height="@dimen/y20"
+                        android:layout_marginLeft="@dimen/x20"
+                        android:background="@drawable/icon_search_white"
+                        app:layout_constraintBottom_toBottomOf="@+id/iv_logo2"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/iv_logo2"></View>
+
+
+                </android.support.constraint.ConstraintLayout>
+
+                <View
+                    android:id="@+id/v_searchbg2"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/y40"
+                    android:layout_marginTop="@dimen/y20"
+                    app:layout_constraintLeft_toRightOf="@+id/v_my2"
+                    app:layout_constraintRight_toLeftOf="@+id/st_title"
+                    app:layout_constraintTop_toTopOf="parent"></View>
+
+
+                <com.flyco.tablayout.SlidingTabLayout
+                    android:id="@+id/st_title"
+                    android:layout_width="@dimen/x174"
+                    android:layout_height="@dimen/y30"
+                    android:layout_marginTop="@dimen/y26"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tl_indicator_corner_radius="@dimen/x4"
+                    app:tl_underline_color="#00000000"
+                    tl:tl_indicator_color="@color/white"
+                    tl:tl_indicator_width="@dimen/x40"
+                    tl:tl_tab_space_equal="true"
+                    tl:tl_textSelectColor="@color/white"
+                    tl:tl_textUnselectColor="#CCFFFFFF"
+                    tl:tl_textsize="@dimen/x18"
+                    tl:tl_underline_height="@dimen/y3"></com.flyco.tablayout.SlidingTabLayout>
+
+
+            </android.support.constraint.ConstraintLayout>
+            <!--</android.support.v4.widget.SwipeRefreshLayout>-->
+
+
+        </android.support.constraint.ConstraintLayout>
+
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/clyt_first"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#80343445"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/index_welcome"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent" />
+
+
+        </android.support.constraint.ConstraintLayout>
+
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

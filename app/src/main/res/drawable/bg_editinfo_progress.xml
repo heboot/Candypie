@@ -1,0 +1,92 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--3个层的顺序即为显示时的叠加顺序-->
+    <!--背景色-->
+    <item android:id="@android:id/background">
+        <shape>
+
+            <solid android:color="@color/transparent" />
+        </shape>
+    </item>
+
+
+    <!--一级进度条的颜色，也可以直接替换成图片-->
+    <item android:id="@android:id/progress">
+        <clip>
+            <shape>
+                <solid android:color="#80ffffff" />
+            </shape>
+        </clip>
+    </item>
+    <!--<item android:id="@android:id/background">-->
+    <!--<clip>-->
+    <!--<shape>-->
+    <!--&lt;!&ndash;<corners android:radius="5dip" />&ndash;&gt;-->
+    <!--&lt;!&ndash;<solid android:color="@color/theme_black"></solid>&ndash;&gt;-->
+    <!--<gradient-->
+    <!--android:endColor="@color/theme_black"-->
+    <!--android:startColor="@color/theme_black"-->
+    <!--android:type="linear" />-->
+
+    <!--</shape>-->
+    <!--</clip>-->
+    <!--</item>-->
+
+    <!--<item android:id="@android:id/secondaryProgress">-->
+    <!--<clip>-->
+    <!--<shape>-->
+    <!--<gradient-->
+    <!--android:endColor="@color/theme_blue"-->
+    <!--android:startColor="@color/theme_blue" />-->
+    <!--</shape>-->
+    <!--</clip>-->
+    <!--</item>-->
+
+    <!--<item android:id="@android:id/progress">-->
+    <!--<clip>-->
+    <!--<shape>-->
+    <!--&lt;!&ndash;<corners android:radius="5dip" />&ndash;&gt;-->
+    <!--<gradient-->
+    <!--android:endColor="#FF2A60"-->
+    <!--android:startColor="#FA8072"-->
+    <!--android:type="linear" />-->
+    <!--</shape>-->
+    <!--</clip>-->
+    <!--</item>-->
+
+
+    <!--<item android:id="@android:id/secondaryProgress">-->
+    <!--<shape>-->
+    <!--<corners android:radius="5dip" />-->
+    <!--<gradient-->
+    <!--android:endColor="#FF2A60"-->
+    <!--android:startColor="#FA8072"-->
+    <!--android:type="linear" />-->
+    <!--</shape>-->
+    <!--</item>-->
+    <!--<item android:id="@android:id/secondaryProgress">-->
+    <!--<clip>-->
+    <!--<shape>-->
+    <!--<corners android:radius="5dip" />-->
+    <!--<gradient-->
+    <!--android:angle="270"-->
+    <!--android:centerColor="#80ffb600"-->
+    <!--android:centerY="0.75"-->
+    <!--android:endColor="#a0ffcb00"-->
+    <!--android:startColor="#80ffd300" />-->
+    <!--</shape>-->
+    <!--</clip>-->
+    <!--</item>-->
+    <!--<item android:id="@android:id/progress">-->
+    <!--<clip>-->
+    <!--<shape>-->
+    <!--<corners android:radius="5dip" />-->
+    <!--&lt;!&ndash;<gradient&ndash;&gt;-->
+    <!--&lt;!&ndash;android:startColor="#ffffd300"&ndash;&gt; &lt;!&ndash;android:centerColor="#ffffb600"&ndash;&gt; &lt;!&ndash;android:centerY="0.75"&ndash;&gt; &lt;!&ndash;android:endColor="#ffffcb00"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:angle="270"&ndash;&gt; &lt;!&ndash;/>&ndash;&gt;-->
+    <!--<solid android:color="#d50b01" />-->
+    <!--</shape>-->
+    <!--</clip>-->
+    <!--</item>-->
+
+</layer-list>

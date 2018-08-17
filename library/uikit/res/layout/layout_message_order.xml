@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/clyt_container"
+        android:layout_width="@dimen/x342"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_rect_white_6">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x14"
+            android:layout_marginTop="@dimen/y17"
+            android:textColor="@color/color_343445"
+            android:textSize="@dimen/x20"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:layout_width="@dimen/x16"
+            android:layout_height="@dimen/y30"
+            android:layout_marginRight="@dimen/x17"
+            android:layout_marginTop="@dimen/y85"
+            android:background="@drawable/icon_msg_order_arrow"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <include
+            android:id="@+id/include_title"
+            layout="@layout/layout_order_item"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x15"
+            android:layout_marginRight="@dimen/x32"
+            android:layout_marginTop="@dimen/y25"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title"></include>
+
+        <include
+            android:id="@+id/include_price"
+            layout="@layout/layout_order_item"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x15"
+            android:layout_marginRight="@dimen/x32"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/include_title"></include>
+
+        <include
+            android:id="@+id/include_address"
+            layout="@layout/layout_order_item"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x15"
+            android:layout_marginRight="@dimen/x32"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/include_price"></include>
+
+        <include
+            android:id="@+id/include_time"
+            layout="@layout/layout_order_item"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/y18"
+            android:layout_marginLeft="@dimen/x15"
+            android:layout_marginRight="@dimen/x32"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/include_address"></include>
+
+        <TextView
+            android:id="@+id/tv_content"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/y17"
+            android:layout_marginLeft="@dimen/x15"
+            android:layout_marginRight="@dimen/x16"
+            android:layout_marginTop="@dimen/x20"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/include_time" />
+
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

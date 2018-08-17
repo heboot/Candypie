@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="listBean"
+            type="com.heboot.bean.config.ConfigBean.ServiceItemsConfigBean.ListBean"></variable>
+
+    </data>
+
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/y20"
+        android:paddingLeft="@dimen/x31"
+        android:paddingTop="@dimen/y20">
+
+        <ImageView
+            android:id="@+id/iv_img"
+            android:layout_width="@dimen/x60"
+            android:layout_height="@dimen/y60"
+            android:background="@drawable/jn1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x31"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_img"
+            app:layout_constraintLeft_toRightOf="@+id/iv_img"
+            app:layout_constraintTop_toTopOf="@+id/iv_img">
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{listBean.title}"
+                android:textColor="@color/color_343445"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tv_subtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{listBean.content}"
+                android:textColor="@color/color_58586C"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

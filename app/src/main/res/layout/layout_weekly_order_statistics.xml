@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="kpiWeeklyBeanModel"
+            type="com.heboot.bean.kpi.KpiWeeklyBeanModel"></variable>
+
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:paddingBottom="@dimen/y50">
+
+        <TextView
+            android:id="@+id/tv_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x15"
+            android:layout_marginTop="@dimen/y12"
+            android:text="订单统计"
+            android:textColor="@color/color_343445"
+            android:textSize="@dimen/x18"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <ImageView
+            android:id="@+id/iv_meet_order"
+            android:layout_width="@dimen/x8"
+            android:layout_height="@dimen/y8"
+            android:background="@drawable/bg_oval_themecolor"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_meetorder"
+            app:layout_constraintLeft_toLeftOf="@+id/tv_info"
+            app:layout_constraintTop_toTopOf="@+id/tv_meetorder" />
+
+        <TextView
+            android:id="@+id/tv_meetorder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x10"
+            android:layout_marginTop="@dimen/y21"
+            android:text="@{`线下  ` + kpiWeeklyBeanModel.meet_order}"
+            android:textColor="@color/theme_color"
+            app:layout_constraintLeft_toRightOf="@+id/iv_meet_order"
+            app:layout_constraintTop_toBottomOf="@+id/tv_info" />
+
+
+        <ImageView
+            android:id="@+id/iv_video_order"
+            android:layout_width="@dimen/x8"
+            android:layout_height="@dimen/y8"
+            android:background="@drawable/bg_oval_red"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_videoorder"
+            app:layout_constraintLeft_toLeftOf="@+id/tv_info"
+            app:layout_constraintTop_toTopOf="@+id/tv_videoorder" />
+
+        <TextView
+            android:id="@+id/tv_videoorder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x10"
+            android:layout_marginTop="@dimen/y4"
+            android:text="@{`视频  ` + kpiWeeklyBeanModel.video_chat}"
+            android:textColor="@color/color_FF5252"
+            app:layout_constraintLeft_toRightOf="@+id/iv_meet_order"
+            app:layout_constraintTop_toBottomOf="@+id/tv_meetorder" />
+
+
+        <RelativeLayout
+            android:id="@+id/rlyt"
+            android:layout_width="@dimen/x200"
+            android:layout_height="@dimen/y200"
+            android:layout_marginTop="@dimen/y75"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <!--<com.gdlife.candypie.view.WeeklyOrderProgressView-->
+            <!--android:id="@+id/dynamicArcView"-->
+            <!--android:layout_width="@dimen/x200"-->
+            <!--android:layout_height="@dimen/y200"-->
+            <!--/>-->
+
+            <!--app:meet_order="20"-->
+            <!--app:video_order="30"-->
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tv_order_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/y40"
+            android:textColor="@color/color_343445"
+            android:textSize="@dimen/x60"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="@+id/rlyt"
+            app:layout_constraintRight_toRightOf="@+id/rlyt"
+            app:layout_constraintTop_toTopOf="@+id/rlyt" />
+
+        <TextView
+            android:id="@+id/tv_order_num_tip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="完成订单"
+            android:textColor="@color/color_898A9E"
+            android:textSize="@dimen/x16"
+            app:layout_constraintLeft_toLeftOf="@+id/rlyt"
+            app:layout_constraintRight_toRightOf="@+id/rlyt"
+            app:layout_constraintTop_toBottomOf="@+id/tv_order_num" />
+
+        <ImageView
+            android:id="@+id/iv_tel"
+            android:layout_width="@dimen/x16"
+            android:layout_height="@dimen/y16"
+            android:layout_marginLeft="@dimen/x10"
+            android:layout_marginTop="@dimen/y45"
+            android:background="@drawable/icon_tel_weekly"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rlyt" />
+
+        <TextView
+            android:id="@+id/tv_communication_tip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x5"
+            android:text="沟通及时"
+            android:textColor="@color/color_898A9E"
+            android:textSize="@dimen/x14"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_tel"
+            app:layout_constraintLeft_toRightOf="@+id/iv_tel"
+            app:layout_constraintTop_toTopOf="@+id/iv_tel" />
+
+        <TextView
+            android:id="@+id/tv_communication_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x5"
+            android:text="@{kpiWeeklyBeanModel.good_eval + `次`}"
+            android:textColor="@color/color_343445"
+            android:textSize="@dimen/x16"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_tel"
+            app:layout_constraintLeft_toRightOf="@+id/tv_communication_tip"
+            app:layout_constraintTop_toTopOf="@+id/iv_tel" />
+
+
+        <ImageView
+            android:id="@+id/iv_addr"
+            android:layout_width="@dimen/x16"
+            android:layout_height="@dimen/y16"
+            android:layout_marginLeft="@dimen/x10"
+            android:layout_marginTop="@dimen/y20"
+            android:background="@drawable/icon_tel_weekly"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_tel" />
+
+        <TextView
+            android:id="@+id/tv_delay_tip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x5"
+            android:text="准时到达见面地点"
+            android:textColor="@color/color_898A9E"
+            android:textSize="@dimen/x14"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_addr"
+            app:layout_constraintLeft_toRightOf="@+id/iv_addr"
+            app:layout_constraintTop_toTopOf="@+id/iv_addr" />
+
+        <TextView
+            android:id="@+id/tv_delay_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x5"
+            android:text="@{kpiWeeklyBeanModel.no_delay + `次`}"
+            android:textColor="@color/color_343445"
+            android:textSize="@dimen/x16"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_addr"
+            app:layout_constraintLeft_toRightOf="@+id/tv_delay_tip"
+            app:layout_constraintTop_toTopOf="@+id/iv_addr" />
+
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

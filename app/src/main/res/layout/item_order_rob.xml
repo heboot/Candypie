@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="orderBean"
+            type="com.heboot.bean.theme.OrderListBean.ListBean"></variable>
+
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:paddingBottom="@dimen/y16">
+
+        <!--android:paddingBottom="@dimen/y16"-->
+        <com.qmuiteam.qmui.widget.QMUIRadiusImageView
+            android:id="@+id/iv_avatar"
+            android:layout_width="@dimen/x60"
+            android:layout_height="@dimen/y60"
+            android:layout_marginLeft="@dimen/x20"
+            android:layout_marginTop="@dimen/y20"
+            android:src="@color/aliyun_red"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:qmui_border_width="0dp" />
+
+        <TextView
+            android:id="@+id/tv_serve_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x20"
+            android:layout_marginTop="@dimen/y28"
+            android:text="吃饭啊"
+            android:textColor="@color/color_343445"
+            android:textSize="@dimen/x17"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toRightOf="@+id/iv_avatar"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_serve_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x10"
+            android:layout_marginTop="@dimen/y28"
+            android:text="¥200"
+            android:textColor="@color/color_FF5252"
+            android:textSize="@dimen/x17"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toRightOf="@+id/tv_serve_name"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_serve_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/y2"
+            android:text="¥200"
+            android:textColor="@color/color_898A9E"
+            android:textSize="@dimen/x12"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="@+id/tv_serve_name"
+            app:layout_constraintTop_toBottomOf="@+id/tv_serve_name" />
+
+        <TextView
+            android:id="@+id/tv_money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x7"
+            android:layout_marginTop="@dimen/y10"
+            android:textColor="@color/color_FF5252"
+            android:textSize="@dimen/x18"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toRightOf="@+id/iv_point"
+            app:layout_constraintTop_toBottomOf="@+id/include_order_content" />
+
+        <Button
+            android:id="@+id/btn_register"
+            android:layout_width="@dimen/x80"
+            android:layout_height="@dimen/y36"
+            android:layout_marginRight="@dimen/x15"
+            android:layout_marginTop="@dimen/y32"
+            android:background="@drawable/bg_selector_order_rob_option"
+            android:text="@string/order_rob"
+            android:textColor="@color/white"
+            android:textSize="@dimen/x18"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y1"
+            android:layout_marginTop="@dimen/y18"
+            android:background="@color/line_color"
+            app:layout_constraintLeft_toLeftOf="@+id/tv_serve_name"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_avatar"></View>
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

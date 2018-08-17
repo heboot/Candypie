@@ -1,0 +1,110 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ucrop_photobox"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/ucrop_color_toolbar"
+        android:minHeight="?attr/actionBarSize"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/ucrop_label_edit_photo"
+            android:textColor="@color/ucrop_color_toolbar_widget"
+            android:textSize="18sp" />
+
+    </android.support.v7.widget.Toolbar>
+
+
+    <FrameLayout
+        android:id="@+id/ucrop_frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <!--android:layout_above="@+id/wrapper_controls"-->
+        <!--android:background="@color/ucrop_color_default_crop_frame"-->
+
+        <!--<ImageView-->
+        <!--android:id="@+id/image_view_logo"-->
+        <!--android:layout_width="200dp"-->
+        <!--android:layout_height="200dp"-->
+        <!--android:layout_gravity="center"-->
+        <!--app:srcCompat="@drawable/ucrop_vector_ic_crop"-->
+        <!--tools:background="@drawable/ucrop_vector_ic_crop"-->
+        <!--tools:ignore="MissingPrefix" />-->
+
+        <com.yalantis.ucrop.view.UCropView
+            android:id="@+id/ucrop"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="0" />
+
+
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/tv_finish"
+        android:layout_width="57dp"
+        android:layout_height="26dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/bg_crop_border_whilte_24"
+        android:gravity="center"
+        android:text="完成"
+        android:textColor="@color/white" />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y70"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/y18"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
+
+        <TextView
+            android:id="@+id/tv_tip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="拖动红框选一帧作为头像"
+            android:textColor="@color/white"
+            android:textSize="@dimen/x14" />
+
+        <LinearLayout
+            android:id="@+id/llyt_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/tv_tip"
+            android:layout_marginTop="@dimen/y18"
+            android:orientation="horizontal"></LinearLayout>
+
+
+        <!--<android.support.v7.widget.RecyclerView-->
+        <!--android:id="@+id/rv_list"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="50dp"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:background="@android:color/holo_red_dark"></android.support.v7.widget.RecyclerView>-->
+
+        <View
+            android:id="@+id/sv_selector"
+            android:layout_width="@dimen/x34"
+            android:layout_height="@dimen/y34"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/bg_rect_bottom_s" />
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

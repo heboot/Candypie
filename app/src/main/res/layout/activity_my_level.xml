@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="kpiLevelBean"
+            type="com.heboot.bean.kpi.KpiLevelBean"></variable>
+
+        <import type="android.view.View"></import>
+
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/color_EDEDF3">
+
+                <ImageView
+                    android:id="@+id/iv_bg"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/y301"
+                    android:background="@drawable/bg_grow_top"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/iv_level"
+                    android:layout_width="@dimen/x103"
+                    android:layout_height="@dimen/y103"
+                    android:layout_marginTop="@dimen/y84"
+                    android:scaleType="fitXY"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/iv_bg" />
+
+
+                <LinearLayout
+                    android:id="@+id/llyt_tip"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y12"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:visibility="@{kpiLevelBean.up_order_nums == 0?View.INVISIBLE:View.VISIBLE}"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/iv_level">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{`你距离Lv.` + (kpiLevelBean.level +1) +`，还差` }"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/x15" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/x4"
+                        android:text="@{kpiLevelBean.up_order_nums+``}"
+                        android:textColor="@color/color_FFDE42"
+                        android:textSize="@dimen/x18"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="单"
+                        android:textColor="@color/color_FFDE42"
+                        android:textSize="@dimen/x15" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_level_left"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x16"
+                    android:layout_marginTop="@dimen/y14"
+                    android:text="@{`Lv.` + kpiLevelBean.level}"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/x20"
+                    android:textStyle="bold"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/llyt_tip" />
+
+                <ProgressBar
+                    android:id="@+id/pb"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/y4"
+                    android:layout_marginLeft="@dimen/x12"
+                    android:layout_marginRight="@dimen/x12"
+                    android:indeterminateDrawable="@android:drawable/progress_indeterminate_horizontal"
+                    android:indeterminateOnly="false"
+                    android:max="100"
+                    android:progress="60"
+                    android:progressDrawable="@drawable/bg_level_progress"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_level_left"
+                    app:layout_constraintLeft_toRightOf="@+id/tv_level_left"
+                    app:layout_constraintRight_toLeftOf="@+id/tv_level_right"
+                    app:layout_constraintTop_toTopOf="@+id/tv_level_left" />
+
+                <TextView
+                    android:id="@+id/tv_level_right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/x16"
+                    android:layout_marginTop="@dimen/y14"
+                    android:text="@{`Lv.` + (kpiLevelBean.level + 1)}"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/x20"
+                    android:textStyle="bold"
+                    android:visibility="@{kpiLevelBean.up_order_nums == 0?View.INVISIBLE:View.VISIBLE}"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/llyt_tip" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="* 线上视频累计 90分钟＝1单"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/x13"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_level_left" />
+
+
+                <View
+                    android:id="@+id/v_bottom_bg"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y10"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/iv_bg"></View>
+
+                <View
+                    android:id="@+id/v_bottom_bg2"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="@dimen/y10"
+                    android:background="@color/white"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_title2"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/iv_bg"></View>
+
+                <ImageView
+                    android:id="@+id/iv_uplevel_title"
+                    android:layout_width="@dimen/x335"
+                    android:layout_height="@dimen/y28"
+                    android:layout_marginTop="@dimen/y26"
+                    android:background="@drawable/my_level_rights"
+                    android:textColor="@color/color_343445"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/v_bottom_bg" />
+
+                <ImageView
+                    android:id="@+id/iv_uplevel"
+                    android:layout_width="@dimen/x60"
+                    android:layout_height="@dimen/y60"
+                    android:layout_marginLeft="@dimen/x30"
+                    android:layout_marginTop="@dimen/y20"
+                    android:background="@drawable/icon_level_rate"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/iv_uplevel_title" />
+
+                <TextView
+                    android:id="@+id/tv_title1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x30"
+                    android:layout_marginTop="@dimen/y5"
+                    android:text="提高分成比例"
+                    android:textColor="@color/color_58586C"
+                    android:textSize="@dimen/x20"
+                    app:layout_constraintLeft_toRightOf="@+id/iv_uplevel"
+                    app:layout_constraintTop_toTopOf="@+id/iv_uplevel" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_list"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/x30"
+                    android:layout_marginTop="@dimen/y5"
+                    app:layout_constraintLeft_toRightOf="@+id/iv_uplevel"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_title1"></android.support.v7.widget.RecyclerView>
+
+
+                <ImageView
+                    android:id="@+id/iv_recommend"
+                    android:layout_width="@dimen/x60"
+                    android:layout_height="@dimen/y60"
+                    android:layout_marginLeft="@dimen/x30"
+                    android:layout_marginTop="@dimen/y30"
+                    android:background="@drawable/icon_level_recommend"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/rv_list" />
+
+
+                <TextView
+                    android:id="@+id/tv_title2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x30"
+                    android:layout_marginRight="@dimen/x45"
+                    android:layout_marginTop="@dimen/y5"
+                    android:paddingBottom="@dimen/y60"
+                    android:text="达到Lv.3,会在服务首页获得推荐"
+                    android:textColor="@color/color_58586C"
+                    android:textSize="@dimen/x20"
+                    app:layout_constraintLeft_toRightOf="@+id/iv_recommend"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/iv_recommend" />
+
+            </android.support.constraint.ConstraintLayout>
+        </android.support.v4.widget.NestedScrollView>
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/clyt_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/y25"
+            android:paddingTop="@dimen/y33">
+
+            <ImageView
+                android:id="@+id/iv_back"
+                android:layout_width="@dimen/x21"
+                android:layout_height="@dimen/y15"
+                android:layout_marginLeft="@dimen/x20"
+                android:background="@drawable/icon_back_white"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_title"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tv_title" />
+
+            <View
+                android:id="@+id/v_back"
+                android:layout_width="@dimen/x40"
+                android:layout_height="@dimen/y35"
+                android:layout_marginLeft="@dimen/y10"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_title"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tv_title"></View>
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLength="10"
+                android:text="我的等级"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </android.support.constraint.ConstraintLayout>
+
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

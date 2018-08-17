@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="type"
+            type="com.gdlife.candypie.common.MValue.TIP_DIALOG_TYPE"></variable>
+
+        <import type="com.gdlife.candypie.common.MValue.TIP_DIALOG_TYPE"></import>
+
+        <import type="android.view.View"></import>
+
+        <variable
+            name="leftText"
+            type="String"></variable>
+
+
+        <variable
+            name="centerText"
+            type="String"></variable>
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#80343445">
+
+        <!--<View-->
+        <!--android:id="@+id/v_bg"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:layout_marginLeft="@dimen/x52"-->
+        <!--android:layout_marginRight="@dimen/x52"-->
+        <!--android:background="@drawable/bg_rect_white_12"-->
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--app:layout_constraintLeft_toLeftOf="parent"-->
+        <!--app:layout_constraintRight_toRightOf="parent"-->
+        <!--app:layout_constraintTop_toTopOf="parent"></View>-->
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/v_bg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x42"
+            android:layout_marginRight="@dimen/x42"
+            android:background="@drawable/bg_rect_white_12"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+
+                android:id="@+id/iv_tip"
+                android:layout_width="@dimen/x235"
+                android:layout_height="@dimen/y101"
+                android:layout_marginTop="@dimen/y25"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.qmuiteam.qmui.widget.QMUIRadiusImageView
+                android:id="@+id/iv_avatar"
+                android:layout_width="@dimen/x80"
+                android:layout_height="@dimen/y80"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_tip"
+                app:layout_constraintLeft_toLeftOf="@+id/iv_tip"
+                app:layout_constraintRight_toRightOf="@+id/iv_tip"
+                app:layout_constraintTop_toTopOf="@+id/iv_tip"
+                app:qmui_border_width="0dp"
+                app:qmui_is_circle="true" />
+
+            <TextView
+                android:id="@+id/tv_content"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="@dimen/y10"
+                android:gravity="center"
+                android:text="1"
+                android:textColor="@color/black"
+                android:textSize="@dimen/x20"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="@+id/v_bg"
+                app:layout_constraintRight_toRightOf="@+id/v_bg"
+                app:layout_constraintTop_toBottomOf="@+id/iv_tip" />
+            <!--android:layout_marginLeft="@dimen/x30"-->
+            <!--android:layout_marginRight="@dimen/x30"-->
+            <TextView
+                android:id="@+id/tv_content2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="@dimen/y7"
+                android:gravity="center"
+                android:text=""
+                android:textColor="@color/color_58586C"
+                android:textSize="@dimen/x16"
+                app:layout_constraintLeft_toLeftOf="@+id/v_bg"
+                app:layout_constraintRight_toRightOf="@+id/v_bg"
+                app:layout_constraintTop_toBottomOf="@+id/tv_content" />
+            <!--android:layout_marginLeft="@dimen/x40"-->
+            <!--android:layout_marginRight="@dimen/x40"-->
+            <View
+                android:id="@+id/line1"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/y1"
+                android:layout_marginTop="@dimen/y40"
+                android:background="@color/line_color"
+                app:layout_constraintLeft_toLeftOf="@+id/v_bg"
+                app:layout_constraintRight_toRightOf="@+id/v_bg"
+                app:layout_constraintTop_toBottomOf="@+id/tv_content2"></View>
+
+
+            <View
+                android:id="@+id/v_center"
+                android:layout_width="@dimen/x1"
+                android:layout_height="@dimen/y44"
+                android:background="@color/line_color"
+                android:visibility="@{type == TIP_DIALOG_TYPE.ONE || type == TIP_DIALOG_TYPE.FIRST_ROB|| type == TIP_DIALOG_TYPE.UPDATE_GLOD_VIP?View.GONE:View.VISIBLE}"
+                app:layout_constraintLeft_toLeftOf="@+id/v_bg"
+                app:layout_constraintRight_toRightOf="@+id/v_bg"
+                app:layout_constraintTop_toBottomOf="@+id/line1"></View>
+
+            <TextView
+                android:id="@+id/tv_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{leftText}"
+                android:textColor="@color/color_343445"
+                android:textSize="@dimen/x17"
+                android:visibility="@{type == TIP_DIALOG_TYPE.ONE || type == TIP_DIALOG_TYPE.FIRST_ROB|| type == TIP_DIALOG_TYPE.UPDATE_GLOD_VIP?View.GONE:View.VISIBLE}"
+                app:layout_constraintBottom_toBottomOf="@+id/v_center"
+                app:layout_constraintLeft_toLeftOf="@+id/v_bg"
+                app:layout_constraintRight_toLeftOf="@+id/v_center"
+                app:layout_constraintTop_toTopOf="@+id/v_center" />
+
+            <TextView
+                android:id="@+id/tv_confirm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_007AFF"
+                android:textSize="@dimen/x17"
+                android:visibility="@{type == TIP_DIALOG_TYPE.ONE || type == TIP_DIALOG_TYPE.FIRST_ROB|| type == TIP_DIALOG_TYPE.UPDATE_GLOD_VIP?View.GONE:View.VISIBLE}"
+                app:layout_constraintBottom_toBottomOf="@+id/v_center"
+                app:layout_constraintLeft_toRightOf="@+id/v_center"
+                app:layout_constraintRight_toRightOf="@+id/v_bg"
+                app:layout_constraintTop_toTopOf="@+id/v_center" />
+
+            <TextView
+                android:id="@+id/tv_center"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/y45"
+                android:gravity="center"
+                android:text="知道了"
+                android:textColor="@color/color_007AFF"
+                android:textSize="17sp"
+                android:visibility="@{type == TIP_DIALOG_TYPE.ONE || type == TIP_DIALOG_TYPE.FIRST_ROB || type == TIP_DIALOG_TYPE.UPDATE_GLOD_VIP?View.VISIBLE:View.GONE}"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/line1" />
+
+
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

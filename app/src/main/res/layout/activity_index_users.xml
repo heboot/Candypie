@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.v4.widget.DrawerLayout
+        android:id="@+id/dlyt_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/clyt_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <android.support.v4.widget.SwipeRefreshLayout
+                android:id="@+id/sryt_index"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                    <android.support.constraint.ConstraintLayout
+                        android:id="@+id/clyt_topbar"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/y69"
+                        android:background="@drawable/bg_gradient_indexv5_top"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_scrollFlags="scroll|enterAlways|snap">
+
+                        <ImageView
+                            android:id="@+id/iv_logo"
+                            android:layout_width="@dimen/x117"
+                            android:layout_height="@dimen/y26"
+                            android:layout_marginTop="@dimen/y28"
+                            android:background="@drawable/logo_white"
+                            android:visibility="invisible"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/iv_to_servicer_index"
+                            android:layout_width="@dimen/x33"
+                            android:layout_height="@dimen/y30"
+                            android:layout_marginRight="@dimen/x16"
+                            android:background="@drawable/icon_switch_role_white"
+                            app:layout_constraintBottom_toBottomOf="@+id/iv_logo"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/iv_logo" />
+
+                        <TextView
+                            android:id="@+id/tv_to_auth"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="@dimen/x16"
+                            android:text="认证"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/x16"
+                            app:layout_constraintBottom_toBottomOf="@+id/iv_logo"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/iv_logo" />
+
+                        <ImageView
+                            android:id="@+id/v_to_servicer_index"
+                            android:layout_width="@dimen/x80"
+                            android:layout_height="@dimen/y87"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/iv_my"
+                            android:layout_width="@dimen/x17"
+                            android:layout_height="@dimen/y18"
+                            android:layout_marginLeft="@dimen/x15"
+                            android:background="@drawable/icon_my_white"
+                            app:layout_constraintBottom_toBottomOf="@+id/iv_logo"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/iv_logo" />
+
+
+                        <ImageView
+                            android:id="@+id/v_my"
+                            android:layout_width="@dimen/x47"
+                            android:layout_height="@dimen/y37"
+                            app:layout_constraintBottom_toBottomOf="@+id/iv_logo"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/iv_logo" />
+
+                        <ImageView
+                            android:id="@+id/iv_unread"
+                            android:layout_width="@dimen/x18"
+                            android:layout_height="@dimen/y18"
+                            android:layout_marginLeft="@dimen/x29"
+                            android:layout_marginTop="@dimen/y28"
+                            android:background="@drawable/icon_red_tip"
+                            android:visibility="gone"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tv_unread"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/y15"
+                            android:layout_marginTop="@dimen/y27"
+                            android:gravity="center"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/x9"
+                            app:layout_constraintBottom_toBottomOf="@+id/iv_unread"
+                            app:layout_constraintLeft_toLeftOf="@+id/iv_unread"
+                            app:layout_constraintRight_toRightOf="@+id/iv_unread"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <View
+                            android:id="@+id/v_search"
+                            android:layout_width="@dimen/x20"
+                            android:layout_height="@dimen/y20"
+                            android:layout_marginLeft="@dimen/x35"
+                            android:background="@drawable/icon_search_white"
+                            app:layout_constraintBottom_toBottomOf="@+id/iv_logo"
+                            app:layout_constraintLeft_toRightOf="@+id/iv_my"
+                            app:layout_constraintTop_toTopOf="@+id/iv_logo"></View>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/x8"
+                            android:text="搜索"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/x20"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="@+id/iv_logo"
+                            app:layout_constraintLeft_toRightOf="@+id/v_search"
+                            app:layout_constraintTop_toTopOf="@+id/iv_logo" />
+
+                        <View
+                            android:id="@+id/v_searchbg"
+                            android:layout_width="@dimen/x200"
+                            android:layout_height="@dimen/y40"
+                            android:layout_marginLeft="@dimen/x35"
+                            app:layout_constraintBottom_toBottomOf="@+id/iv_logo"
+                            app:layout_constraintLeft_toRightOf="@+id/iv_my"
+                            app:layout_constraintTop_toTopOf="@+id/iv_logo"></View>
+
+
+                    </android.support.constraint.ConstraintLayout>
+
+                    <com.jcodecraeer.xrecyclerview.XRecyclerView
+                        android:id="@+id/rv_list"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"></com.jcodecraeer.xrecyclerview.XRecyclerView>
+
+                    <ImageView
+                        android:id="@+id/iv_zz"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/y80"
+                        android:background="@drawable/bg_indexuser_black_gradient"
+                        android:visibility="gone"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <android.support.constraint.ConstraintLayout
+                        android:id="@+id/clyt_topbar2"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/y69"
+
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <ImageView
+                            android:id="@+id/iv_logo2"
+                            android:layout_width="@dimen/x117"
+                            android:layout_height="@dimen/y26"
+                            android:layout_marginTop="@dimen/y28"
+                            android:background="@drawable/logo_white"
+                            android:visibility="invisible"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/iv_to_servicer_index2"
+                            android:layout_width="@dimen/x33"
+                            android:layout_height="@dimen/y30"
+                            android:layout_marginRight="@dimen/x16"
+                            android:background="@drawable/icon_switch_role_white"
+                            app:layout_constraintBottom_toBottomOf="@+id/iv_logo2"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/iv_logo2" />
+
+                        <TextView
+                            android:id="@+id/tv_to_auth2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="@dimen/x16"
+                            android:text="认证"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/x16"
+                            app:layout_constraintBottom_toBottomOf="@+id/iv_logo2"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/iv_logo2" />
+
+                        <ImageView
+                            android:id="@+id/v_to_servicer_index2"
+                            android:layout_width="@dimen/x80"
+                            android:layout_height="@dimen/y87"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/iv_my2"
+                            android:layout_width="@dimen/x17"
+                            android:layout_height="@dimen/y18"
+                            android:layout_marginLeft="@dimen/x15"
+                            android:background="@drawable/icon_my_white"
+                            app:layout_constraintBottom_toBottomOf="@+id/iv_logo2"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/iv_logo2" />
+
+                        <View
+                            android:id="@+id/v_search2"
+                            android:layout_width="@dimen/x20"
+                            android:layout_height="@dimen/y20"
+                            android:layout_marginLeft="@dimen/x35"
+                            android:background="@drawable/icon_search_white"
+                            app:layout_constraintBottom_toBottomOf="@+id/iv_logo2"
+                            app:layout_constraintLeft_toRightOf="@+id/iv_my2"
+                            app:layout_constraintTop_toTopOf="@+id/iv_logo2"></View>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/x8"
+                            android:text="搜索"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/x20"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="@+id/iv_logo2"
+                            app:layout_constraintLeft_toRightOf="@+id/v_search2"
+                            app:layout_constraintTop_toTopOf="@+id/iv_logo2" />
+
+
+                    </android.support.constraint.ConstraintLayout>
+
+                    <View
+                        android:id="@+id/v_my2"
+                        android:layout_width="@dimen/x47"
+                        android:layout_height="@dimen/y37"
+                        android:layout_marginTop="@dimen/y20"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <View
+                        android:id="@+id/v_searchbg2"
+                        android:layout_width="@dimen/x230"
+                        android:layout_height="@dimen/y40"
+                        android:layout_marginTop="@dimen/y20"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"></View>
+
+                    <View
+                        android:id="@+id/v_auth2"
+                        android:layout_width="@dimen/x47"
+                        android:layout_height="@dimen/y37"
+                        android:layout_marginTop="@dimen/y20"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                </android.support.constraint.ConstraintLayout>
+            </android.support.v4.widget.SwipeRefreshLayout>
+
+
+            <ImageView
+                android:id="@+id/iv_zzbottom"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/y136"
+                android:background="@drawable/bg_indexuser_black_gradient_bottom"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent" />
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/clyt_yue"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/y8"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent">
+
+                <ImageView
+                    android:id="@+id/iv_yue"
+                    android:layout_width="@dimen/x61"
+                    android:layout_height="@dimen/y61"
+                    android:background="@drawable/icon_index_userlist_yue"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="快约"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/x12"
+                    android:textStyle="bold"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/iv_yue" />
+
+                <ImageView
+                    android:id="@+id/iv_msg"
+                    android:layout_width="@dimen/x50"
+                    android:layout_height="@dimen/y50"
+                    android:layout_marginRight="@dimen/x48"
+                    android:background="@drawable/icon_user_index_msg"
+                    app:layout_constraintBottom_toBottomOf="@+id/iv_yue"
+                    app:layout_constraintRight_toLeftOf="@+id/iv_yue" />
+
+                <ImageView
+                    android:id="@+id/iv_recommend"
+                    android:layout_width="@dimen/x50"
+                    android:layout_height="@dimen/y50"
+                    android:layout_marginLeft="@dimen/x47"
+                    android:background="@drawable/icon_index_money"
+                    app:layout_constraintBottom_toBottomOf="@+id/iv_yue"
+                    app:layout_constraintLeft_toRightOf="@+id/iv_yue" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="去赚钱"
+                    android:textColor="#FFE97D"
+                    android:textSize="@dimen/x12"
+                    android:textStyle="bold"
+                    app:layout_constraintLeft_toLeftOf="@+id/iv_recommend"
+                    app:layout_constraintRight_toRightOf="@+id/iv_recommend"
+                    app:layout_constraintTop_toBottomOf="@+id/iv_recommend" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="消息"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/x12"
+                    android:textStyle="bold"
+                    app:layout_constraintLeft_toLeftOf="@+id/iv_msg"
+                    app:layout_constraintRight_toRightOf="@+id/iv_msg"
+                    app:layout_constraintTop_toBottomOf="@+id/iv_msg" />
+
+
+                <!--<ImageView-->
+                <!--android:id="@+id/iv_unread2"-->
+                <!--android:layout_width="@dimen/x15"-->
+                <!--android:layout_height="@dimen/y15"-->
+                <!--android:layout_marginLeft="@dimen/x32"-->
+                <!--android:layout_marginTop="@dimen/y4"-->
+                <!---->
+                <!--app:layout_constraintLeft_toLeftOf="@+id/iv_msg"-->
+                <!--app:layout_constraintTop_toTopOf="@+id/iv_msg" />-->
+
+                <TextView
+                    android:id="@+id/tv_unread2"
+                    android:layout_width="@dimen/x15"
+                    android:layout_height="@dimen/y15"
+                    android:layout_marginLeft="@dimen/x32"
+                    android:layout_marginTop="@dimen/y4"
+                    android:background="@drawable/bg_oval_red"
+                    android:gravity="center"
+                    android:text="1"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/x10"
+                    app:layout_constraintBottom_toBottomOf="@+id/iv_unread2"
+                    app:layout_constraintLeft_toLeftOf="@+id/iv_msg"
+                    app:layout_constraintRight_toRightOf="@+id/iv_unread2"
+                    app:layout_constraintTop_toTopOf="@+id/iv_msg" />
+
+
+            </android.support.constraint.ConstraintLayout>
+
+
+        </android.support.constraint.ConstraintLayout>
+
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/clyt_first"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#80343445"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/index_welcome"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent" />
+
+
+        </android.support.constraint.ConstraintLayout>
+
+        <include
+            android:id="@+id/include_left"
+            layout="@layout/layout_leftmenu_head"></include>
+
+
+    </android.support.v4.widget.DrawerLayout>
+</layout>

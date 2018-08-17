@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="vertical">
+        <!--<com.geehao.sanhaolou.views.GifMovieView-->
+        <!--android:id="@+id/gif_progress"-->
+        <!--android:layout_width="75dp"-->
+        <!--app:gif="@drawable/progress"-->
+        <!--android:layout_height="75dp" />-->
+        <!--<TextView-->
+        <!--android:textColor="#9D9D9D"-->
+        <!--android:textSize="15sp"-->
+        <!--android:text="拼命加载中..."-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content" />-->
+
+        <com.qmuiteam.qmui.widget.QMUILoadingView
+            android:layout_width="@dimen/x50"
+            android:layout_height="@dimen/x50"
+            app:qmui_loading_view_size="@dimen/x50" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="加载中..." />
+    </LinearLayout>
+</FrameLayout>

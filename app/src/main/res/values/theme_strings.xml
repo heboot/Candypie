@@ -1,0 +1,101 @@
+<resources>
+
+    <string name="new_theme_time_hint">时间</string>
+    <string name="new_theme_address_hint">地点</string>
+    <string name="new_theme_req_hint">要求</string>
+    <string name="new_theme_money_hint">打赏</string>
+    <string name="new_theme_remark_hint">备注 (可选)</string>
+
+    <string name="place_an_order">下单</string>
+    <string name="more">更多主题</string>
+    <string name="more_themes">更多主题</string>
+
+    <string name="choose_address_search_hint">请输入店名/地址快速查找</string>
+
+    <string name="choose_address_detail_info">记得预定好场地，场地费自负哦</string>
+
+    <string name="person_unit">位</string>
+
+    <string name="unit_person">人</string>
+
+    <string name="persons_unit">个人</string>
+
+    <string name="woman_unit">女生</string>
+
+    <string name="man_unit">男生</string>
+
+    <string name="sex_other_unit">不限性别</string>
+
+    <string name="privacy">匿名发单</string>
+
+    <string name="new_theme_money_info">打赏</string>
+
+    <string name="choose_time">选择时间</string>
+
+    <string name="choose_req">选择要求</string>
+
+    <string name="choose_reward">打赏</string>
+
+    <string name="choose_city">城市</string>
+
+    <string name="choose_height">身高</string>
+
+    <string name="choose_kg">体重</string>
+
+    <string name="service_user_agin">继续约TA</string>
+
+    <string name="yitongzhiyonghu">已通知%1$s位用户</string>
+
+    <string name="select_apply_user">已选择%1$s人</string>
+
+    <string name="page_title_cancel">取消发约</string>
+
+    <string name="page_title_service_user_list">服务者列表</string>
+
+    <string name="cancel_server_more_tip_title">由于多次取消发单\n你已被平台限制发单</string>
+
+    <string name="cancel_server_more_tip_content1">限制时间至</string>
+
+    <string name="cancel_server_more_tip_content2">立即解除限时</string>
+
+    <string name="v1_tip">您的邀约已经发送给对方\n请耐心等待</string>
+
+    <string name="v1_tip2">超过</string>
+
+    <string name="v1_tip3">对方没有反馈\n订单自动取消\n打赏金额会退回到您的账户</string>
+
+    <string name="call_mobile_tip">是否要拨打电话</string>
+
+    <string name="to_video_chat">和TA视频</string>
+
+    <string name="app_zhuli">蜜糖派助理</string>
+
+    <string name="app_zhuli_tip">您的订单已通知周边服务者,请耐心等待...</string>
+
+    <string name="max_select">最多能选择</string>
+
+    <string name="pay_back_tip">是否放弃本次支付</string>
+
+    <string name="dengyideng">等一等</string>
+
+    <string name="abandon">放弃</string>
+
+    <string name="first_rob_title">抢单秘籍\n开启通知，快速抢单</string>
+
+    <string name="first_rob_content">抢单成功后等候发约者选人。\n如未被选中，不要灰心，继续加油</string>
+
+    <string name="order_null_tip">您还没有相关订单，去发布新约会</string>
+
+    <string name="theme_choose_address_unlimited">不限地区</string>
+
+    <string name="resend_service">重新发布</string>
+
+    <string name="price_title">价格</string>
+
+    <string name="pre_to_pay">预支付</string>
+    <string name="set_price_tip">设置价格</string>
+    <string name="first_video_order_tip">约TA只差一步</string>
+    <string name="runing_service_tip">您当前有未处理邀约，无法发布新邀约</string>
+    <string name="switch_to_servicer_city">是否切换到服务者所在城市?</string>
+    <string name="set_price_title_video">视频聊天定价</string>
+</resources>

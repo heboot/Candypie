@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y81"
+            android:background="@drawable/bg_gradient_search_top"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></View>
+
+        <View
+            android:id="@+id/v_icon"
+            android:layout_width="@dimen/x20"
+            android:layout_height="@dimen/y20"
+            android:layout_marginLeft="@dimen/x16"
+            android:layout_marginTop="@dimen/y33"
+            android:background="@drawable/icon_search_white"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></View>
+
+        <EditText
+            android:id="@+id/et_content"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x10"
+            android:layout_marginRight="@dimen/x5"
+            android:layout_marginTop="@dimen/y30"
+            android:background="@null"
+            android:focusable="true"
+            android:hint="输入蜜糖号"
+            android:imeOptions="actionSearch"
+            android:inputType="number"
+            android:textColor="@color/white"
+            android:textColorHint="#B3FFFFFF"
+            android:textSize="@dimen/x20"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toRightOf="@+id/v_icon"
+            app:layout_constraintRight_toLeftOf="@+id/v_clear"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/x16"
+            android:text="@string/cancel"
+            android:textColor="@color/white"
+            android:textSize="@dimen/x16"
+            app:layout_constraintBottom_toBottomOf="@+id/et_content"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/et_content" />
+
+        <View
+            android:id="@+id/v_clear"
+            android:layout_width="@dimen/x16"
+            android:layout_height="@dimen/y16"
+            android:layout_marginRight="@dimen/x30"
+            android:background="@drawable/icon_search_clear"
+            app:layout_constraintBottom_toBottomOf="@+id/et_content"
+            app:layout_constraintRight_toLeftOf="@+id/v_cancel"
+            app:layout_constraintTop_toTopOf="@+id/et_content"></View>
+
+        <View
+            android:id="@+id/v_clearbg"
+            android:layout_width="@dimen/x46"
+            android:layout_height="@dimen/y46"
+            android:layout_marginRight="@dimen/x10"
+            app:layout_constraintBottom_toBottomOf="@+id/et_content"
+            app:layout_constraintRight_toLeftOf="@+id/v_cancel"
+            app:layout_constraintTop_toTopOf="@+id/et_content"></View>
+
+        <View
+            android:id="@+id/v_cancel"
+            android:layout_width="@dimen/x60"
+            android:layout_height="@dimen/y50"
+            app:layout_constraintBottom_toBottomOf="@+id/et_content"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/et_content" />
+
+        <View
+            android:id="@+id/v_bg"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/y8"
+            android:background="@drawable/bg_rect_white_top_12"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_content"></View>
+
+        <TextView
+            android:id="@+id/tv_result_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x16"
+            android:layout_marginTop="@dimen/y20"
+            android:text="搜索结果"
+            android:textColor="@color/color_343445"
+            android:textSize="@dimen/x18"
+            android:textStyle="bold"
+            android:visibility="invisible"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/v_bg" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_list"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/y20"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_result_title"></android.support.v7.widget.RecyclerView>
+
+
+        <com.qmuiteam.qmui.widget.QMUILoadingView
+            android:id="@+id/qmui_loading"
+            android:layout_width="@dimen/x50"
+            android:layout_height="@dimen/x50"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_result_title"
+            app:qmui_loading_view_size="@dimen/x50" />
+
+        <include
+            android:id="@+id/include_nodata"
+            layout="@layout/layout_nodata"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></include>
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+
+        <variable
+            name="content"
+            type="String"></variable>
+
+
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/y5">
+
+        <ImageView
+            android:id="@+id/iv_point"
+            android:layout_width="@dimen/x11"
+            android:layout_height="@dimen/y11"
+            android:layout_marginTop="@dimen/y5"
+            android:background="@color/qmui_config_color_red"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_title" />
+
+        <!--app:layout_constraintBottom_toBottomOf="@+id/tv_title"-->
+
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x8"
+            android:layout_marginRight="@dimen/x16"
+            android:gravity="left"
+            android:text="@{content == null?``:content}"
+            android:textSize="@dimen/x14"
+            app:layout_constraintLeft_toRightOf="@+id/iv_point"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!--android:text="@{content == null?``:content}"-->
+
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

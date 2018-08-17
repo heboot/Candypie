@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="user"
+            type="com.heboot.entity.User"></variable>
+
+        <import type="android.view.View"></import>
+
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="@dimen/x260"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="@android:color/white"
+        android:paddingBottom="@dimen/y17">
+
+        <!--android:showAvatar="@{user.avatar}"-->
+        <com.qmuiteam.qmui.widget.QMUIRadiusImageView
+            android:id="@+id/iv_head"
+            android:layout_width="@dimen/x90"
+            android:layout_height="@dimen/y90"
+            android:layout_marginTop="@dimen/y30"
+            android:src="@drawable/icon_avatar_normal"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:qmui_border_width="0dp"
+            app:qmui_is_circle="true" />
+
+        <LinearLayout
+            android:id="@+id/llyt_nick"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/y13"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_head">
+
+            <TextView
+                android:id="@+id/tv_nick"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@{user.nickname}"
+                android:textColor="@color/color_343445"
+                android:textSize="24sp"></TextView>
+
+
+            <ImageView
+                android:id="@+id/iv_vip"
+                android:layout_width="@dimen/x30"
+                android:layout_height="@dimen/y30"
+                android:layout_marginLeft="@dimen/x5"
+                android:showVipImg="@{user}"
+                android:visibility="@{user.vip_level  > 1?View.VISIBLE:View.GONE}" />
+        </LinearLayout>
+
+
+        <include
+            android:id="@+id/include_menu4"
+            layout="@layout/item_left_menu"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/y25"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/llyt_nick"></include>
+
+        <include
+            android:id="@+id/include_menu3"
+            layout="@layout/item_left_menu"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/include_menu4"></include>
+
+
+        <include
+            android:id="@+id/include_menu1"
+            layout="@layout/item_left_menu"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/include_menu3"></include>
+
+        <include
+            android:id="@+id/include_menu2"
+            layout="@layout/item_left_menu"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/include_menu1"></include>
+
+
+        <include
+            android:id="@+id/include_menu5"
+            layout="@layout/item_left_menu"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/include_menu2"></include>
+
+
+        <include
+            android:id="@+id/include_menu_setprice"
+            layout="@layout/item_left_menu"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/include_menu5"></include>
+
+        <include
+            android:id="@+id/include_menu_enable_video"
+            layout="@layout/item_left_menu_switch"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/include_menu_setprice"></include>
+
+
+        <include
+            android:id="@+id/include_bottom1"
+            layout="@layout/item_left_menu_bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/x60"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/include_bottom2"></include>
+
+
+        <include
+            android:id="@+id/include_bottom2"
+            layout="@layout/item_left_menu_bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"></include>
+
+        <include
+            android:id="@+id/include_bottom3"
+            layout="@layout/item_left_menu_bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x45"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/include_bottom2"></include>
+
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

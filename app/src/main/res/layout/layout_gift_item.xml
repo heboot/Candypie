@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="giftBean"
+            type="com.heboot.bean.gift.GiftBean"></variable>
+
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y120"
+        android:paddingBottom="@dimen/y10"
+        >
+
+        <ImageView
+            android:visibility="invisible"
+            android:id="@+id/iv_border"
+            android:background="@drawable/bg_rect_border_ffde3f"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_width="@dimen/x80"
+            android:layout_height="0dp" />
+
+        <ImageView
+            android:id="@+id/iv_gift"
+            android:layout_width="@dimen/x50"
+            android:layout_height="@dimen/y50"
+            android:showImg="@{giftBean.img}"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+
+            android:layout_marginTop="@dimen/y10"
+           />
+
+        <LinearLayout
+            android:id="@+id/llyt_gift_coin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/y4"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_gift">
+
+            <ImageView
+                android:layout_width="@dimen/x17"
+                android:layout_height="@dimen/y15"
+                android:background="@drawable/icon_coin" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x2"
+                android:text="@{giftBean.price}"
+                android:textColor="@color/white"
+                android:textSize="@dimen/x16" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{giftBean.name}"
+            android:textColor="@color/color_D6D6DF"
+            android:textSize="@dimen/x14"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/llyt_gift_coin" />
+    </android.support.constraint.ConstraintLayout>
+</layout>

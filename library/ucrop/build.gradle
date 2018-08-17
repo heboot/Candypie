@@ -1,0 +1,51 @@
+apply plugin: 'com.android.library'
+
+def config = rootProject.ext.android
+
+android {
+    compileSdkVersion config.COMPILE_SDK_VERSION
+//    buildToolsVersion config.BUILD_TOOLS_VERSION
+    defaultConfig {
+        minSdkVersion 14//config.MIN_SDK_VERSION
+        targetSdkVersion config.TARGET_SDK_VERSION
+        versionName config.VERSION_NAME
+        vectorDrawables.useSupportLibrary = true
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    lintOptions {
+        abortOnError false
+    }
+    resourcePrefix 'ucrop_'
+    productFlavors {
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+//    dataBinding {
+//        enabled = true
+//    }
+}
+
+dependencies {
+    implementation rootProject.ext.dependencies["support-v7"]
+
+    api project(path: ':library:uikit')
+    implementation rootProject.ext.dependencies["constraint_layout"]
+    api 'me.everything:overscroll-decor-android:1.0.4'
+    api "me.leolin:ShortcutBadger:1.1.17@aar"
+//    api rootProject.ext.dependencies["glide"]
+//    annotationProcessor rootProject.ext.dependencies["glide_compiler"]
+
+
+}

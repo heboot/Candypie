@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <string name="msg_notification_tip">消息提醒</string>
+
+    <string name="msg_notification_detail_tip">通知显示消息详情</string>
+
+    <string name="msg_notification_voice_tip">应用内声音提示</string>
+
+    <string name="msg_notification_tip2">如果你要开启或者关闭蜜糖派的新消息通知，请在手机的“设置/通知”找到应用程序“蜜糖派”更改</string>
+
+    <string name="msg_notification_detail_tip2"> 关闭后，当收到蜜糖派消息时，通知提示将不显示发信人和消息内容</string>
+    <string name="no_black_userlist">暂无黑名单</string>
+
+</resources>

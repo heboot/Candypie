@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="usedBalance"
+            type="Boolean"></variable>
+
+        <variable
+            name="usedCoupons"
+            type="Boolean"></variable>
+
+        <import type="android.view.View"></import>
+
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/include_ali"
+            layout="@layout/layout_pay_type_item_ali"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/y10"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/include_toolbar"></include>
+
+        <View
+            android:id="@+id/line_ali"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y1"
+            android:layout_marginLeft="@dimen/x15"
+            android:background="@color/color_EDEDF3"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/include_ali"></View>
+
+        <include
+            android:id="@+id/include_wx"
+            layout="@layout/layout_pay_type_item_wx"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/line_ali"></include>
+
+        <View
+            android:id="@+id/line_wx"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y1"
+            android:layout_marginLeft="@dimen/x15"
+            android:background="@color/color_EDEDF3"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/include_wx"></View>
+
+        <include
+            android:id="@+id/include_balance"
+            layout="@layout/layout_pay_balance_item"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:visibility="@{usedBalance ?View.VISIBLE:View.GONE}"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/line_wx"></include>
+        <!--android:visibility="@{used_balance ?View.VISIBLE:View.GONE}"-->
+
+        <View
+            android:id="@+id/line_balance"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y1"
+            android:layout_marginLeft="@dimen/x15"
+            android:background="@color/color_EDEDF3"
+            android:visibility="@{usedBalance ?View.VISIBLE:View.GONE}"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/include_balance"></View>
+        <!--android:visibility="@{used_balance ?View.VISIBLE:View.GONE}"-->
+
+        <include
+            android:id="@+id/include_coupon"
+            layout="@layout/layout_pay_coupons_item"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:visibility="@{usedCoupons ?View.VISIBLE:View.GONE}"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/line_balance"></include>
+        <!--android:visibility="@{used_coupons ?View.VISIBLE:View.GONE}"-->
+
+        <View
+            android:id="@+id/line_coupon"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y1"
+            android:layout_marginLeft="@dimen/x15"
+            android:background="@color/color_EDEDF3"
+            android:visibility="@{usedCoupons?View.VISIBLE:View.GONE}"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/include_coupon"></View>
+    </android.support.constraint.ConstraintLayout>
+</layout>

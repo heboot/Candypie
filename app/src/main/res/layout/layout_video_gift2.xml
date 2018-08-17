@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_030315"
+        android:paddingBottom="@dimen/y10">
+
+        <com.gdlife.candypie.view.MHV
+            android:id="@+id/sv"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y230"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:gravity="center"
+                android:id="@+id/rv_list"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y230"
+                android:orientation="horizontal"
+               >
+
+            </LinearLayout>
+
+        </com.gdlife.candypie.view.MHV>
+
+
+        <LinearLayout
+            android:visibility="invisible"
+            android:id="@+id/llyt_point"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sv">
+
+            <CheckBox
+                android:id="@+id/cb1"
+                android:layout_width="@dimen/x7"
+                android:layout_height="@dimen/y7"
+                android:background="@drawable/selector_boot_point"
+                android:button="@null" />
+
+            <CheckBox
+                android:id="@+id/cb2"
+                android:layout_width="@dimen/x7"
+                android:layout_height="@dimen/x7"
+                android:layout_marginLeft="@dimen/x10"
+                android:background="@drawable/selector_boot_point"
+                android:button="@null" />
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/tv_coin_balance_tip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x16"
+            android:text="钻石余额:"
+            android:textColor="@color/color_EDEDF3"
+            android:textSize="@dimen/x16"
+            app:layout_constraintBottom_toBottomOf="@+id/qrb_recharge"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/qrb_recharge" />
+
+        <ImageView
+            android:id="@+id/iv_coin"
+            android:layout_width="@dimen/x17"
+            android:layout_height="@dimen/y15"
+            android:layout_marginLeft="@dimen/x10"
+            android:background="@drawable/icon_coin"
+            app:layout_constraintBottom_toBottomOf="@+id/qrb_recharge"
+            app:layout_constraintLeft_toRightOf="@+id/tv_coin_balance_tip"
+            app:layout_constraintTop_toTopOf="@+id/qrb_recharge" />
+
+        <TextView
+            android:id="@+id/tv_coin_balance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x3"
+            android:text="520"
+            android:textColor="@color/color_EDEDF3"
+            android:textSize="@dimen/x16"
+            app:layout_constraintBottom_toBottomOf="@+id/qrb_recharge"
+            app:layout_constraintLeft_toRightOf="@+id/iv_coin"
+            app:layout_constraintTop_toTopOf="@+id/qrb_recharge" />
+
+        <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+            android:id="@+id/qrb_recharge"
+            android:layout_width="@dimen/x60"
+            android:layout_height="@dimen/y30"
+            android:layout_marginLeft="@dimen/x10"
+            android:layout_marginTop="@dimen/y14"
+            android:text="充值"
+            android:textColor="@color/white"
+            android:textSize="@dimen/x14"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toRightOf="@+id/tv_coin_balance"
+            app:layout_constraintTop_toBottomOf="@+id/llyt_point"
+            app:qmui_backgroundColor="@color/color_FF5252"
+            app:qmui_borderWidth="0dp" />
+
+        <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+            android:id="@+id/qrb_send"
+            android:layout_width="@dimen/x60"
+            android:layout_height="@dimen/y30"
+            android:layout_marginRight="@dimen/x16"
+            android:layout_marginTop="@dimen/y14"
+            android:text="赠送"
+            android:textColor="@color/color_343445"
+            android:textSize="@dimen/x14"
+            android:textStyle="bold"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/llyt_point"
+            app:qmui_backgroundColor="@color/color_FFBF63"
+            app:qmui_borderWidth="0dp" />
+    </android.support.constraint.ConstraintLayout>
+</layout>

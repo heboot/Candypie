@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:alpha="0"
+        android:paddingBottom="@dimen/y15"
+        android:paddingTop="@dimen/y15">
+
+        <ImageView
+            android:id="@+id/iv_img"
+            android:layout_width="@dimen/x21"
+            android:layout_height="@dimen/y21"
+            android:background="@color/qmui_config_color_red"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_menu"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_menu" />
+
+        <TextView
+            android:id="@+id/tv_menu"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y22"
+            android:layout_marginLeft="@dimen/x15"
+            android:gravity="left"
+            android:text="11111"
+            android:textColor="@color/color_343445"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/iv_img"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <TextView
+            android:id="@+id/tv_tip"
+            android:layout_width="@dimen/x15"
+            android:layout_height="@dimen/y15"
+            android:layout_marginLeft="@dimen/x5"
+            android:background="@drawable/oval_red"
+            android:gravity="center"
+            android:text="11"
+            android:textColor="@color/white"
+            android:textSize="@dimen/x10"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/tv_menu"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

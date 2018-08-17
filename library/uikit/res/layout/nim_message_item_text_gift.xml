@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="6dp">
+
+
+    <com.netease.nim.uikit.common.ui.imageview.HeadImageView
+        android:id="@+id/message_item_portrait_left"
+        android:layout_width="@dimen/avatar_size_in_session"
+        android:layout_height="@dimen/avatar_size_in_session"
+        android:visibility="gone"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/message_item_time"
+        android:layout_marginRight="@dimen/bubble_head_margin_horizontal"
+        android:background="@color/qmui_config_color_red" />
+
+    <com.netease.nim.uikit.common.ui.imageview.HeadImageView
+        android:id="@+id/message_item_portrait_right"
+        android:layout_width="@dimen/avatar_size_in_session"
+        android:layout_height="@dimen/avatar_size_in_session"
+        android:visibility="gone"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/message_item_time"
+        android:layout_marginLeft="@dimen/bubble_head_margin_horizontal"
+         />
+
+
+    <TextView
+
+        android:layout_toLeftOf="@+id/message_item_portrait_right"
+        android:layout_toRightOf="@+id/message_item_portrait_left"
+        android:id="@+id/nim_message_item_text_body"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/icon_bg_gift_right"
+        android:gravity="center_vertical|left"
+        android:includeFontPadding="false"
+        android:lineSpacingExtra="3dip"
+        android:maxWidth="@dimen/max_text_bubble_width"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+
+
+</RelativeLayout>

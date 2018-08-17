@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="customactivityoncrash_error_activity_error_occurred_explanation">非常抱歉,蜜糖派出现了错误，您可以点击问题详情截图联系客服.</string>
+    <string name="customactivityoncrash_error_activity_restart_app">重启蜜糖派</string>
+    <string name="customactivityoncrash_error_activity_close_app">关闭蜜糖派</string>
+    <string name="customactivityoncrash_error_activity_error_details">问题详情</string>
+    <string name="customactivityoncrash_error_activity_error_details_title">问题详情</string>
+    <string name="customactivityoncrash_error_activity_error_details_close">关闭</string>
+    <string name="customactivityoncrash_error_activity_error_details_copy">复制到剪切板</string>
+    <string name="customactivityoncrash_error_activity_error_details_copied">复制成功</string>
+    <string name="customactivityoncrash_error_activity_error_details_clipboard_label">Error information</string>
+
+    <string name="error_title">蜜糖派</string>
+    <string name="error_occurred">非常抱歉,蜜糖派出现了错误，我们正在紧急修复中.您可以尝试重启蜜糖派。</string>
+    <string name="error_details">问题详情</string>
+    <string name="unknown_exception">未知的异常</string>
+    <string name="restart_app">重启蜜糖派</string>
+    <string name="close_app">关闭蜜糖派</string>
+</resources>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/bg_comment_tag_fouse_pre" android:state_checked="true"></item>
+    <item android:drawable="@drawable/bg_comment_tag_fouse_pre" android:state_selected="true"></item>
+    <item android:drawable="@drawable/bg_comment_tag_normal_pre"></item>
+</selector>

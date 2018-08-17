@@ -1,0 +1,459 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="from"
+            type="String"></variable>
+
+        <import type="android.view.View"></import>
+
+        <import type="com.gdlife.candypie.common.MValue"></import>
+
+        <variable
+            name="user"
+            type="com.heboot.entity.User"></variable>
+
+        <import type="com.gdlife.candypie.serivce.UserService"></import>
+
+
+    </data>
+
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <android.support.v4.widget.NestedScrollView
+            android:id="@+id/sv_container"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="@+id/v_bottom1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:paddingBottom="@dimen/y20">
+
+                <!--<SurfaceView-->
+                <!--android:id="@+id/sv_player"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:background="@color/theme_color"-->
+                <!--app:layout_constraintLeft_toLeftOf="parent"-->
+                <!--app:layout_constraintRight_toRightOf="parent"-->
+                <!--app:layout_constraintTop_toTopOf="parent" />-->
+
+                <!--<include-->
+                <!--android:id="@+id/include_userinfo"-->
+                <!--layout="@layout/layout_user_info"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--app:layout_constraintLeft_toLeftOf="parent"-->
+                <!--app:layout_constraintRight_toRightOf="parent"-->
+                <!--app:layout_constraintTop_toBottomOf="@+id/sv_player"></include>-->
+
+
+                <View
+                    android:id="@+id/sv_player"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <View
+                    android:id="@+id/baseline2"
+                    android:layout_width="@dimen/x23"
+                    android:layout_height="1dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"></View>
+
+
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/vp_video"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/y667"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <Button
+                    android:id="@+id/btn_login"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/y35"
+                    android:layout_marginBottom="@dimen/y10"
+                    android:layout_marginLeft="@dimen/x82"
+                    android:layout_marginRight="@dimen/x82"
+                    android:background="@drawable/bg_rect_bottom_button"
+                    android:text="@string/update_video"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/x16"
+                    android:visibility="@{from.equals(MValue.FROM_MY) ? View.VISIBLE: View.GONE}"
+                    app:layout_constraintBottom_toTopOf="@+id/btn_register"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent" />
+                <!--android:visibility="@{from.equals(MValue.FROM_MY) ? View.VISIBLE: View.GONE}"-->
+
+                <Button
+                    android:id="@+id/btn_register"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/y35"
+                    android:layout_marginBottom="@dimen/y20"
+                    android:layout_marginLeft="@dimen/x82"
+                    android:layout_marginRight="@dimen/x82"
+                    android:background="@drawable/bg_rect_border_themecolor_"
+                    android:text="@string/crop_video"
+                    android:textColor="@color/theme_color"
+                    android:textSize="@dimen/x16"
+                    android:visibility="@{from.equals(MValue.FROM_MY) ? View.VISIBLE: View.GONE}"
+                    app:layout_constraintBottom_toBottomOf="@+id/v_player"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent" />
+                <!--android:visibility="@{from.equals(MValue.FROM_MY) ? View.VISIBLE: View.GONE}"-->
+
+                <!--<include-->
+                <!--layout="@layout/layout_homepage_progress"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--app:layout_constraintBottom_toBottomOf="@+id/sv_player"-->
+                <!--app:layout_constraintLeft_toLeftOf="parent"-->
+                <!--app:layout_constraintRight_toRightOf="parent"></include>-->
+
+                <View
+                    android:id="@+id/v_player"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/y540"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/iv_voice"
+                    android:layout_width="@dimen/x26"
+                    android:layout_height="@dimen/y26"
+                    android:layout_marginBottom="@dimen/y10"
+                    android:layout_marginLeft="@dimen/x10"
+                    android:background="@drawable/icon_homepage_voice_open"
+                    app:layout_constraintBottom_toBottomOf="@+id/v_player"
+                    app:layout_constraintLeft_toLeftOf="@+id/v_player" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/y80"
+                    android:background="@drawable/bg_homepage_black_gradient"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"></View>
+                <!--android:visibility="@{!from.equals(MValue.FROM_MY) ? View.VISIBLE: View.INVISIBLE}"-->
+                <include
+                    android:id="@+id/include_point"
+                    layout="@layout/layout_homepage_point"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/y25"
+                    android:visibility="@{!from.equals(MValue.FROM_MY) ? View.VISIBLE: View.GONE}"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/v_player"></include>
+
+                <View
+                    android:id="@+id/v_pa"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y25"
+                    android:background="@color/white"
+                    android:visibility="@{from.equals(MValue.FROM_MY) ? View.VISIBLE: View.GONE}"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/v_player"></View>
+
+                <include
+                    android:id="@+id/layout_homepage_content"
+                    layout="@layout/layout_homepage_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/include_point"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/v_pa"
+                    app:layout_goneMarginTop="@dimen/y20"></include>
+
+                <!--android:layout_marginTop="@dimen/y565"-->
+                <!--<include-->
+                <!--android:id="@+id/include_userinfo"-->
+                <!--layout="@layout/layout_user_info"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_below="@+id/include_point"-->
+                <!--app:layout_constraintLeft_toLeftOf="parent"-->
+                <!--app:layout_constraintRight_toRightOf="parent"-->
+                <!--app:layout_constraintTop_toBottomOf="@+id/v_pa"-->
+                <!--app:layout_goneMarginTop="@dimen/y20"></include>-->
+
+                <!--<include-->
+                <!--android:id="@+id/include_signature"-->
+                <!--layout="@layout/layout_homepage_item"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginBottom="@dimen/y22"-->
+                <!--android:layout_marginLeft="@dimen/x15"-->
+                <!--android:layout_marginRight="@dimen/x15"-->
+                <!--android:layout_marginTop="@dimen/y25"-->
+                <!--app:layout_constraintLeft_toLeftOf="parent"-->
+                <!--app:layout_constraintRight_toRightOf="parent"-->
+                <!--app:layout_constraintTop_toBottomOf="@+id/include_videos"></include>-->
+
+                <!--<View-->
+                <!--android:id="@+id/line_sign2"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="@dimen/y1"-->
+                <!--android:layout_marginLeft="@dimen/x16"-->
+                <!--android:layout_marginTop="@dimen/y30"-->
+                <!--android:background="@color/line_color"-->
+                <!--app:layout_constraintLeft_toLeftOf="parent"-->
+                <!--app:layout_constraintRight_toRightOf="parent"-->
+                <!--app:layout_constraintTop_toBottomOf="@+id/include_signature"></View>-->
+
+                <!--<include-->
+                <!--android:id="@+id/include_meet_tag"-->
+                <!--layout="@layout/layout_homepage_meet_tag"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="@dimen/y26"-->
+                <!--app:layout_constraintLeft_toLeftOf="parent"-->
+                <!--app:layout_constraintRight_toRightOf="parent"-->
+                <!--app:layout_constraintTop_toBottomOf="@+id/line_sign2"></include>-->
+
+                <!--<View-->
+                <!--android:id="@+id/line_sign"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="@dimen/y1"-->
+                <!--android:layout_marginLeft="@dimen/x16"-->
+                <!--android:layout_marginTop="@dimen/y30"-->
+                <!--android:background="@color/line_color"-->
+                <!--app:layout_constraintLeft_toLeftOf="parent"-->
+                <!--app:layout_constraintRight_toRightOf="parent"-->
+                <!--app:layout_constraintTop_toBottomOf="@+id/include_userinfo"></View>-->
+
+                <!--<include-->
+                <!--android:id="@+id/include_videos"-->
+                <!--layout="@layout/layout_homepage_videos"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="@dimen/y25"-->
+                <!--android:visibility="@{user.video_list == null || user.video_list.size() == 0 ?(UserService.isMe(user)?View.VISIBLE:View.GONE):View.VISIBLE }"-->
+                <!--app:layout_constraintLeft_toLeftOf="parent"-->
+                <!--app:layout_constraintRight_toRightOf="parent"-->
+                <!--app:layout_constraintTop_toBottomOf="@+id/line_sign"></include>-->
+
+                <!--<View-->
+                <!--android:id="@+id/line_visit"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="@dimen/y1"-->
+                <!--android:layout_marginLeft="@dimen/x16"-->
+                <!--android:layout_marginTop="@dimen/y30"-->
+                <!--android:background="@color/line_color"-->
+                <!--app:layout_constraintLeft_toLeftOf="parent"-->
+                <!--app:layout_constraintRight_toRightOf="parent"-->
+                <!--app:layout_constraintTop_toBottomOf="@+id/include_videos"></View>-->
+
+                <!--<include-->
+                <!--android:id="@+id/include_index_visit"-->
+                <!--layout="@layout/layout_index_visit"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--app:layout_constraintLeft_toLeftOf="parent"-->
+                <!--app:layout_constraintRight_toRightOf="parent"-->
+                <!--app:layout_constraintTop_toBottomOf="@+id/line_visit"></include>-->
+
+
+                <!--<include-->
+                <!--android:id="@+id/include_ver"-->
+                <!--layout="@layout/layout_homepage_ver"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginLeft="@dimen/x16"-->
+                <!--android:visibility="gone"-->
+                <!--app:layout_constraintLeft_toLeftOf="parent"-->
+                <!--app:layout_constraintRight_toRightOf="parent"-->
+                <!--app:layout_constraintTop_toBottomOf="@+id/include_videos"></include>-->
+
+                <!--<View-->
+                <!--android:id="@+id/line"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="@dimen/y1"-->
+                <!--android:layout_marginLeft="@dimen/x16"-->
+                <!--android:layout_marginTop="@dimen/y30"-->
+                <!--android:background="@color/line_color"-->
+                <!--android:visibility="gone"-->
+                <!--app:layout_constraintLeft_toLeftOf="parent"-->
+                <!--app:layout_constraintRight_toRightOf="parent"-->
+                <!--app:layout_constraintTop_toBottomOf="@+id/include_ver"></View>-->
+
+
+                <!--<include-->
+                <!--android:id="@+id/include_skill"-->
+                <!--layout="@layout/layout_homepage_skill"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginBottom="@dimen/y22"-->
+                <!--android:layout_marginTop="@dimen/y5"-->
+                <!--app:layout_constraintLeft_toLeftOf="parent"-->
+                <!--app:layout_constraintRight_toRightOf="parent"-->
+                <!--app:layout_constraintTop_toBottomOf="@+id/include_meet_tag"></include>-->
+
+                <!--<android.support.v7.widget.RecyclerView-->
+                <!--android:id="@+id/rv_comment_container"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginLeft="@dimen/x16"-->
+                <!--android:focusable="false"-->
+                <!--android:orientation="vertical"-->
+                <!--android:visibility="@{user.eval_list == null || user.eval_list.size() ==0 ?View.GONE:View.VISIBLE}"-->
+                <!--app:layout_constraintLeft_toLeftOf="parent"-->
+                <!--app:layout_constraintRight_toRightOf="parent"-->
+                <!--app:layout_constraintTop_toBottomOf="@+id/include_skill">-->
+
+
+                <!--</android.support.v7.widget.RecyclerView>-->
+
+
+            </android.support.constraint.ConstraintLayout>
+
+
+        </android.support.v4.widget.NestedScrollView>
+
+
+        <View
+            android:id="@+id/v_top"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y70"
+            android:background="@color/white"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></View>
+
+        <include
+            android:id="@+id/include_toolbar"
+            layout="@layout/layout_toolbar"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y60"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></include>
+
+        <ImageView
+            android:id="@+id/iv_share"
+            android:layout_width="@dimen/x30"
+            android:layout_height="@dimen/y30"
+            android:layout_marginRight="@dimen/x10"
+            android:layout_marginTop="@dimen/y20"
+            android:background="@drawable/icon_share_white"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/v_top"
+            app:layout_constraintRight_toLeftOf="@+id/iv_more"
+            app:layout_constraintTop_toTopOf="@+id/v_top" />
+
+        <ImageView
+            android:id="@+id/iv_more"
+            android:layout_width="@dimen/x30"
+            android:layout_height="@dimen/y30"
+            android:layout_marginRight="@dimen/x16"
+            android:layout_marginTop="@dimen/y20"
+            android:background="@drawable/icon_homepage_more_white"
+            app:layout_constraintBottom_toBottomOf="@+id/v_top"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/v_top" />
+
+        <View
+            android:id="@+id/v_more"
+            android:layout_width="@dimen/x60"
+            android:layout_height="@dimen/y60"
+            app:layout_constraintBottom_toBottomOf="@+id/v_top"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/v_top" />
+
+        <View
+            android:id="@+id/v_bottom1"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y24"
+            android:background="@drawable/bg_homepage_white_gradient"
+            android:visibility="@{!from.equals(MValue.FROM_MY) ? View.VISIBLE: View.GONE}"
+            app:layout_constraintBottom_toTopOf="@+id/v_bottom"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"></View>
+
+        <View
+            android:id="@+id/v_bottom"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y60"
+            android:background="@color/white"
+            android:visibility="@{!from.equals(MValue.FROM_MY) ? View.VISIBLE: View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"></View>
+
+        <View
+            android:id="@+id/baseline"
+            android:layout_width="@dimen/x23"
+            android:layout_height="1dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"></View>
+
+        <TextView
+            android:id="@+id/tv_left"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y40"
+            android:layout_marginLeft="@dimen/x16"
+            android:layout_marginTop="@dimen/y30"
+            android:background="@drawable/bg_rect_border_themecolor_"
+            android:gravity="center"
+            android:text="@string/fav"
+            android:textColor="@color/theme_color"
+            android:textSize="16sp"
+            android:visibility="@{!from.equals(MValue.FROM_MY) ? View.VISIBLE: View.GONE}"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/baseline"
+            app:layout_constraintTop_toTopOf="@+id/v_bottom1" />
+
+        <ImageView
+            android:id="@+id/iv_fav"
+            android:layout_width="@dimen/x17"
+            android:layout_height="@dimen/y17"
+            android:layout_marginLeft="@dimen/x32"
+            android:background="@drawable/icon_fav_normal"
+            android:visibility="@{!from.equals(MValue.FROM_MY) ? View.VISIBLE: View.GONE}"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_left"
+            app:layout_constraintLeft_toLeftOf="@+id/tv_left"
+            app:layout_constraintTop_toTopOf="@+id/tv_left" />
+
+        <TextView
+            android:id="@+id/tv_right"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y40"
+            android:layout_marginRight="@dimen/x16"
+            android:layout_marginTop="@dimen/y30"
+            android:background="@drawable/bg_rect_bottom_button"
+            android:gravity="center"
+            android:text="@string/fav"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:visibility="@{!from.equals(MValue.FROM_MY) ? View.VISIBLE: View.GONE}"
+            app:layout_constraintLeft_toRightOf="@id/baseline"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/v_bottom1" />
+
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

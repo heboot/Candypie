@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="listBean"
+            type="com.heboot.bean.theme.MeetPoiDataBean.ListBean"></variable>
+
+    </data>
+
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/include_toolbar"
+            layout="@layout/layout_toolbar"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y60"
+            android:background="@color/qmui_config_color_red"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></include>
+
+        <ImageView
+            android:id="@+id/iv_img"
+            android:layout_width="@dimen/x100"
+            android:layout_height="@dimen/y100"
+            android:layout_marginLeft="@dimen/x16"
+            android:layout_marginTop="@dimen/y30"
+            android:background="@color/qmui_config_color_red"
+            android:scaleType="centerCrop"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/include_toolbar" />
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x16"
+            android:layout_marginRight="@dimen/x16"
+            android:ellipsize="end"
+            android:gravity="left"
+            android:maxEms="16"
+            android:maxLines="1"
+            android:text="@{listBean.name}"
+            android:textColor="@color/color_343445"
+            android:textSize="20sp"
+            app:layout_constraintLeft_toRightOf="@+id/iv_img"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/iv_img" />
+
+        <TextView
+            android:id="@+id/tv_avg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x16"
+            android:layout_marginTop="@dimen/y22"
+            android:text="@{@string/theme_address_avg + listBean.avg_price + ``}"
+            android:textColor="@color/color_343445"
+            android:textSize="16sp"
+            app:layout_constraintLeft_toRightOf="@+id/iv_img"
+            app:layout_constraintTop_toBottomOf="@+id/tv_name" />
+
+        <ImageView
+            android:layout_width="@dimen/x7"
+            android:layout_height="@dimen/y10"
+            android:layout_marginRight="@dimen/x6"
+            android:background="@drawable/icon_address"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_distance"
+            app:layout_constraintRight_toLeftOf="@+id/tv_distance"
+            app:layout_constraintTop_toTopOf="@+id/tv_distance" />
+
+        <TextView
+            android:id="@+id/tv_distance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/x16"
+            android:textColor="@color/color_343445"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_img"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <View
+            android:id="@+id/v1"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y3"
+            android:layout_marginRight="@dimen/x16"
+            android:layout_marginTop="@dimen/y30"
+            android:background="@drawable/dash_gray"
+            android:layerType="software"
+            app:layout_constraintLeft_toLeftOf="@+id/iv_img"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_img"></View>
+
+        <ImageView
+            android:id="@+id/iv1"
+            android:layout_width="@dimen/x15"
+            android:layout_height="@dimen/y15"
+            android:layout_marginTop="@dimen/y33"
+            android:background="@drawable/icon_poi"
+            app:layout_constraintLeft_toLeftOf="@+id/v1"
+            app:layout_constraintTop_toBottomOf="@+id/v1" />
+        <!--android:text="@{listBean.address}"-->
+        <TextView
+            android:id="@+id/tv_address"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x10"
+            android:layout_marginRight="@dimen/x70"
+            android:layout_marginTop="@dimen/y30"
+            android:gravity="left"
+            android:text="@{listBean.address}"
+            android:textColor="@color/color_343445"
+            android:textSize="16sp"
+            app:layout_constraintLeft_toRightOf="@+id/iv1"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/v1" />
+
+        <ImageView
+            android:id="@+id/iv_mobile"
+            android:layout_width="@dimen/x15"
+            android:layout_height="@dimen/y15"
+            android:background="@drawable/icon_mobile_address_detail"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_mobile"
+            app:layout_constraintLeft_toLeftOf="@+id/iv1"
+            app:layout_constraintTop_toTopOf="@+id/tv_mobile" />
+
+        <TextView
+            android:id="@+id/tv_mobile"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x10"
+            android:layout_marginTop="@dimen/y22"
+            android:gravity="left"
+            android:text="@{listBean.telephone}"
+            android:textColor="@color/color_343445"
+            android:textSize="16sp"
+            app:layout_constraintLeft_toRightOf="@+id/iv_mobile"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_address" />
+
+        <ImageView
+            android:layout_width="@dimen/x5"
+            android:layout_height="@dimen/y9"
+            android:layout_marginRight="@dimen/x20"
+            android:background="@drawable/icon_arrow_right_gray"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_mobile"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_mobile" />
+
+
+        <ImageView
+            android:visibility="invisible"
+            android:id="@+id/iv_comment"
+            android:layout_width="@dimen/x15"
+            android:layout_height="@dimen/y15"
+            android:background="@drawable/icon_comment_address_detail"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_comment"
+            app:layout_constraintLeft_toLeftOf="@+id/iv1"
+            app:layout_constraintTop_toTopOf="@+id/tv_comment" />
+
+        <TextView  android:visibility="invisible"
+            android:id="@+id/tv_comment"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x10"
+            android:layout_marginTop="@dimen/y22"
+            android:gravity="left"
+            android:text="@{@string/net_friend_comment + `（`  + listBean.comments + `)`}"
+            android:textColor="@color/color_343445"
+            android:textSize="16sp"
+            app:layout_constraintLeft_toRightOf="@+id/iv_comment"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_mobile" />
+
+        <ImageView  android:visibility="invisible"
+            android:layout_width="@dimen/x5"
+            android:layout_height="@dimen/y9"
+            android:layout_marginRight="@dimen/x20"
+            android:background="@drawable/icon_arrow_right_gray"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_comment"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_comment" />
+
+        <View
+            android:id="@+id/v2"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y3"
+            android:layout_marginRight="@dimen/x16"
+            android:layout_marginTop="@dimen/y100"
+            android:background="@drawable/dash_gray"
+            android:layerType="software"
+            app:layout_constraintLeft_toLeftOf="@+id/iv_img"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_comment"></View>
+
+        <TextView
+            android:id="@+id/tv_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/y37"
+            android:text="@string/choose_address_detail_info"
+            android:textColor="@color/color_898A9E"
+            android:textSize="@dimen/x14"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/v2" />
+
+
+        <TextView
+
+            android:id="@+id/btn_bottom"
+            android:layout_width="@dimen/x314"
+            android:layout_height="@dimen/y48"
+            android:layout_marginTop="@dimen/y14"
+            android:background="@drawable/bg_rect_bottom_button"
+            android:checked="false"
+            android:elevation="@dimen/x4"
+            android:gravity="center"
+            android:text="@string/affirm_choose_address"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_info" />
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

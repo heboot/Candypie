@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="page_title_rob">抢单</string>
+
+    <string name="page_title_order_detail">订单详情</string>
+
+    <string name="order_commented">你已评价</string>
+
+    <string name="page_title_order">订单</string>
+
+    <string name="cancel_order_tip_content">由于你个人原因取消约会，将扣除%1$s的费用作为违约金，赔偿给赴约者。</string>
+
+    <string name="cancel_order_tip_page_content">连续</string>
+
+    <string name="cancel_order_tip_page_content3">次取消后，</string>
+
+    <!--//2次取消后，÷-->
+
+    <string name="cancel_order_tip_page_content2">小时内将无法发约\n</string>
+
+    <string name="update_level_gold">升级金卡</string>
+
+    <string name="update_level_count_str">可以获得额外的取消次数哦～"</string>
+
+    <string name="cancel_order_tip_title">确定取消约会吗？\n</string>
+
+    <string name="confirm_cancel">确认取消</string>
+
+    <string name="cancel_wait">再等等</string>
+
+    <string name="cancel_rule">取消规则 ></string>
+
+    <string name="order_comment_title">订单评价</string>
+
+    <string name="order_comment_is_delay_title">对方是否迟到？</string>
+
+    <string name="order_comment_outtime_tip">超过24小时不予评价，平台自动点评</string>
+
+    <string name="order_go_to_comment">去评价 ></string>
+
+    <string name="order_rob">抢单</string>
+
+    <string name="order_comment_delay">迟到了</string>
+
+    <string name="order_comment_undelay">很准时</string>
+
+    <string name="order_get">接单</string>
+
+    <string name="update_level">升级</string>
+
+    <string name="rob_countdown">报名倒计时</string>
+
+    <string name="order_comment_likevideo_tip">真人与视频相似度</string>
+
+    <string name="order_comment_likevideo_tip2">服务态度</string>
+
+    <string name="order_comment_likevideo_content1">与视频不符</string>
+
+    <string name="order_comment_likevideo_content2">比视频美</string>
+
+    <string name="noname_commit">匿名提交</string>
+
+    <string name="rob_order_suc">抢单成功，等候对方反馈</string>
+
+    <string name="confirm_cancel_order">确定要取消订单吗</string>
+
+    <string name="confirm_select_user">你是否选择该用户为本次服务者？</string>
+
+    <string name="order_rob_max">已抢满</string>
+    <string name="order_title_all">全部</string>
+    <string name="order_title_yiwancheng">已完成</string>
+    <string name="order_title_cancel">已取消</string>
+    <string name="order_title_daichuli">待处理</string>
+</resources>

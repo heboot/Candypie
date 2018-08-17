@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tl="http://schemas.android.com/apk/res-auto">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/dlyt_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y69"
+            android:background="@drawable/bg_gradient_search_top"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></View>
+
+
+        <com.flyco.tablayout.SlidingTabLayout
+            android:id="@+id/st_title_rank"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y30"
+            android:layout_marginLeft="@dimen/x70"
+            android:layout_marginRight="@dimen/x70"
+            android:layout_marginTop="@dimen/y27"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tl_indicator_corner_radius="@dimen/x4"
+            app:tl_underline_color="#00000000"
+            tl:tl_indicator_color="@color/white"
+            tl:tl_indicator_width="@dimen/x40"
+            tl:tl_tab_space_equal="true"
+            tl:tl_textSelectColor="@color/white"
+            tl:tl_textUnselectColor="#CCFFFFFF"
+            tl:tl_textsize="@dimen/x18"
+            tl:tl_underline_height="@dimen/y3"></com.flyco.tablayout.SlidingTabLayout>
+
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/rv_list_rank"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/y64"
+            android:background="@drawable/bg_rect_white_top_6"
+            android:paddingTop="@dimen/y6"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></android.support.v4.view.ViewPager>
+
+
+        <!--</android.support.v4.widget.SwipeRefreshLayout>-->
+
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

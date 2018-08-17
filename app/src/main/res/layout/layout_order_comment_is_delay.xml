@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/clyt_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/clyt_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_rect_white_top_10"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <!--<include-->
+            <!--android:id="@+id/include_top"-->
+            <!--layout="@layout/layout_new_theme_dialog_top"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--app:layout_constraintLeft_toLeftOf="parent"-->
+            <!--app:layout_constraintRight_toRightOf="parent"-->
+            <!--app:layout_constraintTop_toTopOf="parent"></include>-->
+
+
+            <TextView
+
+                android:id="@+id/tv_comment_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y38"
+                android:text="@string/order_comment_is_delay_title"
+                android:textColor="@color/color_343445"
+                android:textSize="@dimen/x18"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/line"
+                android:layout_width="1px"
+                android:layout_height="1px"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"></View>
+
+
+            <TextView
+                android:text="@string/order_comment_undelay"
+                android:id="@+id/tv_undelay"
+                android:layout_width="@dimen/x104"
+                android:layout_height="@dimen/y36"
+                android:layout_marginRight="@dimen/x7"
+                android:layout_marginTop="@dimen/y20"
+                android:background="@drawable/selector_order_comment_delay"
+                android:gravity="center"
+                android:textColor="@drawable/selector_font_order_option"
+                android:textSize="@dimen/x14"
+                app:layout_constraintRight_toLeftOf="@+id/line"
+                app:layout_constraintTop_toBottomOf="@+id/tv_comment_title" />
+
+            <TextView
+                android:id="@+id/tv_delay"
+                android:layout_width="@dimen/x104"
+                android:layout_height="@dimen/y36"
+                android:layout_marginLeft="@dimen/x7"
+                android:layout_marginTop="@dimen/y20"
+                android:background="@drawable/selector_order_comment_delay"
+                android:gravity="center"
+                android:text="@string/order_comment_delay"
+                android:textColor="@drawable/selector_font_order_option"
+                android:textSize="@dimen/x14"
+                app:layout_constraintLeft_toRightOf="@+id/line"
+                app:layout_constraintTop_toBottomOf="@+id/tv_comment_title" />
+
+            <TextView
+                android:id="@+id/tv_delay_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y12"
+                android:textColor="@color/color_898A9E"
+                android:textSize="@dimen/x12"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_delay" />
+
+
+            <TextView
+                android:id="@+id/tv_tocomment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/y37"
+                android:layout_marginTop="@dimen/y22"
+                android:gravity="center"
+                android:text="@string/order_go_to_comment"
+                android:textColor="@color/theme_color"
+                android:textSize="@dimen/x14"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_delay_tip" />
+
+        </android.support.constraint.ConstraintLayout>
+
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

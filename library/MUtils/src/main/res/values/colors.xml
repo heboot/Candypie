@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white">#FFFFFF</color>
+
+    <color name="black">#000000</color>
+
+    <color name="theme_color">#7136FB</color>
+
+    <color name="color_343445">#343445</color>
+    <color name="color_58586C">#58586C</color>
+    <color name="color_898A9E">#898A9E</color>
+    <color name="color_EDEDF3">#EDEDF3</color>
+    <color name="color_D6D6DF">#D6D6DF</color>
+    <color name="color_57586C">#57586C</color>
+    <color name="color_E6E6E6">#E6E6E6</color>
+    <color name="color_F7F7FC">#F7F7FC</color>
+    <color name="color_CDB079">#CDB079</color>
+    <color name="color_FFDE42">#FFDE42</color>
+    <color name="color_007AFF">#007AFF</color>
+    <color name="color_FF3B30">#FF3B30</color>
+    <color name="color_00BC44">#00BC44</color>
+    <color name="color_FFBF63">#FFBF63</color>
+    <color name="color_FFE97D">#FFE97D</color>
+    <color name="color_FFDE3F">#FFDE3F</color>
+    <color name="color_221B33">#221B33</color>
+    <color name="color_FF6363">#FF6363</color>
+
+    <color name="line_color">#EDEDF3</color>
+    <color name="color_FF5252">#FF5252</color>
+
+    <color name="color_030315">#030315</color>
+
+
+    <color name="grow_progress_bg_color">#66ffffff</color>
+
+    <color name="luckpan_bg_color_text">#FFED93</color>
+    <color name="luckpan_bg_color_text_img">#FFBDBD</color>
+    <color name="luckpan_bg_color_gift">#FFFFFF</color>
+
+    <color name="luckpan_text_color_text">#FF8338</color>
+    <color name="luckpan_text_color_money">#FF4C72</color>
+    <color name="luckpan_text_color_bg">#FFBDBD</color>
+
+
+    <!--美颜用到的色-->
+    <color name="percent15translucentBlack">#26000000</color>
+    <color name="percent30translucentBlack">#4D000000</color>
+    <color name="percent40translucentBlack">#66000000</color>
+    <color name="percent50translucentBlack">#80000000</color>
+    <color name="percent60translucentBlack">#99000000</color>
+</resources>

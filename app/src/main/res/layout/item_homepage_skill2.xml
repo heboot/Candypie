@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="listBean"
+            type="com.heboot.bean.config.ConfigBean.ServiceItemsConfigBean.ListBean"></variable>
+
+    </data>
+
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/y30">
+
+        <ImageView
+            android:id="@+id/iv_img"
+            android:layout_width="@dimen/x70"
+            android:layout_height="@dimen/y70"
+            android:showImg="@{listBean.icon}"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/y8"
+            android:text="@{listBean.title}"
+            android:textColor="@color/color_57586C"
+            android:textSize="13sp"
+            app:layout_constraintLeft_toLeftOf="@+id/iv_img"
+            app:layout_constraintRight_toRightOf="@+id/iv_img"
+            app:layout_constraintTop_toBottomOf="@+id/iv_img" />
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

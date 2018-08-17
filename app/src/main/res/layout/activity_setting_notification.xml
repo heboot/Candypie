@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/include_toolbar"
+            layout="@layout/layout_toolbar"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y60"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></include>
+
+
+        <TextView
+            android:id="@+id/tv_msg_notification_tip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x16"
+            android:layout_marginTop="@dimen/y33"
+            android:text="@string/msg_notification_tip"
+            android:textColor="@color/color_343445"
+            android:textSize="@dimen/x18"
+            android:textStyle="bold"
+            android:visibility="gone"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/include_toolbar" />
+
+        <com.suke.widget.SwitchButton
+            android:id="@+id/sb_noname"
+            android:layout_width="@dimen/x54"
+            android:layout_height="@dimen/y30"
+            android:layout_marginRight="@dimen/x16"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_msg_notification_tip"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_msg_notification_tip"
+            app:sb_background="@color/color_898A9E"
+            app:sb_border_width="0dp"
+            app:sb_checked_color="@color/theme_color"
+            app:sb_show_indicator="false"
+            app:sb_uncheck_color="@color/color_898A9E" />
+
+        <TextView
+            android:id="@+id/tv_msg_notification_tip2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x16"
+            android:layout_marginRight="@dimen/x16"
+            android:layout_marginTop="@dimen/y22"
+            android:text="@string/msg_notification_tip2"
+            android:textColor="@color/color_58586C"
+            android:textSize="@dimen/x13"
+            android:visibility="gone"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_msg_notification_tip" />
+
+        <View
+            android:id="@+id/v1"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y1"
+            android:layout_marginLeft="@dimen/x16"
+            android:layout_marginTop="@dimen/y22"
+            android:background="@color/line_color"
+            android:visibility="gone"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_msg_notification_tip2"></View>
+
+
+        <TextView
+            android:id="@+id/tv_msg_notification_detail_tip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x16"
+            android:layout_marginTop="@dimen/y33"
+            android:text="@string/msg_notification_detail_tip"
+            android:textColor="@color/color_343445"
+            android:textSize="@dimen/x18"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/v1" />
+
+        <com.suke.widget.SwitchButton
+            android:id="@+id/sb_notification_detai"
+            android:layout_width="@dimen/x54"
+            android:layout_height="@dimen/y30"
+            android:layout_marginRight="@dimen/x16"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_msg_notification_detail_tip"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_msg_notification_detail_tip"
+            app:sb_background="@color/color_898A9E"
+            app:sb_border_width="0dp"
+            app:sb_checked_color="@color/theme_color"
+            app:sb_show_indicator="false"
+            app:sb_uncheck_color="@color/color_898A9E" />
+
+        <TextView
+            android:id="@+id/tv_msg_notification_detail_ti2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x16"
+            android:layout_marginRight="@dimen/x16"
+            android:layout_marginTop="@dimen/y22"
+            android:text="@string/msg_notification_detail_tip2"
+            android:textColor="@color/color_58586C"
+            android:textSize="@dimen/x13"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_msg_notification_detail_tip" />
+
+        <View
+            android:id="@+id/v2"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y1"
+            android:layout_marginLeft="@dimen/x16"
+            android:layout_marginTop="@dimen/y22"
+            android:background="@color/line_color"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_msg_notification_detail_ti2"></View>
+
+
+        <TextView
+            android:id="@+id/tv_msg_notification_voice_tip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x16"
+            android:layout_marginTop="@dimen/y33"
+            android:text="@string/msg_notification_voice_tip"
+            android:textColor="@color/color_343445"
+            android:textSize="@dimen/x18"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/v2" />
+
+        <com.suke.widget.SwitchButton
+            android:id="@+id/sb_notification_voice"
+            android:layout_width="@dimen/x54"
+            android:layout_height="@dimen/y30"
+            android:layout_marginRight="@dimen/x16"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_msg_notification_voice_tip"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_msg_notification_voice_tip"
+            app:sb_background="@color/color_898A9E"
+            app:sb_border_width="0dp"
+            app:sb_checked_color="@color/theme_color"
+            app:sb_show_indicator="false"
+            app:sb_uncheck_color="@color/color_898A9E" />
+
+
+        <View
+            android:id="@+id/v3"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y1"
+            android:layout_marginLeft="@dimen/x16"
+            android:layout_marginTop="@dimen/y22"
+            android:background="@color/line_color"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_msg_notification_voice_tip"></View>
+
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

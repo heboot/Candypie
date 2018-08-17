@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="user"
+            type="com.heboot.entity.User"></variable>
+
+        <variable
+            name="from"
+            type="String"></variable>
+
+        <import type="com.gdlife.candypie.common.MValue"></import>
+
+        <import type="android.view.View"></import>
+
+    </data>
+
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+        <!--android:text="@{user.nickname}"-->
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x15"
+            android:gravity="left"
+            android:text="@{user == null?``:user.nickname}"
+            android:textColor="@color/color_343445"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/iv_vip"
+            android:layout_width="@dimen/x30"
+            android:layout_height="@dimen/y30"
+            android:layout_marginLeft="@dimen/x5"
+            android:showVipImg="@{user}"
+            android:visibility="@{user.vip_level  > 1?View.VISIBLE:View.GONE}"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_name"
+            app:layout_constraintLeft_toRightOf="@+id/tv_name"
+            app:layout_constraintTop_toTopOf="@+id/tv_name" />
+
+        <!--<ImageView-->
+        <!--android:layout_width="@dimen/x7"-->
+        <!--android:layout_height="@dimen/y9"-->
+        <!--android:layout_marginLeft="@dimen/x10"-->
+        <!--android:background="@{user == null?@drawable/icon_sex_woman:(user.sex ==0 ? @drawable/icon_sex_woman:@drawable/icon_sex_man)}"-->
+        <!--app:layout_constraintBottom_toBottomOf="@+id/tv_name"-->
+        <!--app:layout_constraintLeft_toRightOf="@+id/iv_vip"-->
+        <!--app:layout_constraintTop_toTopOf="@+id/tv_name" />-->
+
+        <include
+            android:id="@+id/include_sexage"
+            layout="@layout/layout_sex_age"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x5"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_name"
+            app:layout_constraintLeft_toRightOf="@+id/iv_vip"
+            app:layout_constraintTop_toTopOf="@+id/tv_name"></include>
+
+        <TextView
+            android:id="@+id/tv_mt_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{`蜜糖号:` + user.id}"
+            android:textColor="@color/color_343445"
+            android:textSize="@dimen/x18"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="@+id/tv_name"
+            app:layout_constraintTop_toBottomOf="@+id/tv_name" />
+
+        <TextView
+            android:id="@+id/tv_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/y9"
+            android:showUserInfo="@{user}"
+            android:textColor="@color/color_343445"
+            android:textSize="@dimen/x15"
+            app:layout_constraintLeft_toLeftOf="@+id/tv_name"
+            app:layout_constraintTop_toBottomOf="@+id/tv_mt_id" />
+
+        <!--<TextView-->
+        <!--android:id="@+id/tv_constellation"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="@dimen/y3"-->
+        <!--android:text="@{user.constellation}"-->
+        <!--android:textColor="@color/color_343445"-->
+        <!--android:textSize="13sp"-->
+        <!--app:layout_constraintLeft_toLeftOf="@+id/tv_name"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/tv_info" />-->
+
+        <ImageView
+            android:id="@+id/iv"
+            android:layout_width="@dimen/x14"
+            android:layout_height="@dimen/y16"
+            android:background="@drawable/icon_address"
+            android:text="111"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_city"
+            app:layout_constraintLeft_toLeftOf="@+id/tv_name"
+            app:layout_constraintTop_toTopOf="@+id/tv_city" />
+
+
+        <TextView
+            android:id="@+id/tv_city"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x10"
+            android:layout_marginTop="@dimen/y4"
+            android:text="@{user.city}"
+            android:textColor="@color/color_57586C"
+            android:textSize="15sp"
+            app:layout_constraintLeft_toRightOf="@+id/iv"
+            app:layout_constraintTop_toBottomOf="@+id/tv_info" />
+
+        <com.qmuiteam.qmui.widget.QMUIRadiusImageView
+            android:id="@+id/avatar"
+            android:layout_width="@dimen/x60"
+            android:layout_height="@dimen/y60"
+            android:layout_marginRight="@dimen/x16"
+            android:visibility="@{from.equals(MValue.USER_INFO_FROM_HOMEPAGE)?View.GONE:View.VISIBLE}"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:qmui_border_width="0dp"
+            app:qmui_is_circle="true" />
+
+        <ImageView
+            android:id="@+id/iv_edit"
+            android:layout_width="@dimen/x21"
+            android:layout_height="@dimen/y19"
+            android:layout_marginRight="@dimen/x16"
+            android:background="@drawable/icon_edit"
+            android:text="111"
+
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_name" />
+        <!--android:visibility="@{from.equals(MValue.USER_INFO_FROM_HOMEPAGE)?View.VISIBLE:View.GONE}"-->
+    </android.support.constraint.ConstraintLayout>
+</layout>

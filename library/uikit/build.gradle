@@ -1,0 +1,54 @@
+apply plugin: 'com.android.library'
+
+def config = rootProject.ext.android
+
+android {
+    compileSdkVersion config.COMPILE_SDK_VERSION
+    buildToolsVersion config.BUILD_TOOLS_VERSION
+    defaultConfig {
+        minSdkVersion 14//config.MIN_SDK_VERSION//config.MIN_SDK_VERSION
+        targetSdkVersion 26
+        versionName "1.0"
+
+        renderscriptTargetApi 26
+        renderscriptSupportModeEnabled true
+    }
+
+    sourceSets {
+        main {
+            manifest.srcFile 'AndroidManifest.xml'
+            java.srcDirs = ['src']
+            resources.srcDirs = ['src']
+            aidl.srcDirs = ['src']
+            renderscript.srcDirs = ['src']
+            res.srcDirs = ['res', 'res-ptr2', 'res-chatroom']
+            assets.srcDirs = ['assets']
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    dataBinding {
+        enabled = true
+    }
+}
+
+dependencies {
+    api fileTree(dir: 'libs', include: '*.jar')
+    api project(path: ':library:Librarys')
+    api project(path: ':library:http')
+    api project(path: ':library:AliyunSnapn:snap_demo')
+    implementation rootProject.ext.dependencies["constraint_layout"]
+    api 'me.everything:overscroll-decor-android:1.0.4'
+    api "me.leolin:ShortcutBadger:1.1.17@aar"
+
+//    api rootProject.ext.dependencies["glide"]
+//    annotationProcessor rootProject.ext.dependencies["glide_compiler"]
+//
+
+
+}

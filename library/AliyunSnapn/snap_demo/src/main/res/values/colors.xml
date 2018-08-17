@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="tint_color">#807136FB</color>
+    <color name="timeline_background_del_color">#807136FB</color>
+    <color name="timeline_backgound_color">#80ffffff</color>
+</resources>

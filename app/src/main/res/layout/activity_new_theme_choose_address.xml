@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/include_toolbar"
+            layout="@layout/layout_toolbar"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y60"
+            android:background="@color/qmui_config_color_red"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></include>
+
+
+        <TextView
+            android:id="@+id/tv_city"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x20"
+            android:text="北京"
+            android:textColor="@color/color_343445"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/v_bg"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/v_bg" />
+
+        <View
+            android:layout_width="@dimen/x8"
+            android:layout_height="@dimen/y5"
+            android:layout_marginLeft="@dimen/x8"
+            android:background="@drawable/icon_arrow_down_black"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_city"
+            app:layout_constraintLeft_toRightOf="@+id/tv_city"
+            app:layout_constraintTop_toTopOf="@+id/tv_city"></View>
+
+
+        <View
+            android:id="@+id/v_bg"
+            android:layout_width="@dimen/x270"
+            android:layout_height="@dimen/y30"
+            android:layout_marginLeft="@dimen/x34"
+            android:layout_marginRight="@dimen/x15"
+            android:layout_marginTop="@dimen/y20"
+            android:background="@drawable/bg_select_time"
+            app:layout_constraintLeft_toRightOf="@+id/tv_city"
+            app:layout_constraintTop_toBottomOf="@+id/include_toolbar"></View>
+
+
+        <TextView
+            android:id="@+id/et_keyword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x59"
+            android:background="@null"
+            android:focusable="false"
+            android:hint="@string/choose_address_search_hint"
+            android:textColorHint="@color/color_898A9E"
+            android:textSize="14sp"
+
+            app:layout_constraintBottom_toBottomOf="@+id/v_bg"
+            app:layout_constraintLeft_toLeftOf="@+id/v_bg"
+            app:layout_constraintTop_toTopOf="@+id/v_bg" />
+
+        <View
+            android:layout_width="@dimen/x14"
+            android:layout_height="@dimen/y15"
+            android:layout_marginLeft="@dimen/x30"
+            android:background="@drawable/icon_address_search"
+            app:layout_constraintBottom_toBottomOf="@+id/et_keyword"
+            app:layout_constraintLeft_toLeftOf="@+id/v_bg"
+            app:layout_constraintTop_toTopOf="@+id/et_keyword"></View>
+
+        <View
+            android:id="@+id/v_line"
+            android:layout_width="@dimen/x2"
+            android:layout_height="@dimen/y18"
+            android:layout_marginTop="@dimen/y15"
+            android:background="@color/color_F7F7FC"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/v_bg"></View>
+
+
+        <TextView
+            android:id="@+id/tv_near"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/y15"
+            android:text="北京"
+            android:textColor="@color/color_898A9E"
+            android:textSize="@dimen/x16"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/v_line"
+            app:layout_constraintTop_toBottomOf="@+id/v_bg" />
+
+        <View
+            android:layout_width="@dimen/x8"
+            android:layout_height="@dimen/y5"
+            android:layout_marginLeft="@dimen/x6"
+            android:background="@drawable/icon_address_filter"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_near"
+            app:layout_constraintLeft_toRightOf="@+id/tv_near"
+            app:layout_constraintTop_toTopOf="@+id/tv_near"></View>
+
+        <View
+            android:id="@+id/v_near"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y25"
+            android:layout_marginTop="@dimen/y11"
+            android:textColor="@color/color_898A9E"
+            android:textSize="16sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/v_line"
+            app:layout_constraintTop_toBottomOf="@+id/v_bg" />
+
+        <TextView
+            android:id="@+id/tv_sort"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/y15"
+            android:text="智能排序"
+            android:textColor="@color/color_898A9E"
+            android:textSize="@dimen/x16"
+            app:layout_constraintLeft_toRightOf="@+id/v_line"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/v_bg" />
+
+        <View
+            android:layout_width="@dimen/x8"
+            android:layout_height="@dimen/y5"
+            android:layout_marginLeft="@dimen/x6"
+            android:background="@drawable/icon_address_filter"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_sort"
+            app:layout_constraintLeft_toRightOf="@+id/tv_sort"
+            app:layout_constraintTop_toTopOf="@+id/tv_sort"></View>
+
+        <View
+            android:id="@+id/v_sort"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y28"
+            android:layout_marginTop="@dimen/y11"
+            android:textColor="@color/color_898A9E"
+            android:textSize="16sp"
+            app:layout_constraintLeft_toRightOf="@+id/v_line"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/v_bg" />
+
+        <View
+            android:id="@+id/v_line2"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y1"
+            android:layout_marginTop="@dimen/y15"
+            android:background="@color/color_EDEDF3"
+            app:layout_constraintTop_toBottomOf="@+id/v_line"></View>
+
+
+        <com.gdlife.candypie.widget.ProgressFramelayout
+            android:id="@+id/plyt_container"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/v_line2"
+            app:no_data="@layout/include_nodata_info"
+            app:progress="@layout/include_progress_info">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.jcodecraeer.xrecyclerview.XRecyclerView
+                    android:id="@+id/rv_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"></com.jcodecraeer.xrecyclerview.XRecyclerView>
+            </RelativeLayout>
+        </com.gdlife.candypie.widget.ProgressFramelayout>
+
+        <View
+            android:id="@+id/v_bgcolor"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="#80000000"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/v_line2"></View>
+
+
+        <LinearLayout
+            android:id="@+id/llyt_near"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/v_line2">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_near"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/y420"
+                android:layout_weight="1"
+                android:background="@color/white"></android.support.v7.widget.RecyclerView>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_distance"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/y420"
+                android:layout_weight="1.5"
+                android:background="@color/white"></android.support.v7.widget.RecyclerView>
+
+        </LinearLayout>
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_sort"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y200"
+            android:background="@color/white"
+            android:visibility="gone"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/v_line2"></android.support.v7.widget.RecyclerView>
+
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/clyt_search"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/white"
+            android:focusable="true"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <View
+                android:id="@+id/v_search_topbg"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/y75"
+                android:background="@color/white"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"></View>
+
+
+            <View
+                android:id="@+id/v_search_bg"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/y30"
+                android:layout_marginLeft="@dimen/x15"
+                android:layout_marginRight="@dimen/x15"
+                android:layout_marginTop="@dimen/y35"
+                android:background="@drawable/bg_select_time"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/tv_cancel"
+                app:layout_constraintTop_toTopOf="parent"></View>
+
+
+            <EditText
+                android:id="@+id/et_keyword_search"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginLeft="@dimen/x16"
+                android:layout_marginRight="@dimen/x15"
+                android:background="@null"
+                android:hint="@string/choose_address_search_hint"
+                android:maxLines="1"
+                android:paddingLeft="@dimen/x35"
+                android:paddingRight="@dimen/x15"
+                android:textColorHint="@color/color_898A9E"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/v_search_bg"
+                app:layout_constraintLeft_toLeftOf="@+id/v_search_bg"
+                app:layout_constraintRight_toLeftOf="@+id/tv_cancel"
+                app:layout_constraintTop_toTopOf="@+id/v_search_bg" />
+
+
+            <View
+                android:layout_width="@dimen/x14"
+                android:layout_height="@dimen/y15"
+                android:layout_marginLeft="@dimen/x30"
+                android:background="@drawable/icon_address_search"
+                app:layout_constraintBottom_toBottomOf="@+id/v_search_bg"
+                app:layout_constraintLeft_toLeftOf="@+id/v_search_bg"
+                app:layout_constraintTop_toTopOf="@+id/v_search_bg"></View>
+
+            <TextView
+                android:id="@+id/tv_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/x16"
+                android:text="取消"
+                app:layout_constraintBottom_toBottomOf="@+id/v_search_bg"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/v_search_bg" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_search_result"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/v_search_topbg"></android.support.v7.widget.RecyclerView>
+
+
+        </android.support.constraint.ConstraintLayout>
+
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

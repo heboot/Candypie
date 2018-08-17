@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="recommend_friend">推荐好友</string>
+    <string name="renzheng">认证</string>
+    <string name="recommend_gift">推荐有奖</string>
+    <string name="gold_card_rights">金卡权益</string>
+    <string name="gong">共</string>
+    <string name="upload_ing">正在上传</string>
+    <string name="upload_suc_auth_tip">上传成功，请等待审核</string>
+    <string name="upload_suc">上传成功</string>
+    <string name="filtrate">筛选</string>
+    <string name="select_ta">选TA</string>
+    <string name="skill_auth_status_ing">技能审核中</string>
+    <string name="do_nav">导航</string>
+    <string name="rob_order_ed">已参抢</string>
+    <string name="rob_order_full">已抢满</string>
+    <string name="order_info">订单信息</string>
+    <string name="yitongzhi">已通知</string>
+    <string name="weiyonghu"> 位用户</string>
+    <string name="manyidu">满意度</string>
+    <string name="gold_cash_tip">金卡账户仅用于邀约支出，享受多项特权，不可提现</string>
+    <string name="pay_tip">请在10分钟内支付\n若订单未成交，你支付的金额将退回账户</string>
+    <string name="test_server">测试服</string>
+    <string name="wx_friend">微信好友</string>
+    <string name="wx_quan">朋友圈</string>
+    <string name="weibo">微博</string>
+    <string name="order_nouser_tip">建议适当调整金额或稍晚再发布\n打赏金额会退回到您的账户</string>
+    <string name="order_timeout_tip">抱歉由于您选人超过时限\n本次订单自动取消</string>
+    <string name="first_order_pay_tip1">首次发单只需支付</string>
+    <string name="first_order_pay_tip2"> 订金\n订金可抵扣最终费用</string>
+    <string name="coin_balance_tip_by_new_serve">你的账户钻石不足\n充值</string>
+    <string name="go_chatvideo">立即视频</string>
+    <string name="gold_rights_tip">现在您将享受更多的特权</string>
+    <string name="bimianchaoshi">请尽快避免超时</string>
+    <string name="qiangdandaojishi">抢单倒计时</string>
+    <string name="qiangdandaojishi2">，截止后还有</string>
+    <string name="select_user_time_tip">分钟选人时间</string>
+    <string name="jinrudaojishi">进入倒计时</string>
+    <string name="jinrudaojishi_over">进入倒计时00:00，请尽快避免超时</string>
+    <string name="cancel_black">取消拉黑</string>
+    <string name="service_out">服务已过期</string>
+    <string name="black_user_list">黑名单</string>
+    <string name="send_gift">送礼物</string>
+    <string name="yue_ta">约Ta</string>
+    <string name="chat_video">视频聊天</string>
+    <string name="im_send_gift_tip">仅需送她%1$s钻石以上礼物\n就可以发消息给她，她在等你呦</string>
+
+    <string name="turntable_invite_tip">对方邀请你进行转盘游戏</string>
+    <string name="turntable_invite_tip2">秒内未选择自动取消</string>
+    <string name="turntable_invite_tip3">开启转盘游戏钻石余额最低为%1$s钻</string>
+
+    <string name="next_time">下次吧</string>
+    <string name="to_recharge">去充值</string>
+    <string name="tongyi">同意</string>
+    <string name="cash_tip1">可提现金额满%1$s元，方可提现</string>
+    <string name="cash_authid_tip">为确保安全，提现前请先进行身份认证</string>
+    <string name="cash_authid_ing_tip">您的身份认证正在审核中</string>
+    <string name="goto_auth">去认证</string>
+
+
+    <string name="free_video">免费聊天</string>
+
+    <string name="fast_yue">快约</string>
+
+    <string name="mcancel">取消</string>
+    <string name="tip_upload_skill_video">请上传技能视频</string>
+    <string name="permission_tip_storage">蜜糖派需要您的存储/拨打电话权限才能正常运行</string>
+    <string name="goto_setting">去设置</string>
+
+
+    <string name="set_price_gotoset">去定价</string>
+
+    <string name="set_price_video_tags">你的视频特色标签</string>
+
+    <string name="set_price_to_choose">去选择</string>
+
+    <string name="set_price_tip">设置 视频服务 价格</string>
+
+    <string name="set_price_un_tip">价格未设置</string>
+
+    <string name="noname_commit">匿名提交</string>
+
+    <string name="upload_video">上传视频</string>
+
+</resources>

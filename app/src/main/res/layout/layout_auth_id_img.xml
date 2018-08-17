@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/clyt_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+
+        <ImageView
+            android:id="@+id/iv_icon"
+            android:layout_width="@dimen/x40"
+            android:layout_height="@dimen/y35"
+            android:layout_marginTop="@dimen/y36"
+            android:background="@drawable/icon_auth_camera"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/y12"
+            android:text="点击上传"
+            android:textColor="@color/color_898A9E"
+            android:textSize="16sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_icon" />
+
+        <ImageView
+            android:scaleType="centerCrop"
+            android:layout_marginTop="@dimen/y11"
+            android:id="@+id/iv_img"
+            android:layout_width="@dimen/x140"
+            android:layout_height="@dimen/y140"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:layout_marginTop="@dimen/y11"
+            android:layout_width="@dimen/x140"
+            android:layout_height="@dimen/y140"
+            android:background="@drawable/icon_auth_id_bg"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/iv_close"
+              />
+
+
+        <ImageView
+            android:visibility="invisible"
+            android:id="@+id/iv_close"
+            android:layout_width="@dimen/x24"
+            android:layout_height="@dimen/y24"
+            android:layout_marginBottom="@dimen/y86"
+            android:layout_marginLeft="@dimen/x127"
+            android:background="@drawable/icon_close"
+            app:layout_constraintLeft_toLeftOf="@+id/iv_img"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

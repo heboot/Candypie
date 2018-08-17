@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/clyt_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#80343445">
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/clyt_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_rect_white_top_10"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <include
+                android:id="@+id/include_top"
+                layout="@layout/layout_new_theme_dialog_top"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"></include>
+
+
+            <TextView
+                android:id="@+id/tv_sub_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y25"
+                android:textColor="@color/color_898A9E"
+                android:textSize="@dimen/x14"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/include_top" />
+
+            <com.qmuiteam.qmui.widget.QMUIFloatLayout
+                android:id="@+id/qfl_container"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/y30"
+                android:layout_marginLeft="@dimen/x25"
+                android:layout_marginRight="@dimen/x25"
+                android:layout_marginTop="@dimen/y25"
+                app:layout_constraintBottom_toTopOf="@+id/btn_bottom"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_sub_title"
+                app:layout_goneMarginBottom="@dimen/y30"></com.qmuiteam.qmui.widget.QMUIFloatLayout>
+
+            <TextView
+                android:id="@+id/btn_bottom"
+                android:layout_width="@dimen/x314"
+                android:layout_height="@dimen/y48"
+                android:layout_marginBottom="@dimen/y45"
+                android:layout_marginTop="@dimen/y26"
+                android:background="@drawable/selector_bottom_button"
+                android:checked="false"
+                android:elevation="@dimen/x4"
+                android:gravity="center"
+                android:text="@string/noname_commit"
+                android:textColor="@color/white"
+                android:textSize="@dimen/x16"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/qfl_container" />
+
+            <include
+                android:id="@+id/include_comment_suc"
+                layout="@layout/layout_order_comment_suc"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/include_top"></include>
+
+        </android.support.constraint.ConstraintLayout>
+
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

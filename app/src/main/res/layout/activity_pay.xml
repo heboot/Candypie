@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="postServiceBean"
+            type="com.heboot.bean.theme.PostThemeBean"></variable>
+
+        <import type="android.view.View"></import>
+
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/include_toolbar"
+            layout="@layout/layout_toolbar"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y60"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></include>
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/y8"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/include_toolbar">
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent">
+
+                <TextView
+                    android:id="@+id/tv_money"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x15"
+
+                    android:text="@string/pay_money"
+                    android:textColor="@color/color_343445"
+                    android:textSize="@dimen/x18"
+                    android:textStyle="bold"
+                    app:layout_constraintLeft_toLeftOf="parent" />
+
+
+                <include
+                    android:id="@+id/include_type"
+                    layout="@layout/layout_pay_types"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y8"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_money"></include>
+
+
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/clyt_safe"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y20"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/include_type">
+
+                    <TextView
+                        android:id="@+id/tv_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/x15"
+                        android:layout_marginTop="@dimen/y20"
+                        android:text="@string/pay_safeguard_title"
+                        android:textColor="@color/color_343445"
+                        android:textSize="@dimen/x18"
+                        android:textStyle="bold"
+                        app:layout_constraintLeft_toLeftOf="parent" />
+
+                    <android.support.constraint.ConstraintLayout
+                        android:id="@+id/tip_left"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/y20"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toLeftOf="@+id/tip_center"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_title">
+
+                        <ImageView
+                            android:id="@+id/iv_icon_left"
+                            android:layout_width="@dimen/x37"
+                            android:layout_height="@dimen/y37"
+                            android:background="@drawable/icon_safeguard_tuoguan"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/y8"
+                            android:text="第三方账户托管"
+                            android:textColor="@color/color_58586C"
+                            android:textSize="@dimen/x12"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/iv_icon_left" />
+
+                    </android.support.constraint.ConstraintLayout>
+
+                    <android.support.constraint.ConstraintLayout
+                        android:id="@+id/tip_center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/y20"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_title">
+
+                        <ImageView
+                            android:id="@+id/iv_icon"
+                            android:layout_width="@dimen/x37"
+                            android:layout_height="@dimen/y37"
+                            android:background="@drawable/icon_safeguard_back"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/y8"
+                            android:text="未选人退回账户"
+                            android:textColor="@color/color_58586C"
+                            android:textSize="@dimen/x12"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/iv_icon" />
+
+                    </android.support.constraint.ConstraintLayout>
+
+                    <android.support.constraint.ConstraintLayout
+                        android:id="@+id/tip_right"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/y20"
+                        app:layout_constraintLeft_toRightOf="@+id/tip_center"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_title">
+
+                        <ImageView
+                            android:id="@+id/iv_icon_right"
+                            android:layout_width="@dimen/x37"
+                            android:layout_height="@dimen/y37"
+                            android:background="@drawable/icon_safeguard_ewai"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/y8"
+                            android:text="无任何额外费用"
+                            android:textColor="@color/color_58586C"
+                            android:textSize="@dimen/x12"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/iv_icon_right" />
+
+                    </android.support.constraint.ConstraintLayout>
+                </android.support.constraint.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/tv_pay_tip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y60"
+                    android:gravity="center"
+                    android:text="请在10分钟内支付\n若订单未成交，你支付的金额将退回账户"
+                    android:textColor="@color/color_898A9E"
+                    android:textSize="@dimen/x12"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/clyt_safe" />
+
+
+            </android.support.constraint.ConstraintLayout>
+        </android.support.v4.widget.NestedScrollView>
+
+        <TextView
+            android:id="@+id/btn_bottom"
+            android:layout_width="@dimen/x314"
+            android:layout_height="@dimen/y48"
+            android:layout_marginBottom="@dimen/y17"
+            android:background="@drawable/selector_bottom_button"
+            android:checked="false"
+            android:elevation="@dimen/x4"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+    </android.support.constraint.ConstraintLayout>
+</layout>

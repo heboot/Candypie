@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/library/AliyunSnapn/AliyunSnapn.iml" filepath="$PROJECT_DIR$/library/AliyunSnapn/AliyunSnapn.iml" />
+      <module fileurl="file://$PROJECT_DIR$/library/ImageLibrary/ImageLibrary.iml" filepath="$PROJECT_DIR$/library/ImageLibrary/ImageLibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/library/Librarys/Librarys.iml" filepath="$PROJECT_DIR$/library/Librarys/Librarys.iml" />
+      <module fileurl="file://$PROJECT_DIR$/library/MUtils/MUtils.iml" filepath="$PROJECT_DIR$/library/MUtils/MUtils.iml" />
+      <module fileurl="file://$PROJECT_DIR$/library/PushSDK/PushSDK.iml" filepath="$PROJECT_DIR$/library/PushSDK/PushSDK.iml" />
+      <module fileurl="file://$PROJECT_DIR$/library/RecyclerView/RecyclerView.iml" filepath="$PROJECT_DIR$/library/RecyclerView/RecyclerView.iml" />
+      <module fileurl="file://$PROJECT_DIR$/library/SwipeBackLayout/SwipeBackLayout.iml" filepath="$PROJECT_DIR$/library/SwipeBackLayout/SwipeBackLayout.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/candypie.iml" filepath="$PROJECT_DIR$/candypie.iml" />
+      <module fileurl="file://$PROJECT_DIR$/library/faceunity/faceunity.iml" filepath="$PROJECT_DIR$/library/faceunity/faceunity.iml" />
+      <module fileurl="file://$PROJECT_DIR$/library/faceunity_unit/faceunity_unit.iml" filepath="$PROJECT_DIR$/library/faceunity_unit/faceunity_unit.iml" />
+      <module fileurl="file://$PROJECT_DIR$/library/http/http.iml" filepath="$PROJECT_DIR$/library/http/http.iml" />
+      <module fileurl="file://$PROJECT_DIR$/library/library.iml" filepath="$PROJECT_DIR$/library/library.iml" />
+      <module fileurl="file://$PROJECT_DIR$/library/picture_library/picture_library.iml" filepath="$PROJECT_DIR$/library/picture_library/picture_library.iml" />
+      <module fileurl="file://$PROJECT_DIR$/library/AliyunSnapn/snap_core/snap_core.iml" filepath="$PROJECT_DIR$/library/AliyunSnapn/snap_core/snap_core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/library/AliyunSnapn/snap_demo/snap_demo.iml" filepath="$PROJECT_DIR$/library/AliyunSnapn/snap_demo/snap_demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/library/ucrop/ucrop.iml" filepath="$PROJECT_DIR$/library/ucrop/ucrop.iml" />
+      <module fileurl="file://$PROJECT_DIR$/library/uikit/uikit.iml" filepath="$PROJECT_DIR$/library/uikit/uikit.iml" />
+    </modules>
+  </component>
+</project>

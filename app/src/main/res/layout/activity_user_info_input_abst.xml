@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/include_toolbar"
+            layout="@layout/layout_toolbar"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y60"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></include>
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x16"
+            android:layout_marginTop="@dimen/y20"
+            android:text="@string/input_abst"
+            android:textColor="@color/color_343445"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/include_toolbar" />
+
+        <EditText
+            android:id="@+id/et_content"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y200"
+            android:layout_marginRight="@dimen/x16"
+            android:layout_marginTop="@dimen/y18"
+            android:background="@color/line_color"
+            android:gravity="left"
+            android:padding="@dimen/x8"
+            app:layout_constraintLeft_toLeftOf="@+id/tv_title"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title" />
+
+        <TextView
+            android:id="@+id/tv_tip"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/y20"
+            android:gravity="right|center"
+            android:text="@string/input_abst"
+            android:textColor="@color/color_343445"
+            app:layout_constraintRight_toRightOf="@+id/et_content"
+            app:layout_constraintTop_toBottomOf="@+id/et_content" />
+
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

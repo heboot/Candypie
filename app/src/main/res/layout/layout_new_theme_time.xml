@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/clyt_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/clyt_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_rect_white_top_10"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <include
+                android:id="@+id/include_top"
+                layout="@layout/layout_new_theme_dialog_top"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"></include>
+
+            <TextView
+                android:id="@+id/tv_time_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x24"
+                android:layout_marginTop="@dimen/y30"
+                android:text="开始时间"
+                android:textColor="@color/color_343445"
+                android:textSize="14sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/include_top" />
+
+            <View
+                android:id="@+id/v_bg1"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/y44"
+                android:layout_marginLeft="@dimen/x16"
+                android:layout_marginRight="@dimen/x16"
+                android:background="@drawable/bg_select_time"
+                app:layout_constraintBottom_toBottomOf="@+id/llyt_time"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/llyt_time"></View>
+
+            <LinearLayout
+                android:id="@+id/llyt_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x16"
+                android:layout_marginRight="@dimen/x31"
+                android:layout_marginTop="@dimen/y10"
+                android:orientation="horizontal"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_time_title">
+
+                <com.gdlife.candypie.widget.WheelView22
+                    android:id="@+id/rv1"
+                    android:layout_width="@dimen/x105"
+                    android:layout_height="@dimen/y126"
+                    android:overScrollMode="never"></com.gdlife.candypie.widget.WheelView22>
+
+                <com.gdlife.candypie.widget.WheelView22
+                    android:id="@+id/rv2"
+                    android:layout_width="@dimen/x120"
+                    android:layout_height="@dimen/y126"
+                    android:overScrollMode="never"></com.gdlife.candypie.widget.WheelView22>
+
+                <com.gdlife.candypie.widget.WheelView22
+                    android:id="@+id/rv3"
+                    android:layout_width="@dimen/x85"
+                    android:layout_height="@dimen/y126"
+                    android:overScrollMode="never"></com.gdlife.candypie.widget.WheelView22>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x202"
+                android:text="@string/hour_shi"
+                android:textColor="@color/color_343445"
+                android:textSize="@dimen/x22"
+                app:layout_constraintBottom_toBottomOf="@+id/v_bg1"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/v_bg1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x312"
+                android:text="@string/minute"
+                android:textColor="@color/color_343445"
+                android:textSize="@dimen/x22"
+                app:layout_constraintBottom_toBottomOf="@+id/v_bg1"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/v_bg1" />
+
+
+            <TextView
+                android:id="@+id/tv_time_title2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x24"
+                android:layout_marginTop="@dimen/y10"
+                android:text="约会时长"
+                android:textColor="@color/color_343445"
+                android:textSize="14sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/llyt_time" />
+
+            <View
+                android:id="@+id/v_du"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/y44"
+                android:layout_marginLeft="@dimen/x16"
+                android:layout_marginRight="@dimen/x16"
+                android:background="@drawable/bg_select_time"
+                app:layout_constraintBottom_toBottomOf="@+id/llyt_time2"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/llyt_time2"></View>
+
+            <View
+                android:id="@+id/v_center"
+                android:layout_width="1px"
+                android:layout_height="1px"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"></View>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x25"
+                android:text="@string/hours"
+                android:textColor="@color/color_343445"
+                android:textSize="@dimen/x22"
+                app:layout_constraintBottom_toBottomOf="@+id/v_du"
+                app:layout_constraintLeft_toRightOf="@+id/v_center"
+                app:layout_constraintTop_toTopOf="@+id/v_du" />
+
+            <LinearLayout
+                android:id="@+id/llyt_time2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y10"
+                android:gravity="center"
+                app:layout_constraintLeft_toLeftOf="@+id/llyt_time"
+                app:layout_constraintRight_toRightOf="@+id/llyt_time"
+                app:layout_constraintTop_toBottomOf="@+id/tv_time_title2">
+
+                <!--android:layout_width="@dimen/x65"-->
+
+                <com.gdlife.candypie.widget.WheelView22
+
+                    android:id="@+id/rv4"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y126"
+                    android:layout_marginTop="@dimen/y10"
+                    android:overScrollMode="never"
+                    app:layout_constraintLeft_toLeftOf="@+id/llyt_time"
+                    app:layout_constraintRight_toRightOf="@+id/llyt_time"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_time_title2"></com.gdlife.candypie.widget.WheelView22>
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/tv_time_title3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/y39"
+                android:layout_marginLeft="@dimen/x24"
+                android:layout_marginTop="@dimen/y30"
+                android:text=""
+                android:textColor="@color/color_898A9E"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/llyt_time2" />
+
+
+        </android.support.constraint.ConstraintLayout>
+
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

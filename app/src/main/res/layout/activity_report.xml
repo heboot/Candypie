@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/include_toolbar"
+            layout="@layout/layout_toolbar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"></include>
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/include_toolbar">
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <EditText
+                    android:id="@+id/et_content"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/y192"
+                    android:layout_margin="@dimen/x17"
+                    android:background="@drawable/bg_report_input"
+                    android:gravity="left|top"
+                    android:hint="写下你的建议或遇到的问题"
+                    android:maxLength="150"
+                    android:padding="@dimen/x5"
+                    android:textColor="@color/color_343445"
+                    android:textColorHint="@color/color_898A9E"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_contentnum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="123"
+                    android:textColor="@color/color_898A9E"
+                    android:textSize="@dimen/x14"
+                    app:layout_constraintRight_toRightOf="@+id/et_content"
+                    app:layout_constraintTop_toBottomOf="@+id/et_content" />
+
+                <TextView
+                    android:id="@+id/tv_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x17"
+                    android:layout_marginTop="@dimen/y57"
+                    android:text="添加照片"
+                    android:textColor="@color/color_343445"
+                    android:textSize="@dimen/x18"
+                    android:textStyle="bold"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/et_content" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_list"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y10"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_title"></android.support.v7.widget.RecyclerView>
+
+                <LinearLayout
+                    android:id="@+id/llyt_tel"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y53"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/rv_list">
+
+                    <TextView
+                        android:id="@+id/tv_tel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="客服电话:"
+                        android:textColor="@color/color_898A9E"
+                        android:textSize="@dimen/x14" />
+
+                    <TextView
+                        android:id="@+id/tv_telnum"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=":"
+                        android:textColor="@color/color_FF5252"
+                        android:textSize="@dimen/x14" />
+                </LinearLayout>
+
+
+                <TextView
+                    android:id="@+id/btn_bottom"
+                    android:layout_width="@dimen/x314"
+                    android:layout_height="@dimen/y48"
+                    android:layout_marginTop="@dimen/y25"
+                    android:background="@drawable/selector_bottom_button"
+                    android:checked="false"
+                    android:elevation="@dimen/x4"
+                    android:gravity="center"
+                    android:text="确认提交"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/llyt_tel" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/y20"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/btn_bottom"></View>
+
+            </android.support.constraint.ConstraintLayout>
+        </android.support.v4.widget.NestedScrollView>
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

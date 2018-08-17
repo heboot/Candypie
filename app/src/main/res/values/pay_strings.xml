@@ -1,0 +1,77 @@
+<resources>
+
+    <string name="tip_confirm_pay">确认支付</string>
+
+    <string name="page_title_pay">支付</string>
+
+    <string name="page_title_cash">提现</string>
+
+    <string name="page_title_coupons">我的约会券</string>
+
+    <string name="account_balance">账户余额</string>
+
+    <string name="coin_balance">钻石余额:</string>
+
+    <string name="account_cash">提现</string>
+
+    <string name="account_recharge">充值</string>
+
+    <string name="choose_money">请选择金额</string>
+
+    <string name="choose_pay_type">请选择支付方式</string>
+
+    <string name="page_title_account">账户</string>
+
+    <string name="detail">明细</string>
+
+    <string name="pay_money">支付金额： </string>
+
+    <string name="pay_safeguard_title">平台保障</string>
+
+    <string name="coupons">约会券</string>
+
+    <string name="level">等级</string>
+
+    <string name="upgrade_black_tip">升级为黑卡</string>
+
+    <string name="confirm_recharge">确认充值</string>
+
+    <string name="account_ali">支付宝账号</string>
+
+    <string name="cash_user_name">收款人姓名</string>
+
+    <string name="hint_input_ali_account">请输入支付宝账号</string>
+
+    <string name="hint_input_cash_name">请输入收款人姓名</string>
+
+    <string name="hint_input_cash_money">当前可提现</string>
+
+    <string name="cash_money_tip">提现金额（元）</string>
+
+    <string name="service_charge">系统将扣除支付宝手续费</string>
+
+    <string name="valid_time">有效期至</string>
+
+    <string name="new_video_service_coin_tip_title">账户余额不足</string>
+
+    <string name="new_video_service_coin_tip_content">您当前账户钻石余额不足</string>
+
+    <string name="new_video_service_coin_tip_content2">请先去充值</string>
+
+    <string name="unit_coupon">张</string>
+
+    <string name="balance_paymoney_tip">账户余额抵：¥</string>
+
+    <string name="coupon_paymoney_tip"> 约会券抵： ¥</string>
+
+    <string name="pay_status_nopay">尚未支付</string>
+
+    <string name="pay_status_suc">成功支付</string>
+
+    <string name="pay_status_tip">是否完成支付?</string>
+
+    <string name="video_balance_tip">您的钻石即将用完，聊天即将结束</string>
+    <string name="coupon_title_unuse">待使用</string>
+    <string name="coupon_title_outdate">已过期</string>
+
+</resources>

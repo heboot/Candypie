@@ -1,0 +1,159 @@
+<resources>
+
+    <string name="app_name">蜜糖派</string>
+
+    <string name="yue">约</string>
+
+    <string name="login">登录</string>
+
+    <string name="register">注册</string>
+
+    <string name="register_info">完善资料</string>
+
+    <string name="login_by_mobile">手机号注册登录</string>
+
+    <string name="login_protocol_before">继续注册即代表你同意</string>
+
+    <string name="login_protocol">《蜜糖派用户协议》</string>
+
+    <string name="register_send_info">我们发送了4位验证码至</string>
+
+    <string name="set_password">设置登录密码</string>
+
+    <string name="set_new_password">设置新登录密码</string>
+
+    <string name="set_password_hint">输入登录密码</string>
+
+    <string name="set_new_password_hint">输入新登录密码</string>
+
+    <string name="input_nick">输入昵称</string>
+
+    <string name="input_mobile">输入手机号</string>
+
+    <string name="select_birthday">选择年龄</string>
+
+    <string name="input_abst">用一段话介绍你自己</string>
+
+    <string name="select_sex">选择性别</string>
+
+    <string name="select_sex_no_alter">选择性别后不可修改</string>
+
+    <string name="account">账号:  </string>
+
+    <string name="fogget">忘记了？</string>
+
+    <string name="fogget_pwd">找回密码</string>
+
+    <string name="fogget_mobile_tip">找回密码的手机账号</string>
+
+    <string name="mnext">下一步</string>
+
+    <string name="resend">重新获取</string>
+
+    <string name="complete">完成</string>
+
+    <string name="to_login">去登录</string>
+
+    <string name="today">今天</string>
+
+    <string name="today2">明天</string>
+
+    <string name="today3">后天</string>
+
+    <string name="hour">点</string>
+    <string name="hour_shi">时</string>
+
+    <string name="hours">小时</string>
+
+    <string name="minute">分</string>
+
+    <string name="seconds">秒</string>
+
+    <string name="finish">完成</string>
+
+    <string name="permission_storage">需要存储权限</string>
+
+    <string name="page_title_chooseaddress">订单地点</string>
+
+    <string name="page_title_userinfo">个人资料</string>
+
+    <string name="page_title_chooseaddress_detail">店铺</string>
+
+    <string name="theme_address_avg">人均:</string>
+
+    <string name="net_friend_comment">网友点评</string>
+
+    <string name="load_more_end">到底了</string>
+
+    <string name="affirm_choose_address">确认选择</string>
+
+    <string name="affirm_choose_commit">确认提交</string>
+
+    <string name="age_unit">岁</string>
+
+    <string name="age_info">年龄</string>
+
+    <string name="height_info">身高</string>
+
+    <string name="kg_info">体重</string>
+
+    <string name="price_unit">元</string>
+
+    <string name="choose_pic_camera">拍照片</string>
+
+    <string name="choose_video_camera">拍视频</string>
+
+    <string name="choose_video_album">选视频</string>
+
+    <string name="choose_pic_album">选照片</string>
+
+    <string name="confirm">确定</string>
+
+    <string name="confirm_ren">确认</string>
+    <string name="unit_minute">分钟</string>
+
+    <string name="page_title_setting">设置</string>
+
+    <string name="setting_notification">消息提醒</string>
+
+    <string name="setting_record">清空记录</string>
+
+    <string name="setting_cache">清空缓存</string>
+
+    <string name="setting_about">关于</string>
+
+    <string name="rule">规则</string>
+
+    <string name="unit_coin">钻</string>
+
+    <string name="price_symbol">¥</string>
+
+    <string name="page_title_systemmsg">通知</string>
+
+    <string name="page_title_fav">收藏</string>
+
+    <string name="agora_appid">657f3a61e84b4771b568983b2faf09c6</string>
+    <string name="page_title_kpi">我的成长</string>
+    <string name="left_menu_order_text">订单</string>
+    <string name="left_menu_fav_text">收藏</string>
+    <string name="left_menu_msg_text">消息</string>
+    <string name="left_menu_account_text">账户</string>
+    <string name="left_menu_feeback_text">意见反馈</string>
+    <string name="left_menu_help_text">帮助</string>
+    <string name="page_title_report">举报</string>
+    <string name="hint_report">写下你遇到的问题</string>
+    <string name="page_title_suggest">意见反馈</string>
+    <string name="hint_suggest">写下你的建议或遇到的问题</string>
+    <string name="tip_pic_upload_fail">图片上传失败</string>
+    <string name="dev_ing">正在开发中...</string>
+    <string name="video_invite_tip">邀请你视频聊天</string>
+    <string name="video_invite_wait_tip">正在等待对方接受邀请...</string>
+    <string name="video_time_insufficient_tip">通话时长不足</string>
+    <string name="video_time_insufficient_tip2">分钟，你主动挂断将扣除</string>
+    <string name="go_on_next">继续聊</string>
+    <string name="page_title_black_userlist">黑名单</string>
+    <string name="chuli">处理</string>
+    <string name="order_title_daiwancheng">待完成</string>
+    <string name="user_visit_title">最近来访</string>
+    <string name="candypie_number">蜜糖号</string>
+</resources>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="text"
+            type="String"></variable>
+
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:paddingLeft="@dimen/x10"
+        android:paddingRight="@dimen/x10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:gravity="center"
+            android:elevation="@dimen/x4"
+            android:id="@+id/btn_bottom"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y48"
+            android:background="@drawable/selector_bottom_button"
+            android:checked="false"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

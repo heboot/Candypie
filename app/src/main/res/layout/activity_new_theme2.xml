@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="listBean"
+            type="com.heboot.bean.config.ConfigBean.ServiceItemsConfigBean.ListBean"></variable>
+
+        <variable
+            name="type"
+            type="String"></variable>
+
+        <import type="com.gdlife.candypie.common.MValue"></import>
+
+        <import type="android.view.View"></import>
+
+    </data>
+
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/clyt_theme"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_EDEDF3">
+
+        <ImageView
+            android:id="@+id/iv_bg"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y314"
+            android:background="@color/color_EDEDF3"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y314"
+            android:background="@drawable/icon_theme_bg"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/clyt_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="@dimen/y40">
+
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_list"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/y100"
+                    android:layout_marginTop="@dimen/y70"
+                    android:visibility="@{!type.equals(MValue.NEW_SERVICE_TYPE_ONE)?View.VISIBLE:View.GONE }"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"></android.support.v7.widget.RecyclerView>
+
+
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/clyt_normal_top"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/y100"
+                    android:layout_marginLeft="@dimen/x16"
+                    android:layout_marginRight="@dimen/x16"
+                    android:layout_marginTop="@dimen/y12"
+                    android:background="@drawable/bg_new_theme_top"
+                    android:visibility="@{!type.equals(MValue.NEW_SERVICE_TYPE_ONE)?View.VISIBLE:View.GONE }"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/rv_list"
+                    app:layout_goneMarginTop="@dimen/y82">
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/y5"
+                        android:layout_marginBottom="@dimen/y7"
+                        android:layout_marginLeft="@dimen/x17"
+                        android:layout_marginRight="@dimen/x17"
+                        android:layout_marginTop="@dimen/y7"
+                        android:background="@drawable/dash_gray"
+                        android:layerType="software"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"></View>
+
+                    <com.qmuiteam.qmui.widget.QMUIRadiusImageView
+                        android:id="@+id/iv_icon_normal"
+                        android:layout_width="@dimen/x50"
+                        android:layout_height="@dimen/y50"
+                        android:layout_marginLeft="@dimen/x16"
+                        android:showImg="@{listBean.img}"
+                        app:layout_constraintBottom_toBottomOf="@+id/clyt"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/clyt"
+                        app:qmui_border_width="0dp"
+                        app:qmui_is_circle="true" />
+
+                    <android.support.constraint.ConstraintLayout
+                        android:id="@+id/clyt"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/x10"
+                        android:layout_marginTop="@dimen/y9"
+                        app:layout_constraintLeft_toRightOf="@+id/iv_icon_normal"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:id="@+id/tv_new_theme_title_normal"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+
+
+                            android:text="@{listBean.title}"
+                            android:textColor="@color/color_343445"
+                            android:textSize="@dimen/x30"
+                            android:textStyle="bold"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tv_new_theme_subtitle_normal"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="left"
+                            android:maxLines="1"
+                            android:text="@{listBean.content}"
+                            android:textColor="@color/color_343445"
+                            android:textSize="13sp"
+                            app:layout_constraintLeft_toLeftOf="@+id/tv_new_theme_title_normal"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/tv_new_theme_title_normal" />
+                    </android.support.constraint.ConstraintLayout>
+
+                </android.support.constraint.ConstraintLayout>
+
+                <!--1V1下单的头部-->
+                <!--android:visibility="@{type.equals(MValue.NEW_SERVICE_TYPE_ONE)?View.VISIBLE:View.GONE }"-->
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/clyt_top"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/y147"
+                    android:layout_marginLeft="@dimen/x16"
+                    android:layout_marginRight="@dimen/x16"
+                    android:background="@drawable/bg_new_theme_top"
+                    android:visibility="@{type.equals(MValue.NEW_SERVICE_TYPE_ONE)?View.VISIBLE:View.GONE }"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/rv_list"
+                    app:layout_goneMarginTop="@dimen/y105">
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/y5"
+                        android:layout_marginBottom="@dimen/y7"
+                        android:layout_marginLeft="@dimen/x17"
+                        android:layout_marginRight="@dimen/x17"
+                        android:layout_marginTop="@dimen/y7"
+                        android:background="@drawable/dash_gray"
+                        android:layerType="software"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"></View>
+
+                    <TextView
+                        android:id="@+id/tv_new_theme_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/y60"
+                        android:text="@{listBean.title}"
+                        android:textColor="@color/color_343445"
+                        android:textSize="30sp"
+                        android:textStyle="bold"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_new_theme_subtitle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:maxLines="1"
+                        android:text="@{listBean.content}"
+                        android:textColor="@color/color_343445"
+                        android:textSize="13sp"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_new_theme_title" />
+
+
+                </android.support.constraint.ConstraintLayout>
+
+
+                <!--android:visibility="@{type.equals(MValue.one)?View.VISIBLE:View.GONE }"-->
+                <com.qmuiteam.qmui.widget.QMUIRadiusImageView
+                    android:id="@+id/iv_icon"
+                    android:layout_width="@dimen/x88"
+                    android:layout_height="@dimen/y88"
+                    android:layout_marginBottom="@dimen/y94"
+                    android:layout_marginTop="@dimen/y10"
+                    android:showImg="@{listBean.img}"
+                    android:visibility="@{type.equals(MValue.NEW_SERVICE_TYPE_ONE)?View.VISIBLE:View.GONE }"
+                    app:layout_constraintBottom_toBottomOf="@+id/clyt_top"
+                    app:layout_constraintLeft_toLeftOf="@+id/clyt_top"
+                    app:layout_constraintRight_toRightOf="@+id/clyt_top"
+                    app:qmui_border_color="@color/white"
+                    app:qmui_border_width="@dimen/x4"
+                    app:qmui_is_circle="true" />
+
+
+                <!--<ImageView-->
+                <!--android:layout_width="@dimen/x8"-->
+                <!--android:layout_height="@dimen/y17"-->
+                <!--android:layout_marginLeft="@dimen/x16"-->
+                <!--android:layout_marginTop="@dimen/y83"-->
+                <!--android:background="@drawable/bg_banyuan_tran_left"-->
+                <!--app:layout_constraintBottom_toTopOf="@+id/clyt_center"-->
+                <!--app:layout_constraintLeft_toLeftOf="parent" />-->
+
+                <!--<ImageView-->
+                <!--android:layout_width="@dimen/x8"-->
+                <!--android:layout_height="@dimen/y17"-->
+                <!--android:layout_marginBottom="@dimen/y3"-->
+                <!--android:layout_marginRight="@dimen/x16"-->
+                <!--android:background="@drawable/bg_banyuan_tran_right"-->
+                <!--app:layout_constraintBottom_toTopOf="@+id/clyt_center"-->
+                <!--app:layout_constraintRight_toRightOf="parent" />-->
+
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/clyt_center"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x16"
+                    android:layout_marginRight="@dimen/y16"
+                    android:background="@color/white"
+                    android:paddingBottom="@dimen/y30"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/clyt_top"
+                    app:layout_goneMarginTop="@dimen/y110">
+
+                    <!--<ScrollView-->
+                    <!--android:id="@+id/sv"-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="0dp"-->
+                    <!--android:fitsSystemWindows="true"-->
+                    <!--app:layout_constraintBottom_toBottomOf="parent"-->
+                    <!--app:layout_constraintLeft_toLeftOf="parent"-->
+                    <!--app:layout_constraintRight_toRightOf="parent"-->
+                    <!--app:layout_constraintTop_toTopOf="parent">-->
+
+                    <android.support.constraint.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <ImageView
+                            android:id="@+id/iv_point"
+                            android:layout_width="@dimen/x6"
+                            android:layout_height="@dimen/y6"
+                            android:layout_marginLeft="@dimen/x11"
+                            android:background="@drawable/bg_oval_themecolor"
+                            app:layout_constraintBottom_toBottomOf="@+id/include_new_theme_item1"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/include_new_theme_item1" />
+
+                        <include
+                            android:id="@+id/include_new_theme_item1"
+                            layout="@layout/item_new_theme"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/y25"
+                            android:visibility="@{!type.equals(MValue.NEW_SERVICE_TYPE_VIDEO)?View.VISIBLE:View.GONE }"
+                            app:layout_constraintLeft_toRightOf="@+id/iv_point"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"></include>
+
+
+                        <include
+                            android:id="@+id/include_new_theme_item2"
+                            layout="@layout/item_new_theme"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/y25"
+                            app:layout_constraintLeft_toRightOf="@+id/iv_point"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/include_new_theme_item1"></include>
+
+                        <include
+                            android:id="@+id/include_new_theme_item3"
+                            layout="@layout/item_new_theme"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/y25"
+                            app:layout_constraintLeft_toRightOf="@+id/iv_point"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/include_new_theme_item2"></include>
+
+                        <include
+                            android:id="@+id/include_new_theme_item4"
+                            layout="@layout/item_new_theme"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/y25"
+                            android:visibility="@{type.equals(MValue.NEW_SERVICE_TYPE_VIDEO)?View.VISIBLE:View.GONE }"
+                            app:layout_constraintLeft_toRightOf="@+id/iv_point"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/include_new_theme_item3"></include>
+
+                        <TextView
+                            android:id="@+id/tv_video_price"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/x11"
+                            android:layout_marginTop="@dimen/y25"
+                            android:textColor="@color/color_343445"
+                            android:textSize="@dimen/x16"
+                            app:layout_constraintLeft_toRightOf="@+id/iv_point"
+                            app:layout_constraintTop_toBottomOf="@+id/include_new_theme_item4" />
+
+
+                        <!--<include-->
+                        <!--android:id="@+id/include_new_theme_item5"-->
+                        <!--layout="@layout/item_new_theme_edit"-->
+                        <!--android:layout_width="0dp"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:visibility="@{!type.equals(MValue.NEW_SERVICE_TYPE_VIDEO)?View.VISIBLE:View.GONE }"-->
+                        <!--app:layout_constraintLeft_toRightOf="@+id/iv_point"-->
+                        <!--app:layout_constraintRight_toRightOf="parent"-->
+                        <!--app:layout_constraintTop_toBottomOf="@+id/include_new_theme_item4"></include>-->
+                    </android.support.constraint.ConstraintLayout>
+                    <!--</ScrollView>-->
+                </android.support.constraint.ConstraintLayout>
+
+                <ImageView
+                    android:id="@+id/iv_banyuan_bottom_left"
+                    android:layout_width="@dimen/x8"
+                    android:layout_height="@dimen/y17"
+                    android:layout_marginLeft="@dimen/x16"
+                    android:layout_marginTop="@dimen/y83"
+                    android:background="@drawable/bg_banyuan"
+                    app:layout_constraintBottom_toTopOf="@+id/clyt_bottom"
+                    app:layout_constraintLeft_toLeftOf="parent" />
+
+                <ImageView
+                    android:layout_width="@dimen/x8"
+                    android:layout_height="@dimen/y17"
+                    android:layout_marginBottom="@dimen/y3"
+                    android:layout_marginRight="@dimen/x16"
+                    android:background="@drawable/bg_banyuan_right"
+                    app:layout_constraintBottom_toTopOf="@+id/clyt_bottom"
+                    app:layout_constraintRight_toRightOf="parent" />
+
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/clyt_bottom"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x16"
+                    android:layout_marginRight="@dimen/x16"
+                    android:background="@drawable/bg_new_theme2_bottom"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/clyt_center">
+
+                    <TextView
+                        android:id="@+id/btn_bottom"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/y48"
+                        android:layout_marginBottom="@dimen/y28"
+                        android:layout_marginLeft="@dimen/x15"
+                        android:layout_marginRight="@dimen/x15"
+                        android:layout_marginTop="@dimen/y37"
+                        android:background="@drawable/bg_rect_bottom_button"
+                        android:checked="false"
+                        android:elevation="@dimen/x4"
+                        android:gravity="center"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                </android.support.constraint.ConstraintLayout>
+
+                <View
+                    android:id="@+id/v_dash2"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/y5"
+                    android:layout_marginLeft="@dimen/x27"
+                    android:layout_marginRight="@dimen/y27"
+                    android:layout_marginTop="@dimen/y6"
+                    android:background="@drawable/dash_gray"
+                    android:layerType="software"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/iv_banyuan_bottom_left"></View>
+
+            </android.support.constraint.ConstraintLayout>
+        </android.support.v4.widget.NestedScrollView>
+
+
+        <include
+            android:id="@+id/include_toolbar"
+            layout="@layout/layout_toolbar"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y60"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></include>
+
+        <ImageView
+            android:id="@+id/iv_refresh_user"
+            android:layout_width="@dimen/x18"
+            android:layout_height="@dimen/y20"
+            android:layout_marginRight="@dimen/x16"
+            android:layout_marginTop="@dimen/y35"
+            android:background="@drawable/icon_refresh_recommend_user"
+            android:visibility="@{!type.equals(MValue.NEW_SERVICE_TYPE_ONE)?View.VISIBLE:View.GONE }"
+            app:layout_constraintRight_toRightOf="@+id/include_toolbar"
+            app:layout_constraintTop_toTopOf="@+id/include_toolbar" />
+
+        <View
+            android:id="@+id/v_refresh_user"
+            android:layout_width="@dimen/x48"
+            android:layout_height="@dimen/y60"
+            android:visibility="@{!type.equals(MValue.NEW_SERVICE_TYPE_ONE)?View.VISIBLE:View.GONE }"
+            app:layout_constraintRight_toRightOf="@+id/include_toolbar"
+            app:layout_constraintTop_toTopOf="@+id/include_toolbar" />
+
+    </android.support.constraint.ConstraintLayout>
+
+</layout>

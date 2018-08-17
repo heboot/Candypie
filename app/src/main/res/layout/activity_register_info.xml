@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <include
+            android:id="@+id/include_toolbar"
+            layout="@layout/layout_toolbar"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y60"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></include>
+
+        <EditText
+            android:id="@+id/et_nick"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x20"
+            android:layout_marginTop="@dimen/y41"
+            android:background="@null"
+            android:hint="@string/input_nick"
+            android:maxLength="20"
+            android:maxLines="1"
+            android:paddingBottom="@dimen/y14"
+            android:paddingTop="@dimen/y14"
+            android:textColor="@color/color_343445"
+            android:textColorHint="@color/color_D6D6DF"
+            android:textSize="18sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/include_toolbar" />
+
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y1"
+            android:layout_marginLeft="@dimen/x20"
+            android:background="@color/color_EDEDF3"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_nick"></View>
+
+        <TextView
+            android:id="@+id/et_birthday"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x20"
+            android:layout_marginTop="@dimen/y15"
+            android:background="@null"
+            android:hint="@string/select_birthday"
+            android:paddingBottom="@dimen/y14"
+            android:paddingTop="@dimen/y14"
+            android:textColor="@color/color_343445"
+            android:textColorHint="@color/color_D6D6DF"
+            android:textSize="18sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_nick" />
+
+
+        <View
+            android:id="@+id/v_line"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y1"
+            android:layout_marginLeft="@dimen/x20"
+            android:background="@color/color_EDEDF3"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_birthday"></View>
+
+        <TextView
+            android:id="@+id/iv_select_sex"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x20"
+            android:layout_marginTop="@dimen/y39"
+            android:text="@string/select_sex"
+            android:textColor="@color/color_343445"
+            android:textSize="@dimen/x18"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/v_line" />
+
+        <include
+            android:id="@+id/include_sex"
+            layout="@layout/layout_sex_choose"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/y46"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_select_sex_noalter"></include>
+
+        <TextView
+            android:id="@+id/tv_select_sex_noalter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/y16"
+            android:text="@string/select_sex_no_alter"
+            android:textColor="@color/color_898A9E"
+            android:textSize="@dimen/x14"
+            app:layout_constraintLeft_toLeftOf="@+id/iv_select_sex"
+            app:layout_constraintTop_toBottomOf="@+id/iv_select_sex" />
+
+        <TextView
+            android:id="@+id/btn_bottom"
+            layout="@layout/layout_bottom_button_18"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y48"
+            android:layout_marginLeft="@dimen/x30"
+            android:layout_marginRight="@dimen/x30"
+            android:layout_marginTop="@dimen/y82"
+            android:background="@drawable/selector_bottom_button"
+            android:checked="false"
+            android:elevation="@dimen/x4"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/include_sex" />
+
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

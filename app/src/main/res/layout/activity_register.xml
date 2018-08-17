@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/include_toolbar"
+            layout="@layout/layout_toolbar"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y60"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></include>
+
+        <TextView
+            android:id="@+id/tv_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/y18"
+            android:text="@string/login_by_mobile"
+            android:textColor="@color/color_343445"
+            android:textSize="18sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/include_toolbar" />
+
+
+        <TextView
+            android:id="@+id/tv_country"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x13"
+            android:layout_marginRight="@dimen/x20"
+            android:layout_marginTop="@dimen/y37"
+            android:text="+86"
+            android:textColor="@color/color_343445"
+            android:textSize="18sp"
+            app:layout_constraintLeft_toLeftOf="@+id/view_line"
+            app:layout_constraintTop_toBottomOf="@+id/tv_login" />
+
+        <EditText
+            android:id="@+id/et_mobile"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x20"
+            android:layout_marginTop="@dimen/y19"
+            android:background="@null"
+            android:hint="输入手机号码"
+            android:inputType="number"
+            android:maxLength="13"
+            android:maxLines="1"
+            android:textColor="@color/color_343445"
+            android:textColorHint="@color/color_D6D6DF"
+            android:textSize="36sp"
+            app:layout_constraintLeft_toRightOf="@+id/tv_country"
+            app:layout_constraintRight_toRightOf="@+id/view_line"
+            app:layout_constraintTop_toBottomOf="@+id/tv_login" />
+
+        <View
+            android:id="@+id/view_line"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y1"
+            android:layout_marginLeft="@dimen/x20"
+            android:layout_marginRight="@dimen/x20"
+            android:layout_marginTop="@dimen/y5"
+            android:background="@color/color_EDEDF3"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_mobile"></View>
+
+        <LinearLayout
+            android:id="@+id/llyt_protocaol"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/y80"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view_line">
+
+            <CheckBox
+                android:id="@+id/cb"
+                android:layout_width="@dimen/x20"
+                android:layout_height="@dimen/y20"
+                android:background="@drawable/selector_check_protro"
+                android:button="@null"
+                android:checked="true" />
+
+            <TextView
+                android:id="@+id/tv_protocaol_before"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x10"
+                android:text="@string/login_protocol_before"
+                android:textColor="@color/color_898A9E"
+                android:textSize="14sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view_line" />
+
+            <TextView
+                android:id="@+id/tv_protocaol"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/login_protocol"
+                android:textColor="@color/theme_color"
+                android:textSize="14sp"
+                app:layout_constraintLeft_toRightOf="@+id/tv_protocaol_before"
+                app:layout_constraintTop_toBottomOf="@+id/view_line" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/btn_bottom"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y48"
+            android:layout_marginLeft="@dimen/x30"
+            android:layout_marginRight="@dimen/x30"
+            android:layout_marginTop="@dimen/y32"
+            android:background="@drawable/selector_bottom_button"
+            android:checked="false"
+            android:elevation="@dimen/x4"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/llyt_protocaol" />
+
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

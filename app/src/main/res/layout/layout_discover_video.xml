@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <data>
+
+        <variable
+            name="user"
+            type="com.heboot.entity.User"></variable>
+
+        <import type="com.gdlife.candypie.serivce.UserService"></import>
+
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            android:id="@+id/clyt_child_container"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></FrameLayout>
+
+
+        <com.pili.pldroid.player.widget.PLVideoTextureView
+            android:id="@+id/PLVideoView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/iv_cover"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/iv_play"
+            android:layout_width="@dimen/x70"
+            android:layout_height="@dimen/y70"
+            android:background="@drawable/icon_play_homepage"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y180"
+            android:background="@drawable/bg_homepage_black_gradient_bottom"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+
+        <com.qmuiteam.qmui.widget.QMUIRadiusImageView
+            android:id="@+id/iv_avatar"
+            android:layout_width="@dimen/x50"
+            android:layout_height="@dimen/y50"
+            android:layout_marginBottom="@dimen/y18"
+            android:layout_marginRight="@dimen/x12"
+            android:showAvatar="@{user.avatar}"
+            app:layout_constraintBottom_toTopOf="@+id/iv_fav"
+            app:layout_constraintRight_toRightOf="parent"
+            app:qmui_border_color="@color/white"
+            app:qmui_border_width="@dimen/x1"
+            app:qmui_is_circle="true" />
+
+        <ImageView
+            android:layout_width="@dimen/x18"
+            android:layout_height="@dimen/y18"
+            android:layout_marginTop="@dimen/y39"
+            android:background="@drawable/icon_avatar_bottom_room"
+            app:layout_constraintLeft_toLeftOf="@+id/iv_avatar"
+            app:layout_constraintRight_toRightOf="@+id/iv_avatar"
+            app:layout_constraintTop_toTopOf="@+id/iv_avatar" />
+
+        <ImageView
+            android:id="@+id/iv_fav"
+            android:layout_width="@dimen/x39"
+            android:layout_height="@dimen/y39"
+            android:layout_marginRight="@dimen/x18"
+            android:background="@drawable/icon_discover_fav"
+            app:layout_constraintBottom_toTopOf="@+id/tv_fav"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_fav"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/y18"
+            android:text="@string/fav_status_un"
+            android:textColor="@color/white"
+            android:textSize="@dimen/x12"
+            app:layout_constraintBottom_toTopOf="@+id/iv_msg"
+            app:layout_constraintLeft_toLeftOf="@+id/iv_msg"
+            app:layout_constraintRight_toRightOf="@+id/iv_msg" />
+
+
+        <ImageView
+            android:id="@+id/iv_msg"
+            android:layout_width="@dimen/x39"
+            android:layout_height="@dimen/y39"
+            android:layout_marginRight="@dimen/x18"
+            android:background="@drawable/icon_discover_msg"
+            app:layout_constraintBottom_toTopOf="@+id/tv_msg"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/y18"
+            android:text="@string/page_title_msg"
+            android:textColor="@color/white"
+            android:textSize="@dimen/x12"
+            app:layout_constraintBottom_toTopOf="@+id/pb"
+            app:layout_constraintLeft_toLeftOf="@+id/iv_msg"
+            app:layout_constraintRight_toRightOf="@+id/iv_msg" />
+
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/y2"
+            android:layout_marginLeft="@dimen/x11"
+            android:textColor="@color/white"
+            android:textSize="@dimen/x18"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/tv_city"
+            app:layout_constraintLeft_toLeftOf="parent" />
+
+        <ImageView
+            android:id="@+id/iv_sex_bg"
+            android:layout_width="@dimen/x38"
+            android:layout_height="@dimen/y17"
+            android:layout_marginLeft="@dimen/x5"
+            android:layout_marginTop="@dimen/y3"
+            android:background="@{user.sex == 0?@drawable/bg_rect_sex:@drawable/bg_rect_sex_man}"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_name"
+            app:layout_constraintLeft_toRightOf="@+id/tv_name"
+            app:layout_constraintTop_toTopOf="@+id/tv_name" />
+
+        <TextView
+            android:id="@+id/tv_age"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@{user.sex == 0?`♀` + UserService.getUserAgeByBirthdayNoSui(user):`♂` + UserService.getUserAgeByBirthdayNoSui(user)}"
+            android:textColor="@color/white"
+            android:textSize="@dimen/x12"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_sex_bg"
+            app:layout_constraintLeft_toLeftOf="@+id/iv_sex_bg"
+            app:layout_constraintRight_toRightOf="@+id/iv_sex_bg"
+            app:layout_constraintTop_toTopOf="@+id/iv_sex_bg" />
+
+
+        <ImageView
+            android:id="@+id/iv_loc"
+            android:layout_width="@dimen/x11"
+            android:layout_height="@dimen/y12"
+            android:layout_marginLeft="@dimen/x11"
+            android:background="@drawable/icon_order_address"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_city"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_city" />
+
+        <TextView
+            android:id="@+id/tv_city"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/y5"
+            android:layout_marginLeft="@dimen/x5"
+            android:text="北京"
+            android:textColor="@color/white"
+            android:textSize="@dimen/x15"
+            app:layout_constraintBottom_toTopOf="@+id/tv_tese_title"
+            app:layout_constraintLeft_toRightOf="@+id/iv_loc"
+            app:layout_goneMarginBottom="@dimen/y17" />
+
+        <include
+            android:id="@+id/tv_online"
+            layout="@layout/layout_online_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/y6"
+            android:layout_marginLeft="@dimen/x9"
+            android:gravity="center_horizontal"
+            android:text="online"
+            android:textColor="#FFDE3F"
+            android:textSize="@dimen/x15"
+            app:layout_constraintBottom_toTopOf="@+id/tv_tese_title"
+            app:layout_constraintLeft_toRightOf="@+id/tv_city"
+            app:layout_goneMarginBottom="@dimen/y17" />
+
+        <TextView
+            android:id="@+id/tv_tese_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/y15"
+            android:layout_marginLeft="@dimen/x11"
+            android:text="特色:"
+            android:textColor="@color/color_FFDE3F"
+            android:textSize="@dimen/x14"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/pb"
+            app:layout_constraintLeft_toLeftOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_tese_content"
+            android:layout_width="@dimen/x150"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x10"
+            android:layout_marginRight="@dimen/x10"
+            android:ellipsize="marquee"
+            android:gravity="left"
+            android:singleLine="true"
+            android:textColor="@color/white"
+            android:textSize="@dimen/x14"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_tese_title"
+            app:layout_constraintLeft_toRightOf="@+id/tv_tese_title"
+            app:layout_constraintTop_toTopOf="@+id/tv_tese_title" />
+
+        <ProgressBar
+            android:id="@+id/pb"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y3"
+            android:layout_marginBottom="@dimen/y84"
+            android:layout_marginLeft="@dimen/x11"
+            android:layout_marginRight="@dimen/x11"
+            android:indeterminateDrawable="@android:drawable/progress_indeterminate_horizontal"
+            android:indeterminateOnly="false"
+            android:progressDrawable="@drawable/bg_discover_progress"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

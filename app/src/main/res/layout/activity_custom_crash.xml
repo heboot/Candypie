@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+
+        <ImageView
+            android:id="@+id/iv_img"
+            android:layout_width="@dimen/x100"
+            android:layout_height="@dimen/y100"
+            android:layout_marginTop="@dimen/y120"
+            android:background="@drawable/icon_order_null"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x50"
+            android:layout_marginRight="@dimen/x50"
+            android:layout_marginTop="@dimen/y30"
+            android:text="@string/error_occurred"
+            android:textColor="@color/color_898A9E"
+            android:textSize="@dimen/x14"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_img" />
+
+        <TextView
+            android:id="@+id/tv_detail"
+            android:layout_width="@dimen/x200"
+            android:layout_height="@dimen/y50"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/bg_rect_bottom_button"
+            android:gravity="center"
+            android:text="@string/error_details"
+            android:textColor="@color/white"
+            android:textSize="@dimen/x16"
+            android:visibility="invisible"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title" />
+
+        <TextView
+            android:id="@+id/tv_restart"
+            android:layout_width="@dimen/x314"
+            android:layout_height="@dimen/y48"
+            android:layout_marginBottom="@dimen/y20"
+            android:layout_marginTop="@dimen/y80"
+            android:background="@drawable/bg_rect_bottom_button"
+            android:gravity="center"
+            android:text="重启蜜糖派"
+            android:textColor="@color/white"
+            android:textSize="@dimen/x16"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title" />
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/clyt_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_rect_white_top_10"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <include
+                android:id="@+id/include_top"
+                layout="@layout/layout_new_theme_dialog_top"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"></include>
+
+
+            <View
+                android:id="@+id/v"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/y44"
+                android:layout_marginLeft="@dimen/x16"
+                android:layout_marginRight="@dimen/x16"
+                android:background="@drawable/bg_select_time"
+                app:layout_constraintBottom_toBottomOf="@+id/llyt_rv1"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/llyt_rv1"></View>
+
+
+            <LinearLayout
+                android:id="@+id/llyt_rv1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/y60"
+                android:layout_marginTop="@dimen/y34"
+                android:layout_weight="1"
+                android:overScrollMode="never"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/include_top">
+
+                <com.gdlife.candypie.widget.WheelView
+                    android:id="@+id/rv1"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y126"
+                    android:layout_weight="1"
+                    android:overScrollMode="never"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/v1"></com.gdlife.candypie.widget.WheelView>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_unit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/y110"
+                android:textColor="@color/color_343445"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@+id/llyt_rv1"
+                app:layout_constraintRight_toRightOf="@+id/v"
+                app:layout_constraintTop_toTopOf="@+id/llyt_rv1" />
+
+        </android.support.constraint.ConstraintLayout>
+
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

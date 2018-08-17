@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--//values-v19-->
+    <dimen name="padding_top">25dp</dimen>
+
+</resources>

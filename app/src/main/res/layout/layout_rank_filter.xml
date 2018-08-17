@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y60">
+
+
+        <View
+            android:id="@+id/v_center"
+            android:layout_width="1px"
+            android:layout_height="1px"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"></View>
+
+        <TextView
+            android:id="@+id/tv_week"
+            android:layout_width="@dimen/x80"
+            android:layout_height="@dimen/y36"
+            android:layout_marginRight="@dimen/x44"
+            android:background="@drawable/bg_rect_rank_filter"
+            android:gravity="center"
+            android:text="周榜"
+            android:textColor="@color/white"
+            android:textSize="@dimen/x18"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/v_center"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_month"
+            android:layout_width="@dimen/x80"
+            android:layout_height="@dimen/y36"
+            android:layout_marginLeft="@dimen/x44"
+            android:gravity="center"
+            android:text="月榜"
+            android:textColor="@color/color_FF6363"
+            android:textSize="@dimen/x18"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/v_center"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y1"
+            android:background="@color/line_color"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"></View>
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

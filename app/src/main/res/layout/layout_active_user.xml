@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="user"
+            type="com.heboot.entity.User"></variable>
+
+        <import type="com.gdlife.candypie.serivce.UserService"></import>
+
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y100"
+        android:paddingLeft="@dimen/x20"
+        android:paddingTop="@dimen/y20">
+
+        <com.qmuiteam.qmui.widget.QMUIRadiusImageView
+            android:id="@+id/iv_avatar"
+            android:layout_width="@dimen/y60"
+            android:layout_height="@dimen/y60"
+            android:showAvatar="@{user.avatar}"
+            android:src="@color/aliyun_red"
+            app:qmui_border_width="0dp"
+            app:qmui_is_circle="true" />
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x20"
+            android:layout_marginTop="@dimen/y10"
+            android:text="@{user.nickname}"
+            android:textColor="@color/color_343445"
+            android:textSize="@dimen/x17"
+            app:layout_constraintLeft_toRightOf="@+id/iv_avatar"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!--<ImageView-->
+        <!--android:layout_width="@dimen/x7"-->
+        <!--android:layout_height="@dimen/y9"-->
+        <!--android:layout_marginLeft="@dimen/x5"-->
+        <!--android:background="@{user == null?null:(user.sex ==0 ? @drawable/icon_sex_woman:@drawable/icon_sex_man)}"-->
+        <!--app:layout_constraintBottom_toBottomOf="@+id/tv_name"-->
+        <!--app:layout_constraintLeft_toRightOf="@+id/tv_name"-->
+        <!--app:layout_constraintTop_toTopOf="@+id/tv_name" />-->
+        <include
+            android:id="@+id/include_sexage"
+            layout="@layout/layout_sex_age"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x5"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_name"
+            app:layout_constraintLeft_toRightOf="@+id/tv_name"
+            app:layout_constraintTop_toTopOf="@+id/tv_name"></include>
+
+
+        <ImageView
+            android:id="@+id/iv_sex_bg"
+            android:layout_width="@dimen/x38"
+            android:layout_height="@dimen/y17"
+            android:layout_marginLeft="@dimen/x5"
+            android:background="@{user.sex == 0?@drawable/bg_rect_sex:@drawable/bg_rect_sex_man}"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_name"
+            app:layout_constraintLeft_toRightOf="@+id/tv_name"
+            app:layout_constraintTop_toTopOf="@+id/tv_name" />
+
+        <TextView
+            android:id="@+id/tv_age"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@{user.sex == 0?`♀` + UserService.getUserAgeByBirthdayNoSui(user):`♂` + UserService.getUserAgeByBirthdayNoSui(user)}"
+            android:textColor="@color/white"
+            android:textSize="@dimen/x12"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_sex_bg"
+            app:layout_constraintLeft_toLeftOf="@+id/iv_sex_bg"
+            app:layout_constraintRight_toRightOf="@+id/iv_sex_bg"
+            app:layout_constraintTop_toTopOf="@+id/iv_sex_bg" />
+
+        <ImageView
+            android:id="@+id/iv_loc"
+            android:layout_width="@dimen/x11"
+            android:layout_height="@dimen/y12"
+            android:layout_marginTop="@dimen/y2"
+            android:background="@drawable/icon_order_address"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_info"
+            app:layout_constraintLeft_toLeftOf="@+id/tv_name"
+            app:layout_constraintTop_toTopOf="@+id/tv_info" />
+
+        <TextView
+            android:id="@+id/tv_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x4"
+            android:layout_marginTop="@dimen/y2"
+            android:textColor="@color/color_57586C"
+            android:textSize="@dimen/x12"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toRightOf="@+id/iv_loc"
+            app:layout_constraintTop_toBottomOf="@+id/tv_name" />
+
+        <ImageView
+            android:id="@+id/iv_msg"
+            android:layout_width="@dimen/x40"
+            android:layout_height="@dimen/y40"
+            android:layout_marginBottom="@dimen/y25"
+            android:layout_marginRight="@dimen/x8"
+            android:background="@drawable/icon_userinfo_tochat_qian"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y1"
+            android:background="@color/line_color"
+            app:layout_constraintBottom_toBottomOf="parent"></View>
+
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/clyt_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/clyt_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_rect_white_top_10"
+            android:paddingBottom="@dimen/y50"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <include
+                android:id="@+id/include_top"
+                layout="@layout/layout_new_theme_dialog_top"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"></include>
+
+            <TextView
+                android:id="@+id/tv_sex_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x24"
+                android:layout_marginTop="@dimen/y60"
+                android:text="选择性别"
+                android:textColor="@color/color_343445"
+                android:textSize="14sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/include_top" />
+
+            <include
+                android:id="@+id/include_sex"
+                layout="@layout/layout_new_theme_sex"
+                android:layout_width="@dimen/x210"
+                android:layout_height="@dimen/y32"
+                android:layout_marginRight="@dimen/x16"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_sex_title"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tv_sex_title"></include>
+
+            <TextView
+                android:id="@+id/tv_nums_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x24"
+                android:layout_marginTop="@dimen/y40"
+                android:text="选择人数"
+                android:textColor="@color/color_343445"
+                android:textSize="14sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_sex_title" />
+
+            <include
+                android:id="@+id/include_nums"
+                layout="@layout/layout_new_theme_nums"
+                android:layout_width="@dimen/x150"
+                android:layout_height="@dimen/y32"
+                android:layout_marginRight="@dimen/x16"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_nums_title"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tv_nums_title"></include>
+
+            <TextView
+                android:id="@+id/tv_wine_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x24"
+                android:layout_marginTop="@dimen/y40"
+                android:text="期望礼仪性饮酒"
+                android:textColor="@color/color_343445"
+                android:textSize="14sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_nums_title" />
+
+            <com.suke.widget.SwitchButton
+                android:id="@+id/sb_wine"
+                android:layout_width="@dimen/x54"
+                android:layout_height="@dimen/y30"
+                android:layout_marginRight="@dimen/x16"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_wine_title"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tv_wine_title"
+                app:sb_background="@color/color_898A9E"
+                app:sb_border_width="0dp"
+                app:sb_checked_color="@color/theme_color"
+                app:sb_show_indicator="false"
+                app:sb_uncheck_color="@color/color_898A9E" />
+
+            <TextView
+                android:id="@+id/tv_name_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x24"
+                android:layout_marginTop="@dimen/y40"
+                android:text="匿名发单"
+                android:textColor="@color/color_343445"
+                android:textSize="14sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_wine_title" />
+
+            <com.suke.widget.SwitchButton
+                android:id="@+id/sb_noname"
+                android:layout_width="@dimen/x54"
+                android:layout_height="@dimen/y30"
+                android:layout_marginRight="@dimen/x16"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_name_title"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tv_name_title"
+                app:sb_background="@color/color_898A9E"
+                app:sb_border_width="0dp"
+                app:sb_checked_color="@color/theme_color"
+                app:sb_show_indicator="false"
+                app:sb_uncheck_color="@color/color_898A9E" />
+
+
+        </android.support.constraint.ConstraintLayout>
+
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

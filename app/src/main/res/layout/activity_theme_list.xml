@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.gdlife.candypie.widget.ProgressFramelayout
+            android:id="@+id/plyt_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@null"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:no_data="@layout/include_nodata_info"
+            app:progress="@layout/include_progress_info">
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white">
+
+                <include
+                    android:id="@+id/include_toolbar"
+                    layout="@layout/layout_toolbar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"></include>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_list"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/include_toolbar"></android.support.v7.widget.RecyclerView>
+
+
+                <!--android:background="#59ffffff"-->
+                <RelativeLayout
+                    android:id="@+id/clyt_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintBottom_toTopOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent">
+
+                    <ImageView
+                        android:id="@+id/riv_1"
+                        android:layout_width="@dimen/x350"
+                        android:layout_height="@dimen/y350"
+                        android:layout_marginLeft="-200dp"
+                        android:layout_marginTop="-160dp"
+                        android:src="@drawable/bg_themelist_ball"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintRight_toRightOf="parent" />
+
+
+                    <!--android:background="@drawable/bg_themelist_ball"-->
+
+                    <ImageView
+                        android:id="@+id/riv_2"
+                        android:layout_width="@dimen/x350"
+                        android:layout_height="@dimen/y350"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginBottom="-160dp"
+                        android:layout_marginRight="-200dp"
+                        android:background="@drawable/bg_themelist_ball"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+                </RelativeLayout>
+            </android.support.constraint.ConstraintLayout>
+
+        </com.gdlife.candypie.widget.ProgressFramelayout>
+    </RelativeLayout>
+
+
+</layout>

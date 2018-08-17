@@ -1,0 +1,48 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 27
+
+
+
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    sourceSets {
+        main.assets.srcDirs += ['src/main/assets', 'src/main/effects/bundle']
+        main.res.srcDirs += ['src/mian/res', 'src/main/effects/res', 'src/main/filters/res']
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
+    api project(path: ':library:RecyclerView')
+    //美颜模块
+    api project(path: ':library:faceunity')
+
+    implementation 'com.android.support:recyclerview-v7:25.4.0'
+    implementation 'de.hdodenhof:circleimageview:2.2.0'
+
+    api project(path: ':library:MUtils')
+//    implementation 'com.faceunity:nama:5.3.0-lite'
+
+}

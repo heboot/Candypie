@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="user"
+            type="com.heboot.entity.User"></variable>
+
+        <variable
+            name="showChat"
+            type="Boolean"></variable>
+
+        <variable
+            name="showMobile"
+            type="Boolean"></variable>
+
+        <import type="android.view.View"></import>
+
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y100">
+
+        <com.qmuiteam.qmui.widget.QMUIRadiusImageView
+            android:id="@+id/iv_avatar"
+            android:layout_width="@dimen/x60"
+            android:layout_height="@dimen/y60"
+            android:layout_marginLeft="@dimen/x20"
+            android:showAvatar="@{user.avatar}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:qmui_border_width="0dp"
+            app:qmui_is_circle="true" />
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x20"
+            android:text="@{user.nickname}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/iv_avatar"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+
+        <include
+            android:layout_marginLeft="@dimen/x5"
+            android:id="@+id/include_sexage"
+            layout="@layout/layout_sex_age"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_name"
+            app:layout_constraintLeft_toRightOf="@+id/tv_name"
+            app:layout_constraintTop_toTopOf="@+id/tv_name"></include>
+        <!--<ImageView-->
+        <!--android:id="@+id/iv_sex"-->
+        <!--android:layout_width="@dimen/x7"-->
+        <!--android:layout_height="@dimen/y9"-->
+        <!--android:layout_marginLeft="@dimen/x5"-->
+        <!--android:background="@{user == null?@drawable/icon_sex_woman:(user.sex ==0 ? @drawable/icon_sex_woman:@drawable/icon_sex_man)}"-->
+        <!--app:layout_constraintBottom_toBottomOf="@+id/tv_name"-->
+        <!--app:layout_constraintLeft_toRightOf="@+id/tv_name"-->
+        <!--app:layout_constraintTop_toTopOf="@+id/tv_name" />-->
+
+        <ImageView
+            android:id="@+id/iv_chat"
+            android:layout_width="@dimen/x40"
+            android:layout_height="@dimen/y40"
+            android:layout_marginRight="@dimen/x20"
+            android:background="@drawable/icon_userinfo_tochat_qian"
+            android:visibility="@{showChat?View.VISIBLE:View.INVISIBLE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/iv_mobile"
+            android:layout_width="@dimen/x40"
+            android:layout_height="@dimen/y40"
+            android:layout_marginRight="@dimen/x20"
+            android:background="@drawable/icon_mobile"
+            android:visibility="@{showMobile?View.VISIBLE:View.INVISIBLE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/iv_chat"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y1"
+            android:background="@color/line_color"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="@+id/tv_name"
+            app:layout_constraintRight_toRightOf="parent"></View>
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

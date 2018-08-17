@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/include_toolbar"
+            layout="@layout/layout_toolbar"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y60"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></include>
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/rlyt_balance"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/y20"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/include_toolbar">
+
+            <include
+                android:id="@+id/include_balance"
+                layout="@layout/item_balance"
+                android:layout_width="@dimen/x312"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x20"
+                app:layout_constraintLeft_toRightOf="@+id/include_coin"
+                app:layout_constraintTop_toTopOf="parent"></include>
+
+            <include
+                android:id="@+id/include_coin"
+                layout="@layout/item_balance_coin"
+                android:layout_width="@dimen/x312"
+                android:layout_height="@dimen/y186"
+                android:layout_marginLeft="@dimen/x30"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"></include>
+        </android.support.constraint.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x15"
+            android:layout_marginTop="@dimen/y50"
+            android:text="其他服务"
+            android:textColor="@color/color_343445"
+            android:textSize="@dimen/x18"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rlyt_balance" />
+
+        <include
+            android:id="@+id/include_coupon"
+            layout="@layout/layout_balance_service"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/y10"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title"></include>
+
+        <View
+            android:id="@+id/line_coupon"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y1"
+            android:layout_marginLeft="@dimen/x16"
+            android:background="@color/line_color"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/include_coupon"></View>
+
+        <include
+            android:id="@+id/include_level"
+            layout="@layout/layout_balance_service"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/y10"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/line_coupon"></include>
+
+        <View
+            android:id="@+id/line_level"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y1"
+            android:layout_marginLeft="@dimen/x16"
+            android:background="@color/line_color"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/include_level"></View>
+
+        <include
+            android:id="@+id/include_gold_rights"
+            layout="@layout/layout_balance_service"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/y10"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/line_level"></include>
+
+        <View
+            android:id="@+id/line_gold_rights"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y1"
+            android:layout_marginLeft="@dimen/x16"
+            android:background="@color/line_color"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/include_gold_rights"></View>
+
+        <!--<include-->
+        <!--android:id="@+id/include_black"-->
+        <!--layout="@layout/layout_balance_service"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="@dimen/y10"-->
+        <!--app:layout_constraintLeft_toLeftOf="parent"-->
+        <!--app:layout_constraintRight_toRightOf="parent"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/line_level"></include>-->
+
+        <!--<View-->
+        <!--android:id="@+id/line_black"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="@dimen/y1"-->
+        <!--android:layout_marginLeft="@dimen/x16"-->
+        <!--android:background="@color/line_color"-->
+        <!--app:layout_constraintLeft_toLeftOf="parent"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/include_black"></View>-->
+
+
+        <com.qmuiteam.qmui.widget.QMUIRadiusImageView
+            android:id="@+id/iv_up_vip"
+            android:layout_width="@dimen/x314"
+            android:layout_height="@dimen/y70"
+            android:layout_marginBottom="@dimen/y37"
+            android:elevation="@dimen/x4"
+            android:src="@drawable/icon_pay_gold_card_delete"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:qmui_border_width="0dp"
+            app:qmui_corner_radius="@dimen/x35"
+            app:qmui_is_circle="false" />
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

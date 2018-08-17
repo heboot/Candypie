@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <View
+            android:id="@+id/v_close"
+            android:layout_width="@dimen/x50"
+            android:layout_height="@dimen/y53"
+            app:layout_constraintBottom_toBottomOf="@+id/llyt_title"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/llyt_title"></View>
+
+        <ImageView
+            android:layout_width="@dimen/x13"
+            android:layout_height="@dimen/y13"
+            android:layout_marginLeft="@dimen/x17"
+            android:background="@drawable/icon_select_close"
+            app:layout_constraintBottom_toBottomOf="@+id/llyt_title"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/llyt_title" />
+
+        <LinearLayout
+            android:id="@+id/llyt_title"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/y60"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tv_titme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="选择要求"
+                android:textColor="@color/color_343445"
+                android:textSize="@dimen/x18"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_subtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="111"
+                android:textColor="@color/theme_color"
+                android:textSize="@dimen/x12"
+                android:visibility="gone" />
+
+
+        </LinearLayout>
+
+
+        <ImageView
+            android:id="@+id/v_ok"
+            android:layout_width="@dimen/x19"
+            android:layout_height="@dimen/y13"
+            android:layout_marginLeft="@dimen/x17"
+            android:layout_marginRight="@dimen/x17"
+            android:background="@drawable/icon_select_ok"
+            app:layout_constraintBottom_toBottomOf="@+id/llyt_title"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/llyt_title" />
+
+        <View
+            android:id="@+id/iv_ok"
+            android:layout_width="@dimen/x50"
+            android:layout_height="@dimen/y43"
+            android:layout_marginLeft="@dimen/x17"
+            app:layout_constraintBottom_toBottomOf="@+id/llyt_title"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/llyt_title" />
+
+        <View
+            android:id="@+id/v1"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y1"
+            android:background="@color/color_EDEDF3"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/llyt_title"></View>
+    </android.support.constraint.ConstraintLayout>
+</layout>

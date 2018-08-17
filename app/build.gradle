@@ -1,0 +1,204 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.mob.sdk'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+
+def config = rootProject.ext.android
+
+android {
+    compileSdkVersion config.COMPILE_SDK_VERSION
+    buildToolsVersion config.BUILD_TOOLS_VERSION
+    defaultConfig {
+        applicationId config.APPLICATION_ID
+        minSdkVersion config.MIN_SDK_VERSION
+//        minSdkVersion 19
+        targetSdkVersion config.TARGET_SDK_VERSION
+        versionCode config.VERSION_CODE
+        versionName config.VERSION_NAME
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        renderscriptTargetApi 26
+        renderscriptSupportModeEnabled true
+
+        ndk {
+            abiFilters "armeabi-v7a"
+        }
+
+        manifestPlaceholders = [
+
+                XG_ACCESS_ID : "2100281297",
+                XG_ACCESS_KEY: "AKQY85WG581T",
+                UMENG_APPKEY        : "5b39f786b27b0a0d9100002e",
+        ]
+
+        multiDexEnabled true
+//        jackOptions{
+//            enabled true
+//        }
+    }
+
+    signingConfigs {
+        debugConfig {
+//            keyAlias 'guodong_debug'
+//            keyPassword 'guodong2017'
+//            storeFile file('../guodong_debug.jks')
+//            storePassword 'guodong2017'
+            keyAlias 'guodong_release'
+            keyPassword 'guodong2017'
+            storeFile file('../guodong_release.jks')
+            storePassword 'guodong2017'
+        }
+        releaseConfig {
+            keyAlias 'guodong_release'
+            keyPassword 'guodong2017'
+            storeFile file('../guodong_release.jks')
+            storePassword 'guodong2017'
+        }
+    }
+
+    buildTypes {
+        release {
+            debuggable config.DEBUGENABLE
+            signingConfig signingConfigs.releaseConfig
+            buildConfigField 'String', 'OSSBUCKET', "\"candypie-img\""
+            buildConfigField 'String', 'BUGLY_APPID', "\"5025108b4a\""
+            buildConfigField 'String', 'CURRENT_CHANNEL', "\"oppo\""
+            multiDexEnabled true
+
+            shrinkResources false
+
+            minifyEnabled false
+            //移除无用的资源文件
+        }
+        debug {
+            debuggable true
+            buildConfigField 'String', 'OSSBUCKET', "\"yihaocar-img-dev\""
+            signingConfig signingConfigs.releaseConfig
+            buildConfigField 'String', 'BUGLY_APPID', "\"e9013b6142\""
+            buildConfigField 'String', 'CURRENT_CHANNEL', "\"oppo\""
+        }
+    }
+
+    android.applicationVariants.all { variant ->
+        variant.outputs.all {
+            if (variant.buildType.name.equals('release')) {
+                outputFileName = rootProject.getName() + "-" + buildType.name + "-" + defaultConfig.versionName + ".apk";
+            } else if (variant.buildType.name.equals('debug')) {
+                outputFileName = rootProject.getName() + "-" + buildType.name + "-" + defaultConfig.versionName + ".apk";
+            }
+
+        }
+    }
+
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/java'
+        main {
+            jniLibs.srcDir "libs"
+        }
+    }
+
+    repositories {
+        flatDir {
+            dirs 'libs'
+        }
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    lintOptions {
+        abortOnError false
+        checkReleaseBuilds false
+        // 防止在发布的时候出现因MissingTranslation导致Build Failed!
+        disable 'MissingTranslation'
+    }
+
+    kapt {
+        generateStubs = true
+    }
+}
+
+
+dependencies {
+    api fileTree(include: ['*.jar'], dir: 'libs')
+    api(name: 'AlivcReporter', ext: 'aar')
+    api(name: 'AlivcPlayer', ext: 'aar')
+    testImplementation rootProject.ext.dependencies["junit"]
+    androidTestImplementation rootProject.ext.dependencies["test_runner"]
+    androidTestImplementation rootProject.ext.dependencies["test_espresso"]
+    api rootProject.ext.dependencies["dagger"]
+    kapt rootProject.ext.dependencies["dagger_compiler"]
+    implementation rootProject.ext.dependencies["multidex"]
+//    debugImplementation rootProject.ext.dependencies["leakcanary"]
+    //debugCompile
+//    releaseImplementation rootProject.ext.dependencies["leakcanary_no_ap"]
+    implementation rootProject.ext.dependencies["xrecyclerview"]
+    implementation rootProject.ext.dependencies["easypermissions"]
+    api project(path: ':library:picture_library')
+
+    api files('libs/libammsdk.jar')
+    api files('libs/alipaySdk-20170725.jar')
+    api files('libs/agora-sig-sdk.jar')
+    api files('libs/BaiduLBS_Android.jar')
+    implementation files('libs/MiPush_SDK_Client_3_6_0.jar')
+    //推送模块
+    implementation 'com.google.firebase:firebase-messaging:11.6.0'
+    implementation 'com.google.android.gms:play-services-base:11.6.0'
+    implementation 'com.meizu.flyme.internet:push-internal:3.4.2@aar'
+    //    implementation files('libs/HMSSdkPush_2.6.0.301.jar')
+    implementation 'com.huawei.android.hms:push:2.6.0.301'
+    implementation 'com.github.bmarrdev:android-DecoView-charting:v1.2'
+    implementation 'com.github.lzyzsd:jsbridge:1.0.4'
+    implementation rootProject.ext.dependencies["viewmodel"]
+    //    annotationProcessor rootProject.ext.dependencies["liveData_compiler"]
+    api 'me.kaelaela:verticalviewpager:1.0.0@aar'
+    api 'com.github.castorflex.verticalviewpager:library:19.0.1'
+    implementation files('libs/pldroid-player-2.1.4.jar')
+
+
+    //混动编译
+//    implementation rootProject.ext.dependencies["ktx"]
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    kapt "com.android.databinding:compiler:3.1.0"
+
+
+}
+
+// 在MobSDK的扩展中注册ShareSDK的相关信息
+MobSDK {
+    appKey "2576d7dfbf128"
+    appSecret "11f2f5fd743baffc6b7d2524d51bcb98"
+
+    ShareSDK {
+        gui false
+        devInfo {
+            SinaWeibo {
+                appKey "3193702214"
+                appSecret "8cf038001f39e95b256eab1338caeedb"
+                callbackUri "http://www.sharesdk.cn"
+                shareByAppClient true
+            }
+            Wechat {
+                appId "wx6487bff92e6d5912"
+                appSecret "836b0a080ae621bcad46d2d4c07363f0"
+            }
+            WechatMoments {
+                appId "wx6487bff92e6d5912"
+                appSecret "836b0a080ae621bcad46d2d4c07363f0"
+            }
+        }
+    }
+}
+
+//GCM
+//apply plugin: 'com.google.gms.google-services'
+//

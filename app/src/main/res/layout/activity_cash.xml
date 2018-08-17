@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_EDEDF3">
+
+        <View
+            android:id="@+id/v_t"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y70"
+            android:background="@color/white"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></View>
+
+        <include
+            android:id="@+id/include_toolbar"
+            layout="@layout/layout_toolbar"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y60"
+            android:background="@color/white"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></include>
+
+
+        <View
+            android:id="@+id/v_topbg"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y140"
+            android:layout_marginTop="@dimen/y10"
+            android:background="@color/white"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/v_t"></View>
+
+        <TextView
+            android:id="@+id/tv_account_tip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x16"
+            android:text="@string/account_ali"
+            android:textColor="@color/color_343445"
+            android:textSize="@dimen/x18"
+            app:layout_constraintBottom_toBottomOf="@+id/et_account"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/et_account" />
+
+        <EditText
+            android:id="@+id/et_account"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y68"
+            android:background="@null"
+            android:gravity="right|center_vertical"
+            android:hint="@string/hint_input_ali_account"
+            android:paddingRight="@dimen/x16"
+            android:textColor="@color/color_343445"
+            android:textColorHint="@color/color_D6D6DF"
+            android:textSize="@dimen/x18"
+            app:layout_constraintLeft_toRightOf="@+id/tv_account_tip"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/v_topbg" />
+
+        <View
+            android:id="@+id/line_account"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y1"
+            android:layout_marginLeft="@dimen/x15"
+            android:background="@color/color_EDEDF3"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_account"></View>
+
+        <TextView
+            android:id="@+id/tv_name_tip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x16"
+            android:text="@string/cash_user_name"
+            android:textColor="@color/color_343445"
+            android:textSize="@dimen/x18"
+            app:layout_constraintBottom_toBottomOf="@+id/et_name"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/et_name" />
+
+        <EditText
+            android:id="@+id/et_name"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y68"
+            android:background="@null"
+            android:gravity="right|center_vertical"
+            android:hint="@string/hint_input_cash_name"
+            android:paddingRight="@dimen/x16"
+            android:textColor="@color/color_343445"
+            android:textColorHint="@color/color_D6D6DF"
+            android:textSize="@dimen/x18"
+            app:layout_constraintLeft_toRightOf="@+id/tv_account_tip"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/line_account" />
+
+
+        <View
+            android:id="@+id/v_bottombg"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y70"
+            android:layout_marginTop="@dimen/y10"
+            android:background="@color/white"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_name"></View>
+
+
+        <TextView
+            android:id="@+id/tv_money_tip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x16"
+            android:text="@string/cash_money_tip"
+            android:textColor="@color/color_343445"
+            android:textSize="@dimen/x18"
+            app:layout_constraintBottom_toBottomOf="@+id/et_money"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/et_money" />
+
+        <EditText
+            android:id="@+id/et_money"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y68"
+            android:background="@null"
+            android:gravity="right|center_vertical"
+            android:hint="@string/hint_input_cash_money"
+            android:inputType="number"
+            android:paddingRight="@dimen/x16"
+            android:textColor="@color/color_343445"
+            android:textColorHint="@color/color_D6D6DF"
+            android:textSize="@dimen/x18"
+            app:layout_constraintLeft_toRightOf="@+id/tv_account_tip"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/v_bottombg" />
+
+
+        <LinearLayout
+            android:id="@+id/llyt2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/y210"
+            android:orientation="horizontal"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_money">
+
+            <ImageView
+                android:background="@drawable/icon_close_oval_gray"
+                android:layout_width="@dimen/x6"
+                android:layout_height="@dimen/y6" />
+
+            <TextView
+                android:layout_marginLeft="@dimen/x10"
+                android:id="@+id/tv_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/color_898A9E"
+                android:textSize="@dimen/x14"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/et_money" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llyt1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/y230"
+            android:orientation="horizontal"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_money">
+            
+            <ImageView
+                android:background="@drawable/icon_close_oval_gray"
+                android:layout_width="@dimen/x6"
+                android:layout_height="@dimen/y6" />
+
+            <TextView
+                android:layout_marginLeft="@dimen/x10"
+                android:id="@+id/tv_charge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/service_charge"
+                android:textColor="@color/color_898A9E"
+                android:textSize="@dimen/x14"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/et_money" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/btn_bottom"
+            android:layout_width="@dimen/x314"
+            android:layout_height="@dimen/y48"
+            android:layout_marginTop="@dimen/y28"
+            android:background="@drawable/selector_bottom_button"
+            android:checked="false"
+            android:elevation="@dimen/x4"
+            android:gravity="center"
+            android:text="@string/page_title_cash"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/llyt1" />
+    </android.support.constraint.ConstraintLayout>
+</layout>

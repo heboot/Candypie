@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="user"
+            type="com.heboot.entity.User"></variable>
+
+        <variable
+            name="from"
+            type="String"></variable>
+
+        <import type="com.gdlife.candypie.common.MValue"></import>
+
+        <import type="android.view.View"></import>
+
+    </data>
+
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/include_toolbar"
+            layout="@layout/layout_toolbar"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y60"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></include>
+
+
+        <ImageView
+            android:id="@+id/iv_share"
+            android:layout_width="@dimen/x30"
+            android:layout_height="@dimen/y30"
+            android:layout_marginRight="@dimen/x10"
+            android:background="@drawable/icon_share_black"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/include_toolbar"
+            app:layout_constraintRight_toLeftOf="@+id/iv_more"
+            app:layout_constraintTop_toTopOf="@+id/include_toolbar" />
+
+        <ImageView
+            android:id="@+id/iv_more"
+            android:layout_width="@dimen/x30"
+            android:layout_height="@dimen/y30"
+            android:layout_marginRight="@dimen/x16"
+            android:layout_marginTop="@dimen/y30"
+            android:background="@drawable/icon_homepage_more_black"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/include_toolbar" />
+
+        <View
+            android:id="@+id/v_more"
+            android:layout_width="@dimen/x60"
+            android:layout_height="@dimen/y60"
+            app:layout_constraintBottom_toBottomOf="@+id/include_toolbar"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/include_toolbar" />
+
+
+        <ImageView
+            android:id="@+id/iv_edit"
+            android:layout_width="@dimen/x15"
+            android:layout_height="@dimen/y15"
+            android:layout_marginBottom="@dimen/y6"
+            android:layout_marginRight="@dimen/x16"
+            android:background="@drawable/icon_edit"
+            android:visibility="@{from.equals(MValue.FROM_MY) ? View.VISIBLE: View.GONE}"
+            app:layout_constraintBottom_toBottomOf="@+id/include_toolbar"
+            app:layout_constraintRight_toRightOf="@+id/include_toolbar" />
+
+
+        <View
+            android:id="@+id/v_edit"
+            android:layout_width="@dimen/x85"
+            android:layout_height="@dimen/y55"
+            android:visibility="@{from.equals(MValue.FROM_MY) ? View.VISIBLE: View.GONE}"
+            app:layout_constraintBottom_toBottomOf="@+id/include_toolbar"
+            app:layout_constraintRight_toRightOf="@+id/include_toolbar"
+            app:layout_constraintTop_toTopOf="@+id/include_toolbar" />
+
+        <com.gdlife.candypie.widget.ProgressFramelayout
+            android:id="@+id/plyt_container"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/btn_bottom"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/include_toolbar"
+            app:no_data="@layout/include_nodata_info"
+            app:progress="@layout/include_progress_info">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintBottom_toTopOf="@+id/btn_bottom"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/include_toolbar">
+
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingBottom="@dimen/y20"
+                    app:layout_constraintBottom_toTopOf="@+id/btn_bottom"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/include_toolbar">
+
+
+                    <include
+                        android:id="@+id/include_userinfo"
+                        layout="@layout/layout_user_info"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/y25"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"></include>
+
+                    <View
+                        android:id="@+id/line_avatar"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/y1"
+                        android:layout_marginLeft="@dimen/x15"
+                        android:layout_marginTop="@dimen/y22"
+                        android:background="@color/color_EDEDF3"
+                        android:visibility="gone"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/include_userinfo"
+                        app:layout_goneMarginTop="@dimen/y25"></View>
+
+
+                    <include
+                        android:id="@+id/include_avatar"
+                        layout="@layout/layout_homepage_item_right_avatar"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/x15"
+                        android:visibility="gone"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/line_avatar"></include>
+
+                    <View
+                        android:id="@+id/line_nick"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/y1"
+                        android:layout_marginLeft="@dimen/x15"
+                        android:background="@color/color_EDEDF3"
+                        android:visibility="gone"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/include_avatar"></View>
+
+
+                    <include
+                        android:id="@+id/include_nick"
+                        layout="@layout/layout_homepage_item_right_edit"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/x15"
+                        android:visibility="gone"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/line_nick"></include>
+
+
+                    <View
+                        android:id="@+id/v1"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/y1"
+                        android:layout_marginLeft="@dimen/x15"
+                        android:background="@color/line_color"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/include_nick"></View>
+
+                    <include
+                        android:id="@+id/include_signature"
+                        layout="@layout/layout_homepage_item"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/y22"
+                        android:layout_marginLeft="@dimen/x15"
+                        android:layout_marginRight="@dimen/x15"
+                        android:layout_marginTop="@dimen/y22"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/v1"></include>
+
+                    <View
+                        android:id="@+id/v2"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/y1"
+                        android:layout_marginLeft="@dimen/x15"
+                        android:layout_marginTop="@dimen/y25"
+                        android:background="@color/color_EDEDF3"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/include_signature"></View>
+
+                    <include
+                        android:id="@+id/include_index_visit"
+                        layout="@layout/layout_index_visit"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/v2"></include>
+
+                    <View
+                        android:id="@+id/v_visit"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/y1"
+                        android:layout_marginLeft="@dimen/x15"
+                        android:background="@color/line_color"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/include_index_visit"></View>
+
+                    <include
+                        android:id="@+id/include_meet_tag"
+                        layout="@layout/layout_homepage_meet_tag"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/y26"
+                        android:visibility="gone"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/v2_abst_edit"></include>
+
+                    <include
+                        android:id="@+id/include_signature_edit"
+                        layout="@layout/layout_homepage_item_right_text"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/y22"
+                        android:layout_marginLeft="@dimen/x15"
+                        android:visibility="gone"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/v2"></include>
+
+                    <View
+                        android:id="@+id/v2_abst_edit"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/y1"
+                        android:layout_marginLeft="@dimen/x15"
+                        android:background="@color/color_EDEDF3"
+                        android:visibility="gone"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/include_signature_edit"></View>
+
+
+                    <include
+                        android:id="@+id/include_age"
+                        layout="@layout/layout_homepage_item_right_text"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/x15"
+                        android:visibility="gone"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/include_meet_tag"></include>
+
+                    <View
+                        android:id="@+id/line_age"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/y1"
+                        android:layout_marginLeft="@dimen/x15"
+                        android:background="@color/color_EDEDF3"
+                        android:visibility="gone"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/include_age"></View>
+
+                    <include
+                        android:id="@+id/include_height"
+                        layout="@layout/layout_homepage_item_right_text"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/x15"
+                        android:visibility="gone"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/line_age"></include>
+
+                    <View
+                        android:id="@+id/line_height"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/y1"
+                        android:layout_marginLeft="@dimen/x15"
+                        android:background="@color/color_EDEDF3"
+                        android:visibility="gone"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/include_height"></View>
+
+                    <include
+                        android:id="@+id/include_kg"
+                        layout="@layout/layout_homepage_item_right_text"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/x15"
+                        android:visibility="gone"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/include_height"></include>
+
+                    <View
+                        android:id="@+id/line_kg"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/y1"
+                        android:layout_marginLeft="@dimen/x15"
+                        android:background="@color/color_EDEDF3"
+                        android:visibility="gone"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/include_kg"></View>
+
+                    <include
+                        android:id="@+id/include_ver"
+                        layout="@layout/layout_myinfo_ver"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/y22"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/v_visit"></include>
+
+                    <View
+                        android:id="@+id/v4"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/y1"
+                        android:layout_marginLeft="@dimen/x15"
+                        android:background="@color/color_EDEDF3"
+                        android:visibility="gone"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/include_kg"></View>
+
+
+                    <View
+                        android:id="@+id/v3"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/y1"
+                        android:layout_marginLeft="@dimen/x15"
+                        android:background="@color/color_EDEDF3"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/include_ver"></View>
+                </android.support.constraint.ConstraintLayout>
+            </ScrollView>
+        </com.gdlife.candypie.widget.ProgressFramelayout>
+
+        <TextView
+            android:id="@+id/btn_bottom"
+            android:layout_width="@dimen/x314"
+            android:layout_height="@dimen/y48"
+            android:layout_marginBottom="@dimen/y16"
+            android:layout_marginTop="@dimen/y40"
+            android:background="@drawable/bg_rect_bottom_button"
+            android:checked="false"
+            android:elevation="@dimen/x4"
+            android:gravity="center"
+            android:text="@string/affirm_choose_commit"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <ImageView
+            android:id="@+id/iv_chat"
+            android:layout_width="@dimen/x50"
+            android:layout_height="@dimen/y50"
+            android:layout_marginBottom="@dimen/y20"
+            android:layout_marginRight="@dimen/x15"
+            android:background="@drawable/icon_userinfo_tochat_qian"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <include
+            android:id="@+id/include_chattip"
+            layout="@layout/layout_userinfo_tochat_tip"
+            android:layout_width="@dimen/x264"
+            android:layout_height="@dimen/y93"
+            android:layout_marginRight="@dimen/x8"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_chat"
+            app:layout_constraintRight_toLeftOf="@+id/iv_chat"></include>
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

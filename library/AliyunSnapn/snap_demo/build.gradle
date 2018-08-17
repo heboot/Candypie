@@ -1,0 +1,41 @@
+apply plugin: 'com.android.library'
+
+
+android {
+    compileSdkVersion externalCompileSdkVersion
+    buildToolsVersion externalBuildToolsVersion
+    defaultConfig {
+        minSdkVersion externalMinSdkVersion
+        targetSdkVersion externalTargetSdkVersion
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    api fileTree(dir: 'libs', include: ['*.jar'])
+    api (project(':library:AliyunSnapn:snap_core')) {
+        transitive = false
+    }
+
+    api externalAndroidAppCompatV7
+    api externalAndroidDesign
+
+    api externalJSR305
+    api externalGlide
+    api externalEasyPermissions
+    api externalOKHTTP
+    api externalGlideOkHttp
+    api externalOKIO
+    api externalGSON
+
+}

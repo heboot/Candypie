@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <android.support.constraint.ConstraintLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/clyt_star1"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/y12"
+            android:paddingLeft="@dimen/x2">
+
+            <ImageView
+                android:id="@+id/iv_star1"
+                android:layout_width="@dimen/x12"
+                android:layout_height="@dimen/y12"
+                android:background="@color/theme_color"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+
+                android:layout_width="@dimen/x10"
+                android:layout_height="@dimen/y10"
+                android:background="@drawable/icon_star_white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </android.support.constraint.ConstraintLayout>
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/clyt_star2"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/y12"
+            android:paddingLeft="@dimen/x2"
+            app:layout_constraintLeft_toRightOf="@+id/clyt_star1">
+
+            <ImageView
+                android:id="@+id/iv_star2"
+                android:layout_width="@dimen/x12"
+                android:layout_height="@dimen/y12"
+                android:background="@color/theme_color"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:layout_width="@dimen/x10"
+                android:layout_height="@dimen/y10"
+                android:background="@drawable/icon_star_white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </android.support.constraint.ConstraintLayout>
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/clyt_star3"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/y12"
+            android:paddingLeft="@dimen/x2"
+            app:layout_constraintLeft_toRightOf="@+id/clyt_star2">
+
+            <ImageView
+                android:id="@+id/iv_star3"
+                android:layout_width="@dimen/x12"
+                android:layout_height="@dimen/y12"
+                android:background="@color/theme_color"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:layout_width="@dimen/x10"
+                android:layout_height="@dimen/y10"
+                android:background="@drawable/icon_star_white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </android.support.constraint.ConstraintLayout>
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/clyt_star4"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/y12"
+            android:paddingLeft="@dimen/x2"
+            app:layout_constraintLeft_toRightOf="@+id/clyt_star3">
+
+            <ImageView
+                android:id="@+id/iv_star4"
+                android:layout_width="@dimen/x12"
+                android:layout_height="@dimen/y12"
+                android:background="@color/theme_color"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:layout_width="@dimen/x10"
+                android:layout_height="@dimen/y10"
+                android:background="@drawable/icon_star_white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </android.support.constraint.ConstraintLayout>
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/clyt_star5"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/y12"
+            android:paddingLeft="@dimen/x2"
+            app:layout_constraintLeft_toRightOf="@+id/clyt_star4">
+
+            <ImageView
+                android:id="@+id/iv_star5"
+                android:layout_width="@dimen/x12"
+                android:layout_height="@dimen/y12"
+                android:background="@color/theme_color"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:layout_width="@dimen/x10"
+                android:layout_height="@dimen/y10"
+                android:background="@drawable/icon_star_white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

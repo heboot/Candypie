@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <data>
+
+        <variable
+            name="user"
+            type="com.heboot.entity.User"></variable>
+
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/include_toolbar"
+            layout="@layout/layout_toolbar"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y60"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></include>
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/y10"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/include_toolbar">
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/y375"
+                    android:background="@color/black"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/v_player"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/y375"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <ImageView
+                    android:id="@+id/iv_play"
+                    android:layout_width="@dimen/x70"
+                    android:layout_height="@dimen/y70"
+                    android:background="@drawable/ic_video_play"
+                    app:layout_constraintBottom_toBottomOf="@+id/v_player"
+                    app:layout_constraintLeft_toLeftOf="@+id/v_player"
+                    app:layout_constraintRight_toRightOf="@+id/v_player"
+                    app:layout_constraintTop_toTopOf="@+id/v_player" />
+
+                <ImageView
+                    android:id="@+id/iv_player"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/y375"
+                    android:scaleType="fitCenter"
+                    android:visibility="gone"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <View
+                    android:id="@+id/baseline2"
+                    android:layout_width="@dimen/x23"
+                    android:layout_height="1dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"></View>
+
+
+                <Button
+                    android:id="@+id/btn_replace"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/y35"
+                    android:layout_marginBottom="@dimen/y15"
+                    android:layout_marginLeft="@dimen/x30"
+                    android:layout_marginRight="@dimen/x30"
+                    android:background="@drawable/bg_rect_bottom_button"
+                    android:text="@string/update_video"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/x18"
+                    app:layout_constraintBottom_toBottomOf="@+id/v_player"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent" />
+
+
+                <Button
+                    android:id="@+id/btn_register"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/y35"
+                    android:layout_marginBottom="@dimen/y15"
+                    android:layout_marginRight="@dimen/x15"
+                    android:background="@drawable/bg_rect_border_themecolor_"
+                    android:text="@string/crop_video"
+                    android:textColor="@color/theme_color"
+                    android:textSize="@dimen/x18"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="@+id/v_player"
+                    app:layout_constraintLeft_toRightOf="@+id/baseline2"
+                    app:layout_constraintRight_toRightOf="parent" />
+
+                <include
+                    android:id="@+id/include_userinfo"
+                    layout="@layout/layout_user_info_auth"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y20"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/v_player"></include>
+
+                <View
+                    android:id="@+id/line_age"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/y1"
+                    android:layout_marginLeft="@dimen/x15"
+                    android:background="@color/color_EDEDF3"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/include_userinfo"></View>
+
+
+                <!--<ImageView-->
+
+                <!--android:id="@+id/iv_ver_identity"-->
+                <!--android:layout_width="@dimen/x50"-->
+                <!--android:layout_height="@dimen/y50"-->
+                <!--android:layout_marginLeft="@dimen/x30"-->
+                <!--android:layout_marginTop="@dimen/y26"-->
+                <!--android:background="@drawable/icon_ver_id"-->
+                <!--app:layout_constraintLeft_toLeftOf="parent"-->
+                <!--app:layout_constraintTop_toBottomOf="@+id/line_age" />-->
+
+                <!--<TextView-->
+                <!--android:id="@+id/tv_ver_id"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="@dimen/y10"-->
+                <!--android:paddingBottom="@dimen/y20"-->
+                <!--android:showIDVerStatus="@{user}"-->
+                <!--android:textColor="@color/color_57586C"-->
+                <!--android:textSize="15sp"-->
+                <!--app:layout_constraintLeft_toLeftOf="@+id/iv_ver_identity"-->
+                <!--app:layout_constraintRight_toRightOf="@+id/iv_ver_identity"-->
+                <!--app:layout_constraintTop_toBottomOf="@+id/iv_ver_identity" />-->
+
+            </android.support.constraint.ConstraintLayout>
+        </android.support.v4.widget.NestedScrollView>
+    </android.support.constraint.ConstraintLayout>
+</layout>

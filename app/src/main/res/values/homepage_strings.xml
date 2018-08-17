@@ -1,0 +1,65 @@
+<resources>
+
+    <string name="ver_info_my">我的认证</string>
+
+    <string name="ver_info_other">平台认证</string>
+
+    <string name="ver_ok">已认证</string>
+
+    <string name="ver_ing">认证中</string>
+
+    <string name="ver_fail">认证失败</string>
+
+    <string name="ver_info_service">服务认证</string>
+
+    <string name="ver_info_id">身份认证</string>
+
+    <string name="ver_info_servicer">视频认证</string>
+
+    <string name="ver_info_un_servicer">视频未认证</string>
+
+    <string name="my_skill">我的技能</string>
+
+    <string name="other_skill">TA的技能</string>
+
+    <string name="infop_signature">个性签名</string>
+
+    <string name="fav">收藏</string>
+
+    <string name="update_video">替换形象视频</string>
+
+    <string name="crop_video">换头像</string>
+
+    <string name="un_input">未填写</string>
+
+    <string name="un_input_sign">用一句话介绍一下自己</string>
+
+    <string name="unit_kg">kg</string>
+
+    <string name="unit_height">cm</string>
+
+    <string name="avatar">头像</string>
+
+    <string name="nick">昵称</string>
+
+    <string name="ver_id_status_no">身份未认证</string>
+
+    <string name="ver_id_status_suc">身份已认证</string>
+
+    <string name="ver_id_status_ing">身份认证中</string>
+
+    <string name="ver_service_status_no">视频认证</string>
+
+    <string name="ver_service_status_ing">视频认证中</string>
+
+    <string name="ver_service_status_suc">视频已认证</string>
+
+    <string name="input_tip_abst">请输入%1$s到%2$s长度的个性签名</string>
+
+    <string name="user_videos">视频集</string>
+
+    <string name="fav_status_un">收藏</string>
+
+    <string name="fav_status_on">已收藏</string>
+
+</resources>

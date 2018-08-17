@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--<item-->
+    <!--android:width="@dimen/x16"-->
+    <!--android:height="@dimen/y12"-->
+    <!--android:drawable="@color/transparent"></item>-->
+
+    <!--<item-->
+    <!--android:width="@dimen/x16"-->
+    <!--android:height="@dimen/y16"-->
+    <!--android:drawable="@drawable/bg_test_star"-->
+    <!--android:left="@dimen/x2"></item>-->
+    <!--<item-->
+    <!--android:id="@+id/inside_img"-->
+    <!--android:width="@dimen/x12"-->
+    <!--android:height="@dimen/y12"-->
+    <!--android:bottom="@dimen/y2"-->
+    <!--android:drawable="@drawable/icon_star_white"-->
+    <!--android:left="@dimen/x4"-->
+    <!--android:right="@dimen/y2"-->
+    <!--android:top="@dimen/y2"></item>-->
+
+    <item android:drawable="@color/aliyun_color_red"></item>
+
+    <item
+        android:drawable="@drawable/bg_rect_white_6"
+        android:left="@dimen/x2"></item>
+    <item
+        android:bottom="@dimen/y2"
+        android:drawable="@drawable/bg_star_gray"
+        android:left="@dimen/x4"
+        android:right="@dimen/x2"
+        android:top="@dimen/y2"></item>
+
+</layer-list>

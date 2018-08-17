@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/clyt_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/x16"
+        android:layout_marginRight="@dimen/x16"
+        android:layout_marginTop="@dimen/y20"
+        android:background="@drawable/bg_rect_white_6"
+        android:paddingBottom="@dimen/y18">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x14"
+            android:layout_marginTop="@dimen/y17"
+            android:text="222"
+            android:textColor="@color/color_343445"
+            android:textSize="@dimen/x20"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/x14"
+            android:textColor="@color/color_58586C"
+            android:textSize="@dimen/x14"
+            app:layout_constraintBaseline_toBaselineOf="@+id/tv_title"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <TextView
+            android:id="@+id/tv_content"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x14"
+            android:layout_marginRight="@dimen/x14"
+            android:layout_marginTop="@dimen/y8"
+            android:text="和空军了就的视频聊天已经完成，共计600钻石。如果你对空军了就和空军了就的视频聊天已经完成，共计600钻石。如果你对空军了就和空军了就的视频聊天已经完成，共计600钻石。如果你对空军了就您和空军了就的视频聊天已经完成，共计600钻石。如果你对空军了就喜欢的话，可以选择再来一单"
+            android:textColor="@color/color_58586C"
+            android:textSize="@dimen/x15"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title" />
+
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

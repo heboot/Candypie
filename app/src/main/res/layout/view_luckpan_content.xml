@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="goodsData"
+            type="com.heboot.bean.luckypan.TurntableConfigChildBean.ItemsBean.GoodsBean"></variable>
+
+        <import type="android.view.View"></import>
+
+        <variable
+            name="type"
+            type="String"></variable>
+
+        <variable
+            name="from"
+            type="Integer"></variable>
+
+
+        <import type="com.gdlife.candypie.common.MValue"></import>
+
+    </data>
+
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="@dimen/x52"
+        android:layout_height="wrap_content">
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/clyt_text1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+
+                android:id="@+id/tv_action_text1"
+                android:layout_width="@dimen/x50"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y15"
+                android:gravity="center"
+                android:text="@{goodsData.title}"
+                android:textColor="@{goodsData.img == null ?@color/luckpan_text_color_text:@color/white}"
+                android:textSize="@dimen/x15"
+                android:visibility="@{type.equals(`gift`)?View.GONE:View.VISIBLE}"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <!--android:text="@{goodsData.title}"-->
+            <TextView
+                android:layout_width="@dimen/x44"
+                android:layout_height="@dimen/y21"
+                android:layout_marginTop="@dimen/y10"
+                android:background="@drawable/bg_luckpan_gifttext"
+                android:gravity="center"
+                android:text="@{from == MValue.USER_ROLE_NORMAL?`送出`:`得到`}"
+                android:textColor="@color/white"
+                android:visibility="@{type.equals(`gift`)?View.VISIBLE:View.GONE}"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <!--android:visibility="@{type.equals(`gift`)?View.VISIBLE:View.GONE}"-->
+        </android.support.constraint.ConstraintLayout>
+
+
+        <ImageView
+            android:id="@+id/img"
+            android:layout_width="@dimen/x36"
+            android:layout_height="@dimen/y36"
+            android:layout_marginTop="@dimen/y1"
+            android:showImg="@{goodsData.img}"
+            android:visibility="@{goodsData.img != null ?View.VISIBLE:View.INVISIBLE}"
+            app:layout_constraintLeft_toLeftOf="@+id/clyt_text1"
+            app:layout_constraintRight_toRightOf="@+id/clyt_text1"
+            app:layout_constraintTop_toBottomOf="@+id/clyt_text1" />
+
+        <!--android:visibility="@{goodsData.img != null ?View.VISIBLE:View.INVISIBLE}"-->
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/img">
+
+            <ImageView
+                android:id="@+id/ivcoin"
+                android:layout_width="@dimen/x11"
+                android:layout_height="@dimen/y10"
+                android:background="@drawable/icon_coin"
+                android:visibility="@{from == MValue.USER_ROLE_NORMAL?View.VISIBLE:View.GONE}"
+                app:layout_constraintBottom_toBottomOf="@+id/tvmoney1"
+                app:layout_constraintTop_toTopOf="@+id/tvmoney1" />
+            <!--android:visibility="@{from == MValue.USER_ROLE_NORMAL?View.VISIBLE:View.GONE}"-->
+            <TextView
+                android:id="@+id/tvmoney1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{from == MValue.USER_ROLE_NORMAL?goodsData.price+``:`¥`+goodsData.price}"
+                android:textColor="@color/luckpan_text_color_money"
+                android:textSize="@dimen/x14"
+                android:visibility="@{goodsData.price == 0?View.INVISIBLE:View.VISIBLE}"
+                app:layout_constraintLeft_toRightOf="@+id/ivcoin" />
+            <!--android:visibility="@{goodsData.price == 0?View.GONE:View.INVISIBLE}"-->
+            <!--android:text="@{from == MValue.USER_ROLE_NORMAL?goodsData.price+``:`¥`+goodsData.price}"-->
+
+        </android.support.constraint.ConstraintLayout>
+
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="user"
+            type="com.heboot.entity.User"></variable>
+
+        <variable
+            name="orderBean"
+            type="com.heboot.bean.theme.OrderListBean.ListBean"></variable>
+    </data>
+
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <View
+            android:id="@+id/v_line"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y1"
+            android:background="@color/line_color"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></View>
+
+
+        <com.qmuiteam.qmui.widget.QMUIRadiusImageView
+            android:id="@+id/iv_img"
+            android:layout_width="@dimen/x36"
+            android:layout_height="@dimen/y36"
+            android:layout_marginLeft="@dimen/x18"
+            android:layout_marginTop="@dimen/y12"
+            android:showAvatar="@{user==null?``:user.avatar}"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/v_line"
+            app:qmui_border_width="0dp"
+            app:qmui_is_circle="true" />
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x10"
+            android:gravity="left"
+            android:text="@{user==null?``:user.nickname}"
+            android:textColor="@color/color_343445"
+            android:textSize="@dimen/x18"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_img"
+            app:layout_constraintLeft_toRightOf="@+id/iv_img"
+            app:layout_constraintTop_toTopOf="@+id/iv_img" />
+
+        <!--<ImageView-->
+        <!--android:layout_width="@dimen/x7"-->
+        <!--android:layout_height="@dimen/y9"-->
+        <!--android:layout_marginLeft="@dimen/x5"-->
+        <!--android:background="@{user == null?null:(user.sex ==0 ? @drawable/icon_sex_woman:@drawable/icon_sex_man)}"-->
+        <!--app:layout_constraintBottom_toBottomOf="@+id/tv_name"-->
+        <!--app:layout_constraintLeft_toRightOf="@+id/tv_name"-->
+        <!--app:layout_constraintTop_toTopOf="@+id/tv_name" />-->
+
+        <include
+            android:id="@+id/include_sexage"
+            layout="@layout/layout_sex_age"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x5"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_name"
+            app:layout_constraintLeft_toRightOf="@+id/tv_name"
+            app:layout_constraintTop_toTopOf="@+id/tv_name"></include>
+
+        <TextView
+            android:id="@+id/tv_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/x16"
+            android:text="@{orderBean.status_config.value}"
+            android:textSize="@dimen/x14"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_img"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/iv_img" />
+
+        <View
+            android:id="@+id/v_bg"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="@dimen/x16"
+            android:layout_marginRight="@dimen/x16"
+            android:layout_marginTop="@dimen/y12"
+            android:background="@drawable/bg_rect_ededf3_6"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_img"></View>
+
+        <include
+            android:id="@+id/include_title"
+            layout="@layout/layout_order_item"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x32"
+            android:layout_marginRight="@dimen/x32"
+            android:layout_marginTop="@dimen/y25"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_img"></include>
+
+        <include
+            android:id="@+id/include_price"
+            layout="@layout/layout_order_item"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x32"
+            android:layout_marginRight="@dimen/x32"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/include_title"></include>
+
+        <include
+            android:id="@+id/include_address"
+            layout="@layout/layout_order_item"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x32"
+            android:layout_marginRight="@dimen/x32"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/include_price"></include>
+
+        <include
+            android:id="@+id/include_time"
+            layout="@layout/layout_order_item"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/y18"
+            android:layout_marginLeft="@dimen/x32"
+            android:layout_marginRight="@dimen/x32"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/include_address"></include>
+
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

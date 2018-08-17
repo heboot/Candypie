@@ -1,0 +1,7 @@
+<resources>
+
+     <string name="msg_label_read">标记已读</string>
+
+     <string name="page_title_msg">聊天</string>
+
+</resources>
