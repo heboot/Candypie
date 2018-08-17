@@ -353,10 +353,7 @@ public class OrderService {
         if (StringUtils.isEmpty(action)) {
             return;
         }
-        if (action.equals(ServiceAction.SELECT_USER.toString().toLowerCase())) {
-//            IntentUtils.toThemeUserListActivity(context, listBean.getId(), listBean.getService_id().equals("1"), ServiceSelectUserFrom.ORDER_LIST);
-            IntentUtils.toThemeUserListActivity(context, listBean.getId(), listBean.getService_type().equals(MValue.ORDER_TYPE_VIDEO), ServiceSelectUserFrom.ORDER_LIST);
-        } else if (action.equals(ServiceAction.IM.toString().toLowerCase())) {
+        if (action.equals(ServiceAction.IM.toString().toLowerCase())) {
             IntentUtils.intent2ChatActivity(context, MValue.CHAT_PRIEX + listBean.getUsers().get(0).getId());
         } else if (action.equals(ServiceAction.TEL.toString().toLowerCase())) {
             if (listBean != null && listBean.getUsers() != null && listBean.getUsers().size() > 0 && !StringUtils.isEmpty(listBean.getUsers().get(0).getTel())) {

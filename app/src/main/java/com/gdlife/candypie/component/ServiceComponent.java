@@ -9,10 +9,8 @@ import com.gdlife.candypie.activitys.pay.CashActivity;
 import com.gdlife.candypie.activitys.pay.CouponsActivity;
 import com.gdlife.candypie.activitys.pay.PayActivity;
 import com.gdlife.candypie.activitys.pay.RechargeActivity;
-import com.gdlife.candypie.activitys.theme.NewServiceProgressActivity;
 import com.gdlife.candypie.activitys.theme.NewThemeActivity;
 import com.gdlife.candypie.activitys.theme.ServiceCancelActivity;
-import com.gdlife.candypie.activitys.theme.ThemeUserListActivity;
 import com.gdlife.candypie.activitys.user.HomepageActivity;
 import com.gdlife.candypie.activitys.video.PlayerActivity2;
 import com.gdlife.candypie.activitys.video.PlayerActivity3;
@@ -54,7 +52,6 @@ public interface ServiceComponent {
 
     void inject(ServiceCancelActivity serviceCancelActivity);
 
-    void inject(ThemeUserListActivity themeUserListActivity);
 
     void inject(NewThemeActivity newThemeActivity);
 
@@ -75,8 +72,6 @@ public interface ServiceComponent {
     void inject(VideoChatActivity2 videoChatActivity);
 
     void inject(RecentContactsActivity recentContactsActivity);
-
-    void inject(NewServiceProgressActivity newServiceProgressActivity);
 
 
 //    void inject(LoginActivity loginActivity);

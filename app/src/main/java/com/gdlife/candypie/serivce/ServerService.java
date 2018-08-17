@@ -9,7 +9,6 @@ import com.gdlife.candypie.activitys.theme.NewThemeActivity;
 import com.gdlife.candypie.common.MKey;
 import com.gdlife.candypie.common.MValue;
 import com.gdlife.candypie.common.PayFrom;
-import com.gdlife.candypie.common.ServiceSelectUserFrom;
 import com.gdlife.candypie.common.VideoChatFrom;
 import com.gdlife.candypie.utils.IntentUtils;
 import com.gdlife.candypie.widget.dialog.ServiceTipDialog;
@@ -52,11 +51,7 @@ public class ServerService {
 
 
     public void doRuningService(Context context, RunServiceTipBean runServiceTipBean) {
-        if (runServiceTipBean.getAction().equals(RunServiceAction.push_user_list.toString())) {
-            IntentUtils.toThemeUserListActivity(context, runServiceTipBean.getUser_service_id(), false, ServiceSelectUserFrom.ORDER_LIST, true);
-        } else if (runServiceTipBean.getAction().equals(RunServiceAction.push_loading.toString())) {
-            IntentUtils.toNewServiceProgressActivity(context, runServiceTipBean.getUser_service_id());
-        } else if (runServiceTipBean.getAction().equals(RunServiceAction.start_video_chat.toString())) {
+        if (runServiceTipBean.getAction().equals(RunServiceAction.start_video_chat.toString())) {
             IntentUtils.toVideoChatActivity(context, runServiceTipBean.getUser_service_id(), runServiceTipBean.getChat_room_config(), VideoChatFrom.SERVICER);
         }
     }

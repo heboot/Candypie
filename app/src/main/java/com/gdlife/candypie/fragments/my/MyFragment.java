@@ -5,6 +5,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
+import com.faceunity.FURenderer;
 import com.gdlife.candypie.MAPP;
 import com.gdlife.candypie.R;
 import com.gdlife.candypie.adapter.index.IndexVisitAdapter;
@@ -60,6 +61,7 @@ public class MyFragment extends BaseFragment<FragmentMyBinding> {
         super.onSupportVisible();
         if (meUser == null) {
             initMeData();
+            FURenderer.initFURenderer(_mActivity);
         }
     }
 

@@ -45,13 +45,11 @@ import com.gdlife.candypie.activitys.pay.PayActivity;
 import com.gdlife.candypie.activitys.pay.RechargeActivity;
 import com.gdlife.candypie.activitys.theme.ChooseAddressActivity;
 import com.gdlife.candypie.activitys.theme.ChooseAddressDetailActivity;
-import com.gdlife.candypie.activitys.theme.NewServiceProgressActivity;
 import com.gdlife.candypie.activitys.theme.NewThemeActivity;
 import com.gdlife.candypie.activitys.theme.ServerCancelCauseActivity;
 import com.gdlife.candypie.activitys.theme.ServiceCancelActivity;
 import com.gdlife.candypie.activitys.theme.ServiceUserListActivity;
 import com.gdlife.candypie.activitys.theme.ThemeListActivity;
-import com.gdlife.candypie.activitys.theme.ThemeUserListActivity;
 import com.gdlife.candypie.activitys.user.HomepageActivity;
 import com.gdlife.candypie.activitys.user.HomepageOtherActivity;
 import com.gdlife.candypie.activitys.user.HomepageOtherActivity2;
@@ -73,7 +71,6 @@ import com.gdlife.candypie.common.PayFrom;
 import com.gdlife.candypie.common.RechargeType;
 import com.gdlife.candypie.common.RecordVideoFrom;
 import com.gdlife.candypie.common.ReportFromType;
-import com.gdlife.candypie.common.ServiceSelectUserFrom;
 import com.gdlife.candypie.common.UserVideoActivityFrom;
 import com.gdlife.candypie.common.VideoChatFrom;
 import com.gdlife.candypie.common.VideoPreviewFrom;
@@ -529,29 +526,6 @@ public class IntentUtils {
     }
 
 
-    public static void toThemeUserListActivity(Context context, String serviceId, boolean isVideo, ServiceSelectUserFrom from) {
-        Intent intent = new Intent(context, ThemeUserListActivity.class);
-//        intent.putExtra(MKey.NUM, num);
-//        intent.putExtra(MKey.FROM, from);
-        intent.putExtra(MKey.SERVICE_ID, serviceId);
-        intent.putExtra(MKey.FROM, from);
-        intent.putExtra(MKey.TYPE, isVideo);
-        context.startActivity(intent);
-
-    }
-
-    public static void toThemeUserListActivity(Context context, String serviceId, boolean isVideo, ServiceSelectUserFrom from, boolean isRunning) {
-        Intent intent = new Intent(context, ThemeUserListActivity.class);
-//        intent.putExtra(MKey.NUM, num);
-//        intent.putExtra(MKey.FROM, from);
-        intent.putExtra(MKey.SERVICE_ID, serviceId);
-        intent.putExtra(MKey.FROM, from);
-        intent.putExtra(MKey.TYPE, isVideo);
-        intent.putExtra(MKey.IS_RUNNING, isRunning);
-        context.startActivity(intent);
-
-    }
-
     public static void toSettingNotificationActivity(Context context) {
         Intent intent = new Intent(context, SettingNotificationActivity.class);
 //        intent.putExtra(MKey.NUM, num);
@@ -574,13 +548,6 @@ public class IntentUtils {
 
     public static void toRecentContactsActivity(Context context) {
         Intent intent = new Intent(context, RecentContactsActivity.class);
-        context.startActivity(intent);
-    }
-
-
-    public static void toNewServiceProgressActivity(Context context, String userServiceId) {
-        Intent intent = new Intent(context, NewServiceProgressActivity.class);
-        intent.putExtra(MKey.USER_SERVICE_ID, userServiceId);
         context.startActivity(intent);
     }
 

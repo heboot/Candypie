@@ -222,9 +222,6 @@ public class PayActivity extends BaseActivity<ActivityPayBinding> {
                             IntentUtils.toOrderDetailActivity(PayActivity.this, postThemeBean.getUser_service_id(), false);
                             finish();
                         }
-                    } else if (payFrom == PayFrom.NEW_SERVICE) {
-                        IntentUtils.toThemeUserListActivity(PayActivity.this, postThemeBean.getUser_service_id(), isVideo, ServiceSelectUserFrom.NEW_SERVICE);
-                        finish();
                     } else if (payFrom == PayFrom.NEW_SERVICE_ONE_USER) {
                         IntentUtils.toOrderDetailActivity(PayActivity.this, postThemeBean.getUser_service_id(), true);
                         finish();

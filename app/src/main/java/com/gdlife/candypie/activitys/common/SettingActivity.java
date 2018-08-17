@@ -106,11 +106,7 @@ public class SettingActivity extends BaseActivity<ActivitySettingBinding> {
 
 
         binding.includeBlack.getRoot().setOnClickListener((v) -> {
-//            BottomVideoGiftSheetDialogHehe bottomVideoGiftSheetDialogHehe = new BottomVideoGiftSheetDialogHehe("2");
-//            bottomVideoGiftSheetDialogHehe.show(getSupportFragmentManager(), "gift");
-//            new GiftPlayView(MAPP.mapp.getConfigBean().getGift_config().get(0)).show(getFragmentManager(), "gfit");
-
-//            IntentUtils.toUserBlackListActivity(this);
+            IntentUtils.toUserBlackListActivity(this);
         });
 
     }

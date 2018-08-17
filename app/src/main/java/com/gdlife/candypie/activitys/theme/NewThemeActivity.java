@@ -613,9 +613,6 @@ public class NewThemeActivity extends BaseActivity<ActivityNewTheme2Binding> imp
                         postThemeBean.setServiceId(listBean.getId());
                         IntentUtils.toVideoChatActivity(NewThemeActivity.this, postThemeBean.getUser_service_id(), postThemeBean.getChat_room_config(), VideoChatFrom.USER);
                         finish();
-                    } else {
-                        IntentUtils.toThemeUserListActivity(NewThemeActivity.this, postThemeBean.getUser_service_id(), true, ServiceSelectUserFrom.NEW_SERVICE);
-                        finish();
                     }
                 }
 

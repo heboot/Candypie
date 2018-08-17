@@ -10,35 +10,21 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.RatingBar;
 
-import com.alibaba.fastjson.JSON;
 import com.gdlife.candypie.R;
-import com.gdlife.candypie.activitys.theme.ThemeUserListActivity;
 import com.gdlife.candypie.base.HttpObserver;
 import com.gdlife.candypie.common.MKey;
-import com.gdlife.candypie.common.PayFrom;
-import com.gdlife.candypie.common.VideoChatFrom;
-import com.gdlife.candypie.databinding.DialogTipBinding;
 import com.gdlife.candypie.databinding.LayoutOrderCommentBinding;
-import com.gdlife.candypie.databinding.LayoutOrderCommentIsDelayBinding;
 import com.gdlife.candypie.http.HttpClient;
-import com.gdlife.candypie.utils.IntentUtils;
 import com.gdlife.candypie.utils.SignUtils;
 import com.heboot.base.BaseBean;
 import com.heboot.base.BaseBeanEntity;
-import com.heboot.bean.theme.PostThemeBean;
-import com.heboot.bean.theme.PushUserListBean;
 import com.heboot.event.OrderEvent;
 import com.heboot.rxbus.RxBus;
 
 import java.util.Map;
 
-import io.reactivex.Observable;
-import io.reactivex.ObservableEmitter;
-import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
-import me.zhanghai.android.materialratingbar.MaterialRatingBar;
 
 /**
  * Created by heboot on 2018/2/2.

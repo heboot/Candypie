@@ -217,7 +217,6 @@ public class TurntableIntiveTipDialog extends Dialog {
                 @Override
                 public void onSuccess(BaseBean<TurntableConfigBean> baseBean) {
                     dialog.dismiss();
-                    MAPP.mapp.setCurrentTurnableConfigBean(baseBean.getData());
 //                    play(context);
                     LuckpanDialog luckpanDialog = new LuckpanDialog.Builder(context, userServiceId, baseBean.getData().getTurntable_config(), true, -1, role).create();
                     luckpanDialog.show();

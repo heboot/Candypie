@@ -65,17 +65,7 @@ public class InitUtils {
         initQuPai();
         initBugly(application);
         initNIM(application, messageService);
-        initVLayout(application);
         initCrash();
-    }
-
-    private void initVLayout(Application application) {
-//        TangramBuilder.init(application, new IInnerImageSetter() {
-//            @Override
-//            public <IMAGE extends ImageView> void doLoadImageUrl(@NonNull IMAGE view, @Nullable String url) {
-//                ImageUtils.showImage(view, url);
-//            }
-//        }, ImageView.class);
     }
 
     private void initCrash() {

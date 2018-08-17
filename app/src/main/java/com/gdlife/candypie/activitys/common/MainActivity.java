@@ -14,8 +14,10 @@ import com.gdlife.candypie.fragments.my.MyFragment;
 import com.gdlife.candypie.fragments.rank.RankContainerFragment;
 import com.gdlife.candypie.serivce.PushService;
 import com.gdlife.candypie.serivce.UserService;
+import com.gdlife.candypie.serivce.theme.VideoChatService;
 import com.gdlife.candypie.utils.DialogUtils;
 import com.gdlife.candypie.utils.PermissionUtils;
+import com.heboot.entity.User;
 import com.heboot.event.MessageEvent;
 import com.heboot.event.NormalEvent;
 import com.heboot.event.UserEvent;
@@ -45,6 +47,8 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
 
     private ISupportFragment currentFragment;
 
+    private VideoChatService videoChatService;
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_main;
@@ -61,13 +65,10 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
         setUnreadText();
         mDelegate.loadMultipleRootFragment(binding.flytContainer.getId(), 0, indexFragment, rankContainerFragment, messageContainerFragment, myFragment);
         currentFragment = indexFragment;
-
-
     }
 
     @Override
     public void initData() {
-        FURenderer.initFURenderer(this);
         pushService.initHuawei(this);
         DialogUtils.showIndexDialog(this, permissionUtils, false, null);
 
@@ -233,6 +234,14 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
             binding.includeBottomMenu.includeMenuMsg.tvUnread2.setVisibility(View.INVISIBLE);
 
         }
+    }
+
+
+    public void postVideoService(User user) {
+        if (videoChatService == null) {
+            videoChatService = new VideoChatService();
+        }
+        videoChatService.postVideoService(permissionUtils, this, user, null);
     }
 
 

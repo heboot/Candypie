@@ -18,7 +18,6 @@ import com.example.http.HttpUtils;
 import com.gdlife.candypie.activitys.order.OrderDetailActivity;
 import com.gdlife.candypie.activitys.pay.BalanceLogActivity;
 import com.gdlife.candypie.activitys.pay.CouponsActivity;
-import com.gdlife.candypie.activitys.theme.ThemeUserListActivity;
 import com.gdlife.candypie.activitys.user.HomepageActivity;
 import com.gdlife.candypie.activitys.video.VideoChatActivity;
 import com.gdlife.candypie.base.HttpObserver;
@@ -104,13 +103,10 @@ public class MAPP extends Application {
 
     private AgoraAPIOnlySignal m_agoraAPI;
 
-    private int mFinalCount;
 
     private ConfigBean configBean;
 
     private Activity currentActivity;
-
-    private TurntableConfigBean currentTurnableConfigBean;
 
 
     @Override
@@ -122,9 +118,7 @@ public class MAPP extends Application {
         messageService = new MessageService();
         initUtils.registerActivityLifecycleCallbacks(this);
         initUtils.initSDK(this, messageService);
-
         UMConfigure.init(this, UMConfigure.DEVICE_TYPE_PHONE, null);
-
         //初始化播放器（只需调用一次即可，建议在application中初始化）
         AliVcMediaPlayer.init(getApplicationContext());
         SDCardUtils.getRootPathPrivateVideo();
@@ -251,16 +245,6 @@ public class MAPP extends Application {
                 } else if (o instanceof IMEvent.UPDATE_COIN_BALANCE_EVENT) {
 //                    UserService.getInstance().getUser().setCoin(String.valueOf(Integer.parseInt(UserService.getInstance().getUser().getCoin()) - ((IMEvent.UPDATE_COIN_BALANCE_EVENT) o).getCoinAmount()));
                 }
-
-//                //测试用，因为需要权限
-//                else if (o.equals(NormalEvent.TEST_NOTI_EVENT)) {
-//                    if (!APPUtils.isBackground(getApplicationContext()) && MValue.IS_RESUME) {
-//                        SystemNotificationValueBean systemNotificationValueBean = new SystemNotificationValueBean();
-//                        systemNotificationValueBean.setMsg("呵呵");
-//                        PopupNotificationUtils2.INSTANCE.showPopupView(systemNotificationValueBean);
-//                    }
-//
-//                }
             }
 
             @Override
@@ -275,7 +259,6 @@ public class MAPP extends Application {
         });
     }
 
-    private Notification notification;
 
     private PopupNotificationSnack popupNotificationSnack;
 
@@ -331,21 +314,10 @@ public class MAPP extends Application {
             try {
                 popupNotificationSnack = new PopupNotificationSnack(currentActivity.findViewById(android.R.id.content), getApplicationContext(), ((MessageEvent.ShowMessageNotiEvent) o).getSystemNotification().getValue());
                 popupNotificationSnack.setModel(((MessageEvent.ShowMessageNotiEvent) o).getSystemNotification().getValue());
-                if (!StringUtils.isEmpty(o.getSystemNotification().getValue().getTo_action())) {
-                    if (((MessageEvent.ShowMessageNotiEvent) o).getSystemNotification().getValue().getTo_action().equals(MessageToAction.push_list.toString())) {
-                        popupNotificationSnack.show();
-                    } else if (((MessageEvent.ShowMessageNotiEvent) o).getSystemNotification().getValue().getTo_action().equals(MessageToAction.push_user_list.toString())) {
-                        if (!(currentActivity instanceof ThemeUserListActivity)) {
-                            popupNotificationSnack.show();
-                        }
-                    } else if (((MessageEvent.ShowMessageNotiEvent) o).getSystemNotification().getValue().getTo_action().equals(MessageToAction.start_video_chat.toString())) {
-
-                    } else {
-                        popupNotificationSnack.show();
-                    }
-                } else {
+                if (!(getCurrentActivity() instanceof VideoChatActivity)) {
                     popupNotificationSnack.show();
                 }
+
             } catch (Exception e) {
                 CrashReport.postCatchedException(new Throwable("弹5秒窗出现问题"));
                 CrashReport.postCatchedException(e);
@@ -363,9 +335,6 @@ public class MAPP extends Application {
         return currentActivity;
     }
 
-    public void setCurrentTurnableConfigBean(TurntableConfigBean currentTurnableConfigBean) {
-        this.currentTurnableConfigBean = currentTurnableConfigBean;
-    }
 
     @Override
     protected void attachBaseContext(Context base) {

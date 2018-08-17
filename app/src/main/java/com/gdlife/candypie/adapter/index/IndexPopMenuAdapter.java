@@ -1,21 +1,13 @@
 package com.gdlife.candypie.adapter.index;
 
 import android.animation.Animator;
-import android.animation.AnimatorSet;
-import android.animation.ValueAnimator;
-import android.content.Intent;
 import android.view.ViewGroup;
 import android.view.ViewPropertyAnimator;
 import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
-import android.view.animation.AnimationSet;
 import android.view.animation.LinearInterpolator;
 
-import com.daimajia.androidanimations.library.Techniques;
-import com.daimajia.androidanimations.library.YoYo;
 import com.gdlife.candypie.MAPP;
 import com.gdlife.candypie.R;
-import com.gdlife.candypie.activitys.theme.ThemeListActivity;
 import com.gdlife.candypie.common.MValue;
 import com.gdlife.candypie.databinding.ItemPopMenuBinding;
 import com.gdlife.candypie.utils.ImageUtils;
@@ -25,15 +17,11 @@ import com.heboot.bean.config.ConfigBean;
 import com.heboot.recyclerview.baseadapter.BaseRecyclerViewAdapter;
 import com.heboot.recyclerview.baseadapter.BaseRecyclerViewHolder;
 import com.jakewharton.rxbinding2.view.RxView;
-import com.netease.nim.uikit.common.ui.recyclerview.animation.AlphaInAnimation;
-import com.netease.nim.uikit.common.util.log.LogUtil;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.functions.Consumer;
-
-import static android.view.animation.Animation.INFINITE;
 
 /**
  * Created by heboot on 2018/2/1.

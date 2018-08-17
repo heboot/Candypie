@@ -135,10 +135,6 @@
             android:screenOrientation="portrait"></activity>
 
         <activity
-            android:name=".activitys.theme.ThemeUserListActivity"
-            android:screenOrientation="portrait"></activity>
-
-        <activity
             android:name=".activitys.theme.ChooseAddressActivity"
             android:screenOrientation="portrait"></activity>
 
@@ -241,10 +237,6 @@
 
         <activity
             android:name=".activitys.video.PlayerActivity2"
-            android:screenOrientation="portrait"></activity>
-
-        <activity
-            android:name=".activitys.theme.NewServiceProgressActivity"
             android:screenOrientation="portrait"></activity>
 
         <activity

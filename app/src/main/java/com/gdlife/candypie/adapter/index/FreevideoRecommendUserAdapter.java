@@ -41,7 +41,7 @@ public class FreevideoRecommendUserAdapter extends BaseRecyclerViewAdapter {
             binding.setUser(s);
 
             binding.v1.setOnClickListener((v) -> {
-//                weakReference.get().postVideoService(s);
+                weakReference.get().postVideoService(s);
             });
 
             binding.ivAvatar.setOnClickListener((v) -> {
