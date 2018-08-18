@@ -21,6 +21,7 @@ import com.gdlife.candypie.widget.gift.BottomVideoGiftSheetDialog;
 import com.heboot.bean.config.TopMenuBean;
 import com.heboot.event.MessageEvent;
 import com.heboot.event.UserEvent;
+import com.heboot.utils.LogUtil;
 import com.netease.nimlib.sdk.NIMClient;
 import com.netease.nimlib.sdk.msg.MsgService;
 
@@ -55,7 +56,7 @@ public class IndexFragment extends BaseFragment<FragmentIndexBinding> {
 
     @Override
     public void initData() {
-
+        LogUtil.e(TAG, "initData");
         List<String> titles = new ArrayList();
 
         ArrayList<Fragment> fragments = new ArrayList<>();

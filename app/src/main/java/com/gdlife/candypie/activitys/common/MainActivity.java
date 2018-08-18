@@ -20,6 +20,7 @@ import com.gdlife.candypie.serivce.UserService;
 import com.gdlife.candypie.serivce.aservice.ForegroundService;
 import com.gdlife.candypie.serivce.theme.VideoChatService;
 import com.gdlife.candypie.utils.DialogUtils;
+import com.gdlife.candypie.utils.IntentUtils;
 import com.gdlife.candypie.utils.PermissionUtils;
 import com.gdlife.candypie.utils.ScreenManager;
 import com.gdlife.candypie.utils.ScreenReceiverUtil;
@@ -72,6 +73,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
 
     @Override
     public void initUI() {
+        LogUtil.e(TAG, "init ui");
         QMUIStatusBarHelper.translucent(this);
         MStatusBarUtils.setActivityNOLightMode(this);
         permissionUtils = new PermissionUtils();
@@ -242,14 +244,17 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
 
     @Override
     public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
-        LogUtil.e(TAG, "onSaveInstanceState");
         super.onSaveInstanceState(outState, outPersistentState);
+
     }
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         LogUtil.e(TAG, "onRestoreInstanceState");
         super.onRestoreInstanceState(savedInstanceState);
+        Intent intent = new Intent(this, WelcomeActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     private void setUnreadText() {

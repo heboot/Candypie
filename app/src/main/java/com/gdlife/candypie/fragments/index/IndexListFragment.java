@@ -37,6 +37,7 @@ import com.heboot.bean.index.IndexPopTipBean;
 import com.heboot.bean.index.IndexV5Bean;
 import com.heboot.entity.User;
 import com.heboot.event.DiscoverEvent;
+import com.heboot.utils.LogUtil;
 import com.yalantis.dialog.TipCustomDialog;
 
 import java.lang.ref.WeakReference;
@@ -259,7 +260,9 @@ public class IndexListFragment extends BaseFragment<FragmentIndexListBinding> {
     @Override
     public void onSupportVisible() {
         super.onSupportVisible();
+        LogUtil.e(TAG, "onSupportVisible1");
         if (testAdapter == null || testAdapter.getData() == null || testAdapter.getData().size() == 0) {
+            LogUtil.e(TAG, "onSupportVisible2");
             if (binding.nodataLayout.getVisibility() != View.VISIBLE) {
                 binding.srytIndex.setRefreshing(true);
                 initIndexData();
