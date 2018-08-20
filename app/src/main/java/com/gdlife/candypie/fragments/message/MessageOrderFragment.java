@@ -15,6 +15,7 @@ import com.gdlife.candypie.databinding.FragmentMessageOrderBinding;
 import com.gdlife.candypie.http.HttpCallBack;
 import com.gdlife.candypie.http.HttpClient;
 import com.gdlife.candypie.serivce.ServerService;
+import com.gdlife.candypie.serivce.UIService;
 import com.gdlife.candypie.utils.DialogUtils;
 import com.gdlife.candypie.utils.PermissionUtils;
 import com.gdlife.candypie.utils.SignUtils;
@@ -35,6 +36,8 @@ public class MessageOrderFragment extends BaseFragment<FragmentMessageOrderBindi
     private PermissionUtils permissionUtils;
 
     private ServerService serverService = new ServerService();
+
+    private UIService uiService = new UIService();
 
 
     public static MessageOrderFragment newInstance() {
@@ -150,8 +153,9 @@ public class MessageOrderFragment extends BaseFragment<FragmentMessageOrderBindi
                     } else {
                         messageOrderAdapter = new MessageOrderAdapter(R.layout.item_order_rob, new ArrayList<>());
                         binding.rList.setAdapter(messageOrderAdapter);
-
                     }
+
+                    messageOrderAdapter.setEmptyView(uiService.getEmptyViewByOrder("目前没有新的订单"));
 
 //                    binding.nodataLayout.setVisibility(View.VISIBLE);
 //                    binding.tvNodateIntro.setText("目前没有新的订单");

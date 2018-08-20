@@ -87,10 +87,10 @@ public class MessageOrderAdapter extends BaseQuickAdapter<OrderListBean.ListBean
             binding.btnRegister.setText(s.getAction_config().get(0).getValue());
             if (StringUtils.isEmpty(s.getAction_config().get(0).getColor())) {
                 binding.btnRegister.setSelected(false);
-                binding.btnRegister.setTextColor(ContextCompat.getColor(binding.getRoot().getContext(), R.color.color_58586C));
+                binding.btnRegister.setTextColor(ContextCompat.getColor(binding.getRoot().getContext(), R.color.white));
             } else {
                 binding.btnRegister.setSelected(true);
-                binding.btnRegister.setTextColor(ContextCompat.getColor(binding.getRoot().getContext(), R.color.white));
+                binding.btnRegister.setTextColor(ContextCompat.getColor(binding.getRoot().getContext(), R.color.color_58586C));
             }
         }
 

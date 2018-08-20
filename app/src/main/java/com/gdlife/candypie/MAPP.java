@@ -46,6 +46,7 @@ import com.heboot.base.BaseBean;
 import com.heboot.bean.config.ConfigBean;
 import com.heboot.bean.im.ImChatStatusBean;
 import com.heboot.bean.luckypan.TurntableConfigBean;
+import com.heboot.common.ConfigValue;
 import com.heboot.entity.User;
 import com.heboot.event.IMEvent;
 import com.heboot.event.MessageEvent;
@@ -361,5 +362,7 @@ public class MAPP extends Application {
 
     public void setConfigBean(ConfigBean configBean) {
         this.configBean = configBean;
+        //把客服相关的数据 给UIKIT 做最近联系人置顶排序
+        ConfigValue.setKf_uids(configBean.getKf_uids());
     }
 }

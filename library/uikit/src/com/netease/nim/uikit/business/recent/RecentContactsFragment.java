@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
+import com.heboot.common.ConfigValue;
 import com.heboot.event.MessageEvent;
 import com.heboot.rxbus.RxBus;
 import com.netease.nim.uikit.R;
@@ -279,20 +280,20 @@ public class RecentContactsFragment extends TFragment {
             }
         });
 
-        title = (isTagSet(recent, RECENT_TAG_STICKY) ? getString(R.string.main_msg_list_clear_sticky_on_top) : getString(R.string.main_msg_list_sticky_on_top));
-        alertDialog.addItem(title, new onSeparateItemClickListener() {
-            @Override
-            public void onClick() {
-                if (isTagSet(recent, RECENT_TAG_STICKY)) {
-                    removeTag(recent, RECENT_TAG_STICKY);
-                } else {
-                    addTag(recent, RECENT_TAG_STICKY);
-                }
-                NIMClient.getService(MsgService.class).updateRecent(recent);
-
-                refreshMessages(false);
-            }
-        });
+//        title = (isTagSet(recent, RECENT_TAG_STICKY) ? getString(R.string.main_msg_list_clear_sticky_on_top) : getString(R.string.main_msg_list_sticky_on_top));
+//        alertDialog.addItem(title, new onSeparateItemClickListener() {
+//            @Override
+//            public void onClick() {
+//                if (isTagSet(recent, RECENT_TAG_STICKY)) {
+//                    removeTag(recent, RECENT_TAG_STICKY);
+//                } else {
+//                    addTag(recent, RECENT_TAG_STICKY);
+//                }
+//                NIMClient.getService(MsgService.class).updateRecent(recent);
+//
+//                refreshMessages(false);
+//            }
+//        });
 
         alertDialog.addItem("删除该聊天（仅服务器）", new onSeparateItemClickListener() {
             @Override
@@ -358,12 +359,12 @@ public class RecentContactsFragment extends TFragment {
                         loadedRecents = recents;
                         // 初次加载，更新离线的消息中是否有@我的消息
                         for (RecentContact loadedRecent : loadedRecents) {
-                            if (loadedRecent.getFromAccount().equals("cdp23")) {
-                                if (!isTagSet(loadedRecent, RECENT_TAG_STICKY)) {
-                                    addTag(loadedRecent, RECENT_TAG_STICKY);
-                                    NIMClient.getService(MsgService.class).updateRecent(loadedRecent);
-                                }
-                            }
+//                            if (loadedRecent.getFromAccount().equals("cdp23")) {
+//                                if (!isTagSet(loadedRecent, RECENT_TAG_STICKY)) {
+//                                    addTag(loadedRecent, RECENT_TAG_STICKY);
+//                                    NIMClient.getService(MsgService.class).updateRecent(loadedRecent);
+//                                }
+//                            }
                             if (loadedRecent.getSessionType() == SessionTypeEnum.Team) {
                                 updateOfflineContactAited(loadedRecent);
                             }
@@ -494,12 +495,6 @@ public class RecentContactsFragment extends TFragment {
                         continue;
                     }
                     RxBus.getInstance().post(MessageEvent.REFRESH_UNREAD_NUM_ENENT);
-
-//                    if (imMessage.getFromAccount().equals("cdp8")) {
-//                        RecentContact recent =
-//                                addTag(recent, RECENT_TAG_STICKY);
-//                    }
-
                     Set<IMMessage> cacheMessageSet = cacheMessages.get(imMessage.getSessionId());
                     if (cacheMessageSet == null) {
                         cacheMessageSet = new HashSet<>();
@@ -544,7 +539,7 @@ public class RecentContactsFragment extends TFragment {
             }
 
             items.add(r);
-            if (r.getFromAccount().equals("cdp8") || r.getFromAccount().equals("cdp18") || r.getFromAccount().equals("cdp20")) {
+            if (ConfigValue.getKf_uids() != null && ConfigValue.getKf_uids().indexOf(r.getFromAccount()) > -1) {
                 LogUtil.e("标签测试", r.getTag() + "");
                 if (!isTagSet(r, RECENT_TAG_STICKY)) {
                     addTag(r, RECENT_TAG_STICKY);

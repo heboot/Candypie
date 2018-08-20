@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.gdlife.candypie.MAPP;
 import com.gdlife.candypie.R;
 import com.gdlife.candypie.databinding.IncludeNodataInfoBinding;
+import com.gdlife.candypie.databinding.IncludeNodataInfoOrderBinding;
 import com.gdlife.candypie.utils.StringUtils;
 import com.heboot.bean.user.TagsChildBean;
 import com.heboot.utils.ViewUtils;
@@ -45,12 +46,21 @@ public class UIService {
 
 
     /**
-     *
      * @param tipText
      * @return
      */
     public View getEmptyView(String tipText) {
-        IncludeNodataInfoBinding includeNodataInfoBinding = DataBindingUtil.inflate(LayoutInflater.from(MAPP.mapp), R.layout.layout_index_rob_order_head, null, false);
+        IncludeNodataInfoBinding includeNodataInfoBinding = DataBindingUtil.inflate(LayoutInflater.from(MAPP.mapp), R.layout.include_nodata_info, null, false);
+        includeNodataInfoBinding.tvNodateIntro.setText(tipText);
+        return includeNodataInfoBinding.getRoot();
+    }
+
+    /**
+     * @param tipText
+     * @return
+     */
+    public View getEmptyViewByOrder(String tipText) {
+        IncludeNodataInfoOrderBinding includeNodataInfoBinding = DataBindingUtil.inflate(LayoutInflater.from(MAPP.mapp), R.layout.include_nodata_info_order, null, false);
         includeNodataInfoBinding.tvNodateIntro.setText(tipText);
         return includeNodataInfoBinding.getRoot();
     }

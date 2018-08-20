@@ -10,11 +10,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.gdlife.candypie.R;
 import com.gdlife.candypie.adapter.rank.RankUserAdapter;
 import com.gdlife.candypie.base.BaseFragment;
 import com.gdlife.candypie.base.HttpObserver;
 import com.gdlife.candypie.common.MKey;
+import com.gdlife.candypie.common.MValue;
 import com.gdlife.candypie.databinding.FragmentIndexListBinding;
 import com.gdlife.candypie.databinding.LayoutIndexUserTopBinding;
 import com.gdlife.candypie.databinding.LayoutRankFilterBinding;
@@ -22,7 +24,9 @@ import com.gdlife.candypie.databinding.LayoutRankUsertopBinding;
 import com.gdlife.candypie.http.HttpClient;
 import com.gdlife.candypie.utils.GlideImageLoaderByIndexTop;
 import com.gdlife.candypie.utils.ImageUtils;
+import com.gdlife.candypie.utils.IntentUtils;
 import com.gdlife.candypie.utils.SignUtils;
+import com.gdlife.candypie.utils.ToastUtils;
 import com.heboot.base.BaseBean;
 import com.heboot.bean.index.IndexPopTipBean;
 import com.heboot.bean.rank.RankBean;
@@ -50,6 +54,10 @@ public class RankListFragment extends BaseFragment<FragmentIndexListBinding> {
     private boolean filterHeadFlag = false;
 
     private RankBean rankBean;
+
+    private View.OnClickListener topUserClickListener;
+
+    private User selectTopUser;
 
     public static RankListFragment newInstance(String name) {
         Bundle args = new Bundle();
@@ -84,12 +92,15 @@ public class RankListFragment extends BaseFragment<FragmentIndexListBinding> {
     @Override
     public void initData() {
 
-
     }
 
 
     @Override
     public void initListener() {
+
+        topUserClickListener = (v) -> {
+            toTopUserHomepage(selectTopUser);
+        };
 
         binding.srytIndex.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -98,24 +109,6 @@ public class RankListFragment extends BaseFragment<FragmentIndexListBinding> {
                 initIndexData();
             }
         });
-//        testAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-//                if (adapter.getData() == null || adapter.getData().size() <= 0) {
-//                    return;
-//                }
-//
-//                if (pageName.equals("r")) {
-//                    IntentUtils.toDiscoverActivity(binding.getRoot().getContext(), position, adapter.getData(), sp, total);
-//                } else {
-//                    IntentUtils.toHomepageActivity(_mActivity, MValue.FROM_OTHER, (User) adapter.getData().get(position), null, null);
-//                }
-//
-//
-//            }
-//        });
-
-
     }
 
 
@@ -152,11 +145,12 @@ public class RankListFragment extends BaseFragment<FragmentIndexListBinding> {
                 if (currentSelect == RANK_FILTER.WEEK) {
                     List<User> temp = new ArrayList<>();
                     temp.addAll(rankBean.getWeek());
+//                    initUserListData(subRankListData(rankBean.getWeek()));
                     initUserListData(temp);
                 } else if (currentSelect == RANK_FILTER.MONTH) {
                     List<User> temp = new ArrayList<>();
                     temp.addAll(rankBean.getMonth());
-                    initUserListData(temp);
+//                    initUserListData(subRankListData(rankBean.getMonth()));
                     initUserListData(baseBean.getData().getMonth());
                 }
             }
@@ -171,7 +165,7 @@ public class RankListFragment extends BaseFragment<FragmentIndexListBinding> {
 
     private void initUserListData(List<User> monthData) {
         if (rankUserAdapter == null) {
-            rankUserAdapter = new RankUserAdapter(R.layout.layout_rank_item, monthData, rankBean.getRank_title());
+            rankUserAdapter = new RankUserAdapter(R.layout.layout_rank_item, subRankListData(monthData), pageName);
             binding.rvList.setAdapter(rankUserAdapter);
             initFilterHeadView();
             if (monthData != null && monthData.size() > 0) {
@@ -188,7 +182,7 @@ public class RankListFragment extends BaseFragment<FragmentIndexListBinding> {
             initHeadView(monthData);
             binding.nodataLayout.setVisibility(View.GONE);
             rankUserAdapter.getData().clear();
-            rankUserAdapter.addData(monthData);
+            rankUserAdapter.addData(subRankListData(monthData));
 //            rankUserAdapter.notifyDataSetChanged();
         }
     }
@@ -258,9 +252,13 @@ public class RankListFragment extends BaseFragment<FragmentIndexListBinding> {
             if (topUsers != null && topUsers.size() > 0) {
                 ImageUtils.showAvatar(headBinding.avatar1, topUsers.get(0).getAvatar());
                 headBinding.tv1.setText(topUsers.get(0).getNickname());
+                selectTopUser = topUsers.get(0);
+                headBinding.avatar1.setOnClickListener(topUserClickListener);
                 if (topUsers.size() >= 2) {
                     ImageUtils.showAvatar(headBinding.avatar2, topUsers.get(1).getAvatar());
                     headBinding.tv2.setText(topUsers.get(1).getNickname());
+                    selectTopUser = topUsers.get(1);
+                    headBinding.avatar2.setOnClickListener(topUserClickListener);
                 } else {
                     headBinding.v2.setVisibility(View.INVISIBLE);
                     headBinding.avatar2.setVisibility(View.INVISIBLE);
@@ -270,6 +268,8 @@ public class RankListFragment extends BaseFragment<FragmentIndexListBinding> {
                 if (topUsers.size() >= 3) {
                     ImageUtils.showAvatar(headBinding.avatar3, topUsers.get(2).getAvatar());
                     headBinding.tv3.setText(topUsers.get(2).getNickname());
+                    selectTopUser = topUsers.get(2);
+                    headBinding.avatar3.setOnClickListener(topUserClickListener);
                 } else {
                     headBinding.v3.setVisibility(View.INVISIBLE);
                     headBinding.avatar3.setVisibility(View.INVISIBLE);
@@ -285,9 +285,13 @@ public class RankListFragment extends BaseFragment<FragmentIndexListBinding> {
             if (topUsers != null && topUsers.size() > 0) {
                 ImageUtils.showAvatar(headBinding.avatar1, topUsers.get(0).getAvatar());
                 headBinding.tv1.setText(topUsers.get(0).getNickname());
+                selectTopUser = topUsers.get(0);
+                headBinding.avatar1.setOnClickListener(topUserClickListener);
                 if (topUsers.size() >= 2) {
                     ImageUtils.showAvatar(headBinding.avatar2, topUsers.get(1).getAvatar());
                     headBinding.tv2.setText(topUsers.get(1).getNickname());
+                    selectTopUser = topUsers.get(1);
+                    headBinding.avatar2.setOnClickListener(topUserClickListener);
                 } else {
                     headBinding.v2.setVisibility(View.INVISIBLE);
                     headBinding.avatar2.setVisibility(View.INVISIBLE);
@@ -297,6 +301,8 @@ public class RankListFragment extends BaseFragment<FragmentIndexListBinding> {
                 if (topUsers.size() >= 3) {
                     ImageUtils.showAvatar(headBinding.avatar3, topUsers.get(2).getAvatar());
                     headBinding.tv3.setText(topUsers.get(2).getNickname());
+                    selectTopUser = topUsers.get(2);
+                    headBinding.avatar3.setOnClickListener(topUserClickListener);
                 } else {
                     headBinding.v3.setVisibility(View.INVISIBLE);
                     headBinding.avatar3.setVisibility(View.INVISIBLE);
@@ -306,6 +312,38 @@ public class RankListFragment extends BaseFragment<FragmentIndexListBinding> {
             }
         }
 
+    }
 
+
+    /**
+     * 排除排行榜前三的数据
+     */
+    private List<User> subRankListData(List<User> allRankUsers) {
+        List<User> temp = new ArrayList<>();
+        int startIndex = 0;
+        if (allRankUsers != null && allRankUsers.size() > 0) {
+            if (allRankUsers.size() >= 3) {
+                startIndex = 3;
+            } else if (allRankUsers.size() >= 2) {
+                startIndex = 2;
+            } else if (allRankUsers.size() >= 1) {
+                startIndex = 1;
+            } else {
+                startIndex = 0;
+            }
+            for (int i = startIndex; i < allRankUsers.size(); i++) {
+                temp.add(allRankUsers.get(i));
+            }
+        }
+        return temp;
+    }
+
+
+    private void toTopUserHomepage(User s) {
+        if (pageName.equals("consume")) {
+            IntentUtils.toUserInfoActivity(_mActivity, MValue.USER_INFO_TYPE_NORMAL, MValue.USER_INFO_TYPE_NORMAL, s, null, null);
+        } else {
+            IntentUtils.toHomepageActivity(_mActivity, MValue.FROM_OTHER, s, null, null);
+        }
     }
 }

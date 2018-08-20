@@ -187,6 +187,7 @@ public class MyFragment extends BaseFragment<FragmentMyBinding> {
             @Override
             public void onSuccess(BaseBean<MeDataBean> baseBean) {
                 meUser = baseBean.getData().getUser();
+                binding.plytContainer.toMain();
                 initCenterDatas();
             }
 

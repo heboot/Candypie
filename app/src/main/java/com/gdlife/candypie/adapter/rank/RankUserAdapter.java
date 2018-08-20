@@ -5,8 +5,10 @@ import android.databinding.DataBindingUtil;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.gdlife.candypie.R;
+import com.gdlife.candypie.common.MValue;
 import com.gdlife.candypie.databinding.LayoutRankItemBinding;
 import com.gdlife.candypie.utils.ImageUtils;
+import com.gdlife.candypie.utils.IntentUtils;
 import com.heboot.entity.User;
 
 import java.util.List;
@@ -42,6 +44,14 @@ public class RankUserAdapter extends BaseQuickAdapter<User, BaseViewHolder> {
         helper.setText(R.id.tv_action, rank_title);
 
         helper.setText(R.id.tv_value, s.getRank_value());
+
+        layoutRankItemBinding.getRoot().setOnClickListener((v) -> {
+            if (rank_title.equals("consume")) {
+                IntentUtils.toUserInfoActivity(v.getContext(), MValue.USER_INFO_TYPE_NORMAL, MValue.USER_INFO_TYPE_NORMAL, s, null, null);
+            } else {
+                IntentUtils.toHomepageActivity(v.getContext(), MValue.FROM_OTHER, s, null, null);
+            }
+        });
 
     }
 }

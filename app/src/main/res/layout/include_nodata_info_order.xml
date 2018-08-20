@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:id="@+id/nodata_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingTop="@dimen/y180"
+            android:visibility="visible">
+
+            <ImageView
+                android:id="@+id/nodata_click"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/icon_order_null"
+                android:scaleType="centerCrop" />
+
+            <TextView
+                android:id="@+id/tv_nodate_intro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/y20"
+                android:text="没有数据"
+                android:textColor="@color/color_898A9E"
+                android:textSize="@dimen/x14" />
+
+
+        </LinearLayout>
+
+    </FrameLayout>
+</layout>

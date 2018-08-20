@@ -538,11 +538,6 @@ public class UserInfoActivity extends BaseActivity<ActivityUserInfoBinding> {
         });
 
         binding.includeAvatar.getRoot().setOnClickListener((v) -> {
-
-            if (user.getRole() == MValue.USER_ROLE_SERVICER) {
-                return;
-            }
-
             cropUri = ImageUtils.getCropPhotoUri();
             if (avatarBottomSheet == null) {
                 avatarBottomSheet = DialogUtils.getAvatarBottomSheet(UserInfoActivity.this, avatarConsumer);
