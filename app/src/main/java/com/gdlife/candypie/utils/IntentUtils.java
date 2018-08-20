@@ -60,8 +60,8 @@ import com.gdlife.candypie.activitys.user.UserInfoActivity;
 import com.gdlife.candypie.activitys.user.UserInfoInputActivity;
 import com.gdlife.candypie.activitys.user.UserSkillListActivity;
 import com.gdlife.candypie.activitys.user.UserYueAttitudeActivity;
+import com.gdlife.candypie.activitys.video.AutoPlayActivity;
 import com.gdlife.candypie.activitys.video.PlayerActivity2;
-import com.gdlife.candypie.activitys.video.PlayerActivity3;
 import com.gdlife.candypie.activitys.video.UserVideosActivity;
 import com.gdlife.candypie.activitys.video.VideoChatActivity;
 import com.gdlife.candypie.activitys.video.VideoFrameActivity;
@@ -124,7 +124,7 @@ public class IntentUtils {
     }
 
     public static void toPlayerActivity3(Context context, List<HomepageVideoBean> user, int clickPosition) {
-        Intent intent = new Intent(context, PlayerActivity3.class);
+        Intent intent = new Intent(context, AutoPlayActivity.class);
         intent.putExtra(MKey.USER, (Serializable) user);
         intent.putExtra(MKey.INDEX, clickPosition);
         context.startActivity(intent);

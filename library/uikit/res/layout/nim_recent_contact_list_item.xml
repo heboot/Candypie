@@ -58,6 +58,19 @@
             android:layout_marginTop="@dimen/y25"
             android:layout_toRightOf="@id/tv_nickname"></include>
 
+        <TextView
+            android:id="@+id/tv_guanfang"
+            android:layout_width="@dimen/x40"
+            android:layout_height="@dimen/y18"
+            android:layout_marginTop="@dimen/y26"
+            android:layout_toRightOf="@id/tv_nickname"
+            android:background="@drawable/bg_rect_343445_3"
+            android:gravity="center"
+            android:text="官方"
+            android:textColor="@color/white"
+            android:textSize="@dimen/x12"
+            android:visibility="invisible" />
+
         <LinearLayout
             android:id="@+id/content_layout"
             android:layout_width="wrap_content"

@@ -31,7 +31,7 @@ import static com.heboot.event.DiscoverEvent.DISCOVER_PAUSE_PLAY_EVENT_BY_USER_V
  * Created by heboot on 2018/1/17.
  */
 
-public class PlayerActivity3 extends BaseActivity<ActivityAutoPlayerBinding> {
+public class AutoPlayActivity extends BaseActivity<ActivityAutoPlayerBinding> {
 
     private UserVideosVPAdapter userVideosVPAdapter;
 
@@ -89,7 +89,7 @@ public class PlayerActivity3 extends BaseActivity<ActivityAutoPlayerBinding> {
 
     @Override
     public void onPause() {
-        if(tempView != null && tempView.getmPlayer() !=null){
+        if (tempView != null && tempView.getmPlayer() != null) {
             tempView.getmPlayer().pause();
             binding.ivPlay.setVisibility(View.VISIBLE);
 
@@ -100,7 +100,7 @@ public class PlayerActivity3 extends BaseActivity<ActivityAutoPlayerBinding> {
 
     @Override
     public void onStop() {
-        if(tempView != null && tempView.getmPlayer() !=null){
+        if (tempView != null && tempView.getmPlayer() != null) {
             tempView.getmPlayer().stopPlayback();
 
         }
@@ -198,7 +198,7 @@ public class PlayerActivity3 extends BaseActivity<ActivityAutoPlayerBinding> {
 
             }
         });
-        binding.ovBack.setOnClickListener((v)->{
+        binding.ovBack.setOnClickListener((v) -> {
             finish();
         });
     }
@@ -227,9 +227,9 @@ public class PlayerActivity3 extends BaseActivity<ActivityAutoPlayerBinding> {
     }
 
     public static class MOnPageChangeListener implements ViewPager.OnPageChangeListener {
-        private WeakReference<PlayerActivity3> weakReference;
+        private WeakReference<AutoPlayActivity> weakReference;
 
-        public MOnPageChangeListener(WeakReference<PlayerActivity3> weakReference) {
+        public MOnPageChangeListener(WeakReference<AutoPlayActivity> weakReference) {
             this.weakReference = weakReference;
         }
 
@@ -305,9 +305,9 @@ public class PlayerActivity3 extends BaseActivity<ActivityAutoPlayerBinding> {
 
     public static class MInfoLis implements PLOnInfoListener {
 
-        private WeakReference<PlayerActivity3> weakReference;
+        private WeakReference<AutoPlayActivity> weakReference;
 
-        public MInfoLis(WeakReference<PlayerActivity3> weakReference) {
+        public MInfoLis(WeakReference<AutoPlayActivity> weakReference) {
             this.weakReference = weakReference;
         }
 
@@ -315,7 +315,7 @@ public class PlayerActivity3 extends BaseActivity<ActivityAutoPlayerBinding> {
         @Override
         public void onInfo(int i, int i1) {
             if (i == MEDIA_INFO_VIDEO_RENDERING_START) {
-                if(weakReference.get() != null && weakReference.get().currentPlayBinding != null){
+                if (weakReference.get() != null && weakReference.get().currentPlayBinding != null) {
                     weakReference.get().currentPlayBinding.ivPlay.setVisibility(View.GONE);
                     weakReference.get().currentPlayBinding.ivCover.setVisibility(View.GONE);
                 }
@@ -326,16 +326,16 @@ public class PlayerActivity3 extends BaseActivity<ActivityAutoPlayerBinding> {
     }
 
     public static class MComLis implements PLOnCompletionListener {
-        private WeakReference<PlayerActivity3> vodModeActivityWeakReference;
+        private WeakReference<AutoPlayActivity> vodModeActivityWeakReference;
 
-        public MComLis(PlayerActivity3 vodModeActivity) {
-            vodModeActivityWeakReference = new WeakReference<PlayerActivity3>(vodModeActivity);
+        public MComLis(AutoPlayActivity vodModeActivity) {
+            vodModeActivityWeakReference = new WeakReference<AutoPlayActivity>(vodModeActivity);
         }
 
 
         @Override
         public void onCompletion() {
-            PlayerActivity3 vodModeActivity = vodModeActivityWeakReference.get();
+            AutoPlayActivity vodModeActivity = vodModeActivityWeakReference.get();
             if (vodModeActivity != null) {
                 vodModeActivity.onCompleted();
             }

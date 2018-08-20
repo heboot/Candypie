@@ -13,7 +13,7 @@ import com.gdlife.candypie.activitys.theme.NewThemeActivity;
 import com.gdlife.candypie.activitys.theme.ServiceCancelActivity;
 import com.gdlife.candypie.activitys.user.HomepageActivity;
 import com.gdlife.candypie.activitys.video.PlayerActivity2;
-import com.gdlife.candypie.activitys.video.PlayerActivity3;
+import com.gdlife.candypie.activitys.video.AutoPlayActivity;
 import com.gdlife.candypie.activitys.video.UserVideosActivity;
 import com.gdlife.candypie.activitys.video.VideoChatActivity;
 import com.gdlife.candypie.activitys.video.VideoChatActivity2;
@@ -65,7 +65,7 @@ public interface ServiceComponent {
 
     void inject(PlayerActivity2 playerActivity2);
 
-    void inject(PlayerActivity3 playerActivity2);
+    void inject(AutoPlayActivity playerActivity2);
 
     void inject(VideoChatActivity videoChatActivity);
 

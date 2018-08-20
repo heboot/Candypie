@@ -280,7 +280,7 @@
             android:screenOrientation="portrait"></activity>
 
         <activity
-            android:name=".activitys.video.PlayerActivity3"
+            android:name=".activitys.video.AutoPlayActivity"
             android:screenOrientation="portrait"></activity>
 
         <activity

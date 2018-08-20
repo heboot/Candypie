@@ -980,43 +980,64 @@ public class UserInfoActivity extends BaseActivity<ActivityUserInfoBinding> {
         params.put(MKey.AVATAR, JSON.toJSONString(req));
         String sign = SignUtils.doSign(params);
         params.put(MKey.SIGN, sign);
-        HttpClient.Builder.getGuodongServer().upload_avatar(params).observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribe(new BaseObserver(new HttpCallBack<UserInfoEditBean>() {
+
+
+        HttpClient.Builder.getGuodongServer().upload_avatar(params).observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribe(new HttpObserver<UserInfoEditBean>() {
             @Override
-            public void onSubscribe(Disposable disposable) {
-                addDisposable(disposable);
-            }
-
-            @Override
-            public void onSuccess(UserInfoEditBean sendSMSBeanBaseBean) {
-
-                UserService.getInstance().setUser(sendSMSBeanBaseBean.getUser());
-                RxBus.getInstance().post(UserEvent.UPDATE_PROFILE);
-
+            public void onSuccess(BaseBean<UserInfoEditBean> baseBean) {
                 loadingDialog.dismiss();
-                tipDialog = DialogUtils.getSuclDialog(UserInfoActivity.this, "修改成功", true);
+                tipDialog = DialogUtils.getSuclDialog(UserInfoActivity.this, baseBean.getMessage(), true);
                 tipDialog.show();
             }
 
-
             @Override
-            public void onError(Throwable throwable) {
-                loadingDialog.dismiss();
-                loadingDialog = DialogUtils.getFailDialog(UserInfoActivity.this, throwable.getMessage(), true);
-                loadingDialog.show();
-            }
-
-            @Override
-            public void onError(BaseBean<UserInfoEditBean> basebean) {
+            public void onError(BaseBean<UserInfoEditBean> baseBean) {
                 if (tipDialog != null && tipDialog.isShowing()) {
                     tipDialog.dismiss();
                 }
 
-                tipDialog = DialogUtils.getFailDialog(UserInfoActivity.this, basebean.getMessage(), true);
+                tipDialog = DialogUtils.getFailDialog(UserInfoActivity.this, baseBean.getMessage(), true);
                 tipDialog.show();
             }
+        });
 
-
-        }));
+//        HttpClient.Builder.getGuodongServer().upload_avatar(params).observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribe(new BaseObserver(new HttpCallBack<UserInfoEditBean>() {
+//            @Override
+//            public void onSubscribe(Disposable disposable) {
+//                addDisposable(disposable);
+//            }
+//
+//            @Override
+//            public void onSuccess(UserInfoEditBean sendSMSBeanBaseBean) {
+//
+//                UserService.getInstance().setUser(sendSMSBeanBaseBean.getUser());
+//                RxBus.getInstance().post(UserEvent.UPDATE_PROFILE);
+//
+//                loadingDialog.dismiss();
+//                tipDialog = DialogUtils.getSuclDialog(UserInfoActivity.this, "修改成功", true);
+//                tipDialog.show();
+//            }
+//
+//
+//            @Override
+//            public void onError(Throwable throwable) {
+//                loadingDialog.dismiss();
+//                loadingDialog = DialogUtils.getFailDialog(UserInfoActivity.this, throwable.getMessage(), true);
+//                loadingDialog.show();
+//            }
+//
+//            @Override
+//            public void onError(BaseBean<UserInfoEditBean> basebean) {
+//                if (tipDialog != null && tipDialog.isShowing()) {
+//                    tipDialog.dismiss();
+//                }
+//
+//                tipDialog = DialogUtils.getFailDialog(UserInfoActivity.this, basebean.getMessage(), true);
+//                tipDialog.show();
+//            }
+//
+//
+//        }));
     }
 
     @Override

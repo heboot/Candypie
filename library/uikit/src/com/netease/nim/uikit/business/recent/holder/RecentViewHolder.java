@@ -1,5 +1,6 @@
 package com.netease.nim.uikit.business.recent.holder;
 
+import android.databinding.DataBindingUtil;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Handler;
 import android.text.TextUtils;
@@ -9,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.heboot.common.ConfigValue;
 import com.netease.nim.uikit.R;
 import com.netease.nim.uikit.api.NimUIKit;
 import com.netease.nim.uikit.business.recent.RecentContactsCallback;
@@ -24,6 +26,7 @@ import com.netease.nim.uikit.common.ui.recyclerview.holder.BaseViewHolder;
 import com.netease.nim.uikit.common.ui.recyclerview.holder.RecyclerViewHolder;
 import com.netease.nim.uikit.common.util.sys.ScreenUtil;
 import com.netease.nim.uikit.common.util.sys.TimeUtil;
+import com.netease.nim.uikit.databinding.LayoutSexAgeBinding;
 import com.netease.nimlib.sdk.msg.constant.MsgStatusEnum;
 import com.netease.nimlib.sdk.msg.constant.SessionTypeEnum;
 import com.netease.nimlib.sdk.msg.model.RecentContact;
@@ -63,6 +66,11 @@ public abstract class RecentViewHolder extends RecyclerViewHolder<BaseQuickAdapt
 
     private LinearLayout container;
 
+    /**
+     * 官方标识
+     */
+    private TextView tv_guanfang;
+
 
     // 子类覆写
     protected abstract String getContent(RecentContact recent);
@@ -85,6 +93,7 @@ public abstract class RecentViewHolder extends RecyclerViewHolder<BaseQuickAdapt
         this.bottomLine = holder.getView(R.id.bottom_line);
         this.topLine = holder.getView(R.id.top_line);
         this.tvOnlineState = holder.getView(R.id.tv_online_state);
+        this.tv_guanfang = holder.getView(R.id.tv_guanfang);
 //        this.container = holder.getView(R.id.llyt_container);
         holder.addOnClickListener(R.id.unread_number_tip);
         this.imgHead.setOnClickListener(
@@ -97,6 +106,15 @@ public abstract class RecentViewHolder extends RecyclerViewHolder<BaseQuickAdapt
                     getCallback().onItemClick(recent);
                 })
         );
+
+//        LayoutSexAgeBinding binding = DataBindingUtil.bind(holder.getView(R.id.include_sexage));
+
+        if (ConfigValue.getKf_uids() != null && ConfigValue.getKf_uids().indexOf(recent.getFromAccount().replace("cdp", "")) > -1) {
+            this.tv_guanfang.setVisibility(View.VISIBLE);
+        } else {
+            this.tv_guanfang.setVisibility(View.INVISIBLE);
+        }
+
 //        this.container.setOnClickListener(
 //                (v -> {
 //                    getCallback().onItemClick(recent);

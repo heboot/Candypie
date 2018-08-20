@@ -3,23 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <FrameLayout
-        android:layout_width="@dimen/x375"
-        android:layout_height="@dimen/y667">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <!--<android.support.constraint.ConstraintLayout-->
-            <!--android:layout_width="@dimen/x375"-->
-            <!--android:layout_height="@dimen/y667"-->
-            <!--android:background="@color/aliyun_red"-->
-           <!--&gt;-->
+        <!--android:layout_width="@dimen/x375"-->
+        <!--android:layout_height="@dimen/y667"-->
+        <!--android:background="@color/aliyun_red"-->
+        <!--&gt;-->
 
-            <com.pili.pldroid.player.widget.PLVideoTextureView
-                android:id="@+id/PLVideoView"
-                android:layout_width="@dimen/x375"
-                android:layout_height="@dimen/y667"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+        <com.pili.pldroid.player.widget.PLVideoTextureView
+            android:id="@+id/PLVideoView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <!--</android.support.constraint.ConstraintLayout>-->
     </FrameLayout>
