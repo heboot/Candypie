@@ -4,10 +4,8 @@ import android.view.ViewGroup;
 
 import com.gdlife.candypie.R;
 import com.gdlife.candypie.common.MValue;
-import com.gdlife.candypie.databinding.ItemNewThemeTimeBinding;
 import com.gdlife.candypie.databinding.ItemRecommendUserBinding;
 import com.gdlife.candypie.serivce.UserService;
-import com.gdlife.candypie.utils.ImageUtils;
 import com.gdlife.candypie.utils.IntentUtils;
 import com.heboot.bean.config.ConfigBean;
 import com.heboot.entity.User;
@@ -45,7 +43,7 @@ public class NewThemeRecommendUserAdapter extends BaseRecyclerViewAdapter {
         public void onBindViewHolder(final User s, int position) {
             binding.setUser(s);
             binding.getRoot().setOnClickListener((v) -> {
-                IntentUtils.toHomepageActivity(v.getContext(), UserService.getInstance().getUser() != null && UserService.getInstance().getUser().getId() != null &&  s.getId() == UserService.getInstance().getUser().getId() ? MValue.FROM_MY : MValue.FROM_OTHER, s, MValue.HOMEPAG_FROM.RECOMMEND_USER, listBean);
+                IntentUtils.toHomepageActivity(v.getContext(), UserService.getInstance().getUser() != null && UserService.getInstance().getUser().getId() != null && s.getId() == UserService.getInstance().getUser().getId() ? MValue.FROM_MY : MValue.FROM_OTHER, s, MValue.HOMEPAG_FROM.RECOMMEND_USER, listBean);
             });
         }
     }

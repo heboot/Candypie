@@ -250,7 +250,6 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        LogUtil.e(TAG, "onRestoreInstanceState");
         super.onRestoreInstanceState(savedInstanceState);
         Intent intent = new Intent(this, WelcomeActivity.class);
         startActivity(intent);
