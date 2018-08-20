@@ -85,18 +85,37 @@ public abstract class RecentViewHolder extends RecyclerViewHolder<BaseQuickAdapt
         this.bottomLine = holder.getView(R.id.bottom_line);
         this.topLine = holder.getView(R.id.top_line);
         this.tvOnlineState = holder.getView(R.id.tv_online_state);
-        this.container = holder.getView(R.id.llyt_container);
+//        this.container = holder.getView(R.id.llyt_container);
         holder.addOnClickListener(R.id.unread_number_tip);
-        this.portraitPanel.setOnClickListener(
+        this.imgHead.setOnClickListener(
                 (v -> {
                     getCallback().onAvatarClick(recent.getContactId());
                 })
         );
-        this.container.setOnClickListener(
+        holder.getView(R.id.rlyt_container).setOnClickListener(
                 (v -> {
                     getCallback().onItemClick(recent);
                 })
         );
+//        this.container.setOnClickListener(
+//                (v -> {
+//                    getCallback().onItemClick(recent);
+//                })
+//        );
+//        this.portraitPanel.setOnLongClickListener(new View.OnLongClickListener() {
+//            @Override
+//            public boolean onLongClick(View v) {
+//                getCallback().onItemClick(recent);
+//                return true;
+//            }
+//        });
+//        this.container.setOnLongClickListener(new View.OnLongClickListener() {
+//            @Override
+//            public boolean onLongClick(View v) {
+//                getCallback().onItemClick(recent);
+//                return true;
+//            }
+//        });
 
         this.tvUnread.setTouchListener(new DropFake.ITouchListener() {
             @Override

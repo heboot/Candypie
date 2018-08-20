@@ -1,6 +1,7 @@
 package com.gdlife.candypie.fragments.message;
 
 import android.databinding.DataBindingUtil;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -56,7 +57,11 @@ public class MessageActiveFragment extends BaseFragment<FragmentMessageActiveBin
     public void initUI() {
 
         binding.rList.setLayoutManager(new LinearLayoutManager(_mActivity, LinearLayoutManager.VERTICAL, false));
-
+        binding.srytIndex.setEnabled(true);
+        binding.srytIndex.setColorSchemeColors(getResources().getColor(R.color.theme_color));
+        binding.srytIndex.setDistanceToTriggerSync(700);
+        binding.srytIndex.setProgressBackgroundColorSchemeColor(Color.WHITE);
+        binding.srytIndex.setSize(SwipeRefreshLayout.DEFAULT);
     }
 
     @Override

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="user"
+            type="com.heboot.entity.User"></variable>
+
+        <import type="com.netease.nim.uikit.service.UserService"></import>
+
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/iv_sex_bg"
+            android:layout_width="@dimen/x38"
+            android:layout_height="@dimen/y17"
+            android:layout_marginLeft="@dimen/x5"
+            android:background="@{user.sex == 0?@drawable/bg_rect_sex:@drawable/bg_rect_sex_man}" />
+
+        <TextView
+            android:id="@+id/tv_age"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@{user.sex == 0?`♀` + UserService.getUserAgeByBirthdayNoSui(user):`♂` + UserService.getUserAgeByBirthdayNoSui(user)}"
+            android:textColor="@color/white"
+            android:textSize="@dimen/x12"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_sex_bg"
+            app:layout_constraintLeft_toLeftOf="@+id/iv_sex_bg"
+            app:layout_constraintRight_toRightOf="@+id/iv_sex_bg"
+            app:layout_constraintTop_toTopOf="@+id/iv_sex_bg" />
+    </android.support.constraint.ConstraintLayout>
+</layout>

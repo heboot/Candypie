@@ -9,6 +9,7 @@ import com.gdlife.candypie.MAPP;
 import com.gdlife.candypie.common.RecordVideoFrom;
 import com.gdlife.candypie.common.ReportFromType;
 import com.gdlife.candypie.databinding.LayoutMyBottomMenusItemBinding;
+import com.gdlife.candypie.serivce.AuthService;
 import com.gdlife.candypie.serivce.UserService;
 import com.gdlife.candypie.utils.ImageUtils;
 import com.gdlife.candypie.utils.IntentUtils;
@@ -52,7 +53,11 @@ public class MyBottomMenuAdapter extends BaseQuickAdapter<MyBottomMenuModel, Bas
             } else if (item.getName().equals("新手指南")) {
                 IntentUtils.toHTMLActivity(binding.getRoot().getContext(), "", MAPP.mapp.getConfigBean().getStatic_url_config().getUser_help());
             } else if (item.getName().equals("常见问题")) {
-                IntentUtils.toHTMLActivity(binding.getRoot().getContext(), "", MAPP.mapp.getConfigBean().getStatic_url_config().getUser_help());
+                if (UserService.getInstance().isServicer()) {
+                    IntentUtils.toHTMLActivity(binding.getRoot().getContext(), "", MAPP.mapp.getConfigBean().getStatic_url_config().getServicer_qa());
+                } else {
+                    IntentUtils.toHTMLActivity(binding.getRoot().getContext(), "", MAPP.mapp.getConfigBean().getStatic_url_config().getUser_qa());
+                }
             } else if (item.getName().equals("意见反馈")) {
 //                IntentUtils.toSettingActivity(helper.itemView.getContext());
                 IntentUtils.toReportActivity(helper.itemView.getContext(), null, ReportFromType.FEEBACK);

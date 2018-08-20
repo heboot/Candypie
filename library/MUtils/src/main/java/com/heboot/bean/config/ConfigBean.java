@@ -514,6 +514,24 @@ public class ConfigBean implements Serializable {
         private String servicer_help;
         private String cancel_rule;
         private String kpi;
+        private String user_qa;
+        private String servicer_qa;
+
+        public String getServicer_qa() {
+            return servicer_qa;
+        }
+
+        public void setServicer_qa(String servicer_qa) {
+            this.servicer_qa = servicer_qa;
+        }
+
+        public String getUser_qa() {
+            return user_qa;
+        }
+
+        public void setUser_qa(String user_qa) {
+            this.user_qa = user_qa;
+        }
 
         public String getKpi() {
             return kpi;

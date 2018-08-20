@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/llyt_container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/llyt_container"
     android:background="@drawable/nim_touch_bg"
     android:orientation="vertical">
 
@@ -12,9 +12,11 @@
         android:layout_marginLeft="70dip" />
 
     <RelativeLayout
+        android:id="@+id/rlyt_container"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="1dip"
+        android:focusable="true"
         android:minHeight="@dimen/y100">
 
         <FrameLayout
@@ -47,6 +49,14 @@
             android:text="111"
             android:textColor="@color/color_343445"
             android:textSize="@dimen/x17" />
+
+        <include
+            android:id="@+id/include_sexage"
+            layout="@layout/layout_sex_age"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/y25"
+            android:layout_toRightOf="@id/tv_nickname"></include>
 
         <LinearLayout
             android:id="@+id/content_layout"

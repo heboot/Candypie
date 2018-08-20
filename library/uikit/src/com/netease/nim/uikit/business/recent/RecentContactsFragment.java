@@ -146,7 +146,7 @@ public class RecentContactsFragment extends TFragment {
         // recyclerView
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-//        recyclerView.addOnItemTouchListener(touchListener);
+        recyclerView.addOnItemTouchListener(touchListener);
 
         // ios style
         OverScrollDecoratorHelper.setUpOverScroll(recyclerView, OverScrollDecoratorHelper.ORIENTATION_VERTICAL);
@@ -209,14 +209,18 @@ public class RecentContactsFragment extends TFragment {
     private SimpleClickListener<RecentContactAdapter> touchListener = new SimpleClickListener<RecentContactAdapter>() {
         @Override
         public void onItemClick(RecentContactAdapter adapter, View view, int position) {
+            LogUtil.e("云信点击测试", view + ">> " + view.getClass().getName());
             if (callback != null) {
-                if (view.getId() == R.id.portrait_panel) {
-                    RecentContact recent = adapter.getItem(position);
-                    callback.onAvatarClick(recent.getContactId());
-                } else {
+                if (view.getId() != R.id.llyt_container) {
+//                    RecentContact recent = adapter.getItem(position);
+//                    callback.onAvatarClick(recent.getContactId());
                     RecentContact recent = adapter.getItem(position);
                     callback.onItemClick(recent);
                 }
+//                else {
+//                    RecentContact recent = adapter.getItem(position);
+//                    callback.onItemClick(recent);
+//                }
 
             }
         }
@@ -539,7 +543,7 @@ public class RecentContactsFragment extends TFragment {
             }
 
             items.add(r);
-            if (ConfigValue.getKf_uids() != null && ConfigValue.getKf_uids().indexOf(r.getFromAccount()) > -1) {
+            if (ConfigValue.getKf_uids() != null && ConfigValue.getKf_uids().indexOf(r.getFromAccount().replace("cdp", "")) > -1) {
                 LogUtil.e("标签测试", r.getTag() + "");
                 if (!isTagSet(r, RECENT_TAG_STICKY)) {
                     addTag(r, RECENT_TAG_STICKY);

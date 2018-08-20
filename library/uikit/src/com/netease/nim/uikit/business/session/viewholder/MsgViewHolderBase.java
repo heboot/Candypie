@@ -11,6 +11,8 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.netease.nim.uikit.R;
 import com.netease.nim.uikit.business.session.module.list.MsgAdapter;
 import com.netease.nim.uikit.business.team.helper.TeamHelper;
@@ -25,6 +27,7 @@ import com.netease.nimlib.sdk.msg.MsgService;
 import com.netease.nimlib.sdk.msg.attachment.FileAttachment;
 import com.netease.nimlib.sdk.msg.constant.MsgDirectionEnum;
 import com.netease.nimlib.sdk.msg.constant.MsgStatusEnum;
+import com.netease.nimlib.sdk.msg.constant.MsgTypeEnum;
 import com.netease.nimlib.sdk.msg.constant.SessionTypeEnum;
 import com.netease.nimlib.sdk.msg.model.IMMessage;
 
@@ -163,6 +166,10 @@ public abstract class MsgViewHolderBase extends RecyclerViewHolder<BaseMultiItem
         return message.getDirect() == MsgDirectionEnum.In;
     }
 
+    //扣掉钻石提示自定义代码
+    protected TextView tvCoinTip;
+
+
     /// -- 以下是基类实现代码
     @Override
     public void convert(BaseViewHolder holder, IMMessage data, int position, boolean isScrolling) {
@@ -186,6 +193,7 @@ public abstract class MsgViewHolderBase extends RecyclerViewHolder<BaseMultiItem
         nameIconView = findViewById(R.id.message_item_name_icon);
         nameContainer = findViewById(R.id.message_item_name_layout);
         readReceiptTextView = findViewById(R.id.textViewAlreadyRead);
+        tvCoinTip = findViewById(R.id.tv_coin_tip);
 
         // 这里只要inflate出来后加入一次即可
         if (contentContainer.getChildCount() == 0) {
@@ -245,6 +253,13 @@ public abstract class MsgViewHolderBase extends RecyclerViewHolder<BaseMultiItem
             default:
                 progressBar.setVisibility(View.GONE);
                 alertButton.setVisibility(View.GONE);
+                if (message.getDirect() == MsgDirectionEnum.Out && (tvCoinTip.getTag() == null || !tvCoinTip.getTag().equals("hehe"))) {
+                    if (message.getMsgType() == MsgTypeEnum.audio || message.getMsgType() == MsgTypeEnum.text || message.getMsgType() == MsgTypeEnum.image) {
+                        tvCoinTip.setVisibility(View.VISIBLE);
+                        tvCoinTip.setTag("hehe");
+                        YoYo.with(Techniques.FadeOut).delay(3000).duration(1000).playOn(tvCoinTip);
+                    }
+                }
                 break;
         }
     }

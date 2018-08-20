@@ -88,6 +88,15 @@
             android:gravity="bottom"
             android:orientation="horizontal">
 
+            <TextView
+                android:id="@+id/tv_coin_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="hehe"
+                android:textColor="@color/aliyun_red"
+                android:textSize="@dimen/x10"
+                android:visibility="invisible"></TextView>
+
             <ProgressBar
                 android:id="@+id/message_item_progress"
                 android:layout_width="20dip"
