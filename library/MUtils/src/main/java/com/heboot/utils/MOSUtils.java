@@ -17,6 +17,31 @@ public class MOSUtils {
     private static final String KEY_MIUI_VERSION_CODE = "ro.miui.ui.version.code";
     private static final String KEY_MIUI_VERSION_NAME = "ro.miui.ui.version.name";
     private static final String KEY_MIUI_INTERNAL_STORAGE = "ro.miui.internal.storage";
+    private static final String KEY_EMUI_VERSION_CODE = "ro.build.version.emui";
+
+    private static boolean isPropertiesExist(String... keys) {
+        if (keys == null || keys.length == 0) {
+            return false;
+        }
+        try {
+            BuildProperties properties = BuildProperties.newInstance();
+            for (String key : keys) {
+                String value = properties.getProperty(key);
+                if (value != null)
+                    return true;
+            }
+            return false;
+        } catch (IOException e) {
+            return false;
+        }
+    }
+
+
+    public static boolean isEMUI() {
+//        return isPropertiesExist(KEY_EMUI_VERSION_CODE);
+        return "huawei".equalsIgnoreCase(Build.MANUFACTURER);
+    }
+
 
     public static boolean isMIUI() {
         try {

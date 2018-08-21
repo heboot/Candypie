@@ -138,9 +138,6 @@ public class MAPP extends Application {
         } catch (Exception e) {
         }
 
-        if (MzSystemUtils.isBrandMeizu()) {
-            PushManager.register(this, "1000031", "29fc2e1946014c8d99eafe44fc89db7b");
-        }
 
         MobSDK.init(this);
 

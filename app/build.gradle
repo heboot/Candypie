@@ -138,13 +138,12 @@ dependencies {
     api rootProject.ext.dependencies["dagger"]
     kapt rootProject.ext.dependencies["dagger_compiler"]
     implementation rootProject.ext.dependencies["multidex"]
-//    debugImplementation rootProject.ext.dependencies["leakcanary"]
+    //    debugImplementation rootProject.ext.dependencies["leakcanary"]
     //debugCompile
-//    releaseImplementation rootProject.ext.dependencies["leakcanary_no_ap"]
+    //    releaseImplementation rootProject.ext.dependencies["leakcanary_no_ap"]
     implementation rootProject.ext.dependencies["xrecyclerview"]
     implementation rootProject.ext.dependencies["easypermissions"]
     api project(path: ':library:picture_library')
-
     api files('libs/libammsdk.jar')
     api files('libs/alipaySdk-20170725.jar')
     api files('libs/agora-sig-sdk.jar')
@@ -163,14 +162,11 @@ dependencies {
     api 'me.kaelaela:verticalviewpager:1.0.0@aar'
     api 'com.github.castorflex.verticalviewpager:library:19.0.1'
     implementation files('libs/pldroid-player-2.1.4.jar')
-
-
     //混动编译
-//    implementation rootProject.ext.dependencies["ktx"]
+    //    implementation rootProject.ext.dependencies["ktx"]
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     kapt "com.android.databinding:compiler:3.1.0"
-
-
+    implementation files('libs/com.coloros.mcssdk.jar')
 }
 
 // 在MobSDK的扩展中注册ShareSDK的相关信息
