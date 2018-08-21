@@ -33,10 +33,12 @@ import com.gdlife.candypie.serivce.AuthService;
 import com.gdlife.candypie.serivce.MessageService;
 import com.gdlife.candypie.serivce.UserService;
 import com.gdlife.candypie.serivce.VideoService;
+import com.gdlife.candypie.serivce.theme.VideoChatService;
 import com.gdlife.candypie.utils.APPUtils;
 import com.gdlife.candypie.utils.InitUtils;
 import com.gdlife.candypie.utils.IntentUtils;
 import com.gdlife.candypie.utils.NotificationsUtils;
+import com.gdlife.candypie.utils.PermissionUtils;
 import com.gdlife.candypie.utils.SDCardUtils;
 import com.gdlife.candypie.utils.SignUtils;
 import com.gdlife.candypie.utils.StringUtils;
@@ -92,9 +94,12 @@ public class MAPP extends Application {
     InitUtils initUtils;
 
     @Inject
+    PermissionUtils permissionUtils;
+
+    @Inject
     VideoService videoService;
 
-    MessageService messageService;
+    private MessageService messageService;
 
     protected Observable<Object> rxObservable;
 
@@ -108,6 +113,8 @@ public class MAPP extends Application {
     private ConfigBean configBean;
 
     private Activity currentActivity;
+
+    private VideoChatService videoChatService;
 
 
     @Override
@@ -196,7 +203,10 @@ public class MAPP extends Application {
                 } else if (o instanceof MessageEvent.DoSystemMessageActionEvent) {
                     messageService.doSystemMessageAction(((MessageEvent.DoSystemMessageActionEvent) o).getToAction(), ((MessageEvent.DoSystemMessageActionEvent) o).getSystemMessage());
                 } else if (o instanceof MessageEvent.TO_AGAIN_ORDER_EVENT) {
-                    IntentUtils.toThemeListActivity(mapp, true, ((MessageEvent.TO_AGAIN_ORDER_EVENT) o).getUser());
+                    if (videoChatService == null) {
+                        videoChatService = new VideoChatService();
+                    }
+                    videoChatService.postVideoService(permissionUtils, getCurrentActivity(), ((MessageEvent.TO_AGAIN_ORDER_EVENT) o).getUser(), null);
                 } else if (o.equals(MessageEvent.TO_SYSTEM_MESSAGE_PAGE_EVENT)) {
                     IntentUtils.toSystemMessageActivity(mapp);
                 } else if (o instanceof VideoEvent.UPDATE_USER_AVATAR_EVENT) {

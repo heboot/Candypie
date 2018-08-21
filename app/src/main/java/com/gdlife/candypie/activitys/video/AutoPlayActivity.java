@@ -5,6 +5,7 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.gdlife.candypie.MAPP;
 import com.gdlife.candypie.R;
 import com.gdlife.candypie.adapter.video.UserVideosVPAdapter;
 import com.gdlife.candypie.base.BaseActivity;
@@ -13,6 +14,7 @@ import com.gdlife.candypie.databinding.ActivityAutoPlayerBinding;
 import com.gdlife.candypie.databinding.ActivityPlayer2Binding;
 import com.gdlife.candypie.utils.PermissionUtils;
 import com.gdlife.candypie.view.QiniuPlayerView;
+import com.gdlife.candypie.widget.common.ShareDialog;
 import com.heboot.bean.video.HomepageVideoBean;
 import com.heboot.utils.LogUtil;
 import com.pili.pldroid.player.PLOnCompletionListener;
@@ -56,6 +58,9 @@ public class AutoPlayActivity extends BaseActivity<ActivityAutoPlayerBinding> {
 
     private ActivityPlayer2Binding currentPlayBinding;
 
+    private ShareDialog shareDialog;
+
+    private String nickName;
 
     @Override
     protected int getLayoutId() {
@@ -76,6 +81,7 @@ public class AutoPlayActivity extends BaseActivity<ActivityAutoPlayerBinding> {
     @Override
     public void initData() {
         homepageVideoBeans = (List<HomepageVideoBean>) getIntent().getExtras().get(MKey.USER);
+        nickName = getIntent().getExtras().getString(MKey.NAME);
         userClickPosition = getIntent().getExtras().getInt(MKey.INDEX, -1);
         currentShowIndex = userClickPosition;
         userVideosVPAdapter = new UserVideosVPAdapter(this, homepageVideoBeans);
@@ -200,6 +206,12 @@ public class AutoPlayActivity extends BaseActivity<ActivityAutoPlayerBinding> {
         });
         binding.ovBack.setOnClickListener((v) -> {
             finish();
+        });
+        binding.ivShare.setOnClickListener((v) -> {
+            if (shareDialog == null) {
+                shareDialog = new ShareDialog.Builder(this, homepageVideoBeans.get(currentShowIndex).getId(), homepageVideoBeans.get(currentShowIndex).getCover_img(), nickName, MAPP.mapp.getConfigBean().getShare_config().getVideo_share_config()).create();
+            }
+            shareDialog.show();
         });
     }
 

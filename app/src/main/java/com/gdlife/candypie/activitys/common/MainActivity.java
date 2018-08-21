@@ -111,9 +111,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
             public void onNext(Object o) {
                 if (o.equals(UserEvent.LOGIN_SUC)) {
 //                    ImageUtils.showAvatar(binding.includeLeft.ivHead, UserService.getInstance().getUser().getAvatar());
-                } else if (o.equals(UserEvent.UPDATE_PROFILE)) {
-//                    initLeftUI(false);
-                } else if (o.equals(MessageEvent.REFRESH_UNREAD_NUM_ENENT)) {
+                }  else if (o.equals(MessageEvent.REFRESH_UNREAD_NUM_ENENT)) {
 //                    initLeftUI(false);
                     setUnreadText();
                 } else if (o.equals(UserEvent.AUTH_SERVICE_SUC_EVENT)) {

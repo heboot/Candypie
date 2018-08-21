@@ -11,8 +11,12 @@ import com.gdlife.candypie.common.MValue;
 import com.gdlife.candypie.databinding.FragmentMessageBinding;
 import com.gdlife.candypie.serivce.ConfigService;
 import com.gdlife.candypie.utils.IntentUtils;
+import com.gdlife.candypie.utils.ToastUtils;
 import com.heboot.entity.User;
+import com.heboot.event.MessageEvent;
 import com.heboot.event.NormalEvent;
+import com.heboot.faceunity_unit.fulivedemo.utils.ToastUtil;
+import com.heboot.rxbus.RxBus;
 import com.netease.nim.uikit.business.recent.RecentContactsCallback;
 import com.netease.nim.uikit.business.recent.RecentContactsFragment;
 import com.netease.nimlib.sdk.NIMClient;
@@ -38,6 +42,12 @@ public class MessageFragment extends BaseFragment<FragmentMessageBinding> {
         return fragment;
     }
 
+
+    @Override
+    public void onSupportVisible() {
+        super.onSupportVisible();
+        RxBus.getInstance().post(MessageEvent.REFRESH_UNREAD_NUM_ENENT);
+    }
 
     @Override
     protected int getLayoutId() {

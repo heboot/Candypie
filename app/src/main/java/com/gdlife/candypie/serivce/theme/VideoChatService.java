@@ -1,5 +1,7 @@
 package com.gdlife.candypie.serivce.theme;
 
+import android.app.Activity;
+
 import com.gdlife.candypie.MAPP;
 import com.gdlife.candypie.R;
 import com.gdlife.candypie.base.BaseActivity;
@@ -24,6 +26,7 @@ import com.heboot.bean.theme.PostThemeBean;
 import com.heboot.bean.video.VideoChatStratEndBean;
 import com.heboot.entity.User;
 import com.heboot.utils.LogUtil;
+import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
 import com.suke.widget.SwitchButton;
 
 import java.util.Map;
@@ -81,24 +84,11 @@ public class VideoChatService {
      * @param permissionUtils
      * @param activity
      */
-    private boolean checkVideoChatPermission(PermissionUtils permissionUtils, BaseActivity activity) {
+    private boolean checkVideoChatPermission(PermissionUtils permissionUtils, Activity activity) {
         if (!permissionUtils.hasCameraPermission(MAPP.mapp)) {
-            if (activity.tipDialog != null) {
-                activity.tipDialog.dismiss();
-            }
             permissionUtils.getCameraPermission(activity);
             return false;
         }
-
-        // TODO: 2018/7/16  不再进行悬浮窗权限申请
-//        if (!permissionUtils.hasPopupWindowPermission()) {
-//            if (activity.tipDialog != null) {
-//                activity.tipDialog.dismiss();
-//            }
-//            permissionUtils.requestPopupWindowPermission(activity);
-//            return false;
-//        }
-
         return true;
     }
 
@@ -110,7 +100,7 @@ public class VideoChatService {
      * @param user
      * @param coinDialog
      */
-    private boolean checkVideoChatCoin(BaseActivity activity, User user, TipDialog coinDialog) {
+    private boolean checkVideoChatCoin(Activity activity, User user, TipDialog coinDialog) {
         int minCoin = ThemeService.getVideoMinReqCoin(ThemeService.getVideoServiceMinPrice());
 
         if (user != null && !StringUtils.isEmpty(user.getVideo_chat_price())) {
@@ -118,7 +108,7 @@ public class VideoChatService {
             int otherCoin = Integer.parseInt(user.getVideo_chat_price());
 
 
-            if (myCoin < otherCoin ) {
+            if (myCoin < otherCoin) {
                 // TODO: 2018/3/22 提示去充值钻石
                 if (coinDialog == null) {
                     coinDialog = new TipDialog.Builder(activity, new Consumer<Integer>() {
@@ -163,6 +153,7 @@ public class VideoChatService {
         return true;
     }
 
+    private QMUITipDialog tipDialog;
 
     /**
      * 调用接口发起视频单子
@@ -170,8 +161,9 @@ public class VideoChatService {
      * @param activity
      * @param user
      */
-    private void sendVideoChat(BaseActivity activity, User user, HttpObserver<PostThemeBean> observable) {
-        activity.tipDialog = DialogUtils.getLoadingDialog(activity, "", false);
+    private void sendVideoChat(Activity activity, User user, HttpObserver<PostThemeBean> observable) {
+
+        tipDialog = DialogUtils.getLoadingDialog(activity, "", false);
 
         Map<String, Object> params;
         params = SignUtils.getNormalParams();
@@ -189,7 +181,7 @@ public class VideoChatService {
                 if (observable != null) {
                     observable.onSuccess(baseBean);
                 } else {
-                    activity.tipDialog.dismiss();
+                    tipDialog.dismiss();
                     IntentUtils.toVideoChatActivity(activity, baseBean.getData().getUser_service_id(), baseBean.getData().getChat_room_config(), VideoChatFrom.USER);
                 }
             }
@@ -199,9 +191,9 @@ public class VideoChatService {
                 if (observable != null) {
                     observable.onError(baseBean);
                 } else {
-                    activity.tipDialog.dismiss();
-                    activity.tipDialog = DialogUtils.getFailDialog(activity, baseBean.getMessage(), true);
-                    activity.tipDialog.show();
+                    tipDialog.dismiss();
+                    tipDialog = DialogUtils.getFailDialog(activity, baseBean.getMessage(), true);
+                    tipDialog.show();
                 }
 
             }
@@ -231,7 +223,7 @@ public class VideoChatService {
 
     }
 
-    public void postVideoService(PermissionUtils permissionUtils, BaseActivity activity, User user, TipDialog coinDialog) {
+    public void postVideoService(PermissionUtils permissionUtils, Activity activity, User user, TipDialog coinDialog) {
 
         if (UserService.getInstance().checkTourist()) {
             return;
@@ -244,5 +236,6 @@ public class VideoChatService {
         }
 
     }
+
 
 }

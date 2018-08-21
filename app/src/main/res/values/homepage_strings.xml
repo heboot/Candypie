@@ -50,9 +50,9 @@
 
     <string name="ver_service_status_no">视频认证</string>
 
-    <string name="ver_service_status_ing">视频认证中</string>
+    <string name="ver_service_status_ing">认证中</string>
 
-    <string name="ver_service_status_suc">视频已认证</string>
+    <string name="ver_service_status_suc">已认证</string>
 
     <string name="input_tip_abst">请输入%1$s到%2$s长度的个性签名</string>
 

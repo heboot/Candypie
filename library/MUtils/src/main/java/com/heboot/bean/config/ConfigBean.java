@@ -842,6 +842,15 @@ public class ConfigBean implements Serializable {
 
     public static class ShareConfigBean implements Serializable {
         private ShareConfigBeanModel profile_share_config;
+        private ShareConfigBeanModel video_share_config;
+
+        public ShareConfigBeanModel getVideo_share_config() {
+            return video_share_config;
+        }
+
+        public void setVideo_share_config(ShareConfigBeanModel video_share_config) {
+            this.video_share_config = video_share_config;
+        }
 
         public ShareConfigBeanModel getProfile_share_config() {
             return profile_share_config;

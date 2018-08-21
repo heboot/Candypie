@@ -54,6 +54,7 @@ import com.netease.nimlib.sdk.robot.model.RobotMsgType;
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -268,7 +269,6 @@ public class MessageFragment extends TFragment implements ModuleProxy {
             if (messages == null || messages.isEmpty()) {
                 return;
             }
-            RxBus.getInstance().post(MessageEvent.REFRESH_UNREAD_NUM_ENENT);
             messageListPanel.onIncomingMessage(messages);
             sendMsgReceipt(); // 发送已读回执
         }
@@ -283,6 +283,8 @@ public class MessageFragment extends TFragment implements ModuleProxy {
 
 
     private TipCustomOneDialog notChatDialog = null;
+
+    private Map<String, Object> localMap;
 
     /**
      * ********************** implements ModuleProxy *********************
@@ -322,6 +324,17 @@ public class MessageFragment extends TFragment implements ModuleProxy {
         } else if (chatPrice != null && Integer.parseInt(chatPrice) > 0) {
             currentUser.setCoin(String.valueOf(Integer.parseInt(currentUser.getCoin()) - Integer.parseInt(chatPrice)));
             RxBus.getInstance().post(new IMEvent.UPDATE_COIN_BALANCE_EVENT(Integer.parseInt(chatPrice)));
+        }
+
+
+        if (localMap == null) {
+            localMap = new HashMap<>();
+            localMap.put("tag", "test");
+            localMap.put("price", chatPrice + "钻");
+        }
+
+        if (Integer.parseInt(chatPrice) > 0) {
+            message.setLocalExtension(localMap);
         }
 
 

@@ -410,7 +410,7 @@ public class HomepageBottomFragment extends BaseFragment<FragmentHomepageBottomB
             binding.layoutHomepageContent.includeVideos.getRoot().setVisibility(View.VISIBLE);
             binding.layoutHomepageContent.includeVideos.getRoot().setFocusable(false);
             binding.layoutHomepageContent.includeVideos.rvList.setFocusable(false);
-            videosAdapter = new HomepageBottomVideosAdapter(new WeakReference(this), false, user.getVideo_list());
+            videosAdapter = new HomepageBottomVideosAdapter(new WeakReference(this), false, user.getVideo_list(),user);
             binding.layoutHomepageContent.includeVideos.rvList.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false) {
                 @Override
                 public boolean canScrollVertically() {

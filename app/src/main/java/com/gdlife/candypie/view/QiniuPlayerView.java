@@ -20,6 +20,7 @@ import com.pili.pldroid.player.PLOnCompletionListener;
 import com.pili.pldroid.player.PLOnInfoListener;
 import com.pili.pldroid.player.widget.PLVideoTextureView;
 import com.pili.pldroid.player.widget.PLVideoView;
+import com.qmuiteam.qmui.util.QMUIDisplayHelper;
 
 import java.util.concurrent.TimeUnit;
 
@@ -43,6 +44,8 @@ public class QiniuPlayerView extends FrameLayout {
     private PLOnInfoListener listener;
 
     private PLOnCompletionListener cl;
+
+    private FrameLayout container;
 
 
     public QiniuPlayerView(Context context, String url, PLOnInfoListener pl, PLOnCompletionListener cl) {
@@ -76,6 +79,10 @@ public class QiniuPlayerView extends FrameLayout {
 //        ViewUtils.setViewWidth(view, QMUIDisplayHelper.getScreenWidth(context));
 //        binding = DataBindingUtil.getBinding(view);
         mPlayer = view.findViewById(R.id.PLVideoView);
+        container = view.findViewById(R.id.flyt_container);
+//        container.setLayoutParams(
+//                new FrameLayout.LayoutParams(QMUIDisplayHelper.getScreenWidth(context), QMUIDisplayHelper.getScreenHeight(context)));
+//        mPlayer.setLayoutParams(new FrameLayout.LayoutParams(QMUIDisplayHelper.getScreenWidth(context), QMUIDisplayHelper.getScreenHeight(context)));
         initPlayer();
 
 
@@ -97,7 +104,7 @@ public class QiniuPlayerView extends FrameLayout {
 //                    .subscribe(new Consumer<String>() {
 //                        @Override
 //                        public void accept(String s) throws Exception {
-                            mPlayer.start();
+            mPlayer.start();
 //                        }
 //                    });//这里的观察者依然不重要
 

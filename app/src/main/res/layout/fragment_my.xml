@@ -28,12 +28,14 @@
 
             <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:focusable="true"
+                android:focusableInTouchMode="true">
 
                 <View
                     android:layout_width="0dp"
                     android:layout_height="@dimen/y300"
-                    android:background="@drawable/bg_grow_top"
+                    android:background="@drawable/bg_me_top"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent"></View>
@@ -113,7 +115,7 @@
                     android:layout_width="@dimen/x10"
                     android:layout_height="@dimen/y9"
                     android:layout_marginLeft="@dimen/x10"
-                    android:background="@color/white"
+                    android:background="@drawable/icon_my_homepage"
                     app:layout_constraintBottom_toBottomOf="@+id/v_homepage"
                     app:layout_constraintLeft_toLeftOf="@+id/v_homepage"
                     app:layout_constraintTop_toTopOf="@+id/v_homepage"></View>
@@ -138,7 +140,7 @@
                     android:layout_height="@dimen/y19"
                     android:layout_marginRight="@dimen/x21"
                     android:layout_marginTop="@dimen/y54"
-                    android:background="@color/white"
+                    android:background="@drawable/icon_my_edit"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent"></View>
 

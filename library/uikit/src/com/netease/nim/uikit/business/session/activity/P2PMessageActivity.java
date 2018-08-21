@@ -227,10 +227,6 @@ public class P2PMessageActivity extends BaseMessageActivity {
             });
         }
 
-
-        RxBus.getInstance().post(MessageEvent.REFRESH_UNREAD_NUM_ENENT);
-
-
         // 单聊特例话数据，包括个人信息，
         requestBuddyInfo();
         displayOnlineState();
@@ -270,30 +266,6 @@ public class P2PMessageActivity extends BaseMessageActivity {
                 }
             }, "每条私信消耗" + chatPrice + "个钻石", "知道了", "去充值").create();
             tipDialog.show();
-        } else if (Integer.parseInt(chatPrice) > 0) {
-            boolean flag = PreferencesUtils.getBoolean(this, "firstTipCoin", false);
-            if (!flag) {
-                TipCustomOneDialog tipCustomOneDialog = new TipCustomOneDialog.Builder(this, "每条私信消耗" + chatPrice + "个钻石", "知道了", new Consumer<Integer>() {
-                    @Override
-                    public void accept(Integer integer) throws Exception {
-                        if (integer == 1) {
-                            finish();
-                        }
-                    }
-                }).create();
-                PreferencesUtils.putBoolean(this, "firstTipCoin", true);
-                tipCustomOneDialog.show();
-            }
-
-            //            TipDialog tipDialog = new TipDialog.Builder(this, new Consumer<Integer>() {
-//                @Override
-//                public void accept(Integer integer) throws Exception {
-//                    if (integer == 1) {
-//                        RxBus.getInstance().post(new IMEvent.SHOW_IM_GIFT_EVENT(P2PMessageActivity.this, sessionId));
-//                    }
-//                }
-//            }, chatStatus).create();
-//            tipDialog.show();
         }
 
     }

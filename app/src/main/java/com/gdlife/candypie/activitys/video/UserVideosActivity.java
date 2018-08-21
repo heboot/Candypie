@@ -351,7 +351,7 @@ public class UserVideosActivity extends BaseActivity<ActivityUserVideosBinding> 
                 } else {
                     binding.plytContainer.toMain();
                     if (user.getId() == UserService.getInstance().getUser().getId() && sp == 1) {
-                        userVideosAdapter = new UserVideosAdapter(new WeakReference<UserVideosActivity>(UserVideosActivity.this), user.getId().intValue() == UserService.getInstance().getUser().getId().intValue(), new ArrayList<>(), from.equals(UserVideoActivityFrom.REPLACE_MAIN_VIDEO));
+                        userVideosAdapter = new UserVideosAdapter(new WeakReference<UserVideosActivity>(UserVideosActivity.this), user.getId().intValue() == UserService.getInstance().getUser().getId().intValue(), new ArrayList<>(), from.equals(UserVideoActivityFrom.REPLACE_MAIN_VIDEO), user);
                         if (user.getId() == UserService.getInstance().getUser().getId() && sp == 1) {
                             userVideosAdapter.getData().add(0, new HomepageVideoBean());
                         }

@@ -498,7 +498,6 @@ public class RecentContactsFragment extends TFragment {
                     if (!TeamMemberAitHelper.isAitMessage(imMessage)) {
                         continue;
                     }
-                    RxBus.getInstance().post(MessageEvent.REFRESH_UNREAD_NUM_ENENT);
                     Set<IMMessage> cacheMessageSet = cacheMessages.get(imMessage.getSessionId());
                     if (cacheMessageSet == null) {
                         cacheMessageSet = new HashSet<>();

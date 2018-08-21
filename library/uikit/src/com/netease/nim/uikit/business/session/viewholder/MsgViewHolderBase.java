@@ -254,11 +254,18 @@ public abstract class MsgViewHolderBase extends RecyclerViewHolder<BaseMultiItem
                 progressBar.setVisibility(View.GONE);
                 alertButton.setVisibility(View.GONE);
                 if (message.getDirect() == MsgDirectionEnum.Out && (tvCoinTip.getTag() == null || !tvCoinTip.getTag().equals("hehe"))) {
-                    if (message.getMsgType() == MsgTypeEnum.audio || message.getMsgType() == MsgTypeEnum.text || message.getMsgType() == MsgTypeEnum.image) {
-                        tvCoinTip.setVisibility(View.VISIBLE);
-                        tvCoinTip.setTag("hehe");
-                        YoYo.with(Techniques.FadeOut).delay(3000).duration(1000).playOn(tvCoinTip);
+                    if (message.getLocalExtension() != null) {
+                        if (message.getLocalExtension().get("price") != null) {
+                            tvCoinTip.setText("-" + message.getLocalExtension().get("price").toString());
+                        }
+                        if (message.getMsgType() == MsgTypeEnum.audio || message.getMsgType() == MsgTypeEnum.text || message.getMsgType() == MsgTypeEnum.image) {
+                            tvCoinTip.setVisibility(View.VISIBLE);
+                            tvCoinTip.setTag("hehe");
+                            YoYo.with(Techniques.FadeOut).delay(3000).duration(1000).playOn(tvCoinTip);
+                            message.setLocalExtension(null);
+                        }
                     }
+
                 }
                 break;
         }

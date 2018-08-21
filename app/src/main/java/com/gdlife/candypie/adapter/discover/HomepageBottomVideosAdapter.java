@@ -11,6 +11,7 @@ import com.gdlife.candypie.fragments.homepage.HomepageBottomFragment;
 import com.gdlife.candypie.utils.ImageUtils;
 import com.gdlife.candypie.utils.IntentUtils;
 import com.heboot.bean.video.HomepageVideoBean;
+import com.heboot.entity.User;
 import com.heboot.recyclerview.baseadapter.BaseRecyclerViewAdapter;
 import com.heboot.recyclerview.baseadapter.BaseRecyclerViewHolder;
 
@@ -27,9 +28,13 @@ public class HomepageBottomVideosAdapter extends BaseRecyclerViewAdapter {
 
     private boolean isMe = false;
 
-    public HomepageBottomVideosAdapter(WeakReference<HomepageBottomFragment> weakReference, boolean isMe, List<HomepageVideoBean> datas) {
+    private User user;
+
+    public HomepageBottomVideosAdapter(WeakReference<HomepageBottomFragment> weakReference, boolean isMe, List<HomepageVideoBean> datas, User user) {
         this.isMe = isMe;
         this.weakReference = weakReference;
+        this.user
+                = user;
         data.addAll(datas);
         if (isMe) {
             data.add(0, new HomepageVideoBean());
@@ -69,7 +74,7 @@ public class HomepageBottomVideosAdapter extends BaseRecyclerViewAdapter {
                 ImageUtils.showImage(binding.ivVideo, s.getCover_img());
                 binding.getRoot().setOnClickListener((v) -> {
 //                    IntentUtils.toPlayerActivity2(binding.getRoot().getContext(), s.getPath(), VideoPreviewFrom.USER, s.getId(), s.getCover_img());
-                    IntentUtils.toPlayerActivity3(binding.getRoot().getContext(), data, position);
+                    IntentUtils.toPlayerActivity3(binding.getRoot().getContext(), data, position, user.getNickname());
                 });
             }
 

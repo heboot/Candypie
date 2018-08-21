@@ -194,7 +194,6 @@ public class InitUtils {
                 if (UserService.getInstance().getUser() != null && UserService.getInstance().getUser().getSound() == 1) {
                     AudioUtil.playSound(R.raw.new_message, 1, 0);
                 }
-                LogUtil.e("云信新消息来了->", "new message onEvent " + JSON.toJSONString(imMessages));
                 RxBus.getInstance().post(MessageEvent.REFRESH_UNREAD_NUM_ENENT);
             }
         }, true);
@@ -207,9 +206,7 @@ public class InitUtils {
 
                 try {
                     SystemNotification systemNotification = JSON.parseObject(customNotification.getContent(), SystemNotification.class);
-
                     messageService.doSystemNotificationAction(systemNotification);
-
                     RxBus.getInstance().post(MessageEvent.REFRESH_UNREAD_NUM_ENENT);
                 } catch (Exception e) {
                     LogUtil.e("云信新通知来了", "new CustomNotification onEvent " + JSON.toJSONString(e));

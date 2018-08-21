@@ -169,9 +169,7 @@ public class AuthIndexActivity extends BaseActivity<ActivityAuthIndexBinding> {
                         IntentUtils.toPlayerActivity2(this, videoPath, VideoPreviewFrom.ADD, null);
                     }
 
-                }
-                // TODO: 2018/5/21  待测试
-                else if (type == AliyunVideoRecorder.RESULT_TYPE_CROP) {
+                } else if (type == AliyunVideoRecorder.RESULT_TYPE_CROP) {
                     videoPath = data.getStringExtra(CropKey.RESULT_KEY_CROP_PATH);
                     if (recordVideoFrom == RecordVideoFrom.AUTH) {
                         IntentUtils.toPlayerActivity2(this, videoPath, VideoPreviewFrom.AUTH, null);

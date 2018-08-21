@@ -123,10 +123,11 @@ public class IntentUtils {
         context.startActivity(intent);
     }
 
-    public static void toPlayerActivity3(Context context, List<HomepageVideoBean> user, int clickPosition) {
+    public static void toPlayerActivity3(Context context, List<HomepageVideoBean> user, int clickPosition, String nickname) {
         Intent intent = new Intent(context, AutoPlayActivity.class);
         intent.putExtra(MKey.USER, (Serializable) user);
         intent.putExtra(MKey.INDEX, clickPosition);
+        intent.putExtra(MKey.NAME, nickname);
         context.startActivity(intent);
     }
 

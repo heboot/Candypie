@@ -235,21 +235,21 @@ public class SetPriceActivity extends BaseActivity<ActivitySetPriceBinding> {
     }
 
 
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
-            if (checkSelected()) {
-                if (fromIndex) {
-//                    IntentUtils.toIndexServicerContainerActivity(this, null);
-                    AuthService.newOrderToMessageRobPage();
-                    finish();
-                } else {
-                    finish();
-                }
-
-            }
-        }
-        return true;
-    }
+//    @Override
+//    public boolean onKeyDown(int keyCode, KeyEvent event) {
+//        if (keyCode == KeyEvent.KEYCODE_BACK) {
+//            if (checkSelected()) {
+//                if (fromIndex) {
+////                    IntentUtils.toIndexServicerContainerActivity(this, null);
+//                    AuthService.newOrderToMessageRobPage();
+//                    finish();
+//                } else {
+//                    finish();
+//                }
+//
+//            }
+//        }
+//        return true;
+//    }
 
 }

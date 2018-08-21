@@ -61,11 +61,7 @@ import static com.heboot.event.DiscoverEvent.DISCOVER_PAUSE_PLAY_EVENT;
 
 public class DiscoverVideoFragment extends BaseFragment<FragmentDiscoverVideoBinding> {
 
-
     private DiscoverVPAdapter discoverVideoAdapter;
-
-
-//    private AliVcMediaPlayer mPlayer;
 
     private User user;
 
@@ -414,15 +410,6 @@ public class DiscoverVideoFragment extends BaseFragment<FragmentDiscoverVideoBin
 //
                 user = users.get(currentShowIndex);
                 RxBus.getInstance().post(new DiscoverEvent.DiscoverUpdateUserEvent(users.get(currentShowIndex)));
-
-//                if ((position < 0 && viewGroup.getId() != currentShowIndex)) {
-////                    View roomContainer = viewGroup.findViewById(R.id.clyt_child_container);
-//                    if (tempView != null && tempView.getParent() != null && tempView.getParent() instanceof ViewGroup) {
-//                        ((ViewGroup) (tempView.getParent())).removeView(tempView);
-//                    }
-//                }
-
-                LogUtil.e(TAG, "viewgroup.getid ==" + viewGroup.getId() + ">>>>" + currentShowIndex + ">>>>position = " + position + "??" + mRoomId);
 
 
                 // 满足此种条件，表明需要加载直播视频，以及聊天室了

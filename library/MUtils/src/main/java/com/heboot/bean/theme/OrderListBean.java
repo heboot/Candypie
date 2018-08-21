@@ -97,6 +97,7 @@ public class OrderListBean extends BaseBeanEntity {
         private int end_time;
         private int service_time;
         private int status;
+        private long create_time;
         private ExtendBean extend;
         private StatusConfigBean status_config;
         private MeetPoiDataBean.ListBean poi;
@@ -118,6 +119,14 @@ public class OrderListBean extends BaseBeanEntity {
 
         public void setService_eval_tags(ServiceEvalTagsBean service_eval_tags) {
             this.service_eval_tags = service_eval_tags;
+        }
+
+        public long getCreate_time() {
+            return create_time;
+        }
+
+        public void setCreate_time(long create_time) {
+            this.create_time = create_time;
         }
 
         public String getPrice() {

@@ -27,6 +27,7 @@ import javax.inject.Inject;
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.Observer;
+import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
@@ -181,18 +182,36 @@ public class VideoService {
 
         if (videoUploadType == VideoUploadType.USER) {
             if (isAuth == 1) {
-                uploadObservable.flatMap(new Function<String, ObservableSource<UploadAvatarReq>>() {
+//                uploadObservable.flatMap(new Function<String, ObservableSource<UploadAvatarReq>>() {
+//                    @Override
+//                    public ObservableSource<UploadAvatarReq> apply(String s) throws Exception {
+//                        params = SignUtils.getNormalParams();
+//                        params.put(MKey.VIDEO_ID, s);
+//                        return UploadService.doUploadAvatar(avatarPath);
+//                    }
+//                }).flatMap(new Function<UploadAvatarReq, ObservableSource<BaseBean<BaseBeanEntity>>>() {
+//
+//                    @Override
+//                    public ObservableSource<BaseBean<BaseBeanEntity>> apply(UploadAvatarReq s) throws Exception {
+//                        params.put(MKey.AVATAR, JSON.toJSONString(s));
+//                        if (MValue.REPLACE_VIDEO) {
+//                            params.put(MKey.IS_AUTH, isAuth);
+//                            params.put(MKey.COVER_VIDEO, 1);
+//                        } else {
+//                            params.put(MKey.IS_AUTH, 1);
+//                        }
+//                        String sign = SignUtils.doSign(params);
+//                        params.put(MKey.SIGN, sign);
+//                        LogUtil.e("videoservice", JSON.toJSONString(params));
+//                        return HttpClient.Builder.getGuodongServer().upload_video(params);
+//                    }
+//                }).observeOn(AndroidSchedulers.mainThread()).subscribeOn(AndroidSchedulers.mainThread()).subscribe(observer);
+
+                uploadObservable.observeOn(AndroidSchedulers.mainThread()).subscribeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<String>() {
                     @Override
-                    public ObservableSource<UploadAvatarReq> apply(String s) throws Exception {
+                    public void accept(String s) throws Exception {
                         params = SignUtils.getNormalParams();
                         params.put(MKey.VIDEO_ID, s);
-                        return UploadService.doUploadAvatar(avatarPath);
-                    }
-                }).flatMap(new Function<UploadAvatarReq, ObservableSource<BaseBean<BaseBeanEntity>>>() {
-
-                    @Override
-                    public ObservableSource<BaseBean<BaseBeanEntity>> apply(UploadAvatarReq s) throws Exception {
-                        params.put(MKey.AVATAR, JSON.toJSONString(s));
                         if (MValue.REPLACE_VIDEO) {
                             params.put(MKey.IS_AUTH, isAuth);
                             params.put(MKey.COVER_VIDEO, 1);
@@ -202,9 +221,10 @@ public class VideoService {
                         String sign = SignUtils.doSign(params);
                         params.put(MKey.SIGN, sign);
                         LogUtil.e("videoservice", JSON.toJSONString(params));
-                        return HttpClient.Builder.getGuodongServer().upload_video(params);
+                        HttpClient.Builder.getGuodongServer().upload_video(params).observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribe(observer);
                     }
-                }).observeOn(AndroidSchedulers.mainThread()).subscribeOn(AndroidSchedulers.mainThread()).subscribe(observer);
+                });
+
             } else {
                 uploadObservable.flatMap(new Function<String, ObservableSource<BaseBean<BaseBeanEntity>>>() {
                     @Override

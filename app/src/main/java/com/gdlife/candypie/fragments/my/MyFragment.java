@@ -8,6 +8,7 @@ import android.view.View;
 import com.faceunity.FURenderer;
 import com.gdlife.candypie.MAPP;
 import com.gdlife.candypie.R;
+import com.gdlife.candypie.activitys.auth.AuthCommitActivity;
 import com.gdlife.candypie.adapter.index.IndexVisitAdapter;
 import com.gdlife.candypie.adapter.my.MyBottomMenuAdapter;
 import com.gdlife.candypie.base.BaseFragment;
@@ -19,7 +20,9 @@ import com.gdlife.candypie.databinding.FragmentMyBinding;
 import com.gdlife.candypie.http.HttpClient;
 import com.gdlife.candypie.serivce.AuthService;
 import com.gdlife.candypie.serivce.UserService;
+import com.gdlife.candypie.serivce.VerService;
 import com.gdlife.candypie.serivce.theme.VideoChatService;
+import com.gdlife.candypie.utils.DialogUtils;
 import com.gdlife.candypie.utils.GlideImageLoaderByIndexTop;
 import com.gdlife.candypie.utils.IntentUtils;
 import com.gdlife.candypie.utils.SignUtils;
@@ -28,12 +31,17 @@ import com.heboot.bean.index.IndexPopTipBean;
 import com.heboot.bean.me.MeDataBean;
 import com.heboot.entity.User;
 import com.heboot.entity.my.MyBottomMenuModel;
+import com.heboot.event.MeEvent;
+import com.heboot.event.UserEvent;
+import com.heboot.event.VideoEvent;
 import com.suke.widget.SwitchButton;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 public class MyFragment extends BaseFragment<FragmentMyBinding> {
@@ -77,6 +85,34 @@ public class MyFragment extends BaseFragment<FragmentMyBinding> {
 
     @Override
     public void initListener() {
+
+        rxObservable.subscribe(new Observer<Object>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+                addDisposable(d);
+            }
+
+            @Override
+            public void onNext(Object o) {
+//              LogUtil.e("发送刷新用户视频集事件3", o.toString());
+                if (o.equals(MeEvent.REFRESH_ME_BY_AUTH_SUC) || o.equals(UserEvent.UPDATE_PROFILE)) {
+                    initMeData();
+                }
+
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
+
         /**
          * 个人主页按钮
          */
@@ -103,7 +139,9 @@ public class MyFragment extends BaseFragment<FragmentMyBinding> {
          * 认证
          */
         binding.includeMyMenuTop.llytVer.setOnClickListener((v) -> {
-            AuthService.toAuthPageByIndex(_mActivity);
+            if (!UserService.getInstance().isServicer()) {
+                AuthService.toAuthPageByIndex(_mActivity);
+            }
         });
         /**
          * 订单
@@ -206,6 +244,12 @@ public class MyFragment extends BaseFragment<FragmentMyBinding> {
         binding.setUser(meUser);
 
         binding.includeMyMenuCenter.setUser(meUser);
+
+        if (UserService.getInstance().isServicer()) {
+            binding.includeMyMenuTop.tvVerStatus.setText(getString(R.string.ver_ok));
+        } else {
+            VerService.showServiceVerStatus(binding.includeMyMenuTop.tvVerStatus, UserService.getInstance().getUser());
+        }
 
         binding.includeSex.setUser(meUser);
 

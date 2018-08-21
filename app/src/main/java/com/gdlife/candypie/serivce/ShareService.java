@@ -125,8 +125,8 @@ public class ShareService {
         sp.setShareType(Platform.SHARE_WEBPAGE);
         if (StringUtils.isEmpty(uid)) {
             if (!StringUtils.isEmpty(shareConfigBeanModel.getLink())) {
-                sp.setUrl(shareConfigBeanModel.getLink());
-                sp.setTitleUrl(shareConfigBeanModel.getLink());
+                sp.setUrl(getShareLink("", shareConfigBeanModel.getLink()));
+                sp.setTitleUrl(getShareLink("", shareConfigBeanModel.getLink()));
             }
         } else {
             if (!StringUtils.isEmpty(shareConfigBeanModel.getLink())) {
@@ -203,9 +203,16 @@ public class ShareService {
     }
 
     private String getShareLink(String uid, String link) {
-        link = link.replace("{#uid}", uid);
-        link = link.replace("{#uidmd5}", MD5.getMessageDigest(MValue.CHAT_PRIEX + "_" + uid));
-        LogUtil.e("shareservice link=", link);
+        if (link.indexOf("video_id") > -1) {
+            link = link.replace("{#video_id}", uid);
+            link = link.replace("{#video_idmd5}", MD5.getMessageDigest(MValue.CHAT_PRIEX + "_" + uid));
+            LogUtil.e("shareservice link=", link);
+        } else {
+            link = link.replace("{#uid}", uid);
+            link = link.replace("{#uidmd5}", MD5.getMessageDigest(MValue.CHAT_PRIEX + "_" + uid));
+            LogUtil.e("shareservice link=", link);
+        }
+
         return link;
     }
 

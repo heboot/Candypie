@@ -39,30 +39,21 @@ public class UserVideosAdapter extends BaseRecyclerViewAdapter {
 
     private boolean isReplace;
 
-    public UserVideosAdapter(WeakReference<UserVideosActivity> weakReference, boolean isMe, List<HomepageVideoBean> datas, boolean isReplace) {
-        this.isMe = isMe;
-        this.weakReference = weakReference;
-        this.isReplace = isReplace;
-
-//        if (isReplace) {
-//            for (HomepageVideoBean homepageVideoBean : datas) {
-//                if (homepageVideoBean.getStatus() != MValue.VIDEO_AUTH_STATUS_ING) {
-//                    data.add(homepageVideoBean);
-//                }
-//            }
-//        } else {
-//            data.addAll(datas);
+//    public UserVideosAdapter(WeakReference<UserVideosActivity> weakReference, boolean isMe, List<HomepageVideoBean> datas, boolean isReplace) {
+//        this.isMe = isMe;
+//        this.weakReference = weakReference;
+//        this.isReplace = isReplace;
+//        data.addAll(datas);
+//
+//        if (isMe) {
+//            data.add(0, new HomepageVideoBean());
 //        }
-        data.addAll(datas);
+//
+//    }
 
-        if (isMe) {
-            data.add(0, new HomepageVideoBean());
-        }
-
-    }
     private User user;
 
-    public UserVideosAdapter(WeakReference<UserVideosActivity> weakReference, boolean isMe, List<HomepageVideoBean> datas, boolean isReplace,User user) {
+    public UserVideosAdapter(WeakReference<UserVideosActivity> weakReference, boolean isMe, List<HomepageVideoBean> datas, boolean isReplace, User user) {
         this.isMe = isMe;
         this.weakReference = weakReference;
         this.isReplace = isReplace;
@@ -127,7 +118,7 @@ public class UserVideosAdapter extends BaseRecyclerViewAdapter {
                 RxView.clicks(binding.getRoot()).throttleFirst(3, TimeUnit.SECONDS).subscribe(new Consumer<Object>() {
                     @Override
                     public void accept(Object o) throws Exception {
-                        IntentUtils.toPlayerActivity3(binding.getRoot().getContext(),data,position);
+                        IntentUtils.toPlayerActivity3(binding.getRoot().getContext(), data, position, user.getNickname());
                     }
                 });
 

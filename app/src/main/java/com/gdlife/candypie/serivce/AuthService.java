@@ -37,10 +37,10 @@ public class AuthService {
      * 3并且更新的值为SUC
      */
     public void checkAuthStatusIsSuc(int serviceAuthStatus) {
-        if (serviceAuthStatus == MValue.AUTH_STATUS_SUC) {
-//        if (updateUser.getService_auth_status() != null && updateUser.getService_auth_status() == MValue.AUTH_STATUS_SUC && (UserService.getInstance().getUser().getService_auth_status() == null || updateUser.getService_auth_status().intValue() != UserService.getInstance().getUser().getService_auth_status().intValue())) {
-            showSetPriceDialogByAuthSuc(MAPP.mapp.getCurrentActivity());
-        }
+//        if (serviceAuthStatus == MValue.AUTH_STATUS_SUC) {
+////        if (updateUser.getService_auth_status() != null && updateUser.getService_auth_status() == MValue.AUTH_STATUS_SUC && (UserService.getInstance().getUser().getService_auth_status() == null || updateUser.getService_auth_status().intValue() != UserService.getInstance().getUser().getService_auth_status().intValue())) {
+//            showSetPriceDialogByAuthSuc(MAPP.mapp.getCurrentActivity());
+//        }
     }
 
     /**

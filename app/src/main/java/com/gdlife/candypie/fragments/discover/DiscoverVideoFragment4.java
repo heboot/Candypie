@@ -5,6 +5,7 @@ import android.databinding.DataBindingUtil;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -148,6 +149,7 @@ public class DiscoverVideoFragment4 extends BaseFragment<FragmentDiscoverVideoBi
         binding.vvp.setCurrentItem(currentShowIndex);
 
         user = users.get(currentShowIndex);
+
         checkFree();
 
     }
@@ -215,20 +217,38 @@ public class DiscoverVideoFragment4 extends BaseFragment<FragmentDiscoverVideoBi
 
     private void showVideoProgressInfo() {
 
-        if (layoutDiscoverVideoBinding != null) {
+//        if (layoutDiscoverVideoBinding != null) {
+//
+//            int curPosition = (int) layoutDiscoverVideoBinding.PLVideoView.getCurrentPosition();
+//            int duration = (int) layoutDiscoverVideoBinding.PLVideoView.getDuration();
+//            if (duration <= 0) {
+//                return;
+//            }
+//            long pos = 1000L * curPosition / duration;
+//            if (layoutDiscoverVideoBinding != null) {
+//                layoutDiscoverVideoBinding.pb.setMax(1000);
+//                layoutDiscoverVideoBinding.pb.setProgress((int) pos);
+//            }
+//
+//        }
 
-            int curPosition = (int) layoutDiscoverVideoBinding.PLVideoView.getCurrentPosition();
-            int duration = (int) layoutDiscoverVideoBinding.PLVideoView.getDuration();
-            if (duration <= 0) {
-                return;
-            }
+        if (tempView != null && tempView.getmPlayer() != null) {
+
+            int curPosition = (int) tempView.getmPlayer().getCurrentPosition();
+            int duration = (int) tempView.getmPlayer().getDuration();
             long pos = 1000L * curPosition / duration;
+            Log.d("lfj0929", "curPosition = " + curPosition + " , duration = " + duration + " ， inSeek = ");
+
+//                positionTxt.setText(AliPlayerFormatter.formatTime(curPosition));
+//                durationTxt.setText(AliPlayerFormatter.formatTime(duration));
             if (layoutDiscoverVideoBinding != null) {
                 layoutDiscoverVideoBinding.pb.setMax(1000);
+//                layoutDiscoverVideoBinding.pb.setSecondaryProgress(duration);
                 layoutDiscoverVideoBinding.pb.setProgress((int) pos);
             }
 
         }
+
         startUpdateTimer();
     }
 
@@ -388,26 +408,24 @@ public class DiscoverVideoFragment4 extends BaseFragment<FragmentDiscoverVideoBi
                 // 满足此种条件，表明需要加载直播视频，以及聊天室了
                 if (viewGroup.getId() == currentShowIndex && position == 0 && currentShowIndex != mRoomId) {// && currentShowIndex != mRoomId
                     if (tempView != null && tempView.getParent() != null && tempView.getParent() instanceof ViewGroup) {
-                        LogUtil.e("切换检测 One", "remove" + currentShowIndex);
-                        if (tempView.getmPlayer().isPlaying()) {
-//                            tempView.getmPlayer().pause();
-                        }
                         ((ViewGroup) (tempView.getParent())).removeView(tempView);
                     }
-
-                    if (layoutDiscoverVideoBinding != null) {
-                        layoutDiscoverVideoBinding.PLVideoView.stopPlayback();
-                    }
-
                     layoutDiscoverVideoBinding = DataBindingUtil.bind(page);
-                    layoutDiscoverVideoBinding.PLVideoView.setLooping(true);
-                    layoutDiscoverVideoBinding.PLVideoView.setOnInfoListener(firstFrametListener);
-                    layoutDiscoverVideoBinding.PLVideoView.setOnCompletionListener(completedListener);
-                    if (user.getMain_video_list() == null || user.getMain_video_list().size() <= 0) {
-                        return;
-                    }
-                    layoutDiscoverVideoBinding.PLVideoView.setVideoPath(user.getMain_video_list().get(0).getPath());
-                    layoutDiscoverVideoBinding.PLVideoView.start();
+                    loadVideoAndChatRoom(user.getMain_video_list().get(0).getPath(), currentShowIndex, (ViewGroup) viewGroup.findViewById(R.id.clyt_child_container));
+
+//                    if (layoutDiscoverVideoBinding != null) {
+//                        layoutDiscoverVideoBinding.PLVideoView.stopPlayback();
+//                    }
+//
+//                    layoutDiscoverVideoBinding = DataBindingUtil.bind(page);
+//                    layoutDiscoverVideoBinding.PLVideoView.setLooping(true);
+//                    layoutDiscoverVideoBinding.PLVideoView.setOnInfoListener(firstFrametListener);
+//                    layoutDiscoverVideoBinding.PLVideoView.setOnCompletionListener(completedListener);
+//                    if (user.getMain_video_list() == null || user.getMain_video_list().size() <= 0) {
+//                        return;
+//                    }
+//                    layoutDiscoverVideoBinding.PLVideoView.setVideoPath(user.getMain_video_list().get(0).getPath());
+//                    layoutDiscoverVideoBinding.PLVideoView.start();
                 } else if (position == 1 || position == -1) {//if(currentShowIndex != mRoomId)
                     if (((LayoutDiscoverVideoBinding) DataBindingUtil.bind(page)).ivCover.getVisibility() != View.VISIBLE) {
                         ((LayoutDiscoverVideoBinding) DataBindingUtil.bind(page)).ivCover.setVisibility(View.VISIBLE);
@@ -421,6 +439,30 @@ public class DiscoverVideoFragment4 extends BaseFragment<FragmentDiscoverVideoBi
     }
 
     private int mRoomId = -1;
+
+
+    private void loadVideoAndChatRoom(String url, int cur, ViewGroup v) {
+        if (layoutDiscoverVideoBinding != null) {
+            layoutDiscoverVideoBinding.pb.setMax(1000);
+//                layoutDiscoverVideoBinding.pb.setSecondaryProgress(duration);
+            layoutDiscoverVideoBinding.pb.setProgress(0);
+        }
+        LogUtil.e("播放器视图", "add" + currentShowIndex);
+        if (tempView == null) {
+            tempView = new QiniuPlayerView(getContext(), users.get(currentShowIndex).getMain_video_list().get(0).getPath(), firstFrametListener, completedListener);
+        }
+        v.addView(tempView);
+        tempView.updatePlayerUrl(url, null);
+        try {
+            v.addView(tempView);
+            tempView.updatePlayerUrl(url, null);
+        } catch (Exception e) {
+
+        }
+
+        mRoomId = cur;
+    }
+
 
     private void checkFree() {
         if (user != null && user.getFree_video_chat() == 1) {
@@ -463,7 +505,8 @@ public class DiscoverVideoFragment4 extends BaseFragment<FragmentDiscoverVideoBi
         if (layoutDiscoverVideoBinding != null) {
             layoutDiscoverVideoBinding.ivCover.setVisibility(View.VISIBLE);
             layoutDiscoverVideoBinding.ivPlay.setVisibility(View.VISIBLE);
-            layoutDiscoverVideoBinding.PLVideoView.pause();
+//            layoutDiscoverVideoBinding.PLVideoView.pause();
+            tempView.getmPlayer().pause();
         }
         if (tempView != null && tempView.getmPlayer() != null) {
             tempView.getmPlayer().pause();
@@ -474,7 +517,8 @@ public class DiscoverVideoFragment4 extends BaseFragment<FragmentDiscoverVideoBi
         if (layoutDiscoverVideoBinding != null) {
             layoutDiscoverVideoBinding.ivCover.setVisibility(View.GONE);
             layoutDiscoverVideoBinding.ivPlay.setVisibility(View.GONE);
-            layoutDiscoverVideoBinding.PLVideoView.start();
+//            layoutDiscoverVideoBinding.PLVideoView.start();
+            tempView.getmPlayer().start();
         }
         if (tempView != null && tempView.getmPlayer() != null) {
 //            tempView.getmPlayer().start();
@@ -488,7 +532,8 @@ public class DiscoverVideoFragment4 extends BaseFragment<FragmentDiscoverVideoBi
         showVideoProgressInfo();
         stopUpdateTimer();
         if (layoutDiscoverVideoBinding != null) {
-            layoutDiscoverVideoBinding.PLVideoView.start();
+//            layoutDiscoverVideoBinding.PLVideoView.start();
+            tempView.getmPlayer().start();
         }
     }
 

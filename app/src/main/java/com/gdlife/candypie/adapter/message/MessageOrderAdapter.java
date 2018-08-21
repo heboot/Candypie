@@ -16,6 +16,7 @@ import com.gdlife.candypie.utils.IntentUtils;
 import com.gdlife.candypie.utils.StringUtils;
 import com.heboot.bean.config.ConfigBean;
 import com.heboot.bean.theme.OrderListBean;
+import com.heboot.utils.DateUtil;
 
 import java.lang.ref.WeakReference;
 import java.util.List;
@@ -52,6 +53,7 @@ public class MessageOrderAdapter extends BaseQuickAdapter<OrderListBean.ListBean
 
             binding.tvServePrice.setText(s.getPrice() + MAPP.mapp.getString(R.string.price_unit) + " / " + MAPP.mapp.getString(R.string.unit_minute));
 
+            binding.tvServeTime.setText(DateUtil.getRecommendUserInterval(s.getCreate_time() * 1000l));
         } else {
             // TODO: 2018/8/15 地址新版UI不显示了  所以没有跳转
 //            binding.includeOrderContent.includeAddress.getRoot().setOnClickListener((v) -> {
@@ -76,9 +78,8 @@ public class MessageOrderAdapter extends BaseQuickAdapter<OrderListBean.ListBean
             }
 
 
-            if (!listBean.getType().equals("out")) {
-                binding.tvServeTime.setText(ThemeService.getServiceOrderTime(s.getStart_time(), s.getEnd_time(), s.getService_time()));
-            }
+            binding.tvServeTime.setText(DateUtil.getRecommendUserInterval(s.getCreate_time() * 1000l));
+//                binding.tvServeTime.setText(ThemeService.getServiceOrderTime(s.getStart_time(), s.getEnd_time(), s.getService_time()));
 
         }
 

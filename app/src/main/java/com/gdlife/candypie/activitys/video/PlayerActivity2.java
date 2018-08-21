@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.View;
+import android.widget.Toast;
 
 import com.alivc.player.AliVcMediaPlayer;
 import com.alivc.player.MediaPlayer;
@@ -27,12 +28,14 @@ import com.gdlife.candypie.utils.SDCardUtils;
 import com.gdlife.candypie.utils.StringUtils;
 import com.gdlife.candypie.utils.ToastUtils;
 import com.heboot.common.CropAction;
+import com.heboot.event.UserEvent;
 import com.heboot.event.VideoEvent;
 import com.heboot.rxbus.RxBus;
 import com.heboot.utils.ValueUtils;
 import com.qmuiteam.qmui.util.QMUIDisplayHelper;
 import com.yalantis.dialog.PublishAlbumDialog;
 import com.yalantis.ucrop.UCrop;
+import com.yalantis.ucrop.UCropActivityByFrame;
 
 import java.io.File;
 import java.lang.ref.WeakReference;
@@ -227,7 +230,8 @@ public class PlayerActivity2 extends BaseActivity<ActivityPlayer2Binding> {
                         if (from == VideoPreviewFrom.USER) {
                             finish();
                         } else if (from == VideoPreviewFrom.AUTH) {
-                            toFrame(videoPath);
+                            RxBus.getInstance().post(UserEvent.UPDATE_PROFILE);
+                            finish();
                         } else if (from == VideoPreviewFrom.COMMIT) {
                             finish();
                         }
@@ -235,6 +239,32 @@ public class PlayerActivity2 extends BaseActivity<ActivityPlayer2Binding> {
 
 
                 } else if (o.equals(VideoEvent.VIDEO_UPLOAD_SUC_EVENT_BY_USERVIDEOS)) {
+                    finish();
+                } else if (o.equals(VideoEvent.VIDEO_UPLOAD_SUC_EVENT_BY_SERVICE_AUTH) || o.equals(VideoEvent.REPLACE_SUC_EVENT)) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            finish();
+                        }
+                    });
+
+                } else if (o.equals(VideoEvent.VIDEO_UPLOAD_ERROR_EVENT)) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (publishAlbumDialog != null) {
+                                publishAlbumDialog.dismiss();
+                            }
+                            ToastUtils.showToast("上传失败，请稍后重试");
+                        }
+                    });
+                } else if (o.equals(VideoEvent.UPDATE_AVATAR_SUC_EVENT)) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            publishAlbumDialog.showAniTo100();
+                        }
+                    });
                     finish();
                 }
             }
@@ -277,7 +307,9 @@ public class PlayerActivity2 extends BaseActivity<ActivityPlayer2Binding> {
             if (from == VideoPreviewFrom.ADD) {
                 RxBus.getInstance().post(FINISH_AUTH_INDEX_PAGE);
                 doUpload(videoPath);
-            } else if (from == VideoPreviewFrom.CHOOSE) {
+            }
+            //替换主视频
+            else if (from == VideoPreviewFrom.CHOOSE) {
 
                 tipDialog = DialogUtils.getLoadingDialog(this, "", false);
                 tipDialog.setCancelable(true);
@@ -309,7 +341,9 @@ public class PlayerActivity2 extends BaseActivity<ActivityPlayer2Binding> {
                 }
 
 
-            } else if (from == VideoPreviewFrom.AUTH) {
+            }
+            //提交认证
+            else if (from == VideoPreviewFrom.AUTH) {
 
                 RxBus.getInstance().post(FINISH_AUTH_INDEX_PAGE);
 
@@ -317,7 +351,9 @@ public class PlayerActivity2 extends BaseActivity<ActivityPlayer2Binding> {
                 tipDialog.setCancelable(true);
                 tipDialog.show();
                 toFrame(videoPath);
-            } else if (from == VideoPreviewFrom.COMMIT) {
+            }
+            //中断提交认证
+            else if (from == VideoPreviewFrom.COMMIT) {
 
                 RxBus.getInstance().post(FINISH_AUTH_INDEX_PAGE);
 
@@ -335,49 +371,64 @@ public class PlayerActivity2 extends BaseActivity<ActivityPlayer2Binding> {
 
     private void toFrame(String toFramePath) {
 
-
-        Observable.create(new ObservableOnSubscribe<Object>() {
-
-            @Override
-            public void subscribe(ObservableEmitter<Object> emitter) throws Exception {
-                FrameUtils frameUtils = new FrameUtils();
-                String fristImage = ImageUtils.saveBitmap(frameUtils.getFrameByVideo(toFramePath));
-
-                ValueUtils.currentVideoPath = toFramePath;
-
-                UCrop.Options options = new UCrop.Options();
-
-                options.setShowCropGrid(false);
-                options.setFreeStyleCropEnabled(false);
-                options.setHideBottomControls(true);
-                options.setToolbarTitle("裁剪");
-                options.setToolbarColor(Color.TRANSPARENT);
-                options.setToolbarWidgetColor(Color.WHITE);
-
-                tipDialog.dismiss();
-
-                if (from == VideoPreviewFrom.CHOOSE) {
-                    CropAction.CROP_ACTION = CropAction.CROP_ACTION_VALUE.CHOOSE.toString();
-                } else {
-                    CropAction.CROP_ACTION = CropAction.CROP_ACTION_VALUE.UPLOAD_VIDEO.toString();
-                }
+        publishAlbumDialog = new PublishAlbumDialog.Builder(this).create();
+        publishAlbumDialog.show();
+        publishAlbumDialog.showAni();
 
 
-                MValue.CURRENT_UPDATE_AVATAR_VIDEO_ID = videoId;
-//                    options.getOptionBundle().putSerializable("frames", (Serializable) frames);
+        Bitmap bitmap = null;
+        String imagePath = null;
+        try {
+            bitmap = frameUtils.getFrameByVideo(videoPath);
+            imagePath = ImageUtils.saveBitmap(bitmap);
+        } catch (Exception e) {
+        }
 
-                options.getOptionBundle().putSerializable("path", toFramePath);
-                options.getOptionBundle().putSerializable("outPath", SDCardUtils.getRootPathPrivateFrame());
 
-                UCrop.of(Uri.fromFile(new File(fristImage)), ImageUtils.getCropPhotoUri())
-                        .withOptions(options)
-                        .withAspectRatio(1, 1)
-                        .startByFrame(PlayerActivity2.this);
+        RxBus.getInstance().post(new VideoEvent.VideoUploadEvent(toFramePath, imagePath, ""));
 
-                finish();
-            }
+//        Observable.create(new ObservableOnSubscribe<Object>() {
+//
+//            @Override
+//            public void subscribe(ObservableEmitter<Object> emitter) throws Exception {
+//                FrameUtils frameUtils = new FrameUtils();
+//                String fristImage = ImageUtils.saveBitmap(frameUtils.getFrameByVideo(toFramePath));
+//
+//                ValueUtils.currentVideoPath = toFramePath;
+//
+//                UCrop.Options options = new UCrop.Options();
+//
+//                options.setShowCropGrid(false);
+//                options.setFreeStyleCropEnabled(false);
+//                options.setHideBottomControls(true);
+//                options.setToolbarTitle("裁剪");
+//                options.setToolbarColor(Color.TRANSPARENT);
+//                options.setToolbarWidgetColor(Color.WHITE);
+//
+//                tipDialog.dismiss();
+//
+//                if (from == VideoPreviewFrom.CHOOSE) {
+//                    CropAction.CROP_ACTION = CropAction.CROP_ACTION_VALUE.CHOOSE.toString();
+//                } else {
+//                    CropAction.CROP_ACTION = CropAction.CROP_ACTION_VALUE.UPLOAD_VIDEO.toString();
+//                }
+//
+//
+//                MValue.CURRENT_UPDATE_AVATAR_VIDEO_ID = videoId;
+////                    options.getOptionBundle().putSerializable("frames", (Serializable) frames);
+//
+//                options.getOptionBundle().putSerializable("path", toFramePath);
+//                options.getOptionBundle().putSerializable("outPath", SDCardUtils.getRootPathPrivateFrame());
+//
+//                UCrop.of(Uri.fromFile(new File(fristImage)), ImageUtils.getCropPhotoUri())
+//                        .withOptions(options)
+//                        .withAspectRatio(1, 1)
+//                        .startByFrame(PlayerActivity2.this);
+//
+//                finish();
 //            }
-        }).subscribeOn(Schedulers.io()).observeOn(Schedulers.io()).subscribe();
+////            }
+//        }).subscribeOn(Schedulers.io()).observeOn(Schedulers.io()).subscribe();
 
 
     }

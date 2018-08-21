@@ -123,7 +123,7 @@
             <com.suke.widget.SwitchButton
                 android:id="@+id/sb_video_enable"
                 android:layout_width="@dimen/x50"
-                android:layout_height="@dimen/y26"
+                android:layout_height="@dimen/y30"
                 android:layout_marginLeft="@dimen/x16"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toRightOf="@+id/tv_video_enable"
@@ -131,7 +131,7 @@
                 app:sb_background="@color/color_898A9E"
                 app:sb_border_width="0dp"
                 app:sb_checked="true"
-                app:sb_checked_color="@color/theme_color"
+                app:sb_checked_color="@color/color_FF5252"
                 app:sb_show_indicator="false"
                 app:sb_uncheck_color="@color/color_898A9E" />
 
@@ -140,7 +140,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/x5"
                 android:layout_marginRight="@dimen/x36"
-                android:text="@{user.video_chat_price}"
+                android:text="@{user.video_chat_price + `钻/分钟`}"
                 android:textColor="@color/color_343445"
                 android:textSize="@dimen/x16"
                 app:layout_constraintBottom_toBottomOf="parent"
