@@ -439,10 +439,47 @@ public class RecentContactsFragment extends TFragment {
             // 先比较置顶tag
             long sticky = (o1.getTag() & RECENT_TAG_STICKY) - (o2.getTag() & RECENT_TAG_STICKY);
             if (sticky != 0) {
-                return sticky > 0 ? -1 : 1;
+                if (ConfigValue.getKf_uids() != null
+                        && ConfigValue.getKf_uids().indexOf(o1.getFromAccount().replace("cdp", "")) > -1
+                        && ConfigValue.getKf_uids().indexOf(o2.getFromAccount().replace("cdp", "")) > -1
+                        ) {
+                    LogUtil.e("comparetest", Integer.parseInt(o1.getFromAccount().replace("cdp", "")) + ">>>>>>" + Integer.parseInt(o2.getFromAccount().replace("cdp", "")) + "结果 " + (Integer.parseInt(o1.getFromAccount().replace("cdp", "")) < Integer.parseInt(o2.getFromAccount().replace("cdp", ""))));
+                    if (Integer.parseInt(o1.getFromAccount().replace("cdp", "")) < Integer.parseInt(o2.getFromAccount().replace("cdp", ""))) {
+                        return -1;
+                    }
+                    return 1;
+                } else if (ConfigValue.getKf_uids() != null
+                        && ConfigValue.getKf_uids().indexOf(o1.getFromAccount().replace("cdp", "")) > -1) {
+                    return -1;
+                } else if (ConfigValue.getKf_uids() != null
+                        && ConfigValue.getKf_uids().indexOf(o2.getFromAccount().replace("cdp", "")) > -1) {
+                    return 1;
+                } else {
+                    return sticky > 0 ? -1 : 1;
+                }
+
             } else {
-                long time = o1.getTime() - o2.getTime();
-                return time == 0 ? 0 : (time > 0 ? -1 : 1);
+
+                if (ConfigValue.getKf_uids() != null
+                        && ConfigValue.getKf_uids().indexOf(o1.getFromAccount().replace("cdp", "")) > -1
+                        && ConfigValue.getKf_uids().indexOf(o2.getFromAccount().replace("cdp", "")) > -1
+                        ) {
+                    LogUtil.e("comparetest", Integer.parseInt(o1.getFromAccount().replace("cdp", "")) + ">>>>>>" + Integer.parseInt(o2.getFromAccount().replace("cdp", "")) + "结果 " + (Integer.parseInt(o1.getFromAccount().replace("cdp", "")) < Integer.parseInt(o2.getFromAccount().replace("cdp", ""))));
+                    if (Integer.parseInt(o1.getFromAccount().replace("cdp", "")) < Integer.parseInt(o2.getFromAccount().replace("cdp", ""))) {
+                        return -1;
+                    }
+                    return 1;
+                } else if (ConfigValue.getKf_uids() != null
+                        && ConfigValue.getKf_uids().indexOf(o1.getFromAccount().replace("cdp", "")) > -1) {
+                    return -1;
+                } else if (ConfigValue.getKf_uids() != null
+                        && ConfigValue.getKf_uids().indexOf(o2.getFromAccount().replace("cdp", "")) > -1) {
+                    return 1;
+                } else {
+                    long time = o1.getTime() - o2.getTime();
+                    return time == 0 ? 0 : (time > 0 ? -1 : 1);
+                }
+
             }
         }
     };
@@ -543,9 +580,8 @@ public class RecentContactsFragment extends TFragment {
 
             items.add(r);
             if (ConfigValue.getKf_uids() != null && ConfigValue.getKf_uids().indexOf(r.getFromAccount().replace("cdp", "")) > -1) {
-                LogUtil.e("标签测试", r.getTag() + "");
-                if (!isTagSet(r, RECENT_TAG_STICKY)) {
-                    addTag(r, RECENT_TAG_STICKY);
+                if (!isTagSet(r, (1000000 - Integer.parseInt(r.getFromAccount().replace("cdp", ""))))) {
+                    addTag(r, (1000000 - Integer.parseInt(r.getFromAccount().replace("cdp", ""))));
                     NIMClient.getService(MsgService.class).updateRecent(r);
                 }
             }
