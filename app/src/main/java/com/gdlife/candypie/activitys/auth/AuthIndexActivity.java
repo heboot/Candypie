@@ -3,6 +3,7 @@ package com.gdlife.candypie.activitys.auth;
 import android.app.Activity;
 import android.content.Intent;
 
+import com.aliyun.common.httpfinal.QupaiHttpFinal;
 import com.aliyun.demo.recorder.AliyunVideoRecorder;
 import com.aliyun.struct.common.CropKey;
 import com.gdlife.candypie.MAPP;
@@ -32,9 +33,14 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by heboot on 2018/3/5.
@@ -69,9 +75,8 @@ public class AuthIndexActivity extends BaseActivity<ActivityAuthIndexBinding> {
     @Override
     public void initData() {
         DaggerUtilsComponent.builder().build().inject(this);
-
         ImageUtils.showImage(binding.ivCover, MAPP.mapp.getConfigBean().getServicer_auth_config().getCover_img());
-
+        initQuPai();
     }
 
     @Override
@@ -204,6 +209,18 @@ public class AuthIndexActivity extends BaseActivity<ActivityAuthIndexBinding> {
             binding.btnBottom.setEnabled(true);
             binding.btnBottom.setSelected(true);
         }
+    }
+
+    private void initQuPai() {
+        Observable.create(new ObservableOnSubscribe<Object>() {
+            @Override
+            public void subscribe(ObservableEmitter<Object> emitter) throws Exception {
+                System.loadLibrary("QuCore-ThirdParty");
+                System.loadLibrary("QuCore");
+                QupaiHttpFinal.getInstance().initOkHttpFinal();
+//                Logger.setDebug(true);
+            }
+        }).observeOn(Schedulers.io()).subscribeOn(AndroidSchedulers.mainThread()).subscribe();
     }
 
     @Override

@@ -2,19 +2,14 @@ package com.gdlife.candypie.activitys.video;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.hardware.Camera;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.media.AudioManager;
-import android.net.Uri;
-import android.opengl.GLSurfaceView;
 import android.os.Handler;
 import android.os.Message;
-import android.provider.Settings;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.SurfaceView;
@@ -29,7 +24,6 @@ import com.gdlife.candypie.MAPP;
 import com.gdlife.candypie.R;
 import com.gdlife.candypie.base.BaseActivity;
 import com.gdlife.candypie.base.HttpObserver;
-import com.gdlife.candypie.common.MCode;
 import com.gdlife.candypie.common.MKey;
 import com.gdlife.candypie.common.MValue;
 import com.gdlife.candypie.common.RechargeType;
@@ -53,7 +47,7 @@ import com.gdlife.candypie.utils.PermissionUtils;
 import com.gdlife.candypie.utils.SignUtils;
 import com.gdlife.candypie.utils.StringUtils;
 import com.gdlife.candypie.utils.ToastUtils;
-import com.gdlife.candypie.widget.gift.BottomVideoGiftSheetDialog2;
+import com.gdlife.candypie.widget.gift.BottomVideoGiftSheetDialogHehe;
 import com.gdlife.candypie.widget.luckpan.LuckpanDialog;
 import com.gdlife.candypie.widget.luckpan.TurntableIntiveTipDialog;
 import com.heboot.base.BaseBean;
@@ -62,21 +56,17 @@ import com.heboot.bean.luckypan.TurntableConfigBean;
 import com.heboot.bean.theme.PostVideoChatBean;
 import com.heboot.bean.video.VideoChatStratEndBean;
 import com.heboot.common.VideoCatState;
-import com.heboot.dialog.TipCustomOnePermissionDialog;
 import com.heboot.event.GiftEvent;
 import com.heboot.event.OrderEvent;
 import com.heboot.event.TurntableEvent;
 import com.heboot.event.VideoChatEvent;
 import com.heboot.faceunity_unit.fulivedemo.renderer.CameraRenderer;
 import com.heboot.rxbus.RxBus;
-import com.heboot.utils.LogUtil;
-import com.heboot.utils.ViewUtils;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.opensource.svgaplayer.SVGACallback;
 import com.opensource.svgaplayer.SVGADrawable;
 import com.opensource.svgaplayer.SVGAParser;
 import com.opensource.svgaplayer.SVGAVideoEntity;
-import com.qmuiteam.qmui.util.QMUIDisplayHelper;
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 import com.yalantis.dialog.TipCustomDialog;
 
@@ -87,7 +77,6 @@ import java.io.InputStream;
 import java.lang.ref.WeakReference;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.nio.ByteBuffer;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -99,11 +88,6 @@ import io.agora.AgoraAPI;
 import io.agora.rtc.Constants;
 import io.agora.rtc.IRtcEngineEventHandler;
 import io.agora.rtc.RtcEngine;
-import io.agora.rtc.mediaio.AgoraBufferedCamera2;
-import io.agora.rtc.mediaio.AgoraTextureCamera;
-import io.agora.rtc.mediaio.CaptureParameters;
-import io.agora.rtc.mediaio.IVideoFrameConsumer;
-import io.agora.rtc.mediaio.MediaIO;
 import io.agora.rtc.video.AgoraVideoFrame;
 import io.agora.rtc.video.VideoCanvas;
 import io.reactivex.Observable;
@@ -517,8 +501,10 @@ public class VideoChatActivity extends BaseActivity<ActivityVideoChatBinding> im
         });
 
         binding.ivGift.setOnClickListener((v) -> {
-            BottomVideoGiftSheetDialog2 bottomVideoGiftSheetDialog = new BottomVideoGiftSheetDialog2.Builder(this, getSupportFragmentManager(), new WeakReference<>(this)).create();
-            bottomVideoGiftSheetDialog.show();
+//            BottomVideoGiftSheetDialog2 bottomVideoGiftSheetDialog = new BottomVideoGiftSheetDialog2.Builder(this, getSupportFragmentManager(), new WeakReference<>(this)).create();
+//            bottomVideoGiftSheetDialog.show();
+            BottomVideoGiftSheetDialogHehe bottomVideoGiftSheetDialogHehe = new BottomVideoGiftSheetDialogHehe(String.valueOf(postVideoChatBean.getUser().getId()));
+            bottomVideoGiftSheetDialogHehe.show(((FragmentActivity) MAPP.mapp.getCurrentActivity()).getSupportFragmentManager(), "");
         });
 
 
@@ -575,47 +561,6 @@ public class VideoChatActivity extends BaseActivity<ActivityVideoChatBinding> im
 
             @Override
             public void onError(BaseBean<TurntableConfigBean> baseBean) {
-
-            }
-        });
-    }
-
-    public void sendGift(GiftBean giftBean) {
-
-        if (Integer.parseInt(UserService.getInstance().getUser().getCoin()) < Integer.parseInt(giftBean.getPrice())) {
-            TipCustomDialog coinDialog = new TipCustomDialog.Builder(this, new Consumer<Integer>() {
-                @Override
-                public void accept(Integer integer) throws Exception {
-                    if (integer == 1) {
-                        IntentUtils.toRechargeActivity(VideoChatActivity.this, RechargeType.COIN);
-                    }
-
-                }
-            }, "你的钻石余额不足\n请充值", "取消", "充值"
-
-            ).create();
-            coinDialog.show();
-            return;
-        }
-        params = SignUtils.getNormalParams();
-
-        params.put(MKey.USER_SERVICE_ID, userServiceId);
-        params.put(MKey.GIFT_ID, giftBean.getId());
-        params.put(MKey.NUMS, 1);
-        params.put(MKey.TO_UID, postVideoChatBean.getUser().getId());
-        String sign = SignUtils.doSign(params);
-        params.put(MKey.SIGN, sign);
-        HttpClient.Builder.getGuodongServer().send_gift(params).observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribe(new HttpObserver<VideoChatStratEndBean>() {
-            @Override
-            public void onSuccess(BaseBean<VideoChatStratEndBean> baseBean) {
-
-                loadAnimation(giftBean.getPlay_url());
-
-                serviceTime = baseBean.getData().getService_time();
-            }
-
-            @Override
-            public void onError(BaseBean<VideoChatStratEndBean> baseBean) {
 
             }
         });

@@ -68,7 +68,18 @@ public class GiftService {
 
             @Override
             public void onError(BaseBean<VideoChatStratEndBean> baseBean) {
+                TipCustomDialog coinDialog = new TipCustomDialog.Builder(MAPP.mapp.getCurrentActivity(), new Consumer<Integer>() {
+                    @Override
+                    public void accept(Integer integer) throws Exception {
+                        if (integer == 1) {
+                            IntentUtils.toRechargeActivity(MAPP.mapp.getCurrentActivity(), RechargeType.COIN);
+                        }
 
+                    }
+                }, "你的钻石余额不足\n请充值", "取消", "充值"
+
+                ).create();
+                coinDialog.show();
             }
         });
     }

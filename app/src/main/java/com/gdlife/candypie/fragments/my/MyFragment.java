@@ -69,7 +69,6 @@ public class MyFragment extends BaseFragment<FragmentMyBinding> {
         super.onSupportVisible();
         if (meUser == null) {
             initMeData();
-            FURenderer.initFURenderer(_mActivity);
         }
     }
 
@@ -95,7 +94,7 @@ public class MyFragment extends BaseFragment<FragmentMyBinding> {
             @Override
             public void onNext(Object o) {
 //              LogUtil.e("发送刷新用户视频集事件3", o.toString());
-                if (o.equals(MeEvent.REFRESH_ME_BY_AUTH_SUC) || o.equals(UserEvent.UPDATE_PROFILE)) {
+                if (o.equals(MeEvent.REFRESH_ME_BY_AUTH_SUC) || o.equals(UserEvent.UPDATE_PROFILE) || o.equals(MeEvent.REFRESH_ME_BY_SET_VIDEO_PRICE)) {
                     initMeData();
                 }
 
@@ -242,6 +241,13 @@ public class MyFragment extends BaseFragment<FragmentMyBinding> {
     private void initCenterDatas() {
 
         binding.setUser(meUser);
+
+        if (meUser.getOrder_tip_nums() > 0) {
+            binding.includeMyMenuTop.tvOrderNumTip.setVisibility(View.VISIBLE);
+            binding.includeMyMenuTop.tvOrderNumTip.setText(meUser.getOrder_tip_nums());
+        } else {
+            binding.includeMyMenuTop.tvOrderNumTip.setVisibility(View.INVISIBLE);
+        }
 
         binding.includeMyMenuCenter.setUser(meUser);
 

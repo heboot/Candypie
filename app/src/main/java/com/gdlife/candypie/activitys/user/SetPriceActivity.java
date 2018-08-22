@@ -25,6 +25,8 @@ import com.heboot.base.BaseBeanEntity;
 import com.heboot.bean.user.SetPriceInitBean;
 import com.heboot.bean.user.TagsChildBean;
 import com.heboot.dialog.TipCustomOneDialog;
+import com.heboot.event.MeEvent;
+import com.heboot.rxbus.RxBus;
 import com.heboot.utils.LogUtil;
 import com.heboot.utils.MStatusBarUtils;
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
@@ -135,6 +137,7 @@ public class SetPriceActivity extends BaseActivity<ActivitySetPriceBinding> {
                 savedTagIds = selectTagIds;
                 tipDialog = DialogUtils.getSuclDialog(SetPriceActivity.this, baseBean.getMessage(), true);
                 tipDialog.show();
+                RxBus.getInstance().post(MeEvent.REFRESH_ME_BY_SET_VIDEO_PRICE);
             }
 
             @Override
@@ -157,6 +160,7 @@ public class SetPriceActivity extends BaseActivity<ActivitySetPriceBinding> {
                 setUIPrice();
                 tipDialog = DialogUtils.getSuclDialog(SetPriceActivity.this, baseBean.getMessage(), true);
                 tipDialog.show();
+                RxBus.getInstance().post(MeEvent.REFRESH_ME_BY_SET_VIDEO_PRICE);
             }
 
             @Override

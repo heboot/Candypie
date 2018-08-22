@@ -18,6 +18,7 @@ import com.gdlife.candypie.common.UserVideoActivityFrom;
 import com.gdlife.candypie.databinding.LayoutDiscoverVideoHomepageBinding;
 import com.gdlife.candypie.http.HttpClient;
 import com.gdlife.candypie.serivce.UserService;
+import com.gdlife.candypie.serivce.theme.VideoChatService;
 import com.gdlife.candypie.utils.DialogUtils;
 import com.gdlife.candypie.utils.ImageUtils;
 import com.gdlife.candypie.utils.IntentUtils;
@@ -65,6 +66,8 @@ public class DiscoverVideoHomepageFragment extends BaseFragment<LayoutDiscoverVi
     private PermissionUtils permissionUtils;
 
     private AliPlayerView tempView;
+
+    private VideoChatService videoChatService;
 
     @SuppressLint("ValidFragment")
     public DiscoverVideoHomepageFragment(User u) {
@@ -126,6 +129,9 @@ public class DiscoverVideoHomepageFragment extends BaseFragment<LayoutDiscoverVi
             }
 
         }
+
+        binding.tvVideoPrice.setText(user.getVideo_chat_price());
+
     }
 
 
@@ -314,12 +320,21 @@ public class DiscoverVideoHomepageFragment extends BaseFragment<LayoutDiscoverVi
             if (UserService.getInstance().checkTourist(getContext())) {
                 return;
             }
-            if (user.getId().intValue() == UserService.getInstance().getUser().getId().intValue()) {
-                tipDialog = DialogUtils.getFailDialog(getContext(), "不能对自己操作", true);
-                tipDialog.show();
-                return;
+            if (videoChatService == null) {
+                videoChatService = new VideoChatService();
             }
-            IntentUtils.toThemeListActivity(getContext(), true, user);
+            if (permissionUtils == null) {
+                permissionUtils = new PermissionUtils();
+            }
+
+            videoChatService.postVideoService(permissionUtils, _mActivity, user, coinDialog);
+
+//            if (user.getId().intValue() == UserService.getInstance().getUser().getId().intValue()) {
+//                tipDialog = DialogUtils.getFailDialog(getContext(), "不能对自己操作", true);
+//                tipDialog.show();
+//                return;
+//            }
+//            IntentUtils.toThemeListActivity(getContext(), true, user);
         });
 
         binding.ivMsg.setOnClickListener((v) -> {

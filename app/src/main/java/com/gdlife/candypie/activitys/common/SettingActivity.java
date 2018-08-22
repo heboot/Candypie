@@ -1,7 +1,5 @@
 package com.gdlife.candypie.activitys.common;
 
-import android.view.ViewGroup;
-
 import com.gdlife.candypie.BuildConfig;
 import com.gdlife.candypie.MAPP;
 import com.gdlife.candypie.R;
@@ -10,10 +8,6 @@ import com.gdlife.candypie.common.ReportFromType;
 import com.gdlife.candypie.databinding.ActivitySettingBinding;
 import com.gdlife.candypie.serivce.UserService;
 import com.gdlife.candypie.utils.IntentUtils;
-import com.gdlife.candypie.widget.gift.BottomVideoGiftSheetDialog;
-import com.gdlife.candypie.widget.gift.BottomVideoGiftSheetDialogHehe;
-import com.gdlife.candypie.widget.gift.GiftPlayView;
-import com.heboot.bean.gift.GiftBean;
 import com.heboot.event.NormalEvent;
 import com.heboot.utils.MStatusBarUtils;
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;

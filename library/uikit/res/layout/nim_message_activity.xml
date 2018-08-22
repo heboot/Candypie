@@ -68,15 +68,6 @@
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <ImageView
-                    android:id="@+id/iv_again"
-                    android:layout_width="@dimen/x30"
-                    android:layout_height="@dimen/y30"
-                    android:background="@drawable/icon_msg_again"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintRight_toLeftOf="@+id/tv_again"
-                    app:layout_constraintTop_toTopOf="parent" />
-
 
                 <TextView
                     android:id="@+id/tv_again"

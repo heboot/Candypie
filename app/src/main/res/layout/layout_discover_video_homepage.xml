@@ -117,6 +117,7 @@
             app:layout_constraintBottom_toTopOf="@+id/pb"
             app:layout_constraintLeft_toLeftOf="@+id/iv_videos"
             app:layout_constraintRight_toRightOf="@+id/iv_videos" />
+
         <ImageView
             android:layout_width="0dp"
             android:layout_height="@dimen/y180"
@@ -200,8 +201,6 @@
             app:layout_constraintLeft_toRightOf="@+id/iv_loc" />
 
 
-
-
         <ProgressBar
             android:id="@+id/pb"
             style="@android:style/Widget.ProgressBar.Horizontal"
@@ -273,16 +272,6 @@
             app:layout_constraintRight_toRightOf="parent"></View>
 
 
-        <ImageView
-            android:id="@+id/iv_yue"
-            android:layout_width="@dimen/x91"
-            android:layout_height="@dimen/y40"
-            android:layout_marginBottom="@dimen/y18"
-            android:layout_marginRight="@dimen/x15"
-            android:background="@drawable/bg_themecolor_gradient"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintRight_toRightOf="parent" />
-
         <TextView
             android:id="@+id/tv_up"
             android:layout_width="wrap_content"
@@ -291,29 +280,65 @@
             android:text="上滑查看详情"
             android:textColor="@color/white"
             android:textSize="@dimen/x18"
-            app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintBottom_toBottomOf="@+id/iv_yue"
+            app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="@+id/iv_yue" />
 
         <ImageView
+            android:layout_width="@dimen/x16"
+            android:layout_height="@dimen/y9"
             android:layout_marginLeft="@dimen/x10"
-            app:layout_constraintTop_toTopOf="@+id/tv_up"
+            android:background="@drawable/icon_hoempage_arrow_up"
             app:layout_constraintBottom_toBottomOf="@+id/tv_up"
             app:layout_constraintLeft_toRightOf="@+id/tv_up"
-            android:background="@drawable/icon_hoempage_arrow_up"
-            android:layout_width="@dimen/x16"
-            android:layout_height="@dimen/y9" />
+            app:layout_constraintTop_toTopOf="@+id/tv_up" />
 
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/yue_ta"
-            android:textColor="@color/white"
-            android:textSize="@dimen/x18"
+        <ImageView
+            android:id="@+id/iv_yue"
+            android:layout_width="@dimen/x165"
+            android:layout_height="@dimen/y48"
+            android:layout_marginBottom="@dimen/y18"
+            android:layout_marginLeft="@dimen/x15"
+            android:layout_marginRight="@dimen/x15"
+            android:background="@drawable/bg_rect_ff5252_68"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/llyt_selected_price"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="@+id/iv_yue"
             app:layout_constraintLeft_toLeftOf="@+id/iv_yue"
             app:layout_constraintRight_toRightOf="@+id/iv_yue"
-            app:layout_constraintTop_toTopOf="@+id/iv_yue" />
+            app:layout_constraintTop_toTopOf="@+id/iv_yue">
+
+            <TextView
+                android:id="@+id/tv_video_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="@dimen/x16" />
+
+            <ImageView
+                android:layout_width="@dimen/x12"
+                android:layout_height="@dimen/y10"
+                android:layout_marginLeft="@dimen/x2"
+                android:background="@drawable/icon_coin" />
+
+            <TextView
+                android:id="@+id/tv_video_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" /分钟"
+                android:textColor="@color/white"
+                android:textSize="@dimen/x16" />
+
+
+        </LinearLayout>
+
     </android.support.constraint.ConstraintLayout>
 </layout>

@@ -95,6 +95,8 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
         mScreenManager = ScreenManager.getScreenManagerInstance(this);
         mScreenListener.setScreenReceiverListener(mScreenListenerer);
 
+        FURenderer.initFURenderer(this);
+
     }
 
     @Override

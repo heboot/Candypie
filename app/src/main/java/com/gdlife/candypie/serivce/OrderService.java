@@ -21,10 +21,13 @@ import com.gdlife.candypie.common.TagsDialogType;
 import com.gdlife.candypie.component.DaggerServiceComponent;
 import com.gdlife.candypie.http.HttpCallBack;
 import com.gdlife.candypie.http.HttpClient;
+import com.gdlife.candypie.serivce.theme.VideoChatService;
 import com.gdlife.candypie.utils.DialogUtils;
 import com.gdlife.candypie.utils.IntentUtils;
+import com.gdlife.candypie.utils.PermissionUtils;
 import com.gdlife.candypie.utils.SignUtils;
 import com.gdlife.candypie.utils.StringUtils;
+import com.gdlife.candypie.utils.ToastUtils;
 import com.gdlife.candypie.widget.common.ServiceCancelTipDialog;
 import com.gdlife.candypie.widget.dialog.ChooseTagsDialog;
 import com.gdlife.candypie.widget.theme.ServiceCommentDialog;
@@ -342,6 +345,10 @@ public class OrderService {
         }
     }
 
+    private VideoChatService videoChatService;
+
+    private PermissionUtils permissionUtils;
+
     /**
      * 订单操作
      *
@@ -381,6 +388,14 @@ public class OrderService {
             IntentUtils.toThemeListActivity(context, true, listBean.getUsers().get(0));
         } else if (action.equals(ServiceAction.COMMENT.toString().toLowerCase())) {
             doCommentOrder(context, listBean.getId(), null);
+        } else if (action.equals(ServiceAction.VIDEO_CHAT.toString().toLowerCase())) {
+            if (videoChatService == null) {
+                videoChatService = new VideoChatService();
+            }
+            if (permissionUtils == null) {
+                permissionUtils = new PermissionUtils();
+            }
+            videoChatService.postVideoService(permissionUtils, MAPP.mapp.getCurrentActivity(), listBean.getUsers().get(0), null);
         }
     }
 

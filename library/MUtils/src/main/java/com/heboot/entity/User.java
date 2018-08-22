@@ -133,6 +133,17 @@ public class User implements Serializable {
     //我的页面
     private List<IndexPopTipBean> ad_list;
 
+    //我的页面 订单红点提示
+    private int order_tip_nums;
+
+    public int getOrder_tip_nums() {
+        return order_tip_nums;
+    }
+
+    public void setOrder_tip_nums(int order_tip_nums) {
+        this.order_tip_nums = order_tip_nums;
+    }
+
     public List<IndexPopTipBean> getAd_list() {
         return ad_list;
     }

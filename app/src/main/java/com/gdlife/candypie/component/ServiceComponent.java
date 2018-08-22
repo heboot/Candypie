@@ -12,11 +12,10 @@ import com.gdlife.candypie.activitys.pay.RechargeActivity;
 import com.gdlife.candypie.activitys.theme.NewThemeActivity;
 import com.gdlife.candypie.activitys.theme.ServiceCancelActivity;
 import com.gdlife.candypie.activitys.user.HomepageActivity;
-import com.gdlife.candypie.activitys.video.PlayerActivity2;
 import com.gdlife.candypie.activitys.video.AutoPlayActivity;
+import com.gdlife.candypie.activitys.video.PlayerActivity2;
 import com.gdlife.candypie.activitys.video.UserVideosActivity;
 import com.gdlife.candypie.activitys.video.VideoChatActivity;
-import com.gdlife.candypie.activitys.video.VideoChatActivity2;
 import com.gdlife.candypie.adapter.order.UserOrderAdapter;
 import com.gdlife.candypie.module.CommonServiceModule;
 import com.gdlife.candypie.module.PayServiceModule;
@@ -69,7 +68,6 @@ public interface ServiceComponent {
 
     void inject(VideoChatActivity videoChatActivity);
 
-    void inject(VideoChatActivity2 videoChatActivity);
 
     void inject(RecentContactsActivity recentContactsActivity);
 

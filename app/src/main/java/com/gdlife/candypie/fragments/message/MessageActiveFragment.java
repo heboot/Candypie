@@ -157,11 +157,34 @@ public class MessageActiveFragment extends BaseFragment<FragmentMessageActiveBin
     private void initHeadView(IndexPopTipBean topAdListBean, VisitListBean visitListBean) {
         if (headView == null) {
             LayoutIndexActiveHeadBinding cbinding = DataBindingUtil.inflate(LayoutInflater.from(getActivity()), R.layout.layout_index_active_head, null, false);
-            if (visitListBean != null && visitListBean.getList() != null && visitListBean.getList().size() > 0) {
-                cbinding.getRoot().setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, getResources().getDimensionPixelOffset(R.dimen.y160)));
-            } else {
+            //没有广告 没有访客
+            if (visitListBean == null || visitListBean.getList() == null || visitListBean.getList().size() <= 0 && topAdListBean == null) {
+//                cbinding.getRoot().setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, getResources().getDimensionPixelOffset(R.dimen.y160)));
+                return;
+            }
+            //只有访客
+            else if (visitListBean != null && visitListBean.getList() != null && visitListBean.getList().size() > 0 && topAdListBean == null) {
+                binding.vv.setVisibility(View.VISIBLE);
+                cbinding.ivBg.setVisibility(View.GONE);
+                cbinding.getRoot().setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, getResources().getDimensionPixelOffset(R.dimen.y90)));
+            }
+            //只有广告
+            else if (visitListBean == null || visitListBean.getList() == null || visitListBean.getList().size() <= 0 && topAdListBean != null) {
+                binding.vv.setVisibility(View.GONE);
+                cbinding.ivBg.setVisibility(View.VISIBLE);
                 cbinding.getRoot().setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, getResources().getDimensionPixelOffset(R.dimen.y80)));
             }
+            //都有
+            else if (visitListBean != null && visitListBean.getList() != null && visitListBean.getList().size() > 0 && topAdListBean != null) {
+                binding.vv.setVisibility(View.GONE);
+                cbinding.ivBg.setVisibility(View.VISIBLE);
+                cbinding.getRoot().setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, getResources().getDimensionPixelOffset(R.dimen.y160)));
+            }
+
+
+//            else {
+//                cbinding.getRoot().setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, getResources().getDimensionPixelOffset(R.dimen.y80)));
+//            }
 
             binding.getRoot().setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.color_EDEDF3));
 

@@ -43,20 +43,19 @@ public class ActiveAdapter2 extends BaseQuickAdapter<User, BaseViewHolder> {
         });
 
         binding.ivAvatar.setOnClickListener((v) -> {
-
-            if (s.getService_auth_status() != null && s.getService_auth_status() == MValue.AUTH_STATUS_SUC) {
-                IntentUtils.toHomepageActivity(v.getContext(), MValue.FROM_OTHER, s, null, null);
-            } else {
+            if (UserService.getInstance().isServicer()) {
                 IntentUtils.toUserInfoActivity(v.getContext(), MValue.USER_INFO_TYPE_NORMAL, MValue.USER_INFO_TYPE_NORMAL, s, null, null);
+            } else {
+                IntentUtils.toHomepageActivity(v.getContext(), MValue.FROM_OTHER, s, null, null);
             }
 
         });
 
         binding.getRoot().setOnClickListener((v) -> {
-            if (s.getService_auth_status() != null && s.getService_auth_status() == MValue.AUTH_STATUS_SUC) {
-                IntentUtils.toHomepageActivity(v.getContext(), MValue.FROM_OTHER, s, null, null);
-            } else {
+            if (UserService.getInstance().isServicer()) {
                 IntentUtils.toUserInfoActivity(v.getContext(), MValue.USER_INFO_TYPE_NORMAL, MValue.USER_INFO_TYPE_NORMAL, s, null, null);
+            } else {
+                IntentUtils.toHomepageActivity(v.getContext(), MValue.FROM_OTHER, s, null, null);
             }
         });
     }

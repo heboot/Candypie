@@ -62,7 +62,7 @@ public class InitUtils {
 
     public void initSDK(Application application, MessageService messageService) {
 //        initLeakCanary(application);
-        initQuPai();
+//        initQuPai();
         initBugly(application);
         initNIM(application, messageService);
         initCrash();

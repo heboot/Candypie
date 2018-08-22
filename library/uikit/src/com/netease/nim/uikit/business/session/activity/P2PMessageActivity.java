@@ -75,7 +75,6 @@ public class P2PMessageActivity extends BaseMessageActivity {
 
     private TextView tvAgain, tvReport;
 
-    private ImageView ivAgain;
 
     private View vAgain;
 
@@ -161,7 +160,6 @@ public class P2PMessageActivity extends BaseMessageActivity {
         selftUser = (User) getIntent().getExtras().getSerializable("selfUser");
         contactId = (String) getIntent().getExtras().get(Extras.EXTRA_ACCOUNT);
         tvAgain = (TextView) findViewById(R.id.tv_again);
-        ivAgain = (ImageView) findViewById(R.id.iv_again);
         tvReport = (TextView) findViewById(R.id.tv_report);
         vAgain = findViewById(R.id.v_again);
         EventBus.getDefault().register(P2PMessageActivity.this);
@@ -195,11 +193,9 @@ public class P2PMessageActivity extends BaseMessageActivity {
 
         if (hideAgain != null && hideAgain) {
             vAgain.setVisibility(View.GONE);
-            ivAgain.setVisibility(View.GONE);
             tvAgain.setVisibility(View.GONE);
         } else {
             vAgain.setVisibility(View.VISIBLE);
-            ivAgain.setVisibility(View.VISIBLE);
             tvAgain.setVisibility(View.VISIBLE);
             vAgain.setOnClickListener((v) -> {
                 if (hideBottom != null && hideBottom) {
@@ -256,17 +252,17 @@ public class P2PMessageActivity extends BaseMessageActivity {
         }
 
 
-        if (Integer.parseInt(chatPrice) > 0 && Integer.parseInt(selftUser.getCoin()) < Integer.parseInt(chatPrice)) {
-            TipDialog tipDialog = new TipDialog.Builder(this, new Consumer<Integer>() {
-                @Override
-                public void accept(Integer integer) throws Exception {
-                    if (integer == 1) {
-                        RxBus.getInstance().post(TO_RECHARGE_BY_IM);
-                    }
-                }
-            }, "每条私信消耗" + chatPrice + "个钻石", "知道了", "去充值").create();
-            tipDialog.show();
-        }
+//        if (Integer.parseInt(chatPrice) > 0 && Integer.parseInt(selftUser.getCoin()) < Integer.parseInt(chatPrice)) {
+//            TipDialog tipDialog = new TipDialog.Builder(this, new Consumer<Integer>() {
+//                @Override
+//                public void accept(Integer integer) throws Exception {
+//                    if (integer == 1) {
+//                        RxBus.getInstance().post(TO_RECHARGE_BY_IM);
+//                    }
+//                }
+//            }, "每条私信消耗" + chatPrice + "个钻石", "知道了", "去充值").create();
+//            tipDialog.show();
+//        }
 
     }
 

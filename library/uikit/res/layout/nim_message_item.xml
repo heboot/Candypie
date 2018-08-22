@@ -97,7 +97,7 @@
                 android:text="hehe"
                 android:textColor="@color/aliyun_red"
                 android:textSize="@dimen/x10"
-                android:visibility="invisible"></TextView>
+                android:visibility="gone"></TextView>
 
             <ProgressBar
                 android:id="@+id/message_item_progress"

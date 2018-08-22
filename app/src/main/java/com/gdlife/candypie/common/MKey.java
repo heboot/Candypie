@@ -201,4 +201,6 @@ public class MKey {
     public static final String TAG_IDS = "tag_ids";
 
     public static final String K = "k";
+
+    public static final String PUSH_TOKEN = "push_token";
 }

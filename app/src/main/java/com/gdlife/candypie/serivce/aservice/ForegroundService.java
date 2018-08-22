@@ -36,13 +36,13 @@ public class ForegroundService extends Service {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
             Notification.Builder builder = new Notification.Builder(this);
             builder.setSmallIcon(R.drawable.app_icon);
-            builder.setContentTitle("KeepAppAlive");
-            builder.setContentText("DaemonService is runing...");
+            builder.setContentTitle("蜜糖派");
+            builder.setContentText("蜜糖派正在运行...");
             startForeground(NOTICE_ID, builder.build());
             // 如果觉得常驻通知栏体验不好
             // 可以通过启动CancelNoticeService，将通知移除，oom_adj值不变
-//            Intent intent = new Intent(this, CancelNoticeService.class);
-//            startService(intent);
+            Intent intent = new Intent(this, CancelNoticeService.class);
+            startService(intent);
         } else {
             startForeground(NOTICE_ID, new Notification());
         }

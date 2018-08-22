@@ -12,6 +12,7 @@ public enum ServiceAction {
     CANCEL,
     COMPLETE,
     AGAIN,
-    COMMENT
+    COMMENT,
+    VIDEO_CHAT
 
 }

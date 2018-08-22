@@ -126,7 +126,7 @@ public class MAPP extends Application {
         messageService = new MessageService();
         initUtils.registerActivityLifecycleCallbacks(this);
         initUtils.initSDK(this, messageService);
-        UMConfigure.init(this, UMConfigure.DEVICE_TYPE_PHONE, null);
+        UMConfigure.init(MAPP.mapp, UMConfigure.DEVICE_TYPE_PHONE, "a84de7f77834b3084be55710846d4f48");
         //初始化播放器（只需调用一次即可，建议在application中初始化）
         AliVcMediaPlayer.init(getApplicationContext());
         SDCardUtils.getRootPathPrivateVideo();

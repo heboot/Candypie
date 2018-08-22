@@ -21,7 +21,7 @@ android {
         renderscriptSupportModeEnabled true
 
         ndk {
-            abiFilters "armeabi-v7a"
+            abiFilters "armeabi-v7a","x86"
         }
 
         manifestPlaceholders = [
@@ -167,6 +167,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     kapt "com.android.databinding:compiler:3.1.0"
     implementation files('libs/com.coloros.mcssdk.jar')
+    implementation files('libs/utdid4all-1.1.5.3_proguard.jar')
 }
 
 // 在MobSDK的扩展中注册ShareSDK的相关信息

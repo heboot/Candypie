@@ -477,7 +477,9 @@ public interface HttpClient {
     @POST("user/user/me")
     Observable<BaseBean<MeDataBean>> me(@FieldMap Map<String, Object> params);
 
-
+    @FormUrlEncoded
+    @POST("app/user/update_push_token")
+    Observable<BaseBean<BaseBeanEntity>> update_push_token(@FieldMap Map<String, Object> params);
 //    /**
 //     * 首页轮播图
 //     */

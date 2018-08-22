@@ -105,7 +105,7 @@
                     app:layout_constraintBottom_toTopOf="@+id/btn_register"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent" />
-                <!--android:visibility="@{from.equals(MValue.FROM_MY) ? View.VISIBLE: View.GONE}"-->
+                <!-- android:visibility="@{from.equals(MValue.FROM_MY) ? View.VISIBLE: View.GONE}"-->
 
                 <Button
                     android:id="@+id/btn_register"
@@ -118,11 +118,11 @@
                     android:text="@string/crop_video"
                     android:textColor="@color/theme_color"
                     android:textSize="@dimen/x16"
-                    android:visibility="@{from.equals(MValue.FROM_MY) ? View.VISIBLE: View.GONE}"
+                    android:visibility="invisible"
                     app:layout_constraintBottom_toBottomOf="@+id/v_player"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent" />
-                <!--android:visibility="@{from.equals(MValue.FROM_MY) ? View.VISIBLE: View.GONE}"-->
+                <!--  android:visibility="@{from.equals(MValue.FROM_MY) ? View.VISIBLE: View.GONE}"-->
 
                 <!--<include-->
                 <!--layout="@layout/layout_homepage_progress"-->
