@@ -40,6 +40,7 @@ public class User implements Serializable {
     private String mobile;
     private String tel;
     private String avatar;
+    private String update_avatar;
     private Integer role;
     private int sex;
     private String birthday;
@@ -135,6 +136,14 @@ public class User implements Serializable {
 
     //我的页面 订单红点提示
     private int order_tip_nums;
+
+    public String getUpdate_avatar() {
+        return update_avatar;
+    }
+
+    public void setUpdate_avatar(String update_avatar) {
+        this.update_avatar = update_avatar;
+    }
 
     public int getOrder_tip_nums() {
         return order_tip_nums;

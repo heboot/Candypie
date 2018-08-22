@@ -699,6 +699,11 @@ public class UserInfoActivity extends BaseActivity<ActivityUserInfoBinding> {
         params = SignUtils.getNormalParams();
 
         if (type.equals(MValue.USER_INFO_TYPE_AUTH) || type.equals(MValue.USER_INFO_TYPE_AUTH_COMMIT) || UserService.getInstance().getUser().getService_auth_status() != null && UserService.getInstance().getUser().getService_auth_status() == MValue.AUTH_STATUS_SUC) {
+            if (StringUtils.isEmpty(user.getUpdate_avatar())) {
+                tipDialog = DialogUtils.getFailDialog(this, "请先上传头像", true);
+                tipDialog.show();
+                return;
+            }
             if (StringUtils.isEmpty(birthdayDate) && StringUtils.isEmpty(user.getBirthday())) {
                 tipDialog = DialogUtils.getFailDialog(this, "请选择生日", true);
                 tipDialog.show();
@@ -985,6 +990,7 @@ public class UserInfoActivity extends BaseActivity<ActivityUserInfoBinding> {
         HttpClient.Builder.getGuodongServer().upload_avatar(params).observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribe(new HttpObserver<UserInfoEditBean>() {
             @Override
             public void onSuccess(BaseBean<UserInfoEditBean> baseBean) {
+                user.setUpdate_avatar("test");
                 loadingDialog.dismiss();
                 tipDialog = DialogUtils.getSuclDialog(UserInfoActivity.this, baseBean.getMessage(), true);
                 tipDialog.show();
