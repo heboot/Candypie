@@ -120,7 +120,7 @@ public class UserVisitActivity extends BaseActivity<ActivityUserVisitListBinding
                 if (baseBean.getData() != null && baseBean.getData().getList() != null && baseBean.getData().getList().size() > 0) {
                     binding.plytContainer.toMain();
                     if (activeAdapter == null) {
-                        activeAdapter = new ActiveAdapter(baseBean.getData().getList());
+                        activeAdapter = new ActiveAdapter(baseBean.getData().getList(), false);
                         binding.rvList.setAdapter(activeAdapter);
                     } else {
                         if (sp == 1) {

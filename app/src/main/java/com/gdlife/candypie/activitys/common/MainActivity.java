@@ -7,7 +7,9 @@ import android.support.v4.content.ContextCompat;
 import android.view.KeyEvent;
 import android.view.View;
 
+import com.aliyun.common.httpfinal.QupaiHttpFinal;
 import com.faceunity.FURenderer;
+import com.gdlife.candypie.MAPP;
 import com.gdlife.candypie.R;
 import com.gdlife.candypie.base.BaseActivity;
 import com.gdlife.candypie.databinding.ActivityMainBinding;
@@ -19,6 +21,8 @@ import com.gdlife.candypie.serivce.PushService;
 import com.gdlife.candypie.serivce.UserService;
 import com.gdlife.candypie.serivce.aservice.ForegroundService;
 import com.gdlife.candypie.serivce.theme.VideoChatService;
+import com.gdlife.candypie.utils.AudioUtil;
+import com.gdlife.candypie.utils.AudioUtil2;
 import com.gdlife.candypie.utils.DialogUtils;
 import com.gdlife.candypie.utils.IntentUtils;
 import com.gdlife.candypie.utils.PermissionUtils;
@@ -34,8 +38,13 @@ import com.netease.nimlib.sdk.NIMClient;
 import com.netease.nimlib.sdk.msg.MsgService;
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import me.yokeyword.fragmentation.ISupportFragment;
 
 
@@ -84,6 +93,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
         mDelegate.loadMultipleRootFragment(binding.flytContainer.getId(), 0, indexFragment, rankContainerFragment, messageContainerFragment, myFragment);
         currentFragment = indexFragment;
         startFService();
+        AudioUtil2.getInstance(this);
     }
 
     @Override
@@ -95,7 +105,13 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
         mScreenManager = ScreenManager.getScreenManagerInstance(this);
         mScreenListener.setScreenReceiverListener(mScreenListenerer);
 
-        FURenderer.initFURenderer(this);
+        Observable.create(new ObservableOnSubscribe<Object>() {
+            @Override
+            public void subscribe(ObservableEmitter<Object> emitter) throws Exception {
+                FURenderer.initFURenderer(MAPP.mapp);
+            }
+        }).observeOn(Schedulers.io()).subscribeOn(AndroidSchedulers.mainThread()).subscribe();
+
 
     }
 

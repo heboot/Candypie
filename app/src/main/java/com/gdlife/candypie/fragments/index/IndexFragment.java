@@ -7,8 +7,10 @@ import android.view.View;
 import com.gdlife.candypie.MAPP;
 import com.gdlife.candypie.R;
 import com.gdlife.candypie.base.BaseFragment;
+import com.gdlife.candypie.common.CustomEvent;
 import com.gdlife.candypie.databinding.FragmentIndexBinding;
 import com.gdlife.candypie.serivce.UserService;
+import com.gdlife.candypie.utils.CustomEventUtil;
 import com.gdlife.candypie.utils.IntentUtils;
 import com.gdlife.candypie.utils.PermissionUtils;
 import com.heboot.bean.config.TopMenuBean;
@@ -79,6 +81,7 @@ public class IndexFragment extends BaseFragment<FragmentIndexBinding> {
 //            IntentUtils.toSearchActivity(getContext());
 //        });
         binding.vSearchbg2.setOnClickListener((v) -> {
+            CustomEventUtil.onEvent(CustomEvent.INDEX_CLICK_SEARCH);
             IntentUtils.toSearchActivity(getContext());
         });
 

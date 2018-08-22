@@ -8,6 +8,7 @@ import com.gdlife.candypie.common.MValue;
 import com.gdlife.candypie.common.VideoChatFrom;
 import com.gdlife.candypie.repository.GiftRepository;
 import com.gdlife.candypie.utils.AudioUtil;
+import com.gdlife.candypie.utils.AudioUtil2;
 import com.gdlife.candypie.utils.IntentUtils;
 import com.gdlife.candypie.utils.StringUtils;
 import com.gdlife.candypie.widget.gift.GiftPlayView;
@@ -139,11 +140,13 @@ public class MessageService {
 
                     if (UserService.getInstance().getUser() != null && UserService.getInstance().getUser().getSound() == 1) {
                         AudioUtil.playSound(R.raw.money, 1, 0);
+//                        AudioUtil2.getInstance(MAPP.mapp).playMoneySound();
                     }
                     RxBus.getInstance().post(new MessageEvent.NewApplyUserEvent(systemNotification.getValue().getUser_service_id(), systemNotification.getValue().getApply_user()));
                 } else if (systemNotification.getType().equals(MessageToAction.apply.toString())) {
                     if (UserService.getInstance().getUser() != null && UserService.getInstance().getUser().getSound() == 1) {
                         AudioUtil.playSound(R.raw.money, 1, 0);
+//                        AudioUtil2.getInstance(MAPP.mapp).playMoneySound();
                     }
                     RxBus.getInstance().post(new MessageEvent.NewOrderEvent(systemNotification.getValue().getUser_service_id(), systemNotification.getValue().getPush_service()));
                 } else if (systemNotification.getValue() != null && !StringUtils.isEmpty(systemNotification.getValue().getTo_action()) && systemNotification.getValue().getTo_action().equals(MessageToAction.start_video_chat.toString())) {

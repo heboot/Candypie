@@ -2,28 +2,22 @@ package com.gdlife.candypie.activitys.discover;
 
 import android.media.AudioManager;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.view.KeyEvent;
 import android.view.View;
 
-import com.gdlife.candypie.MAPP;
 import com.gdlife.candypie.R;
 import com.gdlife.candypie.adapter.discover.DiscoverFragmentAdapter;
-import com.gdlife.candypie.adapter.index.ActiveAdapter;
 import com.gdlife.candypie.base.BaseActivity;
 import com.gdlife.candypie.base.HttpObserver;
 import com.gdlife.candypie.common.MKey;
 import com.gdlife.candypie.databinding.FragmentDiscoverBinding;
-import com.gdlife.candypie.fragments.discover.DiscoverVideoFragment;
 import com.gdlife.candypie.fragments.discover.DiscoverVideoFragment4;
 import com.gdlife.candypie.fragments.homepage.HomepageBottomFragment;
 import com.gdlife.candypie.http.HttpClient;
 import com.gdlife.candypie.serivce.UserService;
 import com.gdlife.candypie.utils.SignUtils;
-import com.gdlife.candypie.utils.StringUtils;
 import com.heboot.base.BaseBean;
 import com.heboot.base.BaseBeanEntity;
-import com.heboot.bean.user.UserVisitListBean;
 import com.heboot.entity.User;
 import com.heboot.event.DiscoverEvent;
 import com.heboot.utils.MStatusBarUtils;

@@ -244,7 +244,7 @@ public class MyFragment extends BaseFragment<FragmentMyBinding> {
 
         if (meUser.getOrder_tip_nums() > 0) {
             binding.includeMyMenuTop.tvOrderNumTip.setVisibility(View.VISIBLE);
-            binding.includeMyMenuTop.tvOrderNumTip.setText(meUser.getOrder_tip_nums());
+            binding.includeMyMenuTop.tvOrderNumTip.setText(meUser.getOrder_tip_nums() + "");
         } else {
             binding.includeMyMenuTop.tvOrderNumTip.setVisibility(View.INVISIBLE);
         }

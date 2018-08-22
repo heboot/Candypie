@@ -105,7 +105,7 @@ public class SearchUserActivity extends BaseActivity<ActivitySearchBinding> {
                     initNodata(View.GONE);
                     if (activeAdapter == null) {
                         binding.rvList.setVisibility(View.VISIBLE);
-                        activeAdapter = new ActiveAdapter(baseBean.getData().getList());
+                        activeAdapter = new ActiveAdapter(baseBean.getData().getList(),true);
                         binding.rvList.setAdapter(activeAdapter);
                         binding.tvResultTitle.setVisibility(View.VISIBLE);
 

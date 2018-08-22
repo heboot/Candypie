@@ -227,6 +227,9 @@ public class RecentContactsFragment extends TFragment {
 
         @Override
         public void onItemLongClick(RecentContactAdapter adapter, View view, int position) {
+            if (ConfigValue.getKf_uids() != null && ConfigValue.getKf_uids().indexOf(adapter.getItem(position).getFromAccount().replace("cdp", "")) > -1) {
+                return;
+            }
             showLongClickMenu(adapter.getItem(position), position);
         }
 

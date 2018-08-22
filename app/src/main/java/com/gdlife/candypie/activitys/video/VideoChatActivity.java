@@ -39,6 +39,7 @@ import com.gdlife.candypie.serivce.UserInfoService;
 import com.gdlife.candypie.serivce.UserService;
 import com.gdlife.candypie.serivce.theme.VideoChatService;
 import com.gdlife.candypie.utils.AudioUtil;
+import com.gdlife.candypie.utils.AudioUtil2;
 import com.gdlife.candypie.utils.DialogUtils;
 import com.gdlife.candypie.utils.ImageUtils;
 import com.gdlife.candypie.utils.IntentUtils;
@@ -217,7 +218,8 @@ public class VideoChatActivity extends BaseActivity<ActivityVideoChatBinding> im
             binding.tvWait.setText("蜜糖号：" + postVideoChatBean.getUser().getId());
 
             binding.tvWaitInfo.setText("对方正在邀请您视频聊天～");
-            AudioUtil.playSound(R.raw.voip_called, 1, -1);
+//            AudioUtil.playSound(R.raw.voip_called, 1, -1);
+            AudioUtil2.getInstance(this).playServicerCalling();
             if (permissionUtils.hasCameraPermission(MAPP.mapp)) {
                 initGLSurfaceView();
             } else {
@@ -227,7 +229,8 @@ public class VideoChatActivity extends BaseActivity<ActivityVideoChatBinding> im
 
         } else {
             setCancelEnable(false);
-            AudioUtil.playSound(R.raw.voip_calling_stay, 1, 0);
+//            AudioUtil.playSound(R.raw.voip_calling_stay, 1, 0);
+            AudioUtil2.getInstance(this).playUserCalling();
 //            joinChannel();
             initGLSurfaceView();
             binding.ivPublishCancel.setVisibility(View.VISIBLE);
@@ -351,7 +354,6 @@ public class VideoChatActivity extends BaseActivity<ActivityVideoChatBinding> im
                             @Override
                             public void run() {
                                 if (((VideoChatEvent.UPDATE_VIDEO_STATE_EVENT) o).getState() == VideoCatState.cancel) {
-                                    AudioUtil.stop();
                                     before2cancel();
                                 } else if (((VideoChatEvent.UPDATE_VIDEO_STATE_EVENT) o).getState() == VideoCatState.refuse) {
                                     before2refuse();
@@ -468,7 +470,8 @@ public class VideoChatActivity extends BaseActivity<ActivityVideoChatBinding> im
         });
 
         binding.ivApply.setOnClickListener((v) -> {
-            AudioUtil.stop();
+//            AudioUtil.stop();
+            AudioUtil2.getInstance(this).stopRinging();
             if (!permissionUtils.hasCameraPermission(MAPP.mapp)) {
                 permissionUtils.getCameraPermission(this);
                 return;
@@ -478,7 +481,8 @@ public class VideoChatActivity extends BaseActivity<ActivityVideoChatBinding> im
             setupLocalVideo();
         });
         binding.ivReject.setOnClickListener((v) -> {
-            AudioUtil.stop();
+//            AudioUtil.stop();
+            AudioUtil2.getInstance(this).stopRinging();
             MAPP.mapp.getM_agoraAPI().channelInviteRefuse(postVideoChatBean.getChannel_name(), String.valueOf(postVideoChatBean.getUser().getId()), 0, "");
             completeOrder();
         });
@@ -897,7 +901,7 @@ public class VideoChatActivity extends BaseActivity<ActivityVideoChatBinding> im
                     binding.tvApply.setVisibility(View.GONE);
                     if (videoChatFrom == VideoChatFrom.USER) {
                         userJoined = true;
-                        AudioUtil.playSound(R.raw.voip_calling_ring, 1, -1);
+//                        AudioUtil.playSound(R.raw.voip_calling_ring, 1, -1);
                     } else {
                         currentState = VideoCatState.ing;
                         binding.ivPublishCancel.setVisibility(View.GONE);
@@ -948,7 +952,8 @@ public class VideoChatActivity extends BaseActivity<ActivityVideoChatBinding> im
                         binding.ivAvatar.setVisibility(View.INVISIBLE);
                         binding.tvName.setVisibility(View.INVISIBLE);
                         binding.tvWait.setVisibility(View.INVISIBLE);
-                        AudioUtil.stop();
+//                        AudioUtil.stop();
+                        AudioUtil2.getInstance(VideoChatActivity.this).stopRinging();
                         if (!timeFlag) {
 
                             if (videoChatFrom == VideoChatFrom.USER) {
@@ -1014,7 +1019,8 @@ public class VideoChatActivity extends BaseActivity<ActivityVideoChatBinding> im
      * 用户收到后 提示并关掉页面
      */
     private void before2refuse() {
-        AudioUtil.stop();
+//        AudioUtil.stop();
+        AudioUtil2.getInstance(VideoChatActivity.this).stopRinging();
         if (currentState == VideoCatState.before) {
             currentState = VideoCatState.refuse;
             runOnUiThread(new Runnable() {
@@ -1036,7 +1042,8 @@ public class VideoChatActivity extends BaseActivity<ActivityVideoChatBinding> im
      * 服务者收到后 提示并关掉页面
      */
     private void before2cancel() {
-        AudioUtil.stop();
+//        AudioUtil.stop();
+        AudioUtil2.getInstance(VideoChatActivity.this).stopRinging();
         if (currentState == VideoCatState.before) {
             currentState = VideoCatState.cancel;
             runOnUiThread(new Runnable() {
@@ -1323,7 +1330,8 @@ public class VideoChatActivity extends BaseActivity<ActivityVideoChatBinding> im
         MValue.currentVideoTime = 0;
         ObserableUtils.initValue = 0;
         MValue.currentVideoCoinAmount = 0;
-        AudioUtil.stop();
+//        AudioUtil.stop();
+        AudioUtil2.getInstance(VideoChatActivity.this).stopRinging();
         mRtcEngine.leaveChannel();
         RtcEngine.destroy();
         mRtcEngine = null;
@@ -1387,10 +1395,11 @@ public class VideoChatActivity extends BaseActivity<ActivityVideoChatBinding> im
             super.onInviteEndByPeer(channelID, account, uid, extra);
 
             if (weakReference.get() != null && !weakReference.get().isDestroyed()) {
-                AudioUtil.stop();
+//                AudioUtil.stop();
+                AudioUtil2.getInstance(weakReference.get()).stopRinging();
                 weakReference.get().before2cancel();
             } else {
-                AudioUtil.stop();
+                AudioUtil2.getInstance(MAPP.mapp).stopRinging();
             }
         }
     }

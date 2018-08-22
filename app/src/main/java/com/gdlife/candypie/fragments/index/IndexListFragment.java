@@ -11,10 +11,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.gdlife.candypie.MAPP;
 import com.gdlife.candypie.R;
 import com.gdlife.candypie.adapter.index.IndexUsersAdapter3;
 import com.gdlife.candypie.base.BaseFragment;
 import com.gdlife.candypie.base.HttpObserver;
+import com.gdlife.candypie.common.CustomEvent;
 import com.gdlife.candypie.common.IndexTopADType;
 import com.gdlife.candypie.common.MKey;
 import com.gdlife.candypie.common.MValue;
@@ -25,6 +27,7 @@ import com.gdlife.candypie.databinding.LayoutIndexUserTopBinding;
 import com.gdlife.candypie.http.HttpClient;
 import com.gdlife.candypie.serivce.UserService;
 import com.gdlife.candypie.serivce.index.ADService;
+import com.gdlife.candypie.utils.CustomEventUtil;
 import com.gdlife.candypie.utils.DialogUtils;
 import com.gdlife.candypie.utils.GlideImageLoaderByIndexTop;
 import com.gdlife.candypie.utils.IntentUtils;
@@ -38,6 +41,7 @@ import com.heboot.bean.index.IndexV5Bean;
 import com.heboot.entity.User;
 import com.heboot.event.DiscoverEvent;
 import com.heboot.utils.LogUtil;
+import com.umeng.analytics.MobclickAgent;
 import com.yalantis.dialog.TipCustomDialog;
 
 import java.lang.ref.WeakReference;
@@ -229,8 +233,14 @@ public class IndexListFragment extends BaseFragment<FragmentIndexListBinding> {
                 }
 
                 if (pageName.equals("r")) {
+                    CustomEventUtil.onEvent(CustomEvent.INDEX_CLICK_USER_R);
                     IntentUtils.toDiscoverActivity(binding.getRoot().getContext(), position, adapter.getData(), sp, total);
                 } else {
+                    if (pageName.equals("a")) {
+                        CustomEventUtil.onEvent(CustomEvent.INDEX_CLICK_USER_A);
+                    } else if (pageName.equals("n")) {
+                        CustomEventUtil.onEvent(CustomEvent.INDEX_CLICK_USER_N);
+                    }
                     IntentUtils.toHomepageActivity(_mActivity, MValue.FROM_OTHER, (User) adapter.getData().get(position), null, null);
                 }
 

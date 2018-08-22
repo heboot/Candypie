@@ -94,7 +94,7 @@
                     android:id="@+id/btn_login"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/y35"
-                    android:layout_marginBottom="@dimen/y10"
+                    android:layout_marginBottom="@dimen/y20"
                     android:layout_marginLeft="@dimen/x82"
                     android:layout_marginRight="@dimen/x82"
                     android:background="@drawable/bg_rect_bottom_button"
@@ -102,7 +102,7 @@
                     android:textColor="@color/white"
                     android:textSize="@dimen/x16"
                     android:visibility="@{from.equals(MValue.FROM_MY) ? View.VISIBLE: View.GONE}"
-                    app:layout_constraintBottom_toTopOf="@+id/btn_register"
+                    app:layout_constraintBottom_toBottomOf="@+id/v_player"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent" />
                 <!-- android:visibility="@{from.equals(MValue.FROM_MY) ? View.VISIBLE: View.GONE}"-->

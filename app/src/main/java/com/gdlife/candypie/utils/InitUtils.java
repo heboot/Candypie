@@ -193,6 +193,7 @@ public class InitUtils {
             public void onEvent(List<IMMessage> imMessages) {
                 if (UserService.getInstance().getUser() != null && UserService.getInstance().getUser().getSound() == 1) {
                     AudioUtil.playSound(R.raw.new_message, 1, 0);
+//                    AudioUtil2.getInstance(MAPP.mapp).playNewMsgSound();
                 }
                 RxBus.getInstance().post(MessageEvent.REFRESH_UNREAD_NUM_ENENT);
             }
