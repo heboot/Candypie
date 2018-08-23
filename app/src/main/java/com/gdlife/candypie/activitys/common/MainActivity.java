@@ -328,6 +328,13 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
         super.onDestroy();
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (myFragment != null) {
+            myFragment.onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
     private ScreenReceiverUtil.SreenStateListener mScreenListenerer = new ScreenReceiverUtil.SreenStateListener() {
         @Override
         public void onSreenOn() {

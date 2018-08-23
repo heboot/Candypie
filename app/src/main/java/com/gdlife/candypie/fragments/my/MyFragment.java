@@ -1,14 +1,18 @@
 package com.gdlife.candypie.fragments.my;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
+import com.alibaba.fastjson.JSON;
 import com.faceunity.FURenderer;
 import com.gdlife.candypie.MAPP;
 import com.gdlife.candypie.R;
 import com.gdlife.candypie.activitys.auth.AuthCommitActivity;
+import com.gdlife.candypie.activitys.user.UserInfoActivity;
 import com.gdlife.candypie.adapter.index.IndexVisitAdapter;
 import com.gdlife.candypie.adapter.my.MyBottomMenuAdapter;
 import com.gdlife.candypie.base.BaseFragment;
@@ -19,21 +23,31 @@ import com.gdlife.candypie.common.RechargeType;
 import com.gdlife.candypie.databinding.FragmentMyBinding;
 import com.gdlife.candypie.http.HttpClient;
 import com.gdlife.candypie.serivce.AuthService;
+import com.gdlife.candypie.serivce.UploadService;
 import com.gdlife.candypie.serivce.UserService;
 import com.gdlife.candypie.serivce.VerService;
 import com.gdlife.candypie.serivce.theme.VideoChatService;
 import com.gdlife.candypie.utils.DialogUtils;
 import com.gdlife.candypie.utils.GlideImageLoaderByIndexTop;
+import com.gdlife.candypie.utils.ImageUtils;
 import com.gdlife.candypie.utils.IntentUtils;
 import com.gdlife.candypie.utils.SignUtils;
+import com.gdlife.candypie.widget.common.BottomSheetDialog;
 import com.heboot.base.BaseBean;
 import com.heboot.bean.index.IndexPopTipBean;
 import com.heboot.bean.me.MeDataBean;
+import com.heboot.bean.user.UserInfoEditBean;
 import com.heboot.entity.User;
 import com.heboot.entity.my.MyBottomMenuModel;
 import com.heboot.event.MeEvent;
 import com.heboot.event.UserEvent;
 import com.heboot.event.VideoEvent;
+import com.heboot.req.UploadAvatarReq;
+import com.luck.picture.lib.PictureSelector;
+import com.luck.picture.lib.config.PictureConfig;
+import com.luck.picture.lib.config.PictureMimeType;
+import com.luck.picture.lib.entity.LocalMedia;
+import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
 import com.suke.widget.SwitchButton;
 
 import java.util.ArrayList;
@@ -42,6 +56,7 @@ import java.util.List;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 public class MyFragment extends BaseFragment<FragmentMyBinding> {
@@ -51,6 +66,14 @@ public class MyFragment extends BaseFragment<FragmentMyBinding> {
     private VideoChatService videoChatService;
 
     private List<MyBottomMenuModel> myBottomMenuModels = new ArrayList<>();
+
+    private Consumer<Integer> avatarConsumer;
+
+    private BottomSheetDialog avatarBottomSheet;
+
+    private QMUITipDialog loadingDialog;
+
+    private Uri cropUri;
 
     public static MyFragment newInstance() {
         Bundle args = new Bundle();
@@ -111,6 +134,48 @@ public class MyFragment extends BaseFragment<FragmentMyBinding> {
 
             }
         });
+
+        avatarConsumer = new Consumer<Integer>() {
+            @Override
+            public void accept(Integer integer) throws Exception {
+                avatarBottomSheet.dismiss();
+                switch (integer) {
+                    case 0:
+                        PictureSelector.create(_mActivity)
+                                .openCamera(PictureMimeType.ofImage()).setOutputCameraPath(cropUri.getPath()).enableCrop(true)
+                                .cropWH(300, 300).withAspectRatio(1, 1)
+                                .cropCompressQuality(70)// 裁剪压缩质量 默认90 int
+                                .minimumCompressSize(200)// 小于100kb的图片不压缩
+                                .hideBottomControls(true)
+                                .previewImage(false)
+                                .showCropGrid(false)
+                                .rotateEnabled(false)
+                                .forResult(PictureConfig.CAMERA);
+                        break;
+                    case 1:
+                        PictureSelector.create(_mActivity).openGallery(PictureMimeType.ofImage()).enableCrop(true)
+                                .cropWH(300, 300).withAspectRatio(1, 1)
+                                .cropCompressQuality(70)// 裁剪压缩质量 默认90 int
+                                .minimumCompressSize(200)// 小于100kb的图片不压缩
+                                .hideBottomControls(true)
+                                .previewImage(false)
+                                .isCamera(false)
+                                .rotateEnabled(false)
+                                .previewEggs(false)
+                                .showCropGrid(false).maxSelectNum(1).forResult(PictureConfig.CHOOSE_REQUEST);
+                        break;
+                }
+            }
+        };
+
+        binding.ivAvatar.setOnClickListener((v) -> {
+            cropUri = ImageUtils.getCropPhotoUri();
+            if (avatarBottomSheet == null) {
+                avatarBottomSheet = DialogUtils.getAvatarBottomSheet(_mActivity, avatarConsumer);
+            }
+            avatarBottomSheet.show();
+        });
+
 
         /**
          * 个人主页按钮
@@ -368,6 +433,94 @@ public class MyFragment extends BaseFragment<FragmentMyBinding> {
 
         binding.includeMyMenuBottom.rvList.setAdapter(new MyBottomMenuAdapter(R.layout.layout_my_bottom_menus_item, myBottomMenuModels));
 
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        List<LocalMedia> selectList = PictureSelector.obtainMultipleResult(data);
+        if (resultCode == RESULT_OK) {
+            switch (requestCode) {
+                case PictureConfig.CHOOSE_REQUEST:
+                    selectList = PictureSelector.obtainMultipleResult(data);
+                    if (selectList != null && selectList.size() > 0) {
+                        doGetPic(selectList.get(0));
+                    } else {
+                        doGetPic(null);
+                    }
+                    break;
+                case PictureConfig.CAMERA:
+                    if (selectList != null && selectList.size() > 0) {
+                        doGetPic(selectList.get(0));
+                    } else {
+                        doGetPic(null);
+                    }
+                    break;
+            }
+        }
+    }
+
+    private void doGetPic(LocalMedia localMedia) {
+        if (localMedia == null) {
+            return;
+        }
+        loadingDialog = DialogUtils.getLoadingDialog(_mActivity, "", false);
+        loadingDialog.show();
+
+//        ImageUtils.showImage(binding.includeAvatar.tvRight, localMedia.getCutPath());
+
+        UploadService.doUploadAvatar(localMedia.getCutPath(), new Observer<UploadAvatarReq>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+                addDisposable(d);
+            }
+
+            @Override
+            public void onNext(UploadAvatarReq uploadAvatarReq) {
+                if (uploadAvatarReq != null) {
+                    updateAvatar(uploadAvatarReq);
+                }
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                loadingDialog.dismiss();
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
+
+    }
+
+    private void updateAvatar(UploadAvatarReq req) {
+        params = SignUtils.getNormalParams();
+
+        params.put(MKey.AVATAR, JSON.toJSONString(req));
+        String sign = SignUtils.doSign(params);
+        params.put(MKey.SIGN, sign);
+
+
+        HttpClient.Builder.getGuodongServer().upload_avatar(params).observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribe(new HttpObserver<UserInfoEditBean>() {
+            @Override
+            public void onSuccess(BaseBean<UserInfoEditBean> baseBean) {
+                loadingDialog.dismiss();
+                tipDialog = DialogUtils.getSuclDialog(_mActivity, baseBean.getMessage(), true);
+                tipDialog.show();
+            }
+
+            @Override
+            public void onError(BaseBean<UserInfoEditBean> baseBean) {
+                if (tipDialog != null && tipDialog.isShowing()) {
+                    tipDialog.dismiss();
+                }
+
+                tipDialog = DialogUtils.getFailDialog(_mActivity, baseBean.getMessage(), true);
+                tipDialog.show();
+            }
+        });
     }
 
 
