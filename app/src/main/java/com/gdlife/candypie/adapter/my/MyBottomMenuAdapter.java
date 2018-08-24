@@ -8,6 +8,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.gdlife.candypie.MAPP;
 import com.gdlife.candypie.common.RecordVideoFrom;
 import com.gdlife.candypie.common.ReportFromType;
+import com.gdlife.candypie.common.UserVideoActivityFrom;
 import com.gdlife.candypie.databinding.LayoutMyBottomMenusItemBinding;
 import com.gdlife.candypie.serivce.AuthService;
 import com.gdlife.candypie.serivce.UserService;
@@ -45,7 +46,8 @@ public class MyBottomMenuAdapter extends BaseQuickAdapter<MyBottomMenuModel, Bas
                     permissionUtils.getCameraPermission(MAPP.mapp.getCurrentActivity());
                 }
             } else if (item.getName().equals("上传视频")) {
-                IntentUtils.toAuthIndexActivity(helper.itemView.getContext(), RecordVideoFrom.USER);
+//                IntentUtils.toAuthIndexActivity(helper.itemView.getContext(), RecordVideoFrom.USER);
+                IntentUtils.toUserVideosActivity(helper.itemView.getContext(), UserService.getInstance().getUser(), UserVideoActivityFrom.NORMAL);
             } else if (item.getName().equals("我的收藏")) {
                 IntentUtils.toUserFavsListActivity(helper.itemView.getContext());
             } else if (item.getName().equals("设置")) {

@@ -135,6 +135,16 @@
                 app:sb_show_indicator="false"
                 app:sb_uncheck_color="@color/color_898A9E" />
 
+            <View
+                android:id="@+id/v_enable"
+                android:layout_width="@dimen/x50"
+                android:layout_height="@dimen/y30"
+                android:layout_marginLeft="@dimen/x16"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@+id/tv_video_enable"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

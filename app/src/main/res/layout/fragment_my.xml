@@ -70,6 +70,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/x10"
                     android:layout_marginTop="@dimen/y45"
+                    android:ellipsize="end"
+                    android:maxLength="6"
                     android:text="@{user.nickname}"
                     android:textColor="@color/white"
                     android:textSize="@dimen/x24"

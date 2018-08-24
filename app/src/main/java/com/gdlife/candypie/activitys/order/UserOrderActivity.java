@@ -8,6 +8,7 @@ import com.gdlife.candypie.databinding.ActivityUserOrderBinding;
 import com.gdlife.candypie.fragments.order.OrderListFragment;
 import com.heboot.event.NormalEvent;
 import com.heboot.utils.MStatusBarUtils;
+import com.jakewharton.rxbinding2.widget.RxTextView;
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 
 import java.util.ArrayList;
@@ -81,7 +82,8 @@ public class UserOrderActivity extends BaseActivity<ActivityUserOrderBinding> {
     public void initListener() {
         binding.includeToolbar.vBack.setOnClickListener((v) -> {
             finish();
-        }); rxObservable.subscribe(new Observer<Object>() {
+        });
+        rxObservable.subscribe(new Observer<Object>() {
             @Override
             public void onSubscribe(Disposable d) {
                 addDisposable(d);

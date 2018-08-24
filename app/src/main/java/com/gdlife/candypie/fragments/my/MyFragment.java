@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
 import com.alibaba.fastjson.JSON;
+import com.aliyun.common.httpfinal.QupaiHttpFinal;
 import com.faceunity.FURenderer;
 import com.gdlife.candypie.MAPP;
 import com.gdlife.candypie.R;
@@ -20,6 +21,7 @@ import com.gdlife.candypie.base.HttpObserver;
 import com.gdlife.candypie.common.MKey;
 import com.gdlife.candypie.common.MValue;
 import com.gdlife.candypie.common.RechargeType;
+import com.gdlife.candypie.common.RecordVideoFrom;
 import com.gdlife.candypie.databinding.FragmentMyBinding;
 import com.gdlife.candypie.http.HttpClient;
 import com.gdlife.candypie.serivce.AuthService;
@@ -49,10 +51,15 @@ import com.luck.picture.lib.config.PictureMimeType;
 import com.luck.picture.lib.entity.LocalMedia;
 import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
 import com.suke.widget.SwitchButton;
+import com.yalantis.dialog.TipCustomDialog;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -75,6 +82,8 @@ public class MyFragment extends BaseFragment<FragmentMyBinding> {
 
     private Uri cropUri;
 
+    private TipCustomDialog womenTipDialog;
+
     public static MyFragment newInstance() {
         Bundle args = new Bundle();
         MyFragment fragment = new MyFragment();
@@ -92,7 +101,20 @@ public class MyFragment extends BaseFragment<FragmentMyBinding> {
         super.onSupportVisible();
         if (meUser == null) {
             initMeData();
+            initQuPai();
         }
+    }
+
+    private void initQuPai() {
+        Observable.create(new ObservableOnSubscribe<Object>() {
+            @Override
+            public void subscribe(ObservableEmitter<Object> emitter) throws Exception {
+                System.loadLibrary("QuCore-ThirdParty");
+                System.loadLibrary("QuCore");
+                QupaiHttpFinal.getInstance().initOkHttpFinal();
+//                Logger.setDebug(true);
+            }
+        }).observeOn(Schedulers.io()).subscribeOn(AndroidSchedulers.mainThread()).subscribe();
     }
 
     @Override
@@ -107,6 +129,7 @@ public class MyFragment extends BaseFragment<FragmentMyBinding> {
 
     @Override
     public void initListener() {
+
 
         rxObservable.subscribe(new Observer<Object>() {
             @Override
@@ -230,23 +253,29 @@ public class MyFragment extends BaseFragment<FragmentMyBinding> {
         binding.includeMyMenuCenter.sbVideoEnable.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(SwitchButton view, boolean isChecked) {
-                if (isChecked) {
-                    if (UserService.getInstance().getUser().getVideo_chat_status() == 1) {
-                        return;
+                if (UserService.getInstance().isServicer()) {
+                    if (isChecked) {
+                        if (UserService.getInstance().getUser().getVideo_chat_status() == 1) {
+                            return;
+                        }
+                        if (videoChatService == null) {
+                            videoChatService = new VideoChatService();
+                        }
+                        videoChatService.switch_video_chat_status(binding.includeMyMenuCenter.sbVideoEnable);
+                    } else {
+                        if (UserService.getInstance().getUser().getVideo_chat_status() == 0) {
+                            return;
+                        }
+                        if (videoChatService == null) {
+                            videoChatService = new VideoChatService();
+                        }
+                        videoChatService.switch_video_chat_status(binding.includeMyMenuCenter.sbVideoEnable);
                     }
-                    if (videoChatService == null) {
-                        videoChatService = new VideoChatService();
-                    }
-                    videoChatService.switch_video_chat_status(binding.includeMyMenuCenter.sbVideoEnable);
+
                 } else {
-                    if (UserService.getInstance().getUser().getVideo_chat_status() == 0) {
-                        return;
-                    }
-                    if (videoChatService == null) {
-                        videoChatService = new VideoChatService();
-                    }
-                    videoChatService.switch_video_chat_status(binding.includeMyMenuCenter.sbVideoEnable);
+                    showAuthDialog();
                 }
+
 
             }
         });
@@ -254,7 +283,12 @@ public class MyFragment extends BaseFragment<FragmentMyBinding> {
          * 设置价格
          */
         binding.includeMyMenuCenter.vSetVideoPrice.setOnClickListener((v) -> {
-            IntentUtils.toSetPriceActivity(_mActivity, false);
+            if (UserService.getInstance().isServicer()) {
+                IntentUtils.toSetPriceActivity(_mActivity, false);
+            } else {
+                showAuthDialog();
+            }
+
         });
         /**
          * 账单明细
@@ -279,6 +313,21 @@ public class MyFragment extends BaseFragment<FragmentMyBinding> {
                 IntentUtils.toHTMLActivity(binding.getRoot().getContext(), null, MAPP.mapp.getConfigBean().getInvite_url_config().getU_u() + "?token=" + UserService.getInstance().getToken());
             }
         });
+
+
+        binding.includeMyMenuCenter.vEnable.setOnClickListener((v) -> {
+            if (UserService.getInstance().isServicer()) {
+                if (UserService.getInstance().getUser().getVideo_chat_status() == 1) {
+                    binding.includeMyMenuCenter.sbVideoEnable.setChecked(false);
+                } else {
+                    binding.includeMyMenuCenter.sbVideoEnable.setChecked(true);
+                }
+            } else {
+                showAuthDialog();
+            }
+
+        });
+
     }
 
     private void initMeData() {
@@ -300,6 +349,22 @@ public class MyFragment extends BaseFragment<FragmentMyBinding> {
         });
     }
 
+    private void showAuthDialog() {
+        if (womenTipDialog == null) {
+            womenTipDialog = new TipCustomDialog.Builder(_mActivity, new Consumer<Integer>() {
+                @Override
+                public void accept(Integer integer) throws Exception {
+                    if (integer == 0) {
+                        womenTipDialog.dismiss();
+                    } else {
+                        IntentUtils.toAuthIndexActivity(_mActivity, RecordVideoFrom.AUTH);
+                    }
+                }
+            }, "认证主播后，即可设定视频服务价格", "取消", "去认证").create();
+        }
+        womenTipDialog.show();
+    }
+
     /**
      * 初始化中间的菜单数据
      */
@@ -317,8 +382,10 @@ public class MyFragment extends BaseFragment<FragmentMyBinding> {
         binding.includeMyMenuCenter.setUser(meUser);
 
         if (UserService.getInstance().isServicer()) {
+            binding.includeMyMenuCenter.sbVideoEnable.setEnabled(true);
             binding.includeMyMenuTop.tvVerStatus.setText(getString(R.string.ver_ok));
         } else {
+            binding.includeMyMenuCenter.sbVideoEnable.setEnabled(false);
             VerService.showServiceVerStatus(binding.includeMyMenuTop.tvVerStatus, UserService.getInstance().getUser());
         }
 

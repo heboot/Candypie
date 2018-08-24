@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y52"
+        android:layout_marginLeft="@dimen/x16"
+        android:layout_marginRight="@dimen/x16">
+
+        <ImageView
+            android:id="@+id/iv_msg"
+            android:layout_width="@dimen/x30"
+            android:layout_height="@dimen/y30"
+            android:layout_marginLeft="@dimen/x5"
+            android:layout_marginTop="@dimen/y5"
+            android:background="@drawable/oval_red"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_msg"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/y1"
+            android:gravity="center"
+            android:text="私信"
+            android:textColor="@color/color_FF5252"
+            android:textSize="@dimen/x10"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="@+id/iv_msg"
+            app:layout_constraintRight_toRightOf="@+id/iv_msg"
+            app:layout_constraintTop_toBottomOf="@+id/iv_msg" />
+
+        <ImageView
+            android:id="@+id/iv_send_gift"
+            android:layout_width="@dimen/x30"
+            android:layout_height="@dimen/y30"
+            android:layout_marginTop="@dimen/y5"
+            android:background="@drawable/oval_red"
+            app:layout_constraintLeft_toLeftOf="@+id/tv_send_gift"
+            app:layout_constraintRight_toRightOf="@+id/tv_send_gift"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_send_gift"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x40"
+            android:layout_marginTop="@dimen/y1"
+            android:gravity="center"
+            android:text="送礼物"
+            android:textColor="@color/color_C9AA4B"
+            android:textSize="@dimen/x10"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toRightOf="@+id/iv_msg"
+            app:layout_constraintTop_toBottomOf="@+id/iv_send_gift" />
+
+        <View
+            android:id="@+id/v_video_bg"
+            android:layout_width="@dimen/x200"
+            android:layout_height="@dimen/y40"
+            android:background="@drawable/bg_gradient_videochat"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></View>
+
+        <View
+            android:layout_width="@dimen/x26"
+            android:layout_height="@dimen/y22"
+            android:layout_marginLeft="@dimen/x19"
+            android:background="@drawable/icon_discover_chat"
+            app:layout_constraintBottom_toBottomOf="@+id/v_video_bg"
+            app:layout_constraintLeft_toLeftOf="@+id/v_video_bg"
+            app:layout_constraintTop_toTopOf="@+id/v_video_bg"></View>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x55"
+            android:gravity="left|center_vertical"
+            android:text="聊天300钻/分钟"
+            android:textColor="@color/white"
+            android:textSize="@dimen/x16"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/v_video_bg"
+            app:layout_constraintLeft_toLeftOf="@+id/v_video_bg"
+            app:layout_constraintRight_toRightOf="@+id/v_video_bg"
+            app:layout_constraintTop_toTopOf="@+id/v_video_bg" />
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

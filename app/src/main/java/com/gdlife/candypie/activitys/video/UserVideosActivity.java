@@ -342,7 +342,7 @@ public class UserVideosActivity extends BaseActivity<ActivityUserVideosBinding> 
                             userVideosAdapter.getData().clear();
                         }
                         userVideosAdapter.getData().addAll(sendSMSBeanBaseBean.getList());
-                        if (user.getId() == UserService.getInstance().getUser().getId() && sp == 1) {
+                        if (user.getId().intValue() == UserService.getInstance().getUser().getId().intValue() && sp == 1) {
                             userVideosAdapter.getData().add(0, new HomepageVideoBean());
                         }
                         userVideosAdapter.notifyDataSetChanged();
@@ -350,7 +350,7 @@ public class UserVideosActivity extends BaseActivity<ActivityUserVideosBinding> 
 
                 } else {
                     binding.plytContainer.toMain();
-                    if (user.getId() == UserService.getInstance().getUser().getId() && sp == 1) {
+                    if (user.getId().intValue() == UserService.getInstance().getUser().getId().intValue() && sp == 1) {
                         userVideosAdapter = new UserVideosAdapter(new WeakReference<UserVideosActivity>(UserVideosActivity.this), user.getId().intValue() == UserService.getInstance().getUser().getId().intValue(), new ArrayList<>(), from.equals(UserVideoActivityFrom.REPLACE_MAIN_VIDEO), user);
                         if (user.getId() == UserService.getInstance().getUser().getId() && sp == 1) {
                             userVideosAdapter.getData().add(0, new HomepageVideoBean());
