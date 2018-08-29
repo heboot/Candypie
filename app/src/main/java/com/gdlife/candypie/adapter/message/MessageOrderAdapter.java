@@ -9,6 +9,7 @@ import com.gdlife.candypie.MAPP;
 import com.gdlife.candypie.R;
 import com.gdlife.candypie.common.MValue;
 import com.gdlife.candypie.databinding.ItemOrderRobBinding;
+import com.gdlife.candypie.fragments.message.MessageOrderFragment;
 import com.gdlife.candypie.serivce.OrderService;
 import com.gdlife.candypie.serivce.ThemeService;
 import com.gdlife.candypie.utils.ImageUtils;
@@ -29,6 +30,8 @@ public class MessageOrderAdapter extends BaseQuickAdapter<OrderListBean.ListBean
 
 
     private ConfigBean.ServiceItemsConfigBean.ListBean listBean;
+
+    private WeakReference<MessageOrderFragment> weakReference;
 
     public MessageOrderAdapter(int layoutResId, List<OrderListBean.ListBean> list) {
         super(layoutResId, list);
@@ -87,9 +90,11 @@ public class MessageOrderAdapter extends BaseQuickAdapter<OrderListBean.ListBean
         if (s.getAction_config() != null) {
             binding.btnRegister.setText(s.getAction_config().get(0).getValue());
             if (StringUtils.isEmpty(s.getAction_config().get(0).getColor())) {
+                binding.btnRegister.setEnabled(false);
                 binding.btnRegister.setSelected(false);
                 binding.btnRegister.setTextColor(ContextCompat.getColor(binding.getRoot().getContext(), R.color.white));
             } else {
+                binding.btnRegister.setEnabled(true);
                 binding.btnRegister.setSelected(true);
                 binding.btnRegister.setTextColor(ContextCompat.getColor(binding.getRoot().getContext(), R.color.color_58586C));
             }
@@ -101,15 +106,14 @@ public class MessageOrderAdapter extends BaseQuickAdapter<OrderListBean.ListBean
             if (listBean.getType().equals("out") || StringUtils.isEmpty(s.getAction_config().get(0).getAction())) {
                 return;
             }
-
-            if (s.getService_type().equals(MValue.ORDER_TYPE_VIDEO)) {
-//                if (!permissionUtils.hasCameraPermission(MAPP.mapp)) {
-//                    permissionUtils.getCameraPermission(weakReference.get().getActivity());
-//                    return;
-//                }
-            }
-//            weakReference.get().doApply(s.getId(), helper.getLayoutPosition(),
-//                    binding.btnRegister, binding.tvMoney, s);
+//
+//            if (s.getService_type().equals(MValue.ORDER_TYPE_VIDEO)) {
+////                if (!permissionUtils.hasCameraPermission(MAPP.mapp)) {
+////                    permissionUtils.getCameraPermission(weakReference.get().getActivity());
+////                    return;
+////                }
+//            }
+            weakReference.get().apply(binding.btnRegister, s.getId(), s);
         });
 
         binding.ivAvatar.setOnClickListener((v) -> {

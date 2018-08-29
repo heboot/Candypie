@@ -11,6 +11,7 @@ import android.view.WindowManager;
 import com.gdlife.candypie.R;
 import com.gdlife.candypie.databinding.DialogFreeVideoBinding;
 import com.gdlife.candypie.databinding.DialogTipTitleBinding;
+import com.gdlife.candypie.serivce.AuthService;
 import com.gdlife.candypie.serivce.UserService;
 import com.gdlife.candypie.utils.ImageUtils;
 import com.gdlife.candypie.utils.IntentUtils;
@@ -77,8 +78,11 @@ public class FreeVideoDialog extends Dialog {
                 @Override
                 public void accept(Object o) throws Exception {
                     dialog.dismiss();
+                    if (indexPopTipBean.getAction().equals("service_auth")) {
+                        AuthService.toAuthPageByIndex(context);
+                    }
 
-                    observer.accept(1);
+//                    observer.accept(1);
 
 //                    if (!StringUtils.isEmpty(indexPopTipBean.getUrl())) {
 //                        IntentUtils.toHTMLActivity(context, null, indexPopTipBean.getUrl() + "?token=" + UserService.getInstance().getToken());

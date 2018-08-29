@@ -128,9 +128,9 @@ public class MessageActiveFragment extends BaseFragment<FragmentMessageActiveBin
                 if (sp == 1) {
 
                     if (baseBean.getData() != null && baseBean.getData().getTop_ad_list() != null) {
-                        initHeadView(baseBean.getData().getTop_ad_list().get(0), baseBean.getData().getVisit_list());
+                        initHeadView(baseBean.getData().getTop_ad_list().size() > 0 ? baseBean.getData().getTop_ad_list().get(0) : null, baseBean.getData().getVisit_list() == null ? null : baseBean.getData().getVisit_list());
                     } else if (baseBean.getData().getVisit_list() != null && baseBean.getData().getVisit_list().getList() != null) {
-                        initHeadView(null, baseBean.getData().getVisit_list());
+                        initHeadView(null, baseBean.getData().getVisit_list() == null ? null : baseBean.getData().getVisit_list());
                     }
 
                     activeAdapter.getData().clear();

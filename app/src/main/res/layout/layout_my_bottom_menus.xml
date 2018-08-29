@@ -3,15 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <android.support.constraint.ConstraintLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/color_EDEDF3"
-        android:paddingLeft="@dimen/x17"
-        android:paddingRight="@dimen/x20">
+        android:paddingLeft="@dimen/x10"
+        android:paddingRight="@dimen/x13">
 
         <android.support.v7.widget.RecyclerView
+            android:background="@color/color_EDEDF3"
             android:id="@+id/rv_list"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:focusable="false"
             app:layout_constraintBottom_toBottomOf="parent"

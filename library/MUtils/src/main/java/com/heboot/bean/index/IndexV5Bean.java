@@ -21,7 +21,16 @@ public class IndexV5Bean extends BaseBeanEntity {
     private List<User> list;
     private IndexRecommendConfigBean recommend_config;
     private int service_auth_tip;
+    private int service_auth;
 
+
+    public int getService_auth() {
+        return service_auth;
+    }
+
+    public void setService_auth(int service_auth) {
+        this.service_auth = service_auth;
+    }
 
     public int getService_auth_tip() {
         return service_auth_tip;

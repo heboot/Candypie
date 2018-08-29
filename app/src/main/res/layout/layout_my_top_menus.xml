@@ -26,7 +26,7 @@
                 android:layout_marginTop="@dimen/y4"
                 android:text="我的账户"
                 android:textColor="@color/color_343445"
-                android:textSize="@dimen/x18" />
+                android:textSize="@dimen/x16" />
 
         </LinearLayout>
 
@@ -50,7 +50,7 @@
                 android:layout_marginTop="@dimen/y4"
                 android:text="已认证"
                 android:textColor="@color/color_343445"
-                android:textSize="@dimen/x18" />
+                android:textSize="@dimen/x16" />
 
         </LinearLayout>
 
@@ -73,7 +73,7 @@
                 android:layout_marginTop="@dimen/y4"
                 android:text="推荐有奖"
                 android:textColor="@color/color_343445"
-                android:textSize="@dimen/x18" />
+                android:textSize="@dimen/x16" />
 
         </LinearLayout>
 
@@ -105,7 +105,7 @@
                     android:layout_marginTop="@dimen/y4"
                     android:text="我的订单"
                     android:textColor="@color/color_343445"
-                    android:textSize="@dimen/x18"
+                    android:textSize="@dimen/x16"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/iv" />

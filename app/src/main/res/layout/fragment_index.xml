@@ -115,8 +115,10 @@
 
                 <com.flyco.tablayout.SlidingTabLayout
                     android:id="@+id/st_title"
-                    android:layout_width="@dimen/x174"
+                    android:layout_width="@dimen/x200"
                     android:layout_height="@dimen/y30"
+                    android:layout_marginLeft="@dimen/x38"
+                    android:layout_marginRight="@dimen/x38"
                     android:layout_marginTop="@dimen/y26"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"

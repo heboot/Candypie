@@ -361,6 +361,11 @@ public class IndexListFragment extends BaseFragment<FragmentIndexListBinding> {
                     freeVideoDialog.show();
                 }
 
+                if (indexBean.getService_auth() == 1) {
+                    freeVideoDialog = new FreeVideoDialog.Builder(_mActivity, indexBean.getPopup_tip(), freeDialogConsumer).create();
+                    freeVideoDialog.show();
+                }
+
                 if (indexBean.getService_auth_tip() == 1) {
                     if (womenTipDialog == null) {
                         womenTipDialog = new TipCustomDialog.Builder(_mActivity, new Consumer<Integer>() {

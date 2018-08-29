@@ -2,10 +2,12 @@ package com.gdlife.candypie.adapter.my;
 
 import android.databinding.DataBindingUtil;
 import android.support.annotation.Nullable;
+import android.view.ViewGroup;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.gdlife.candypie.MAPP;
+import com.gdlife.candypie.R;
 import com.gdlife.candypie.common.RecordVideoFrom;
 import com.gdlife.candypie.common.ReportFromType;
 import com.gdlife.candypie.common.UserVideoActivityFrom;
@@ -16,6 +18,10 @@ import com.gdlife.candypie.utils.ImageUtils;
 import com.gdlife.candypie.utils.IntentUtils;
 import com.gdlife.candypie.utils.PermissionUtils;
 import com.heboot.entity.my.MyBottomMenuModel;
+import com.heboot.utils.ViewUtils;
+import com.qmuiteam.qmui.util.QMUIDisplayHelper;
+import com.qmuiteam.qmui.util.QMUIViewHelper;
+import com.qmuiteam.qmui.util.QMUIViewOffsetHelper;
 
 import java.util.List;
 
@@ -23,13 +29,19 @@ public class MyBottomMenuAdapter extends BaseQuickAdapter<MyBottomMenuModel, Bas
 
     private PermissionUtils permissionUtils;
 
+    private ViewGroup.MarginLayoutParams layoutParams;
+
     public MyBottomMenuAdapter(int layoutResId, @Nullable List<MyBottomMenuModel> data) {
         super(layoutResId, data);
+//        int count = (QMUIDisplayHelper.getScreenWidth(MAPP.mapp) - MAPP.mapp.getResources().getDimensionPixelOffset(R.dimen.x10)) / 3;
+//        layoutParams = new ViewGroup.MarginLayoutParams(count, count);
     }
 
     @Override
     protected void convert(BaseViewHolder helper, MyBottomMenuModel item) {
         LayoutMyBottomMenusItemBinding binding = DataBindingUtil.bind(helper.itemView);
+//        binding.getRoot().setLayoutParams(layoutParams);
+//        ViewUtils.setMargins(binding.getRoot(), MAPP.mapp.getResources().getDimensionPixelOffset(R.dimen.x3), MAPP.mapp.getResources().getDimensionPixelOffset(R.dimen.x3), 0, 0);
         binding.tvName.setText(item.getName());
         ImageUtils.showImage(binding.iv, item.getIcon());
         binding.getRoot().setOnClickListener((v) -> {

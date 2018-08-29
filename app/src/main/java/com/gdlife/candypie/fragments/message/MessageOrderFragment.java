@@ -2,8 +2,11 @@ package com.gdlife.candypie.fragments.message;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
+import android.widget.CheckBox;
+import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.gdlife.candypie.MAPP;
@@ -11,16 +14,22 @@ import com.gdlife.candypie.R;
 import com.gdlife.candypie.adapter.message.MessageOrderAdapter;
 import com.gdlife.candypie.base.BaseFragment;
 import com.gdlife.candypie.base.BaseObserver;
+import com.gdlife.candypie.base.HttpObserver;
 import com.gdlife.candypie.common.MKey;
+import com.gdlife.candypie.common.MValue;
+import com.gdlife.candypie.common.VideoChatFrom;
 import com.gdlife.candypie.databinding.FragmentMessageOrderBinding;
 import com.gdlife.candypie.http.HttpCallBack;
 import com.gdlife.candypie.http.HttpClient;
 import com.gdlife.candypie.serivce.ServerService;
 import com.gdlife.candypie.serivce.UIService;
 import com.gdlife.candypie.utils.DialogUtils;
+import com.gdlife.candypie.utils.IntentUtils;
 import com.gdlife.candypie.utils.PermissionUtils;
 import com.gdlife.candypie.utils.SignUtils;
+import com.gdlife.candypie.utils.StringUtils;
 import com.heboot.base.BaseBean;
+import com.heboot.bean.theme.ApplyOrderBean;
 import com.heboot.bean.theme.OrderListBean;
 import com.heboot.utils.PreferencesUtils;
 
@@ -190,5 +199,45 @@ public class MessageOrderFragment extends BaseFragment<FragmentMessageOrderBindi
 
         }));
     }
+
+
+    public void apply(CheckBox textView, String userServiceId, OrderListBean.ListBean s) {
+        params = SignUtils.getNormalParams();
+        params.put(MKey.SP, sp);
+        params.put(MKey.PAGESIZE, pageSize);
+        String sign = SignUtils.doSign(params);
+        params.put(MKey.SIGN, sign);
+        HttpClient.Builder.getGuodongServer().apply(params).observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribe(new HttpObserver<ApplyOrderBean>() {
+            @Override
+            public void onSuccess(BaseBean<ApplyOrderBean> baseBean) {
+                ApplyOrderBean applyOrderBean = baseBean.getData();
+                initOrders();
+
+                textView.setText(getString(R.string.rob_order_ed));
+                textView.setSelected(false);
+                textView.setChecked(false);
+                textView.setTextColor(ContextCompat.getColor(binding.getRoot().getContext(), R.color.color_58586C));
+
+
+//                money.setTextColor(ContextCompat.getColor(binding.getRoot().getContext(), R.color.color_898A9E));
+                if (applyOrderBean.getChat_room_config() != null && !StringUtils.isEmpty(applyOrderBean.getChat_room_config().getChannel_key())) {
+                    IntentUtils.toVideoChatActivity(getContext(), userServiceId, applyOrderBean.getChat_room_config(), VideoChatFrom.SERVICER);
+                } else if (s.getStatus() == MValue.ORDER_STATUS_DAICHULI) {
+                    IntentUtils.intent2ChatActivity(getContext(), MValue.CHAT_PRIEX + s.getUser().getId());
+                }
+
+            }
+
+            @Override
+            public void onError(BaseBean<ApplyOrderBean> baseBean) {
+                if (tipDialog != null && tipDialog.isShowing()) {
+                    tipDialog.dismiss();
+                }
+                tipDialog = DialogUtils.getFailDialog(getContext(), baseBean.getMessage(), true);
+                tipDialog.show();
+            }
+        });
+    }
+
 
 }

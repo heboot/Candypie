@@ -357,7 +357,7 @@ public class MyFragment extends BaseFragment<FragmentMyBinding> {
                     if (integer == 0) {
                         womenTipDialog.dismiss();
                     } else {
-                        IntentUtils.toAuthIndexActivity(_mActivity, RecordVideoFrom.AUTH);
+                        IntentUtils.toAuthBootActivity(_mActivity);
                     }
                 }
             }, "认证主播后，即可设定视频服务价格", "取消", "去认证").create();

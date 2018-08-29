@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <android.support.constraint.ConstraintLayout
-        android:layout_width="@dimen/x100"
-        android:layout_height="@dimen/y100"
+        android:layout_width="@dimen/x115"
+        android:layout_height="@dimen/y115"
         android:layout_marginLeft="@dimen/x3"
         android:layout_marginTop="@dimen/y3"
-        android:background="@drawable/bg_rect_white_3"
-         >
+
+        android:background="@drawable/bg_rect_white_3">
 
         <ImageView
             android:id="@+id/iv"
@@ -30,7 +30,8 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/iv" />
-
+        <!--android:layout_marginLeft="@dimen/x3"-->
+        <!--android:layout_marginTop="@dimen/y3"-->
 
     </android.support.constraint.ConstraintLayout>
 </layout>

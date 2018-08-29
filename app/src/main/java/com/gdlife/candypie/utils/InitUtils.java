@@ -5,6 +5,7 @@ import android.content.Context;
 
 import com.alibaba.fastjson.JSON;
 import com.aliyun.common.httpfinal.QupaiHttpFinal;
+import com.faceunity.FURenderer;
 import com.gdlife.candypie.BuildConfig;
 import com.gdlife.candypie.MAPP;
 import com.gdlife.candypie.R;
@@ -63,6 +64,7 @@ public class InitUtils {
     public void initSDK(Application application, MessageService messageService) {
 //        initLeakCanary(application);
 //        initQuPai();
+        initMeiyan();
         initBugly(application);
         initNIM(application, messageService);
         initCrash();
@@ -277,6 +279,15 @@ public class InitUtils {
 //            return;
 //        }
 //        LeakCanary.install(application);
+    }
+
+    private void initMeiyan() {
+        Observable.create(new ObservableOnSubscribe<Object>() {
+            @Override
+            public void subscribe(ObservableEmitter<Object> emitter) throws Exception {
+                FURenderer.initFURenderer(MAPP.mapp);
+            }
+        }).observeOn(Schedulers.io()).subscribeOn(AndroidSchedulers.mainThread()).subscribe();
     }
 
     private void initQuPai() {
