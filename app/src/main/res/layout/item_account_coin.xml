@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="@dimen/x164"
+        android:layout_height="@dimen/y200"
+        android:layout_marginLeft="@dimen/x16"
+        android:layout_marginTop="@dimen/y10"
+        android:background="@color/white">
+
+        <ImageView
+            android:id="@+id/iv_zhi"
+            android:layout_width="@dimen/x56"
+            android:layout_height="@dimen/y56"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/iv_img"
+            android:layout_width="@dimen/x164"
+            android:layout_height="@dimen/y220"
+            android:background="@drawable/icon_account_re_coin"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/y7"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@+id/tv_money"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent">
+
+            <TextView
+                android:id="@+id/tv_coin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="111111"
+                android:textColor="@color/color_343445"
+                android:textSize="@dimen/x24"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/tv_money"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_coin_plus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="111111"
+                android:textColor="@color/color_FF6363"
+                android:textSize="@dimen/x24"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/tv_money"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent" />
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/tv_money"
+            android:layout_width="@dimen/x120"
+            android:layout_height="@dimen/y40"
+            android:layout_marginBottom="@dimen/y14"
+            android:background="@drawable/bg_gradient_recharge"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/x18"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

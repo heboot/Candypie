@@ -64,6 +64,34 @@ public class RechargeConfigBean extends BaseBeanEntity {
         private String product_id;
         private int amount;
         private String coin;
+        private String pre_coin;
+        private int plus_coin;
+        private String icon;
+
+        public String getPre_coin() {
+            return pre_coin;
+        }
+
+        public void setPre_coin(String pre_coin) {
+            this.pre_coin = pre_coin;
+        }
+
+
+        public int getPlus_coin() {
+            return plus_coin;
+        }
+
+        public void setPlus_coin(int plus_coin) {
+            this.plus_coin = plus_coin;
+        }
+
+        public String getIcon() {
+            return icon;
+        }
+
+        public void setIcon(String icon) {
+            this.icon = icon;
+        }
 
         public String getProduct_id() {
             return product_id;

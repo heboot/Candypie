@@ -6,6 +6,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <View
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y200"
+            android:background="@drawable/bg_account_top"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></View>
+
         <include
             android:id="@+id/include_toolbar"
             layout="@layout/layout_toolbar"
@@ -15,137 +23,261 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"></include>
 
-        <android.support.constraint.ConstraintLayout
-            android:id="@+id/rlyt_balance"
+        <LinearLayout
+            android:id="@+id/llyt_account"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/y20"
+            android:layout_marginTop="@dimen/y10"
+            android:gravity="center"
+            android:orientation="horizontal"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/include_toolbar">
 
-            <include
-                android:id="@+id/include_balance"
-                layout="@layout/item_balance"
-                android:layout_width="@dimen/x312"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/x20"
-                app:layout_constraintLeft_toRightOf="@+id/include_coin"
-                app:layout_constraintTop_toTopOf="parent"></include>
+            <ImageView
+                android:layout_width="@dimen/x30"
+                android:layout_height="@dimen/y30"
+                android:layout_marginTop="@dimen/y4"
+                android:background="@drawable/icon_account_coin" />
 
-            <include
-                android:id="@+id/include_coin"
-                layout="@layout/item_balance_coin"
-                android:layout_width="@dimen/x312"
-                android:layout_height="@dimen/y186"
-                android:layout_marginLeft="@dimen/x30"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent"></include>
-        </android.support.constraint.ConstraintLayout>
+            <TextView
+                android:id="@+id/tv_coin_balance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x10"
+                android:text="111"
+                android:textColor="@color/white"
+                android:textSize="@dimen/x48"
+                android:textStyle="bold" />
+
+        </LinearLayout>
 
         <TextView
-            android:id="@+id/tv_title"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/x15"
-            android:layout_marginTop="@dimen/y50"
-            android:text="其他服务"
-            android:textColor="@color/color_343445"
-            android:textSize="@dimen/x18"
+            android:layout_marginTop="@dimen/y8"
+            android:gravity="center"
+            android:text="钻石余额"
+            android:textColor="@color/white"
+            android:textSize="@dimen/x20"
             android:textStyle="bold"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rlyt_balance" />
-
-        <include
-            android:id="@+id/include_coupon"
-            layout="@layout/layout_balance_service"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/y10"
-            app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_title"></include>
+            app:layout_constraintTop_toBottomOf="@+id/llyt_account" />
 
         <View
-            android:id="@+id/line_coupon"
+            android:id="@+id/v_bg"
             android:layout_width="0dp"
-            android:layout_height="@dimen/y1"
-            android:layout_marginLeft="@dimen/x16"
-            android:background="@color/line_color"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/include_coupon"></View>
-
-        <include
-            android:id="@+id/include_level"
-            layout="@layout/layout_balance_service"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/y10"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/line_coupon"></include>
-
-        <View
-            android:id="@+id/line_level"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/y1"
-            android:layout_marginLeft="@dimen/x16"
-            android:background="@color/line_color"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/include_level"></View>
-
-        <include
-            android:id="@+id/include_gold_rights"
-            layout="@layout/layout_balance_service"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/y10"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/line_level"></include>
-
-        <View
-            android:id="@+id/line_gold_rights"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/y1"
-            android:layout_marginLeft="@dimen/x16"
-            android:background="@color/line_color"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/include_gold_rights"></View>
-
-        <!--<include-->
-        <!--android:id="@+id/include_black"-->
-        <!--layout="@layout/layout_balance_service"-->
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginTop="@dimen/y10"-->
-        <!--app:layout_constraintLeft_toLeftOf="parent"-->
-        <!--app:layout_constraintRight_toRightOf="parent"-->
-        <!--app:layout_constraintTop_toBottomOf="@+id/line_level"></include>-->
-
-        <!--<View-->
-        <!--android:id="@+id/line_black"-->
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_height="@dimen/y1"-->
-        <!--android:layout_marginLeft="@dimen/x16"-->
-        <!--android:background="@color/line_color"-->
-        <!--app:layout_constraintLeft_toLeftOf="parent"-->
-        <!--app:layout_constraintTop_toBottomOf="@+id/include_black"></View>-->
-
-
-        <com.qmuiteam.qmui.widget.QMUIRadiusImageView
-            android:id="@+id/iv_up_vip"
-            android:layout_width="@dimen/x314"
-            android:layout_height="@dimen/y70"
-            android:layout_marginBottom="@dimen/y37"
-            android:elevation="@dimen/x4"
-            android:src="@drawable/icon_pay_gold_card_delete"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/y195"
+            android:background="@drawable/bg_rect_white_top_6"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:qmui_border_width="0dp"
-            app:qmui_corner_radius="@dimen/x35"
-            app:qmui_is_circle="false" />
+            app:layout_constraintTop_toTopOf="parent"></View>
+        <!--android:background="@drawable/bg_rect_white_top_6"-->
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/y6"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/v_bg">
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/tv_money_balance_tip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x16"
+                    android:text="账户余额"
+                    android:textColor="@color/color_343445"
+                    android:textSize="@dimen/x16"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/qrb_cash"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/qrb_cash" />
+
+                <TextView
+                    android:id="@+id/tv_money_balance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x10"
+                    android:text=""
+                    android:textColor="@color/color_343445"
+                    android:textSize="@dimen/x16"
+                    app:layout_constraintBottom_toBottomOf="@+id/qrb_cash"
+                    app:layout_constraintLeft_toRightOf="@+id/tv_money_balance_tip"
+                    app:layout_constraintTop_toTopOf="@+id/qrb_cash" />
+
+                <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+                    android:id="@+id/qrb_cash"
+                    android:layout_width="@dimen/x60"
+                    android:layout_height="@dimen/y30"
+                    android:layout_marginRight="@dimen/x10"
+                    android:layout_marginTop="@dimen/y9"
+                    android:text="提现"
+                    android:textColor="@color/white"
+                    app:layout_constraintRight_toLeftOf="@+id/qrb_recharge"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:qmui_backgroundColor="@color/color_FF5252"
+                    app:qmui_borderWidth="0dp" />
+
+
+                <View
+                    android:id="@+id/v_line"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/y1"
+                    android:layout_marginLeft="@dimen/x16"
+                    android:layout_marginTop="@dimen/y18"
+                    android:background="@color/line_color"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_money_balance_tip"></View>
+
+
+                <TextView
+                    android:id="@+id/tv_coupon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x16"
+                    android:layout_marginTop="@dimen/y18"
+                    android:text="约会券"
+                    android:textColor="@color/color_343445"
+                    android:textSize="@dimen/x16"
+                    android:textStyle="bold"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/v_line" />
+
+                <TextView
+                    android:id="@+id/tv_coupon_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x10"
+                    android:text=""
+                    android:textColor="@color/color_343445"
+                    android:textSize="@dimen/x16"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_coupon"
+                    app:layout_constraintLeft_toRightOf="@+id/tv_coupon"
+                    app:layout_constraintTop_toTopOf="@+id/tv_coupon" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/x35"
+                    android:text="去查看"
+                    android:textColor="@color/color_898A9E"
+                    android:textSize="@dimen/x15"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_coupon"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tv_coupon" />
+
+                <ImageView
+                    android:layout_width="@dimen/x5"
+                    android:layout_height="@dimen/y9"
+                    android:layout_marginRight="@dimen/x20"
+                    android:background="@drawable/icon_arrow_right_gray"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_coupon"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tv_coupon" />
+
+                <com.qmuiteam.qmui.widget.roundwidget.QMUIRoundButton
+                    android:id="@+id/qrb_recharge"
+                    android:layout_width="@dimen/x60"
+                    android:layout_height="@dimen/y30"
+                    android:layout_marginRight="@dimen/x16"
+                    android:layout_marginTop="@dimen/y9"
+                    android:text="提现"
+                    android:textColor="@color/white"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:qmui_backgroundColor="@color/color_FF5252"
+                    app:qmui_borderWidth="0dp" />
+
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/y19"
+                    android:background="@color/color_EDEDF3"
+                    android:paddingTop="@dimen/y14"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_coupon">
+
+                    <TextView
+                        android:id="@+id/tv_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="购买钻石"
+                        android:textColor="@color/color_343445"
+                        android:textSize="@dimen/x20"
+                        android:textStyle="bold"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_sub_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="快来享受美好视频"
+                        android:textColor="@color/color_898A9E"
+                        android:textSize="@dimen/x11"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_title" />
+
+                    <View
+                        android:layout_width="@dimen/x116"
+                        android:layout_height="@dimen/y9"
+                        android:layout_marginLeft="@dimen/x11"
+                        android:background="@drawable/account_line_right"
+                        app:layout_constraintBottom_toBottomOf="@+id/tv_title"
+                        app:layout_constraintLeft_toRightOf="@+id/tv_title"
+                        app:layout_constraintTop_toTopOf="@+id/tv_title"></View>
+
+                    <View
+                        android:layout_width="@dimen/x116"
+                        android:layout_height="@dimen/y9"
+                        android:layout_marginRight="@dimen/x11"
+                        android:background="@drawable/account_line_left"
+                        app:layout_constraintBottom_toBottomOf="@+id/tv_title"
+                        app:layout_constraintRight_toLeftOf="@+id/tv_title"
+                        app:layout_constraintTop_toTopOf="@+id/tv_title"></View>
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rv_list"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="@dimen/x16"
+                        android:layout_marginTop="@dimen/y14"
+                        android:background="@color/color_EDEDF3"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_sub_title"></android.support.v7.widget.RecyclerView>
+
+                </android.support.constraint.ConstraintLayout>
+
+                <!--<View-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="0dp"-->
+                <!--android:layout_marginTop="@dimen/y19"-->
+                <!--android:background="@color/color_EDEDF3"-->
+                <!--app:layout_constraintBottom_toBottomOf="parent"-->
+                <!--app:layout_constraintLeft_toLeftOf="parent"-->
+                <!--app:layout_constraintRight_toRightOf="parent"-->
+                <!--app:layout_constraintTop_toBottomOf="@+id/tv_coupon"></View>-->
+
+
+            </android.support.constraint.ConstraintLayout>
+
+        </android.support.v4.widget.NestedScrollView>
 
     </android.support.constraint.ConstraintLayout>
+
 </layout>
