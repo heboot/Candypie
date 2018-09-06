@@ -131,11 +131,13 @@ public class RecentContactsActivity extends BaseActivity<ActivityRecentcontactsB
                 user.setId(Integer.parseInt(user2.getAccount().replace(MValue.CHAT_PRIEX, "")));
 
 
-                if (Integer.parseInt(role) == MValue.USER_ROLE_NORMAL) {
-                    IntentUtils.toUserInfoActivity(MAPP.mapp, MValue.USER_INFO_TYPE_NORMAL, MValue.USER_INFO_TYPE_NORMAL, user, null, null);
-                } else if (Integer.parseInt(role) == MValue.USER_ROLE_SERVICER) {
-                    IntentUtils.toHomepageActivity(MAPP.mapp, MValue.FROM_OTHER, user, MValue.HOMEPAG_FROM.ONE_ONE, null);
-                }
+//                if (Integer.parseInt(role) == MValue.USER_ROLE_NORMAL) {
+//                    IntentUtils.toUserInfoActivity(MAPP.mapp, MValue.USER_INFO_TYPE_NORMAL, MValue.USER_INFO_TYPE_NORMAL, user, null, null);
+//                } else if (Integer.parseInt(role) == MValue.USER_ROLE_SERVICER) {
+//                    IntentUtils.toHomepageActivity(MAPP.mapp, MValue.FROM_OTHER, user, MValue.HOMEPAG_FROM.ONE_ONE, null);
+//                }
+
+                IntentUtils.toUserPageActivity(MAPP.mapp.getCurrentActivity(), String.valueOf(user.getId()));
 
             }
 

@@ -10,6 +10,25 @@ import java.util.List;
 
 public class UserVideosBean extends BaseBeanEntity {
 
+    private String title;
+
+    private String nums;
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getNums() {
+        return nums;
+    }
+
+    public void setNums(String nums) {
+        this.nums = nums;
+    }
 
     private List<HomepageVideoBean> list;
 

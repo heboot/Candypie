@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <View
+            android:id="@+id/v_unfav_bg"
+            android:layout_width="@dimen/x80"
+            android:layout_height="@dimen/y36"
+            android:background="@drawable/bg_gradient_fav"></View>
+
+        <View
+            android:id="@+id/iv_unfav"
+            android:layout_width="@dimen/x16"
+            android:layout_height="@dimen/y16"
+            android:layout_marginLeft="@dimen/x14"
+            android:background="@drawable/icon_fav_star"
+            app:layout_constraintBottom_toBottomOf="@+id/v_unfav_bg"
+            app:layout_constraintLeft_toLeftOf="@+id/v_unfav_bg"
+            app:layout_constraintTop_toTopOf="@+id/v_unfav_bg"></View>
+
+        <TextView
+            android:id="@+id/tv_unfav"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y36"
+            android:layout_marginLeft="@dimen/x34"
+            android:gravity="center"
+            android:text="收藏"
+            android:textColor="@color/white"
+            android:textSize="@dimen/x16"
+            app:layout_constraintBottom_toBottomOf="@+id/v_unfav_bg"
+            app:layout_constraintLeft_toLeftOf="@+id/v_unfav_bg"
+            app:layout_constraintTop_toTopOf="@+id/v_unfav_bg" />
+
+        <TextView
+            android:id="@+id/tv_faved"
+            android:layout_width="@dimen/x80"
+            android:layout_height="@dimen/y36"
+            android:background="@drawable/bg_rect_white_22"
+            android:gravity="center"
+            android:text="已收藏"
+            android:textColor="@color/color_FF5252"
+            android:textSize="@dimen/x16"
+            android:visibility="gone"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </android.support.constraint.ConstraintLayout>
+</layout>

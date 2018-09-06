@@ -104,6 +104,10 @@
             android:screenOrientation="portrait"></activity>
 
         <activity
+            android:name=".activitys.user.UserPageActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
             android:name=".activitys.common.IndexActivity"
             android:screenOrientation="portrait" />
 

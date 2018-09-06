@@ -211,7 +211,7 @@ public class UIService {
         floatLayout.removeAllViews();
 
         floatLayout.setChildHorizontalSpacing(verticalSpacing);
-        floatLayout.setChildHorizontalSpacing(horizontalSpacing);
+        floatLayout.setChildVerticalSpacing(horizontalSpacing);
 
         for (TagsChildBean tagsChildBean : tagsChildBeanList) {
 
@@ -366,11 +366,15 @@ public class UIService {
         } else {
             qmuiRoundButtonDrawable.setBgData(ColorStateList.valueOf(Color.parseColor(tagsChildBean.getBg_color())));
         }
-
+        if (!StringUtils.isEmpty(tagsChildBean.getFont_color())) {
+            qmuiRoundButton.setTextColor(Color.parseColor(tagsChildBean.getFont_color()));
+        } else {
+            qmuiRoundButton.setTextColor(Color.WHITE);
+        }
         qmuiRoundButton.setBackground(qmuiRoundButtonDrawable);
         qmuiRoundButton.setGravity(Gravity.CENTER);
         qmuiRoundButton.setLayoutParams(layoutParams);
-        qmuiRoundButton.setTextColor(Color.WHITE);
+
         qmuiRoundButton.setTextSize(TypedValue.COMPLEX_UNIT_PX, context.getResources().getDimensionPixelSize(R.dimen.x14));
         ViewUtils.setViewHeight(qmuiRoundButton, context.getResources().getDimensionPixelOffset(R.dimen.y24));
         QMUIViewHelper.setPaddingLeft(qmuiRoundButton, context.getResources().getDimensionPixelSize(R.dimen.x10));

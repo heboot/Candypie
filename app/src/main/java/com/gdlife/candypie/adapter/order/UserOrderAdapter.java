@@ -146,11 +146,13 @@ public class UserOrderAdapter extends BaseRecyclerViewAdapter {
                 }
                 if (s.getUsers() != null && s.getUsers().size() > 0) {
                     //uid是发单人
-                    if (s.getUsers().get(0).getId().intValue() != s.getUid()) {//  if (s.getUsers().get(0).getRole() == MValue.USER_ROLE_SERVICER) {
-                        IntentUtils.toHomepageActivity(v.getContext(), MValue.FROM_OTHER, s.getUsers().get(0), MValue.HOMEPAG_FROM.ONE_ONE, null);
-                    } else {
-                        IntentUtils.toUserInfoActivity(v.getContext(), MValue.USER_INFO_TYPE_NORMAL, MValue.USER_INFO_TYPE_NORMAL, s.getUsers().get(0), null, null);
-                    }
+//                    if (s.getUsers().get(0).getId().intValue() != s.getUid()) {//  if (s.getUsers().get(0).getRole() == MValue.USER_ROLE_SERVICER) {
+//                        IntentUtils.toHomepageActivity(v.getContext(), MValue.FROM_OTHER, s.getUsers().get(0), MValue.HOMEPAG_FROM.ONE_ONE, null);
+//                    } else {
+//                        IntentUtils.toUserInfoActivity(v.getContext(), MValue.USER_INFO_TYPE_NORMAL, MValue.USER_INFO_TYPE_NORMAL, s.getUsers().get(0), null, null);
+//                    }
+
+                    IntentUtils.toUserPageActivity(MAPP.mapp.getCurrentActivity(), String.valueOf(s.getId()));
                 }
 
 

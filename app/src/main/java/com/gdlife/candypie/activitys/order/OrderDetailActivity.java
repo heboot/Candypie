@@ -113,12 +113,13 @@ public class OrderDetailActivity extends BaseActivity<ActivityOrderDetailBinding
         });
         binding.ivImg.setOnClickListener((v) -> {
             if (orderBean.getUsers() != null && orderBean.getUsers().size() > 0) {
-                if (orderBean.getUsers().get(0).getId().intValue() != orderBean.getUid()) {
-                    ConfigBean.ServiceItemsConfigBean.ListBean serviceBean = ThemeService.getServiceBeanById(orderBean.getService_id());
-                    IntentUtils.toHomepageActivity(v.getContext(), MValue.FROM_OTHER, orderBean.getUsers().get(0), MValue.HOMEPAG_FROM.ONE_ONE, serviceBean);
-                } else {
-                    IntentUtils.toUserInfoActivity(this, MValue.USER_INFO_TYPE_NORMAL, MValue.USER_INFO_TYPE_NORMAL, orderBean.getUsers().get(0), null, null);
-                }
+//                if (orderBean.getUsers().get(0).getId().intValue() != orderBean.getUid()) {
+//                    ConfigBean.ServiceItemsConfigBean.ListBean serviceBean = ThemeService.getServiceBeanById(orderBean.getService_id());
+//                    IntentUtils.toHomepageActivity(v.getContext(), MValue.FROM_OTHER, orderBean.getUsers().get(0), MValue.HOMEPAG_FROM.ONE_ONE, serviceBean);
+//                } else {
+//                    IntentUtils.toUserInfoActivity(this, MValue.USER_INFO_TYPE_NORMAL, MValue.USER_INFO_TYPE_NORMAL, orderBean.getUsers().get(0), null, null);
+//                }
+                IntentUtils.toUserPageActivity(MAPP.mapp.getCurrentActivity(), String.valueOf(orderBean.getUsers().get(0).getId()));
             }
         });
         binding.tvAll.setOnClickListener((v) -> {

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="@dimen/x48"
+        android:layout_height="@dimen/y48">
+
+        <ImageView
+            android:id="@+id/iv_gift"
+            android:layout_width="@dimen/x40"
+            android:layout_height="@dimen/y40"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_num"
+            android:layout_width="@dimen/x15"
+            android:layout_height="@dimen/y15"
+            android:background="@drawable/oval_red"
+            android:gravity="center"
+            android:maxLength="2"
+            android:text="111"
+            android:textColor="@color/white"
+            android:textSize="@dimen/x10"
+            android:textStyle="bold"
+            app:layout_constraintRight_toRightOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

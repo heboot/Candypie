@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/iv_avatar"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y375"
+            android:background="@color/robot_link_element_text_blue"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y100"
+            android:background="@drawable/bg_homepage_black_gradient"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y100"
+            android:background="@drawable/bg_indexuser_black_gradient_bottom"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_avatar"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x16"
+            android:text="111"
+            android:textColor="@color/white"
+            android:textSize="@dimen/x24"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/tv_mt_id"
+            app:layout_constraintLeft_toLeftOf="parent" />
+
+        <include
+            android:id="@+id/include_sexage"
+            layout="@layout/layout_sex_age"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_name"
+            app:layout_constraintLeft_toRightOf="@+id/tv_name"
+            app:layout_constraintTop_toTopOf="@+id/tv_name"></include>
+
+        <TextView
+            android:id="@+id/tv_mt_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/y15"
+            android:layout_marginLeft="@dimen/x16"
+            android:text="111"
+            android:textColor="@color/white"
+            android:textSize="@dimen/x18"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent" />
+
+        <include
+            android:id="@+id/tv_online"
+            layout="@layout/layout_online_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x10"
+            android:layout_marginTop="@dimen/y1"
+            android:gravity="center_horizontal"
+            android:text="online"
+            android:textColor="#FFDE3F"
+            android:textSize="@dimen/x15"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_mt_id"
+            app:layout_constraintLeft_toRightOf="@+id/tv_mt_id"
+            app:layout_constraintTop_toTopOf="@+id/tv_mt_id" />
+
+        <include
+            android:id="@+id/include_fav"
+            layout="@layout/layout_userpage_avatar_fav"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/y26"
+            android:layout_marginRight="@dimen/x16"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"></include>
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

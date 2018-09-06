@@ -217,7 +217,7 @@ public class MAPP extends Application {
 //                    }, ((IMEvent.SHOW_IM_GIFT_EVENT) o).getToUid()).create();
 //                    bottomVideoGiftSheetDialog.show();
                     try {
-                        BottomVideoGiftSheetDialogHehe bottomVideoGiftSheetDialogHehe = new BottomVideoGiftSheetDialogHehe(((IMEvent.SHOW_IM_GIFT_EVENT) o).getToUid().replace(MValue.CHAT_PRIEX, ""));
+                        BottomVideoGiftSheetDialogHehe bottomVideoGiftSheetDialogHehe = new BottomVideoGiftSheetDialogHehe(((IMEvent.SHOW_IM_GIFT_EVENT) o).getToUid().replace(MValue.CHAT_PRIEX, ""), null);
                         bottomVideoGiftSheetDialogHehe.show(((FragmentActivity) MAPP.mapp.getCurrentActivity()).getSupportFragmentManager(), "");
                     } catch (Exception e) {
 

@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.gdlife.candypie.widget.ProgressFramelayout
+            android:id="@+id/plyt_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:no_data="@layout/include_nodata_info"
+            app:progress="@layout/include_progress_info">
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <android.support.v4.widget.NestedScrollView
+                    android:id="@+id/sv_container"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintBottom_toTopOf="@+id/v_bottom"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:orientation="vertical">
+
+                        <include
+                            android:id="@+id/include_avatar"
+                            layout="@layout/layout_userpage_avatar"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"></include>
+
+                        <include
+                            android:id="@+id/include_videos"
+                            layout="@layout/layout_homepage_videos"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/y20"></include>
+
+                        <include
+                            android:id="@+id/include_info"
+                            layout="@layout/layout_userpage_info"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/y20"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/include_avatar"></include>
+
+                        <include
+                            android:id="@+id/include_gift"
+                            layout="@layout/layout_userpage_gift"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/y20"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/include_avatar"></include>
+
+                        <include
+                            android:id="@+id/include_abst"
+                            layout="@layout/layout_userpage_abst"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/y20"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/include_avatar"></include>
+
+                        <include
+                            android:id="@+id/include_visit"
+                            layout="@layout/layout_userpage_visit"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/include_avatar"></include>
+
+                        <include
+                            android:id="@+id/include_comment"
+                            layout="@layout/layout_userpage_comment"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/include_avatar"></include>
+                    </LinearLayout>
+                </android.support.v4.widget.NestedScrollView>
+
+
+                <View
+                    android:id="@+id/v_top"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/y70"
+                    android:background="@color/white"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"></View>
+
+                <include
+                    android:id="@+id/include_toolbar"
+                    layout="@layout/layout_toolbar"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/y60"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"></include>
+
+                <ImageView
+                    android:id="@+id/iv_share"
+                    android:layout_width="@dimen/x30"
+                    android:layout_height="@dimen/y30"
+                    android:layout_marginRight="@dimen/x16"
+                    android:layout_marginTop="@dimen/y25"
+                    android:background="@drawable/icon_share_white"
+                    app:layout_constraintBottom_toBottomOf="@+id/include_toolbar"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/include_toolbar" />
+
+                <ImageView
+                    android:id="@+id/iv_more"
+                    android:layout_width="@dimen/x30"
+                    android:layout_height="@dimen/y30"
+                    android:layout_marginRight="@dimen/x16"
+                    android:layout_marginTop="@dimen/y25"
+                    android:background="@drawable/icon_homepage_more_white"
+                    app:layout_constraintBottom_toBottomOf="@+id/include_toolbar"
+                    app:layout_constraintRight_toLeftOf="@+id/iv_share"
+                    app:layout_constraintTop_toTopOf="@+id/include_toolbar" />
+
+                <View
+                    android:id="@+id/v_more"
+                    android:layout_width="@dimen/x60"
+                    android:layout_height="@dimen/y60"
+                    app:layout_constraintBottom_toBottomOf="@+id/v_top"
+                    app:layout_constraintRight_toLeftOf="@+id/iv_share"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/v_top" />
+
+                <View
+                    android:id="@+id/v1"
+                    android:layout_width="@dimen/x15"
+                    android:layout_height="0dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"></View>
+
+                <View
+                    android:id="@+id/v_bottom"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/y60"
+                    android:background="@drawable/bg_bottom_menu"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"></View>
+
+                <include
+                    android:id="@+id/include_bottom"
+                    layout="@layout/layout_userpage_bottom"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/y58"
+                    android:layout_marginLeft="@dimen/x16"
+                    android:layout_marginRight="@dimen/x16"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"></include>
+
+                <View
+                    android:id="@+id/v_tip_msg"
+                    android:layout_width="@dimen/x160"
+                    android:layout_height="@dimen/y40"
+                    android:layout_marginBottom="@dimen/y50"
+                    android:layout_marginLeft="@dimen/x8"
+                    android:background="@drawable/tip_userpage_msg"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"></View>
+
+
+            </android.support.constraint.ConstraintLayout>
+        </com.gdlife.candypie.widget.ProgressFramelayout>
+    </android.support.constraint.ConstraintLayout>
+</layout>

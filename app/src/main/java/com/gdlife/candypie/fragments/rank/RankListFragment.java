@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.gdlife.candypie.MAPP;
 import com.gdlife.candypie.R;
 import com.gdlife.candypie.adapter.rank.RankUserAdapter;
 import com.gdlife.candypie.base.BaseFragment;
@@ -340,10 +341,6 @@ public class RankListFragment extends BaseFragment<FragmentIndexListBinding> {
 
 
     private void toTopUserHomepage(User s) {
-        if (pageName.equals("consume")) {
-            IntentUtils.toUserInfoActivity(_mActivity, MValue.USER_INFO_TYPE_NORMAL, MValue.USER_INFO_TYPE_NORMAL, s, null, null);
-        } else {
-            IntentUtils.toHomepageActivity(_mActivity, MValue.FROM_OTHER, s, null, null);
-        }
+        IntentUtils.toUserPageActivity(MAPP.mapp.getCurrentActivity(), String.valueOf(s.getId()));
     }
 }

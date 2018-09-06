@@ -58,6 +58,7 @@ import com.gdlife.candypie.activitys.user.UserBlackListActivity;
 import com.gdlife.candypie.activitys.user.UserFavsListActivity;
 import com.gdlife.candypie.activitys.user.UserInfoActivity;
 import com.gdlife.candypie.activitys.user.UserInfoInputActivity;
+import com.gdlife.candypie.activitys.user.UserPageActivity;
 import com.gdlife.candypie.activitys.user.UserSkillListActivity;
 import com.gdlife.candypie.activitys.user.UserYueAttitudeActivity;
 import com.gdlife.candypie.activitys.video.AutoPlayActivity;
@@ -120,6 +121,12 @@ public class IntentUtils {
     public static void toSetPriceActivity(Context context, Boolean fromIndex) {
         Intent intent = new Intent(context, SetPriceActivity.class);
         intent.putExtra(MKey.FROM, fromIndex);
+        context.startActivity(intent);
+    }
+
+    public static void toUserPageActivity(Context context, String uid) {
+        Intent intent = new Intent(context, UserPageActivity.class);
+        intent.putExtra(MKey.UID, uid);
         context.startActivity(intent);
     }
 
@@ -263,56 +270,56 @@ public class IntentUtils {
 
     public static void toHomepageActivity(Context context, String from, User user, MValue.HOMEPAG_FROM pageFrom, ConfigBean.ServiceItemsConfigBean.ListBean listBean) {
 
-        if (user != null && UserService.getInstance().getUser() != null && UserService.getInstance().getUser().getId() != null && user.getId().intValue() == UserService.getInstance().getUser().getId().intValue()) {
-            Intent intent = new Intent(context, HomepageActivity.class);
-            intent.putExtra(MKey.FROM, MValue.FROM_MY);
-            intent.putExtra(MKey.USER, user);
-            intent.putExtra(MKey.PAGE_FROM, pageFrom);
-            intent.putExtra(MKey.SERVICE_ITEM, listBean);
-            if (context.getClass().getSimpleName().equals(MAPP.mapp.getClass().getSimpleName())) {
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            }
-            context.startActivity(intent);
-        } else {
-            Intent intent = new Intent(context, HomepageOtherActivity.class);
-            intent.putExtra(MKey.FROM, from);
-            intent.putExtra(MKey.USER, user);
-            intent.putExtra(MKey.PAGE_FROM, pageFrom);
-            intent.putExtra(MKey.SERVICE_ITEM, listBean);
-            if (context.getClass().getSimpleName().equals(MAPP.mapp.getClass().getSimpleName())) {
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            }
-            context.startActivity(intent);
-
-        }
-
+//        if (user != null && UserService.getInstance().getUser() != null && UserService.getInstance().getUser().getId() != null && user.getId().intValue() == UserService.getInstance().getUser().getId().intValue()) {
+//            Intent intent = new Intent(context, HomepageActivity.class);
+//            intent.putExtra(MKey.FROM, MValue.FROM_MY);
+//            intent.putExtra(MKey.USER, user);
+//            intent.putExtra(MKey.PAGE_FROM, pageFrom);
+//            intent.putExtra(MKey.SERVICE_ITEM, listBean);
+//            if (context.getClass().getSimpleName().equals(MAPP.mapp.getClass().getSimpleName())) {
+//                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//            }
+//            context.startActivity(intent);
+//        } else {
+//            Intent intent = new Intent(context, HomepageOtherActivity.class);
+//            intent.putExtra(MKey.FROM, from);
+//            intent.putExtra(MKey.USER, user);
+//            intent.putExtra(MKey.PAGE_FROM, pageFrom);
+//            intent.putExtra(MKey.SERVICE_ITEM, listBean);
+//            if (context.getClass().getSimpleName().equals(MAPP.mapp.getClass().getSimpleName())) {
+//                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//            }
+//            context.startActivity(intent);
+//
+//        }
+        toUserPageActivity(context, String.valueOf(user.getId()));
     }
 
     public static void toHomepageActivity2(Context context, String from, User user, MValue.HOMEPAG_FROM pageFrom, ConfigBean.ServiceItemsConfigBean.ListBean listBean) {
 
-        if (user != null && UserService.getInstance().getUser() != null && UserService.getInstance().getUser().getId() != null && user.getId().intValue() == UserService.getInstance().getUser().getId().intValue()) {
-            Intent intent = new Intent(context, HomepageActivity.class);
-            intent.putExtra(MKey.FROM, from);
-            intent.putExtra(MKey.USER, user);
-            intent.putExtra(MKey.PAGE_FROM, pageFrom);
-            intent.putExtra(MKey.SERVICE_ITEM, listBean);
-            if (context.getClass().getSimpleName().equals(MAPP.mapp.getClass().getSimpleName())) {
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            }
-            context.startActivity(intent);
-        } else {
-            Intent intent = new Intent(context, HomepageOtherActivity2.class);
-            intent.putExtra(MKey.FROM, from);
-            intent.putExtra(MKey.USER, user);
-            intent.putExtra(MKey.PAGE_FROM, pageFrom);
-            intent.putExtra(MKey.SERVICE_ITEM, listBean);
-            if (context.getClass().getSimpleName().equals(MAPP.mapp.getClass().getSimpleName())) {
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            }
-            context.startActivity(intent);
-
-        }
-
+//        if (user != null && UserService.getInstance().getUser() != null && UserService.getInstance().getUser().getId() != null && user.getId().intValue() == UserService.getInstance().getUser().getId().intValue()) {
+//            Intent intent = new Intent(context, HomepageActivity.class);
+//            intent.putExtra(MKey.FROM, from);
+//            intent.putExtra(MKey.USER, user);
+//            intent.putExtra(MKey.PAGE_FROM, pageFrom);
+//            intent.putExtra(MKey.SERVICE_ITEM, listBean);
+//            if (context.getClass().getSimpleName().equals(MAPP.mapp.getClass().getSimpleName())) {
+//                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//            }
+//            context.startActivity(intent);
+//        } else {
+//            Intent intent = new Intent(context, HomepageOtherActivity2.class);
+//            intent.putExtra(MKey.FROM, from);
+//            intent.putExtra(MKey.USER, user);
+//            intent.putExtra(MKey.PAGE_FROM, pageFrom);
+//            intent.putExtra(MKey.SERVICE_ITEM, listBean);
+//            if (context.getClass().getSimpleName().equals(MAPP.mapp.getClass().getSimpleName())) {
+//                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//            }
+//            context.startActivity(intent);
+//
+//        }
+        toUserPageActivity(context, String.valueOf(user.getId()));
     }
 
     public static void toUserInfoInputActivity(Context context, String content) {

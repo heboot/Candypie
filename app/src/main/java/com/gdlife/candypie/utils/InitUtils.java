@@ -166,19 +166,16 @@ public class InitUtils {
                     user.setId(Integer.parseInt(user2.getAccount().replace(MValue.CHAT_PRIEX, "")));
 
 
-                    if (Integer.parseInt(role) == MValue.USER_ROLE_NORMAL) {
-                        IntentUtils.toUserInfoActivity(MAPP.mapp, MValue.USER_INFO_TYPE_NORMAL, MValue.USER_INFO_TYPE_NORMAL, user, null, null);
-                    } else if (Integer.parseInt(role) == MValue.USER_ROLE_SERVICER) {
-                        IntentUtils.toHomepageActivity(MAPP.mapp, MValue.FROM_OTHER, user, MValue.HOMEPAG_FROM.ONE_ONE, null);
-                    }
+                    IntentUtils.toUserPageActivity(MAPP.mapp.getCurrentActivity(), String.valueOf(user.getId()));
 
 //                    IntentUtils.intent2UserHomepageActivityByString(GuoDongAPP.getInstance(), message.getFromAccount().replace("yhc", ""));
                 } else if (message.getDirect() == MsgDirectionEnum.Out) {
-                    if (UserService.getInstance().getUser().getRole() == MValue.USER_ROLE_SERVICER && UserService.getInstance().getUser().getService_auth_status() != null && UserService.getInstance().getUser().getService_auth_status() == MValue.AUTH_STATUS_SUC) {
-                        IntentUtils.toHomepageActivity(MAPP.mapp, MValue.FROM_MY, UserService.getInstance().getUser(), null, null);
-                    } else {
-                        IntentUtils.toUserInfoActivity(MAPP.mapp, MValue.USER_INFO_TYPE_NORMAL, MValue.USER_INFO_TYPE_NORMAL, UserService.getInstance().getUser(), null, null);
-                    }
+//                    if (UserService.getInstance().getUser().getRole() == MValue.USER_ROLE_SERVICER && UserService.getInstance().getUser().getService_auth_status() != null && UserService.getInstance().getUser().getService_auth_status() == MValue.AUTH_STATUS_SUC) {
+//                        IntentUtils.toHomepageActivity(MAPP.mapp, MValue.FROM_MY, UserService.getInstance().getUser(), null, null);
+//                    } else {
+//                        IntentUtils.toUserInfoActivity(MAPP.mapp, MValue.USER_INFO_TYPE_NORMAL, MValue.USER_INFO_TYPE_NORMAL, UserService.getInstance().getUser(), null, null);
+//                    }
+                    IntentUtils.toUserPageActivity(MAPP.mapp.getCurrentActivity(), String.valueOf(UserService.getInstance().getUser().getId()));
                 }
             }
 

@@ -38,6 +38,7 @@ import com.gdlife.candypie.widget.common.BottomSheetDialog;
 import com.gdlife.candypie.widget.common.ShareDialog;
 import com.gdlife.candypie.widget.common.TipDialog;
 import com.gdlife.candypie.widget.dialog.ServiceTipDialog;
+import com.gdlife.candypie.widget.gift.BottomVideoGiftSheetDialogHehe;
 import com.heboot.base.BaseBean;
 import com.heboot.base.BaseBeanEntity;
 import com.heboot.bean.index.IndexV5Bean;
@@ -150,7 +151,7 @@ public class DiscoverVideoFragment4 extends BaseFragment<FragmentDiscoverVideoBi
 
         user = users.get(currentShowIndex);
 
-        checkFree();
+        binding.tvShareContent.setText(MAPP.mapp.getConfigBean().getShare_config().getVideo_share_config().getTip());
 
     }
 
@@ -370,19 +371,29 @@ public class DiscoverVideoFragment4 extends BaseFragment<FragmentDiscoverVideoBi
 
         binding.vvp.setOnPageChangeListener(onPageChangeListener);
 
-        binding.ivYue.setOnClickListener((v) -> {
-            if (UserService.getInstance().checkTourist(getContext())) {
-                return;
-            }
-            if (user.getId().intValue() == UserService.getInstance().getUser().getId().intValue()) {
-                tipDialog = DialogUtils.getFailDialog(getContext(), "不能对自己操作", true);
-                tipDialog.show();
-                return;
-            }
-            IntentUtils.toThemeListActivity(getContext(), true, user);
+//        binding.includeBottom.setOnClickListener((v) -> {
+//            if (UserService.getInstance().checkTourist(getContext())) {
+//                return;
+//            }
+//            if (user.getId().intValue() == UserService.getInstance().getUser().getId().intValue()) {
+//                tipDialog = DialogUtils.getFailDialog(getContext(), "不能对自己操作", true);
+//                tipDialog.show();
+//                return;
+//            }
+//            IntentUtils.toThemeListActivity(getContext(), true, user);
+//        });
+
+        binding.includeBottom.ivMsg.setOnClickListener((v) -> {
+            IntentUtils.intent2ChatActivity(getContext(), MValue.CHAT_PRIEX + user.getId());
         });
 
-        binding.ivGift.setOnClickListener((v) -> {
+
+        binding.includeBottom.ivSendGift.setOnClickListener(v -> {
+            BottomVideoGiftSheetDialogHehe bottomVideoGiftSheetDialogHehe = new BottomVideoGiftSheetDialogHehe(String.valueOf(user.getId()), null);
+            bottomVideoGiftSheetDialogHehe.show(getFragmentManager(), "");
+        });
+
+        binding.includeBottom.vVideoBg.setOnClickListener((v) -> {
             if (UserService.getInstance().checkTourist(getContext())) {
                 return;
             }
@@ -463,31 +474,6 @@ public class DiscoverVideoFragment4 extends BaseFragment<FragmentDiscoverVideoBi
         mRoomId = cur;
     }
 
-
-    private void checkFree() {
-        if (user != null && user.getFree_video_chat() == 1) {
-            ViewUtils.setMarginLeft(binding.ivGiftIcon, getResources().getDimensionPixelOffset(R.dimen.x33));
-            binding.llytSelectedPrice.setVisibility(View.GONE);
-            binding.tvChat.setVisibility(View.VISIBLE);
-            binding.tvChat.setText(getString(R.string.free_video));
-        } else if (user != null && user.getFree_video_chat() == 0) {
-
-            if (UserService.getInstance().getUser() != null && UserService.getInstance().getUser().getId() != null && user.getId().intValue() == UserService.getInstance().getUser().getId().intValue()) {
-                ViewUtils.setMarginLeft(binding.ivGiftIcon, getResources().getDimensionPixelOffset(R.dimen.x33));
-                binding.tvChat.setText(getString(R.string.chat_video));
-                binding.llytSelectedPrice.setVisibility(View.GONE);
-                binding.tvChat.setVisibility(View.VISIBLE);
-            } else {
-                ViewUtils.setMarginLeft(binding.ivGiftIcon, getResources().getDimensionPixelOffset(R.dimen.x23));
-//                binding.tvChat.setText(user.getVideo_chat_price() + getString(R.string.unit_coin) + "/" + getString(R.string.unit_minute));
-                binding.tvChat.setVisibility(View.GONE);
-                binding.llytSelectedPrice.setVisibility(View.VISIBLE);
-                binding.tvVideoPrice.setText(user.getVideo_chat_price());
-            }
-
-        }
-    }
-
     private void postVideoService() {
         videoChatService.postVideoService(permissionUtils, (BaseActivity) getActivity(), user, coinDialog);
     }
@@ -564,10 +550,6 @@ public class DiscoverVideoFragment4 extends BaseFragment<FragmentDiscoverVideoBi
                     weakReference.get().sp = weakReference.get().sp + 1;
                     weakReference.get().initDiscoverData(weakReference.get().sp);
                 }
-            }
-
-            if (weakReference.get() != null && weakReference.get() != null && weakReference.get().user != null) {
-                weakReference.get().checkFree();
             }
 
             RxBus.getInstance().post(new DiscoverEvent.DiscoverUpdateUserEvent(weakReference.get().users.get(weakReference.get().currentShowIndex)));

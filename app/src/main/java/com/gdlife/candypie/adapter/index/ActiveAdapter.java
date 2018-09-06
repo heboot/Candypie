@@ -71,12 +71,7 @@ public class ActiveAdapter extends BaseRecyclerViewAdapter {
                 } else {
                     CustomEventUtil.onEvent(TO_USERPAGE_BY_VISIT);
                 }
-                if (s.getService_auth_status() != null && s.getService_auth_status() == MValue.AUTH_STATUS_SUC) {
-                    IntentUtils.toHomepageActivity(v.getContext(), MValue.FROM_OTHER, s, null, null);
-                } else {
-                    IntentUtils.toUserInfoActivity(v.getContext(), MValue.USER_INFO_TYPE_NORMAL, MValue.USER_INFO_TYPE_NORMAL, s, null, null);
-                }
-
+                IntentUtils.toUserPageActivity(v.getContext(), String.valueOf(s.getId()));
             });
 
             binding.getRoot().setOnClickListener((v) -> {
@@ -85,11 +80,12 @@ public class ActiveAdapter extends BaseRecyclerViewAdapter {
                 } else {
                     CustomEventUtil.onEvent(TO_USERPAGE_BY_VISIT);
                 }
-                if (s.getService_auth_status() != null && s.getService_auth_status() == MValue.AUTH_STATUS_SUC) {
-                    IntentUtils.toHomepageActivity(v.getContext(), MValue.FROM_OTHER, s, null, null);
-                } else {
-                    IntentUtils.toUserInfoActivity(v.getContext(), MValue.USER_INFO_TYPE_NORMAL, MValue.USER_INFO_TYPE_NORMAL, s, null, null);
-                }
+                IntentUtils.toUserPageActivity(v.getContext(), String.valueOf(s.getId()));
+//                if (s.getService_auth_status() != null && s.getService_auth_status() == MValue.AUTH_STATUS_SUC) {
+//                    IntentUtils.toHomepageActivity(v.getContext(), MValue.FROM_OTHER, s, null, null);
+//                } else {
+//                    IntentUtils.toUserInfoActivity(v.getContext(), MValue.USER_INFO_TYPE_NORMAL, MValue.USER_INFO_TYPE_NORMAL, s, null, null);
+//                }
             });
         }
 

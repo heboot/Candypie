@@ -147,7 +147,6 @@ public class DiscoverVideoFragment extends BaseFragment<FragmentDiscoverVideoBin
         binding.vvp.setCurrentItem(currentShowIndex);
 
         user = users.get(currentShowIndex);
-        checkFree();
 
     }
 
@@ -375,29 +374,6 @@ public class DiscoverVideoFragment extends BaseFragment<FragmentDiscoverVideoBin
 
         binding.vvp.setOnPageChangeListener(onPageChangeListener);
 
-        binding.ivYue.setOnClickListener((v) -> {
-            if (UserService.getInstance().checkTourist(getContext())) {
-                return;
-            }
-            if (user.getId().intValue() == UserService.getInstance().getUser().getId().intValue()) {
-                tipDialog = DialogUtils.getFailDialog(getContext(), "不能对自己操作", true);
-                tipDialog.show();
-                return;
-            }
-            IntentUtils.toThemeListActivity(getContext(), true, user);
-        });
-
-        binding.ivGift.setOnClickListener((v) -> {
-            if (UserService.getInstance().checkTourist(getContext())) {
-                return;
-            }
-            if (user.getId().intValue() == UserService.getInstance().getUser().getId().intValue()) {
-                tipDialog = DialogUtils.getFailDialog(getContext(), "不能对自己操作", true);
-                tipDialog.show();
-                return;
-            }
-            postVideoService();
-        });
 
         binding.vvp.setPageTransformer(false, new ViewPager.PageTransformer() {
             @Override
@@ -462,13 +438,6 @@ public class DiscoverVideoFragment extends BaseFragment<FragmentDiscoverVideoBin
         mRoomId = cur;
     }
 
-    private void checkFree() {
-        if (user != null && user.getFree_video_chat() == 1) {
-            binding.tvChat.setText(getString(R.string.free_video));
-        } else if (user != null && user.getFree_video_chat() == 0) {
-            binding.tvChat.setText(getString(R.string.chat_video));
-        }
-    }
 
     private void postVideoService() {
 
@@ -634,9 +603,6 @@ public class DiscoverVideoFragment extends BaseFragment<FragmentDiscoverVideoBin
                 }
             }
 
-            if (weakReference.get() != null && weakReference.get() != null && weakReference.get().user != null) {
-                weakReference.get().checkFree();
-            }
 
             RxBus.getInstance().post(new DiscoverEvent.DiscoverUpdateUserEvent(weakReference.get().users.get(weakReference.get().currentShowIndex)));
             RxBus.getInstance().post(new DiscoverEvent.DiscoverUpdatePositionEvent(position));

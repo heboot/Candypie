@@ -72,99 +72,49 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"></View>
 
-
-        <ImageView
-            android:id="@+id/iv_gift"
+        <include
+            android:id="@+id/include_bottom"
+            layout="@layout/layout_userpage_bottom"
             android:layout_width="0dp"
-            android:layout_height="@dimen/y48"
-            android:layout_marginBottom="@dimen/y18"
-            android:layout_marginLeft="@dimen/x15"
-            android:background="@drawable/bg_rect_ff5252_68"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/y4"
+            android:layout_marginLeft="@dimen/x16"
+            android:layout_marginRight="@dimen/x16"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@+id/v1" />
+            app:layout_constraintRight_toRightOf="parent"></include>
 
-        <LinearLayout
-            android:id="@+id/llyt_selected_price"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="@+id/iv_gift"
-            app:layout_constraintLeft_toRightOf="@+id/iv_gift_icon"
-            app:layout_constraintRight_toRightOf="@+id/iv_gift"
-            app:layout_constraintTop_toTopOf="@+id/iv_gift">
-
-            <TextView
-                android:id="@+id/tv_video_price"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:textSize="@dimen/x16" />
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/clyt_share"
+            android:layout_width="@dimen/x154"
+            android:layout_height="@dimen/y44"
+            android:layout_marginRight="@dimen/x11"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/include_toolbar">
 
             <ImageView
-                android:layout_width="@dimen/x12"
-                android:layout_height="@dimen/y10"
-                android:layout_marginLeft="@dimen/x2"
-                android:background="@drawable/icon_coin" />
+                android:layout_width="@dimen/x154"
+                android:layout_height="@dimen/y44"
+                android:background="@drawable/tip_share"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"></ImageView>
 
             <TextView
-                android:id="@+id/tv_video_time"
-                android:layout_width="wrap_content"
+                android:id="@+id/tv_share_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text=" /分钟"
+                android:layout_marginTop="@dimen/y20"
+                android:gravity="center"
                 android:textColor="@color/white"
-                android:textSize="@dimen/x16" />
+                android:textSize="@dimen/x13"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-
-        </LinearLayout>
-
-        <ImageView
-            android:id="@+id/iv_yue"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/y48"
-            android:layout_marginBottom="@dimen/y18"
-            android:layout_marginRight="@dimen/x15"
-            android:background="@drawable/bg_themecolor_gradient"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toRightOf="@+id/v1"
-            app:layout_constraintRight_toRightOf="parent" />
-
-        <TextView
-            android:id="@+id/tv_chat"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/x10"
-            android:text="@string/chat_video"
-            android:textColor="@color/white"
-            android:textSize="@dimen/x18"
-            app:layout_constraintBottom_toBottomOf="@+id/iv_gift"
-            app:layout_constraintLeft_toRightOf="@+id/iv_gift_icon"
-            app:layout_constraintTop_toTopOf="@+id/iv_gift" />
-
-        <ImageView
-            android:id="@+id/iv_gift_icon"
-            android:layout_width="@dimen/x26"
-            android:layout_height="@dimen/y23"
-            android:layout_marginLeft="@dimen/x33"
-            android:background="@drawable/icon_discover_chat"
-            android:textSize="@dimen/x18"
-            app:layout_constraintBottom_toBottomOf="@+id/iv_gift"
-            app:layout_constraintLeft_toLeftOf="@+id/iv_gift"
-            app:layout_constraintTop_toTopOf="@+id/iv_gift" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/yue_ta"
-            android:textColor="@color/white"
-            android:textSize="@dimen/x18"
-            app:layout_constraintBottom_toBottomOf="@+id/iv_yue"
-            app:layout_constraintLeft_toLeftOf="@+id/iv_yue"
-            app:layout_constraintRight_toRightOf="@+id/iv_yue"
-            app:layout_constraintTop_toTopOf="@+id/iv_yue" />
-
+        </android.support.constraint.ConstraintLayout>
 
     </android.support.constraint.ConstraintLayout>
 </layout>

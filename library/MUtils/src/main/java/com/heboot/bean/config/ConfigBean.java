@@ -976,6 +976,15 @@ public class ConfigBean implements Serializable {
         private String is_share;
         private List<String> type;
         private String action_id;
+        private String tip;
+
+        public String getTip() {
+            return tip;
+        }
+
+        public void setTip(String tip) {
+            this.tip = tip;
+        }
 
         public String getAction_id() {
             return action_id;

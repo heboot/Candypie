@@ -204,11 +204,12 @@ public class MyFragment extends BaseFragment<FragmentMyBinding> {
          * 个人主页按钮
          */
         binding.vHomepage.setOnClickListener((v) -> {
-            if (UserService.getInstance().getUser().getRole() == MValue.USER_ROLE_SERVICER && UserService.getInstance().getUser().getService_auth_status() != null && UserService.getInstance().getUser().getService_auth_status() == MValue.AUTH_STATUS_SUC) {
-                IntentUtils.toHomepageActivity(v.getContext(), MValue.FROM_MY, UserService.getInstance().getUser(), null, null);
-            } else {
-                IntentUtils.toUserInfoActivity(binding.getRoot().getContext(), MValue.FROM_MY, MValue.USER_INFO_TYPE_NORMAL, UserService.getInstance().getUser(), null, null);
-            }
+//            if (UserService.getInstance().getUser().getRole() == MValue.USER_ROLE_SERVICER && UserService.getInstance().getUser().getService_auth_status() != null && UserService.getInstance().getUser().getService_auth_status() == MValue.AUTH_STATUS_SUC) {
+//                IntentUtils.toHomepageActivity(v.getContext(), MValue.FROM_MY, UserService.getInstance().getUser(), null, null);
+//            } else {
+//                IntentUtils.toUserInfoActivity(binding.getRoot().getContext(), MValue.FROM_MY, MValue.USER_INFO_TYPE_NORMAL, UserService.getInstance().getUser(), null, null);
+//            }
+            IntentUtils.toUserPageActivity(MAPP.mapp.getCurrentActivity(), String.valueOf( UserService.getInstance().getUser().getId()));
         });
         /**
          * 编辑按钮

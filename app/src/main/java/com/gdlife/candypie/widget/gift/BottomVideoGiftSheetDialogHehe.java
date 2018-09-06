@@ -44,6 +44,7 @@ public class BottomVideoGiftSheetDialogHehe extends DialogFragment {
     private GiftService giftService;
     private String toUid;
     private List<CheckBox> checkBoxes = new ArrayList<>();
+    private String userServiceId;
 
 
 //    @NonNull
@@ -63,8 +64,9 @@ public class BottomVideoGiftSheetDialogHehe extends DialogFragment {
 //        return dialog;
 //    }
 
-    public BottomVideoGiftSheetDialogHehe(String toUid) {
+    public BottomVideoGiftSheetDialogHehe(String toUid, String userServiceId) {
         this.toUid = toUid;
+        this.userServiceId = userServiceId;
     }
 
 
@@ -199,7 +201,7 @@ public class BottomVideoGiftSheetDialogHehe extends DialogFragment {
 
         binding.qrbSend.setOnClickListener((v) -> {
             if (MValue.currentSelectedGiftBean != null) {
-                giftService.sendGift(MValue.currentSelectedGiftBean, toUid, null);
+                giftService.sendGift(MValue.currentSelectedGiftBean, toUid, userServiceId);
                 dismiss();
             }
         });

@@ -507,7 +507,7 @@ public class VideoChatActivity extends BaseActivity<ActivityVideoChatBinding> im
         binding.ivGift.setOnClickListener((v) -> {
 //            BottomVideoGiftSheetDialog2 bottomVideoGiftSheetDialog = new BottomVideoGiftSheetDialog2.Builder(this, getSupportFragmentManager(), new WeakReference<>(this)).create();
 //            bottomVideoGiftSheetDialog.show();
-            BottomVideoGiftSheetDialogHehe bottomVideoGiftSheetDialogHehe = new BottomVideoGiftSheetDialogHehe(String.valueOf(postVideoChatBean.getUser().getId()));
+            BottomVideoGiftSheetDialogHehe bottomVideoGiftSheetDialogHehe = new BottomVideoGiftSheetDialogHehe(String.valueOf(postVideoChatBean.getUser().getId()), userServiceId);
             bottomVideoGiftSheetDialogHehe.show(((FragmentActivity) MAPP.mapp.getCurrentActivity()).getSupportFragmentManager(), "");
         });
 

@@ -201,7 +201,8 @@ public class MessageService {
             } else if (toAction.equals(MessageToAction.user_profile.toString())) {
                 User user = new User();
                 user.setId(systemMessage.getUid());
-                IntentUtils.toUserInfoActivity(MAPP.mapp.getCurrentActivity(), MValue.USER_INFO_TYPE_NORMAL, MValue.USER_INFO_TYPE_NORMAL, user, null, null);
+                IntentUtils.toUserPageActivity(MAPP.mapp.getCurrentActivity(), String.valueOf(user.getId()));
+//                IntentUtils.toUserInfoActivity(MAPP.mapp.getCurrentActivity(), MValue.USER_INFO_TYPE_NORMAL, MValue.USER_INFO_TYPE_NORMAL, user, null, null);
             } else if (toAction.equals(MessageToAction.link.toString())) {
                 IntentUtils.toHTMLActivity(MAPP.mapp.getCurrentActivity(), null, systemMessage.getLink());
             } else if (toAction.equals(MessageToAction.post_service.toString())) {

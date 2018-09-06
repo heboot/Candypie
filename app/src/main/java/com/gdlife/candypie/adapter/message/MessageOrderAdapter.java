@@ -120,11 +120,12 @@ public class MessageOrderAdapter extends BaseQuickAdapter<OrderListBean.ListBean
             if (listBean.getType().equals("out")) {
                 return;
             }
-            if (s.getUser().getId().intValue() != s.getUid()) { //if (s.getUser().getRole() == MValue.USER_ROLE_SERVICER) {
-                IntentUtils.toHomepageActivity(v.getContext(), MValue.FROM_OTHER, s.getUser(), null, null);
-            } else {
-                IntentUtils.toUserInfoActivity(v.getContext(), MValue.USER_INFO_TYPE_NORMAL, MValue.USER_INFO_TYPE_NORMAL, s.getUser(), null, null);
-            }
+//            if (s.getUser().getId().intValue() != s.getUid()) { //if (s.getUser().getRole() == MValue.USER_ROLE_SERVICER) {
+//                IntentUtils.toHomepageActivity(v.getContext(), MValue.FROM_OTHER, s.getUser(), null, null);
+//            } else {
+//                IntentUtils.toUserInfoActivity(v.getContext(), MValue.USER_INFO_TYPE_NORMAL, MValue.USER_INFO_TYPE_NORMAL, s.getUser(), null, null);
+//            }
+            IntentUtils.toUserPageActivity(MAPP.mapp.getCurrentActivity(), String.valueOf(s.getId()));
         });
 
         binding.getRoot().setOnClickListener((v) -> {

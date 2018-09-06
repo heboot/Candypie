@@ -160,6 +160,10 @@ public interface HttpClient {
     Observable<BaseBean<UserInfoBean>> profile(@FieldMap Map<String, Object> params);
 
     @FormUrlEncoded
+    @POST("user/user/profile")
+    Observable<BaseBean<UserInfoBean>> user_profile(@FieldMap Map<String, Object> params);
+
+    @FormUrlEncoded
     @POST("app/user/servicer_profile")
     Observable<BaseBean<UserInfoBean>> servicer_profile(@FieldMap Map<String, Object> params);
 

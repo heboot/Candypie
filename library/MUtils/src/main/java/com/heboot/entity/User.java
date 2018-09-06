@@ -6,9 +6,13 @@ import com.heboot.bean.index.VisitListBean;
 import com.heboot.bean.user.OnLineStatus;
 import com.heboot.bean.user.PreEditMeetTagsBean;
 import com.heboot.bean.user.TagsChildBean;
+import com.heboot.bean.user.UserAbstBean;
 import com.heboot.bean.user.UserEvalBean;
+import com.heboot.bean.user.UserGiftBean;
+import com.heboot.bean.user.UserProfileBean;
 import com.heboot.bean.user.UserSkillBean;
 import com.heboot.bean.video.HomepageVideoBean;
+import com.heboot.bean.video.UserVideosBean;
 
 import java.io.Serializable;
 import java.util.List;
@@ -136,6 +140,47 @@ public class User implements Serializable {
 
     //我的页面 订单红点提示
     private int order_tip_nums;
+
+    //新个人主页
+    private UserProfileBean profile;
+
+    private UserGiftBean gift;
+
+    private UserAbstBean signature;
+
+    private UserVideosBean user_video;
+
+    public UserVideosBean getUser_video() {
+        return user_video;
+    }
+
+    public void setUser_video(UserVideosBean user_video) {
+        this.user_video = user_video;
+    }
+
+    public UserAbstBean getSignature() {
+        return signature;
+    }
+
+    public void setSignature(UserAbstBean signature) {
+        this.signature = signature;
+    }
+
+    public UserGiftBean getGift() {
+        return gift;
+    }
+
+    public void setGift(UserGiftBean gift) {
+        this.gift = gift;
+    }
+
+    public UserProfileBean getProfile() {
+        return profile;
+    }
+
+    public void setProfile(UserProfileBean profile) {
+        this.profile = profile;
+    }
 
     public String getUpdate_avatar() {
         return update_avatar;

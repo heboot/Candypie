@@ -4,6 +4,8 @@ import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.provider.CalendarContract;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -80,6 +82,14 @@ public class DiscoverVPAdapter extends PagerAdapter {
             binding.tvTeseTitle.setVisibility(View.GONE);
         }
 
+        if (user.getIs_favs() == 1) {
+            binding.tvFav.setText("已收藏");
+            binding.tvFav.setTextColor(ContextCompat.getColor(context, R.color.color_FF5252));
+        } else {
+            binding.tvFav.setText("收藏");
+            binding.tvFav.setTextColor(Color.WHITE);
+        }
+
 
         binding.tvName.setText(user.getNickname());
         binding.tvCity.setText(user.getCity());
@@ -103,30 +113,8 @@ public class DiscoverVPAdapter extends PagerAdapter {
             RxBus.getInstance().post(DISCOVER_PAUSE_PLAY_EVENT);
         });
 
-        binding.ivMsg.setOnClickListener((v) -> {
-            if (UserService.getInstance().checkTourist(container.getContext())) {
-                return;
-            }
-            if (user.getId().intValue() == UserService.getInstance().getUser().getId().intValue()) {
-                tipDialog = DialogUtils.getFailDialog(container.getContext(), "不能对自己操作", true);
-                tipDialog.show();
-                return;
-            }
-            toChat(user);
-        });
-        binding.tvMsg.setOnClickListener((v) -> {
-            if (UserService.getInstance().checkTourist(container.getContext())) {
-                return;
-            }
-            if (user.getId().intValue() == UserService.getInstance().getUser().getId().intValue()) {
-                tipDialog = DialogUtils.getFailDialog(container.getContext(), "不能对自己操作", true);
-                tipDialog.show();
-                return;
-            }
-            toChat(user);
-        });
 
-        binding.ivFav.setOnClickListener((v) -> {
+        binding.tvFav.setOnClickListener((v) -> {
             if (UserService.getInstance().checkTourist(container.getContext())) {
                 return;
             }
@@ -178,8 +166,8 @@ public class DiscoverVPAdapter extends PagerAdapter {
                 @Override
                 public void onSuccess(BaseBean<BaseBeanEntity> baseBean) {
                     user.setIs_favs(1);
-                    binding.ivFav.setBackgroundResource(R.drawable.icon_discover_fav_on);
                     binding.tvFav.setText(context.getString(R.string.fav_status_on));
+                    binding.tvFav.setTextColor(ContextCompat.getColor(context, R.color.color_FF5252));
                 }
 
                 @Override
@@ -195,8 +183,8 @@ public class DiscoverVPAdapter extends PagerAdapter {
             HttpClient.Builder.getGuodongServer().unfavs(params).observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribe(new HttpObserver<BaseBeanEntity>() {
                 @Override
                 public void onSuccess(BaseBean<BaseBeanEntity> baseBean) {
-                    binding.ivFav.setBackgroundResource(R.drawable.icon_discover_fav);
                     binding.tvFav.setText(context.getString(R.string.fav_status_un));
+                    binding.tvFav.setTextColor(Color.WHITE);
                     user.setIs_favs(0);
                 }
 

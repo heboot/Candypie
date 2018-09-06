@@ -2,6 +2,7 @@ package com.gdlife.candypie.adapter.video;
 
 import android.content.Context;
 import android.databinding.DataBindingUtil;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -90,7 +91,7 @@ public class UserVideosVPAdapter extends PagerAdapter {
                 @Override
                 public void onSuccess(BaseBean<BaseBeanEntity> baseBean) {
                     user.setIs_favs(1);
-                    binding.ivFav.setBackgroundResource(R.drawable.icon_discover_fav_on);
+                    binding.tvFav.setTextColor(ContextCompat.getColor(context, R.color.color_FF5252));
                     binding.tvFav.setText(context.getString(R.string.fav_status_on));
                 }
 
@@ -107,7 +108,6 @@ public class UserVideosVPAdapter extends PagerAdapter {
             HttpClient.Builder.getGuodongServer().unfavs(params).observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribe(new HttpObserver<BaseBeanEntity>() {
                 @Override
                 public void onSuccess(BaseBean<BaseBeanEntity> baseBean) {
-                    binding.ivFav.setBackgroundResource(R.drawable.icon_discover_fav);
                     binding.tvFav.setText(context.getString(R.string.fav_status_un));
                     user.setIs_favs(0);
                 }
