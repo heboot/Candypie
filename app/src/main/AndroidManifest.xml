@@ -90,6 +90,9 @@
             android:name=".activitys.common.MainActivity"
             android:screenOrientation="portrait"></activity>
 
+        <activity
+            android:name=".activitys.login2register.RegisterForgetActivity"
+            android:screenOrientation="portrait"></activity>
 
         <activity
             android:name=".activitys.common.SearchUserActivity"

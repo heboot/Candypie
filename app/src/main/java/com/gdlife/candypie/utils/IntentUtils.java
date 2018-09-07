@@ -32,6 +32,7 @@ import com.gdlife.candypie.activitys.kpi.WeeklyActivity;
 import com.gdlife.candypie.activitys.login2register.LoginActivity;
 import com.gdlife.candypie.activitys.login2register.RegisterActivity;
 import com.gdlife.candypie.activitys.login2register.RegisterCodeActivity;
+import com.gdlife.candypie.activitys.login2register.RegisterForgetActivity;
 import com.gdlife.candypie.activitys.login2register.RegisterPwdActivity;
 import com.gdlife.candypie.activitys.message.RecentContactsActivity;
 import com.gdlife.candypie.activitys.message.SystemMessageActivity;
@@ -159,9 +160,13 @@ public class IntentUtils {
     }
 
     public static void toRegisterActivity(Context context, String type) {
-        Intent intent = new Intent(context, RegisterActivity.class);
+//        Intent intent = new Intent(context, RegisterActivity.class);
+//        intent.putExtra(MKey.TYPE, type);
+//        context.startActivity(intent);
+        Intent intent = new Intent(context, RegisterForgetActivity.class);
         intent.putExtra(MKey.TYPE, type);
         context.startActivity(intent);
+
     }
 
     public static void toRegisterCodeActivity(Context context, String mobile, int interval_time, String type) {

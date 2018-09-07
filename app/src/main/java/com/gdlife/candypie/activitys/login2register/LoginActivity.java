@@ -61,10 +61,10 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> {
         MobclickAgent.onEvent(LoginActivity.this, NumEventKeys.login_view.toString());
         QMUIStatusBarHelper.translucent(this);
         MStatusBarUtils.setActivityLightMode(this);
-        binding.includeToolbar.setHideTitle(true);
         binding.includeToolbar.setShowRight(true);
-        binding.includeToolbar.tvRight.setText(getString(R.string.register));
-        binding.btnBottom.setText(getString(R.string.login));
+        binding.includeToolbar.tvRight.setText("注册");
+        binding.includeToolbar.tvTitle.setText("登录蜜糖派");
+        binding.btnBottom.setText("立即登录");
         QMUIKeyboardHelper.showKeyboard(binding.etMobile, true);
     }
 

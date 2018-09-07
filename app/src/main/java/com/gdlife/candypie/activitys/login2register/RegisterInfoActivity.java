@@ -1,48 +1,53 @@
 package com.gdlife.candypie.activitys.login2register;
 
-import android.animation.Animator;
-import android.animation.ObjectAnimator;
-import android.view.View;
+import android.content.Intent;
+import android.net.Uri;
 
-import com.bigkoo.pickerview.TimePickerView;
+import com.alibaba.fastjson.JSON;
 import com.gdlife.candypie.MAPP;
 import com.gdlife.candypie.R;
 import com.gdlife.candypie.base.BaseActivity;
 import com.gdlife.candypie.base.BaseObserver;
+import com.gdlife.candypie.base.HttpObserver;
 import com.gdlife.candypie.common.MKey;
 import com.gdlife.candypie.common.NumEventKeys;
 import com.gdlife.candypie.component.DaggerUtilsComponent;
 import com.gdlife.candypie.databinding.ActivityRegisterInfoBinding;
 import com.gdlife.candypie.http.HttpCallBack;
 import com.gdlife.candypie.http.HttpClient;
-import com.gdlife.candypie.serivce.ConfigService;
 import com.gdlife.candypie.serivce.LoginService;
+import com.gdlife.candypie.serivce.UploadService;
 import com.gdlife.candypie.serivce.UserService;
 import com.gdlife.candypie.utils.CheckUtils;
 import com.gdlife.candypie.utils.DialogUtils;
+import com.gdlife.candypie.utils.ImageUtils;
 import com.gdlife.candypie.utils.IntentUtils;
 import com.gdlife.candypie.utils.SignUtils;
-import com.gdlife.candypie.utils.StringUtils;
-import com.gdlife.candypie.widget.common.TipDialog;
+import com.gdlife.candypie.widget.common.BottomSheetDialog;
 import com.heboot.base.BaseBean;
 import com.heboot.base.BaseBeanEntity;
 import com.heboot.bean.login2register.RegisterBean;
+import com.heboot.bean.user.UserInfoEditBean;
 import com.heboot.dialog.TipCustomOneDialog;
 import com.heboot.entity.User;
 import com.heboot.event.NormalEvent;
 import com.heboot.event.UserEvent;
+import com.heboot.req.UploadAvatarReq;
 import com.heboot.rxbus.RxBus;
-import com.heboot.utils.DateUtil;
 import com.heboot.utils.MStatusBarUtils;
-import com.qmuiteam.qmui.util.QMUIKeyboardHelper;
+import com.luck.picture.lib.PictureSelector;
+import com.luck.picture.lib.config.PictureConfig;
+import com.luck.picture.lib.config.PictureMimeType;
+import com.luck.picture.lib.entity.LocalMedia;
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
+import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
 import com.umeng.analytics.MobclickAgent;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.util.List;
 
 import javax.inject.Inject;
 
+import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
@@ -57,15 +62,18 @@ public class RegisterInfoActivity extends BaseActivity<ActivityRegisterInfoBindi
     @Inject
     CheckUtils checkUtils;
 
-    private ObjectAnimator animator;
-
     private int currentSelect = -1;
 
-    private String birthdayDate;
-
-    private TimePickerView pvTime;
-
     private TipCustomOneDialog chooseSexTipDialog;
+
+    private Consumer<Integer> avatarConsumer;
+
+    private BottomSheetDialog avatarBottomSheet;
+
+    private Uri cropUri;
+
+
+    private UploadAvatarReq uploadAvatarReq;
 
     @Override
     public void initUI() {
@@ -91,6 +99,16 @@ public class RegisterInfoActivity extends BaseActivity<ActivityRegisterInfoBindi
 
     @Override
     public void initListener() {
+
+        binding.ivAvatar.setOnClickListener((v) -> {
+            cropUri = ImageUtils.getCropPhotoUri();
+            if (avatarBottomSheet == null) {
+                avatarBottomSheet = DialogUtils.getAvatarBottomSheet(RegisterInfoActivity.this, avatarConsumer);
+            }
+            avatarBottomSheet.show();
+        });
+
+
         binding.includeToolbar.vBack.setOnClickListener((v) -> {
             finish();
         });
@@ -111,58 +129,51 @@ public class RegisterInfoActivity extends BaseActivity<ActivityRegisterInfoBindi
             chooseSexTipDialog.show();
         });
 
-        binding.etBirthday.setOnClickListener((v) -> {
-
-            QMUIKeyboardHelper.hideKeyboard(v);
-
-            Calendar selectedDate = Calendar.getInstance();
-            selectedDate.set(1986, 1, 1);
-            Calendar startDate = Calendar.getInstance();
-            //startDate.set(2013,1,1);
-            Calendar endDate = Calendar.getInstance();
-            //endDate.set(2020,1,1);
-
-            //正确设置方式 原因：注意事项有说明
-            startDate.set(ConfigService.getInstance().getMaxAgeYear(), 0, 1);
-            endDate.set(ConfigService.getInstance().getMinAgeYear(), 12, 31);
-
-            if (pvTime == null) {
-
-                //时间选择器
-                pvTime = new TimePickerView.Builder(this, new TimePickerView.OnTimeSelectListener() {
-                    @Override
-                    public void onTimeSelect(Date date, View v) {//选中事件回调
-                        try {
-                            birthdayDate = DateUtil.date2Str(date, DateUtil.FORMAT_YMD);
-                            binding.etBirthday.setText(DateUtil.getCurrentAgeByBirthdate(date) + MAPP.mapp.getString(R.string.age_unit));
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }).setType(new boolean[]{true, true, true, false, false, false})
-                        .setLabel("年", "月", "日", null, null, null)
-                        .setContentSize(22)//滚轮文字大小
-                        .setTitleSize(20)//标题文字大小
-                        .setRangDate(startDate, endDate).build();
-            }
-            pvTime.setDate(selectedDate);//注：根据需求来决定是否使用该方法（一般是精确到秒的情况），此项可以在弹出选择器的时候重新设置当前时间，避免在初始化之后由于时间已经设定，导致选中时间与当前时间不匹配的问题。
-            pvTime.show();
-        });
 
         binding.btnBottom.setOnClickListener((v) -> {
             checkInfoData();
 //            Intent intent = new Intent(this, IndexActivity.class);
 //            startActivity(intent);
         });
+
+        avatarConsumer = new Consumer<Integer>() {
+            @Override
+            public void accept(Integer integer) throws Exception {
+                avatarBottomSheet.dismiss();
+                switch (integer) {
+                    case 0:
+                        PictureSelector.create(RegisterInfoActivity.this)
+                                .openCamera(PictureMimeType.ofImage()).setOutputCameraPath(cropUri.getPath()).enableCrop(true)
+                                .cropWH(300, 300).withAspectRatio(1, 1)
+                                .cropCompressQuality(70)// 裁剪压缩质量 默认90 int
+                                .minimumCompressSize(200)// 小于100kb的图片不压缩
+                                .hideBottomControls(true)
+                                .previewImage(false)
+                                .showCropGrid(false)
+                                .rotateEnabled(false)
+                                .forResult(PictureConfig.CAMERA);
+                        break;
+                    case 1:
+                        PictureSelector.create(RegisterInfoActivity.this).openGallery(PictureMimeType.ofImage()).enableCrop(true)
+                                .cropWH(300, 300).withAspectRatio(1, 1)
+                                .cropCompressQuality(70)// 裁剪压缩质量 默认90 int
+                                .minimumCompressSize(200)// 小于100kb的图片不压缩
+                                .hideBottomControls(true)
+                                .previewImage(false)
+                                .isCamera(false)
+                                .rotateEnabled(false)
+                                .previewEggs(false)
+                                .showCropGrid(false).maxSelectNum(1).forResult(PictureConfig.CHOOSE_REQUEST);
+                        break;
+                }
+            }
+        };
+
     }
 
 
     @Override
     protected void onPause() {
-        if (animator != null) {
-            animator.end();
-            animator.removeAllListeners();
-        }
         super.onPause();
     }
 
@@ -180,11 +191,6 @@ public class RegisterInfoActivity extends BaseActivity<ActivityRegisterInfoBindi
             return;
         }
 
-        if (StringUtils.isEmpty(binding.etBirthday.getText().toString())) {
-            tipDialog = DialogUtils.getFailDialog(this, getString(R.string.check_error_birthday), true);
-            tipDialog.show();
-            return;
-        }
 
         tipDialog = DialogUtils.getLoadingDialog(this, "", false);
         tipDialog.show();
@@ -206,8 +212,8 @@ public class RegisterInfoActivity extends BaseActivity<ActivityRegisterInfoBindi
                 params.put(MKey.CODE, UserService.getInstance().getUser().getSmscode());
                 params.put(MKey.PASSWORD, UserService.getInstance().getUser().getPwd());
                 params.put(MKey.NICK_NAME, binding.etNick.getText().toString());
-                params.put(MKey.BIRTHDAY, birthdayDate);
                 params.put(MKey.SEX, currentSelect);
+                params.put(MKey.AVATAR, uploadAvatarReq == null ? "" : JSON.toJSONString(uploadAvatarReq));
                 String sign = SignUtils.doSign(params);
                 params.put(MKey.SIGN, sign);
                 HttpClient.Builder.getGuodongServer().user_register(params).observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribe(new BaseObserver(new HttpCallBack<RegisterBean>() {
@@ -289,4 +295,62 @@ public class RegisterInfoActivity extends BaseActivity<ActivityRegisterInfoBindi
     protected int getLayoutId() {
         return R.layout.activity_register_info;
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        List<LocalMedia> selectList = PictureSelector.obtainMultipleResult(data);
+        if (resultCode == RESULT_OK) {
+            switch (requestCode) {
+                case PictureConfig.CHOOSE_REQUEST:
+                    selectList = PictureSelector.obtainMultipleResult(data);
+                    if (selectList != null && selectList.size() > 0) {
+                        doGetPic(selectList.get(0));
+                    } else {
+                        doGetPic(null);
+                    }
+                    break;
+                case PictureConfig.CAMERA:
+                    if (selectList != null && selectList.size() > 0) {
+                        doGetPic(selectList.get(0));
+                    } else {
+                        doGetPic(null);
+                    }
+                    break;
+            }
+        }
+    }
+
+    private void doGetPic(LocalMedia localMedia) {
+        if (localMedia == null) {
+            return;
+        }
+
+        ImageUtils.showImage(binding.ivAvatar, localMedia.getCutPath());
+
+        UploadService.doUploadAvatar(localMedia.getCutPath(), new Observer<UploadAvatarReq>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+                addDisposable(d);
+            }
+
+            @Override
+            public void onNext(UploadAvatarReq uploadAvatarReq) {
+                if (uploadAvatarReq != null) {
+                    RegisterInfoActivity.this.uploadAvatarReq = uploadAvatarReq;
+                }
+            }
+
+            @Override
+            public void onError(Throwable e) {
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
+
+    }
+
+
 }

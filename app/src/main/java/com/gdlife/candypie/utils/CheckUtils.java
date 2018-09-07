@@ -105,6 +105,15 @@ public class CheckUtils {
         return false;
     }
 
+    public boolean checkCode(String vocode) {
+        if (StringUtils.isEmpty(vocode)
+                || vocode.length() != 4
+                ) {
+            return false;
+        }
+        return true;
+    }
+
     /**
      * 检查密码
      *
@@ -112,7 +121,7 @@ public class CheckUtils {
      * @return
      */
     public boolean checkPwd(String pwd) {
-        if(StringUtils.isEmpty(pwd)){
+        if (StringUtils.isEmpty(pwd)) {
             return false;
         }
         if (StringUtils.countLength(pwd) <= ConfigService.getInstance().getPasswordMaxLength()

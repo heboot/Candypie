@@ -185,11 +185,9 @@ public class RegisterCodeActivity extends BaseActivity<ActivityRegisterCodeBindi
             @Override
             public void onClick(View v) {
 //                checkUtils.setEditLastSelection(binding.etCode);
-                LogUtil.e("显示键盘1","111");
                 QMUIKeyboardHelper.showKeyboard(binding.etCode, 0);
             }
         };
-
 
 
         binding.vv.setOnClickListener(clickListener);

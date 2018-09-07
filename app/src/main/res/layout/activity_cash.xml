@@ -137,7 +137,7 @@
             android:layout_width="@dimen/x314"
             android:layout_height="@dimen/y48"
             android:layout_marginBottom="@dimen/y45"
-            android:background="@drawable/selector_bottom_button"
+            android:background="@drawable/selector_bottom_button_account"
             android:checked="false"
             android:elevation="@dimen/x4"
             android:gravity="center"
