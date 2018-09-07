@@ -16,32 +16,31 @@
             app:layout_constraintTop_toTopOf="parent"></include>
 
         <LinearLayout
-            android:layout_marginTop="@dimen/y10"
             android:id="@+id/llyt_title"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/y40"
-            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/y20"
+            android:gravity="center|bottom"
             android:orientation="horizontal"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/include_toolbar">
 
             <TextView
-                android:id="@+id/tv_balance_type"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/coin_balance"
-                android:textColor="@color/color_343445"
-                android:textSize="@dimen/x20" />
-
-            <TextView
                 android:id="@+id/tv_balance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/x3"
-                android:text="0"
+                android:text="20"
                 android:textColor="@color/color_343445"
-                android:textSize="@dimen/x24"
+                android:textSize="@dimen/x48" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x3"
+                android:text="元"
+                android:textColor="@color/color_343445"
+                android:textSize="@dimen/x36"
                 android:textStyle="bold" />
 
         </LinearLayout>
@@ -52,62 +51,32 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/x16"
             android:layout_marginTop="@dimen/y8"
-            android:text="@string/choose_money"
+            android:text="账户余额"
             android:textColor="@color/color_343445"
-            android:textSize="@dimen/x18"
+            android:textSize="@dimen/x20"
             android:textStyle="bold"
             app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/llyt_title" />
+
+        <View
+            android:id="@+id/v1"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y10"
+            android:layout_marginTop="@dimen/y25"
+            android:background="@color/color_EDEDF3"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_choose_money"></View>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_list"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/x9"
-            android:layout_marginRight="@dimen/x16"
-            android:layout_marginTop="@dimen/y11"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_choose_money"></android.support.v7.widget.RecyclerView>
-
-        <TextView
-            android:id="@+id/tv_choose_paytype"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/x16"
-            android:layout_marginTop="@dimen/y24"
-            android:text="@string/choose_pay_type"
-            android:textColor="@color/color_343445"
-            android:textSize="@dimen/x18"
-            android:textStyle="bold"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rv_list" />
-
-        <include
-            android:id="@+id/include_type"
-            layout="@layout/layout_pay_types"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/y7"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_choose_paytype"></include>
+            app:layout_constraintTop_toBottomOf="@+id/v1"></android.support.v7.widget.RecyclerView>
 
 
-        <TextView
-            android:id="@+id/btn_bottom"
-            android:layout_width="@dimen/x314"
-            android:layout_height="@dimen/y48"
-            android:layout_marginTop="@dimen/y22"
-            android:background="@drawable/selector_bottom_button"
-            android:checked="false"
-            android:elevation="@dimen/x4"
-            android:text="@string/confirm_recharge"
-            android:gravity="center"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/include_type" />
     </android.support.constraint.ConstraintLayout>
 </layout>

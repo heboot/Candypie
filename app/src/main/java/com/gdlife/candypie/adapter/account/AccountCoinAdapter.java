@@ -17,11 +17,9 @@ import java.util.List;
 
 public class AccountCoinAdapter extends BaseQuickAdapter<RechargeConfigBean.ConfigBean, BaseViewHolder> {
 
-    private GiftRepository giftRepository;
 
     public AccountCoinAdapter(int layoutResId, List data) {
         super(layoutResId, data);
-        giftRepository = new GiftRepository();
     }
 
 

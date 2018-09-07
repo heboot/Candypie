@@ -98,6 +98,9 @@
         <activity
             android:name=".activitys.video.VideoFrameActivity"
             android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".activitys.pay.CashIndexActivity"
+            android:screenOrientation="portrait"></activity>
 
         <activity
             android:name=".activitys.theme.ThemeListActivity"

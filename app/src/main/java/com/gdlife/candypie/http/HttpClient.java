@@ -3,6 +3,7 @@ package com.gdlife.candypie.http;
 import com.example.http.HttpUtils;
 import com.heboot.base.BaseBean;
 import com.heboot.base.BaseBeanEntity;
+import com.heboot.bean.account.UserCashAccountBean;
 import com.heboot.bean.auth.ServiceAuthQBean;
 import com.heboot.bean.auth.SubmitAuthBean;
 import com.heboot.bean.auth.UserAuthIDBean;
@@ -484,7 +485,15 @@ public interface HttpClient {
     @FormUrlEncoded
     @POST("app/user/update_push_token")
     Observable<BaseBean<BaseBeanEntity>> update_push_token(@FieldMap Map<String, Object> params);
+
+    @FormUrlEncoded
+    @POST("order/user_cash/cash_account")
+    Observable<BaseBean<UserCashAccountBean>> cash_account(@FieldMap Map<String, Object> params);
+
 //    /**
+
+
+
 //     * 首页轮播图
 //     */
 //    @GET("ting?from=android&version=5.8.1.0&channel=ppzs&operator=3&method=baidu.ting.plaza.index&cuid=89CF1E1A06826F9AB95A34DC0F6AAA14")

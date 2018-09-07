@@ -1,12 +1,13 @@
 package com.gdlife.candypie.activitys.pay;
 
 import android.support.v7.widget.GridLayoutManager;
-import android.widget.CompoundButton;
+import android.support.v7.widget.LinearLayoutManager;
+import android.view.View;
 
 import com.alibaba.fastjson.JSON;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.gdlife.candypie.R;
-import com.gdlife.candypie.adapter.recharge.RechargeAdapter;
-import com.gdlife.candypie.adapter.recharge.RechargeCoinAdapter;
+import com.gdlife.candypie.adapter.account.RechargeAdapter;
 import com.gdlife.candypie.base.BaseActivity;
 import com.gdlife.candypie.base.BaseObserver;
 import com.gdlife.candypie.base.HttpObserver;
@@ -22,6 +23,7 @@ import com.gdlife.candypie.serivce.PayService;
 import com.gdlife.candypie.serivce.UserService;
 import com.gdlife.candypie.utils.DialogUtils;
 import com.gdlife.candypie.utils.SignUtils;
+import com.gdlife.candypie.widget.dialog.account.ChoosePayTypeDialog;
 import com.heboot.base.BaseBean;
 import com.heboot.bean.pay.RechargeConfigBean;
 import com.heboot.bean.pay.ServicePaymentBean;
@@ -31,7 +33,6 @@ import com.heboot.utils.LogUtil;
 import com.heboot.utils.MStatusBarUtils;
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 
-import java.lang.ref.WeakReference;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -50,13 +51,15 @@ public class RechargeActivity extends BaseActivity<ActivityRechargeBinding> {
 
     private RechargeType rechargeType;
 
-    private RechargeCoinAdapter rechargeCoinAdapter;
 
     private RechargeAdapter rechargeAdapter;
 
-    private RechargeConfigBean.ConfigBean rechargeConfigBean;
 
-    private String payType;
+    private ChoosePayTypeDialog choosePayTypeDialog;
+
+    private Consumer<String> consumer;
+
+    private RechargeConfigBean.ConfigBean rechargeConfigBean;
 
     @Inject
     PayService payService;
@@ -69,7 +72,7 @@ public class RechargeActivity extends BaseActivity<ActivityRechargeBinding> {
         binding.includeToolbar.setHideTitle(false);
         binding.includeToolbar.tvTitle.setText(getString(R.string.account_recharge));
 
-        binding.rvList.setLayoutManager(new GridLayoutManager(this, 3));
+        binding.rvList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
     }
 
@@ -77,28 +80,18 @@ public class RechargeActivity extends BaseActivity<ActivityRechargeBinding> {
     public void initData() {
 
         DaggerServiceComponent.builder().build().inject(this);
-
-        rechargeType = (RechargeType) getIntent().getExtras().get(MKey.TYPE);
-
-        if (rechargeType == RechargeType.COIN) {
-            binding.tvBalanceType.setText(getString(R.string.coin_balance));
-            binding.tvBalance.setText(UserService.getInstance().getUser().getCoin());
-            initRechargeCoinConfig();
-        } else {
-            binding.tvBalanceType.setText(getString(R.string.account_balance));
-            binding.tvBalance.setText(UserService.getInstance().getUser().getBalance());
-            initRechargeConfig();
-        }
+        binding.tvBalance.setText(UserService.getInstance().getUser().getBalance());
+        rechargeType = RechargeType.RECHARGE;
+        initRechargeConfig();
 
 
     }
 
 
-    private void doRecharge() {
+    private void doRecharge(String payType, RechargeConfigBean.ConfigBean rechargeConfigBean) {
         params = SignUtils.getNormalParams();
         params.put(MKey.PRODUCT_ID, rechargeConfigBean.getProduct_id());
         params.put(MKey.TYPE, rechargeType.toString().toLowerCase());
-        params.put(MKey.USE_BALANCE, binding.includeType.includeBalance.sbWine.isChecked() ? 1 : 0);
         params.put(MKey.PAYMENT_TYPE, payType);
         String sign = SignUtils.doSign(params);
         params.put(MKey.SIGN, sign);
@@ -110,7 +103,7 @@ public class RechargeActivity extends BaseActivity<ActivityRechargeBinding> {
 
             @Override
             public void onSuccess(ServicePaymentBean servicePaymentBean) {
-                if (binding.includeType.includeAli.cbCheck.isChecked()) {
+                if (payType.equals(PayType.ALIPAY.toString().toLowerCase())) {
                     payService.doPay(PayType.ALIPAY, RechargeActivity.this, servicePaymentBean.getPayment_params(), new Consumer<Map<String, String>>() {
                         @Override
                         public void accept(Map<String, String> stringStringMap) throws Exception {
@@ -122,7 +115,7 @@ public class RechargeActivity extends BaseActivity<ActivityRechargeBinding> {
                             });
                         }
                     });
-                } else if (binding.includeType.includeWx.cbCheck.isChecked()) {
+                } else if (payType.equals(PayType.WEIXIN.toString().toLowerCase())) {
                     MValue.currentRechargeType = RechargeType.RECHARGE;
                     payService.doPay(PayType.WEIXIN, RechargeActivity.this, servicePaymentBean.getPayment_params(), new Consumer<Map<String, String>>() {
                         @Override
@@ -160,8 +153,15 @@ public class RechargeActivity extends BaseActivity<ActivityRechargeBinding> {
             @Override
             public void onSuccess(BaseBean<RechargeConfigBean> baseBean) {
                 if (baseBean.getData().getConfig() != null && baseBean.getData().getConfig().size() > 0) {
-                    setUI(baseBean.getData());
-                    rechargeAdapter = new RechargeAdapter(baseBean.getData().getConfig(), new WeakReference<RechargeActivity>(RechargeActivity.this));
+                    rechargeAdapter = new RechargeAdapter(R.layout.item_recharge_money, baseBean.getData().getConfig());
+                    rechargeAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                            rechargeConfigBean = (RechargeConfigBean.ConfigBean) adapter.getData().get(position);
+                            choosePayTypeDialog = new ChoosePayTypeDialog(consumer);
+                            choosePayTypeDialog.show(getSupportFragmentManager(), "");
+                        }
+                    });
                     binding.rvList.setAdapter(rechargeAdapter);
                 }
             }
@@ -177,43 +177,16 @@ public class RechargeActivity extends BaseActivity<ActivityRechargeBinding> {
         });
     }
 
-    private void initRechargeCoinConfig() {
-        params = SignUtils.getNormalParams();
-        String sign = SignUtils.doSign(params);
-        params.put(MKey.SIGN, sign);
-
-
-        HttpClient.Builder.getGuodongServer().recharge_coin_config(params).observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribe(new HttpObserver<RechargeConfigBean>() {
-            @Override
-            public void onSuccess(BaseBean<RechargeConfigBean> baseBean) {
-                if (baseBean.getData().getConfig() != null && baseBean.getData().getConfig().size() > 0) {
-                    setUI(baseBean.getData());
-                    rechargeCoinAdapter = new RechargeCoinAdapter(baseBean.getData().getConfig(), new WeakReference<RechargeActivity>(RechargeActivity.this));
-                    binding.rvList.setAdapter(rechargeCoinAdapter);
-                }
-            }
-
-            @Override
-            public void onError(BaseBean<RechargeConfigBean> baseBean) {
-                if (tipDialog != null && tipDialog.isShowing()) {
-                    tipDialog.dismiss();
-                }
-                tipDialog = DialogUtils.getFailDialog(RechargeActivity.this, baseBean.getMessage(), true);
-                tipDialog.show();
-            }
-        });
-    }
-
-    private void setUI(RechargeConfigBean o) {
-        payService.setPayTypesUI(binding.includeType, o.getPayment_config());
-        binding.includeType.setUsedBalance(o.getUsed_balance() == 1 ? true : false);
-        binding.includeType.setUsedCoupons(o.getUsed_coupons() == 1 ? true : false);
-    }
 
     @Override
     public void initListener() {
 
-        binding.includeType.includeAli.cbCheck.setChecked(true);
+        consumer = new Consumer<String>() {
+            @Override
+            public void accept(String s) throws Exception {
+                doRecharge(s, rechargeConfigBean);
+            }
+        };
 
         rxObservable.subscribe(new Observer<Object>() {
 
@@ -247,104 +220,7 @@ public class RechargeActivity extends BaseActivity<ActivityRechargeBinding> {
             finish();
         });
 
-        binding.includeType.includeAli.getRoot().setOnClickListener((v) -> {
-            if (binding.includeType.includeWx.cbCheck.isChecked()) {
-                binding.includeType.includeWx.cbCheck.setChecked(false);
-            }
-            binding.includeType.includeAli.cbCheck.setChecked(true);
-        });
-        binding.includeType.includeWx.getRoot().setOnClickListener((v) -> {
-            if (binding.includeType.includeAli.cbCheck.isChecked()) {
-                binding.includeType.includeAli.cbCheck.setChecked(false);
-            }
-            binding.includeType.includeWx.cbCheck.setChecked(true);
-        });
-        binding.includeType.includeAli.cbCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    if (binding.includeType.includeWx.cbCheck.isChecked()) {
-                        binding.includeType.includeWx.cbCheck.setChecked(false);
-                    }
-                    binding.includeType.includeAli.cbCheck.setChecked(true);
-                }
-//                else {
-//                    if (binding.includeType.includeWx.cbCheck.isChecked()) {
-//                        binding.includeType.includeWx.cbCheck.setChecked(false);
-//                    }
-//                    binding.includeType.includeAli.cbCheck.setChecked(true);
-//                }
 
-            }
-        });
-        binding.includeType.includeWx.cbCheck.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    if (binding.includeType.includeAli.cbCheck.isChecked()) {
-                        binding.includeType.includeAli.cbCheck.setChecked(false);
-                    }
-                    binding.includeType.includeWx.cbCheck.setChecked(true);
-                }
-
-//                else {
-//                    if (binding.includeType.includeAli.cbCheck.isChecked()) {
-//                        binding.includeType.includeAli.cbCheck.setChecked(false);
-//                    }
-//                    binding.includeType.includeWx.cbCheck.setChecked(true);
-//                }
-
-            }
-        });
-        binding.btnBottom.setOnClickListener((v) -> {
-            doPay();
-        });
-
-    }
-
-    public void setBottom() {
-        if (rechargeType == RechargeType.COIN) {
-            if (rechargeCoinAdapter != null && rechargeCoinAdapter.getSelectBean() != null) {
-                rechargeConfigBean = rechargeCoinAdapter.getSelectBean();
-//                if (binding.includeType.includeWx.cbCheck.isSelected() || binding.includeType.includeAli.cbCheck.isSelected()) {
-                binding.btnBottom.setText(getString(R.string.confirm_recharge) + getString(R.string.price_symbol) + rechargeCoinAdapter.getSelectBean().getAmount());
-                binding.btnBottom.setSelected(true);
-//                }
-            }
-        } else if (rechargeType == RechargeType.RECHARGE) {
-            if (rechargeAdapter != null && rechargeAdapter.getSelectBean() != null) {
-                rechargeConfigBean = rechargeAdapter.getSelectBean();
-//                if (binding.includeType.includeWx.cbCheck.isSelected() || binding.includeType.includeAli.cbCheck.isSelected()) {
-                binding.btnBottom.setText(getString(R.string.confirm_recharge) + getString(R.string.price_symbol) + rechargeAdapter.getSelectBean().getAmount());
-                binding.btnBottom.setSelected(true);
-//                }
-            }
-        }
-    }
-
-    private void doPay() {
-
-        if (!binding.includeType.includeAli.cbCheck.isChecked() && !binding.includeType.includeWx.cbCheck.isChecked()) {
-            tipDialog = DialogUtils.getFailDialog(this, getString(R.string.choose_pay_type), true);
-            tipDialog.show();
-            return;
-        }
-
-        if (binding.includeType.includeAli.cbCheck.isChecked()) {
-            payType = PayType.ALIPAY.toString().toLowerCase();
-        } else if (binding.includeType.includeWx.cbCheck.isChecked()) {
-            payType = PayType.WEIXIN.toString().toLowerCase();
-        }
-
-        if (rechargeType == RechargeType.COIN) {
-            if (rechargeCoinAdapter != null && rechargeCoinAdapter.getSelectBean() != null) {
-                doRecharge();
-            }
-        } else if (rechargeType == RechargeType.RECHARGE) {
-            if (rechargeAdapter != null && rechargeAdapter.getSelectBean() != null) {
-                doRecharge();
-            }
-        }
     }
 
 

@@ -6,7 +6,7 @@
     <string name="please_select_abst">请输入个性签名</string>
     <string name="auth_id_no_save_tip">如果不保存，直接返回会丢失你修改的资料</string>
     <string name="tip_call_mobile_fail">拨打电话失败，请稍后重试</string>
-    <string name="please_input_cash_name">请输入收款人姓名</string>
+    <string name="please_input_cash_name">请输入支付宝姓名</string>
     <string name="please_input_cash_amount">请输入提款金额</string>
     <string name="ali_account">支付宝账号：</string>
     <string name="ali_account_name">支付宝姓名：</string>

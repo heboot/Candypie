@@ -40,6 +40,7 @@ import com.gdlife.candypie.activitys.order.UserOrderActivity;
 import com.gdlife.candypie.activitys.pay.AccountActivity;
 import com.gdlife.candypie.activitys.pay.BalanceLogActivity;
 import com.gdlife.candypie.activitys.pay.CashActivity;
+import com.gdlife.candypie.activitys.pay.CashIndexActivity;
 import com.gdlife.candypie.activitys.pay.CouponsActivity;
 import com.gdlife.candypie.activitys.pay.PayActivity;
 import com.gdlife.candypie.activitys.pay.RechargeActivity;
@@ -330,6 +331,11 @@ public class IntentUtils {
 
     public static void toCashActivity(Context context) {
         Intent intent = new Intent(context, CashActivity.class);
+        context.startActivity(intent);
+    }
+
+    public static void toCashIndexActivity(Context context) {
+        Intent intent = new Intent(context, CashIndexActivity.class);
         context.startActivity(intent);
     }
 

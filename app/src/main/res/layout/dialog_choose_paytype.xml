@@ -5,7 +5,7 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/aliyun_red">
+       >
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="@dimen/x310"
@@ -17,6 +17,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
+                android:id="@+id/tv_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/y34"
@@ -27,6 +28,68 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/v_ali"
+                android:layout_width="@dimen/x240"
+                android:layout_height="@dimen/y56"
+                android:layout_marginTop="@dimen/y28"
+                android:background="@drawable/bg_rect_border_alipay"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_title"></View>
+
+            <View
+                android:layout_width="@dimen/x36"
+                android:layout_height="@dimen/y36"
+                android:layout_marginLeft="@dimen/x28"
+                android:background="@drawable/icon_accout_alipay"
+                app:layout_constraintBottom_toBottomOf="@+id/v_ali"
+                app:layout_constraintLeft_toLeftOf="@+id/v_ali"
+                app:layout_constraintTop_toTopOf="@+id/v_ali"></View>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x72"
+                android:text="支付宝快捷支付"
+                android:textColor="@color/color_0080FF"
+                android:textSize="@dimen/x20"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/v_ali"
+                app:layout_constraintLeft_toLeftOf="@+id/v_ali"
+                app:layout_constraintTop_toTopOf="@+id/v_ali" />
+
+            <View
+                android:id="@+id/v_wx"
+                android:layout_width="@dimen/x240"
+                android:layout_height="@dimen/y56"
+                android:layout_marginTop="@dimen/y16"
+                android:background="@drawable/bg_rect_border_wxpay"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/v_ali"></View>
+
+            <View
+                android:layout_width="@dimen/x36"
+                android:layout_height="@dimen/y36"
+                android:layout_marginLeft="@dimen/x28"
+                android:background="@drawable/icon_accout_wx"
+                app:layout_constraintBottom_toBottomOf="@+id/v_wx"
+                app:layout_constraintLeft_toLeftOf="@+id/v_wx"
+                app:layout_constraintTop_toTopOf="@+id/v_wx"></View>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x72"
+                android:text="支付宝快捷支付"
+                android:textColor="@color/color_24AF41"
+                android:textSize="@dimen/x20"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/v_wx"
+                app:layout_constraintLeft_toLeftOf="@+id/v_wx"
+                app:layout_constraintTop_toTopOf="@+id/v_wx" />
 
         </android.support.constraint.ConstraintLayout>
     </android.support.constraint.ConstraintLayout>

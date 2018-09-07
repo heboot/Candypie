@@ -38,11 +38,11 @@
 
     <string name="account_ali">支付宝账号</string>
 
-    <string name="cash_user_name">收款人姓名</string>
+    <string name="cash_user_name">支付宝姓名</string>
 
     <string name="hint_input_ali_account">请输入支付宝账号</string>
 
-    <string name="hint_input_cash_name">请输入收款人姓名</string>
+    <string name="hint_input_cash_name">请输入真实姓名</string>
 
     <string name="hint_input_cash_money">当前可提现</string>
 

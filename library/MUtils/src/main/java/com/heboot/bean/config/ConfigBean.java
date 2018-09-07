@@ -806,6 +806,15 @@ public class ConfigBean implements Serializable {
         private String min_balance;
         private String min_amount;
         private List<String> cash_week;
+        private String tip;
+
+        public String getTip() {
+            return tip;
+        }
+
+        public void setTip(String tip) {
+            this.tip = tip;
+        }
 
         public String getTax() {
             return tax;
