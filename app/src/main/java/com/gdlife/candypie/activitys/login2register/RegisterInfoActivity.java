@@ -9,12 +9,14 @@ import com.gdlife.candypie.R;
 import com.gdlife.candypie.base.BaseActivity;
 import com.gdlife.candypie.base.BaseObserver;
 import com.gdlife.candypie.base.HttpObserver;
+import com.gdlife.candypie.common.LoginType;
 import com.gdlife.candypie.common.MKey;
 import com.gdlife.candypie.common.NumEventKeys;
 import com.gdlife.candypie.component.DaggerUtilsComponent;
 import com.gdlife.candypie.databinding.ActivityRegisterInfoBinding;
 import com.gdlife.candypie.http.HttpCallBack;
 import com.gdlife.candypie.http.HttpClient;
+import com.gdlife.candypie.serivce.DownloadService;
 import com.gdlife.candypie.serivce.LoginService;
 import com.gdlife.candypie.serivce.UploadService;
 import com.gdlife.candypie.serivce.UserService;
@@ -22,7 +24,10 @@ import com.gdlife.candypie.utils.CheckUtils;
 import com.gdlife.candypie.utils.DialogUtils;
 import com.gdlife.candypie.utils.ImageUtils;
 import com.gdlife.candypie.utils.IntentUtils;
+import com.gdlife.candypie.utils.SDCardUtils;
 import com.gdlife.candypie.utils.SignUtils;
+import com.gdlife.candypie.utils.StringUtils;
+import com.gdlife.candypie.utils.ToastUtils;
 import com.gdlife.candypie.widget.common.BottomSheetDialog;
 import com.heboot.base.BaseBean;
 import com.heboot.base.BaseBeanEntity;
@@ -39,10 +44,14 @@ import com.luck.picture.lib.PictureSelector;
 import com.luck.picture.lib.config.PictureConfig;
 import com.luck.picture.lib.config.PictureMimeType;
 import com.luck.picture.lib.entity.LocalMedia;
+import com.netease.nim.uikit.common.util.media.ImageUtil;
+import com.netease.nim.uikit.common.util.string.StringUtil;
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
 import com.umeng.analytics.MobclickAgent;
 
+import java.io.File;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -52,6 +61,10 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
+import zlc.season.rxdownload3.RxDownload;
+import zlc.season.rxdownload3.core.Failed;
+import zlc.season.rxdownload3.core.Status;
+import zlc.season.rxdownload3.core.Succeed;
 
 /**
  * Created by heboot on 2018/2/5.
@@ -71,6 +84,16 @@ public class RegisterInfoActivity extends BaseActivity<ActivityRegisterInfoBindi
     private BottomSheetDialog avatarBottomSheet;
 
     private Uri cropUri;
+
+    private String sync_login_id;
+
+    private LoginType sync_login_type;
+
+    private HashMap hashMap;
+
+    private String syncHeadUrl;
+
+    private DownloadService downloadService;
 
 
     private UploadAvatarReq uploadAvatarReq;
@@ -92,9 +115,36 @@ public class RegisterInfoActivity extends BaseActivity<ActivityRegisterInfoBindi
     public void initData() {
         DaggerUtilsComponent.builder().build().inject(this);
         checkUtils.setBottomEnable(binding.btnBottom, true);
+        if (getIntent() != null && getIntent().getExtras() != null) {
+            sync_login_id = (String) getIntent().getExtras().get(MKey.ACTION_ID);
+        }
+        initOtherLoginData();
+
 
         chooseSexTipDialog = new TipCustomOneDialog.Builder(this, "性别设定后不可更改", "知道了").create();
 
+    }
+
+    private void initOtherLoginData() {
+        if (!StringUtils.isEmpty(sync_login_id)) {
+            sync_login_type = (LoginType) getIntent().getExtras().get(MKey.TYPE);
+            hashMap = (HashMap) getIntent().getExtras().get(MKey.MAP);
+            if (sync_login_type == LoginType.WX) {
+                syncHeadUrl = (String) hashMap.get("headimgurl");
+                ImageUtils.showImage(binding.ivAvatar, (String) hashMap.get("headimgurl"));
+                binding.etNick.setText((String) hashMap.get("nickname"));
+                if ((int) hashMap.get("sex") == 1) {
+                    currentSelect = 1;
+                    binding.includeSex.tvMan.setSelected(true);
+                    binding.includeSex.tvWoman.setSelected(false);
+                } else {
+                    currentSelect = 0;
+                    binding.includeSex.tvMan.setSelected(false);
+                    binding.includeSex.tvWoman.setSelected(true);
+                }
+            }
+
+        }
     }
 
     @Override
@@ -177,19 +227,8 @@ public class RegisterInfoActivity extends BaseActivity<ActivityRegisterInfoBindi
         super.onPause();
     }
 
-    private void checkInfoData() {
 
-        if (currentSelect < 0) {
-            tipDialog = DialogUtils.getFailDialog(this, "请先选择性别", true);
-            tipDialog.show();
-            return;
-        }
-
-        if (!checkUtils.checkNick(binding.etNick.getText().toString())) {
-            tipDialog = DialogUtils.getFailDialog(this, getString(R.string.check_error_nick), true);
-            tipDialog.show();
-            return;
-        }
+    private void doSubmit() {
 
 
         tipDialog = DialogUtils.getLoadingDialog(this, "", false);
@@ -208,12 +247,20 @@ public class RegisterInfoActivity extends BaseActivity<ActivityRegisterInfoBindi
             @Override
             public void onSuccess(BaseBeanEntity o) {
                 params = SignUtils.getNormalParams();
-                params.put(MKey.MOBILE, UserService.getInstance().getUser().getMobile());
-                params.put(MKey.CODE, UserService.getInstance().getUser().getSmscode());
-                params.put(MKey.PASSWORD, UserService.getInstance().getUser().getPwd());
+                if (StringUtils.isEmpty(sync_login_id)) {
+                    params.put(MKey.MOBILE, UserService.getInstance().getUser().getMobile());
+                    params.put(MKey.CODE, UserService.getInstance().getUser().getSmscode());
+                    params.put(MKey.PASSWORD, UserService.getInstance().getUser().getPwd());
+                }
+
                 params.put(MKey.NICK_NAME, binding.etNick.getText().toString());
                 params.put(MKey.SEX, currentSelect);
                 params.put(MKey.AVATAR, uploadAvatarReq == null ? "" : JSON.toJSONString(uploadAvatarReq));
+                if (!StringUtils.isEmpty(sync_login_id)) {
+                    params.put(MKey.SYNC_LOGIN_ID, sync_login_id);
+                }
+
+
                 String sign = SignUtils.doSign(params);
                 params.put(MKey.SIGN, sign);
                 HttpClient.Builder.getGuodongServer().user_register(params).observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribe(new BaseObserver(new HttpCallBack<RegisterBean>() {
@@ -226,8 +273,10 @@ public class RegisterInfoActivity extends BaseActivity<ActivityRegisterInfoBindi
                     public void onSuccess(RegisterBean sendSMSBeanBaseBean) {
                         MobclickAgent.onEvent(RegisterInfoActivity.this, NumEventKeys.register_success.toString());
                         User user = sendSMSBeanBaseBean.getUser();
-                        user.setPwd(UserService.getInstance().getUser().getPwd());
-                        user.setMobile(UserService.getInstance().getUser().getMobile().replaceAll(" ", ""));
+                        if (StringUtils.isEmpty(sync_login_id)) {
+                            user.setPwd(UserService.getInstance().getUser().getPwd());
+                            user.setMobile(UserService.getInstance().getUser().getMobile().replaceAll(" ", ""));
+                        }
                         UserService.getInstance().setUser(user);
                         UserService.getInstance().putSPUser(user);
                         RxBus.getInstance().post(NormalEvent.FINISH_PAGE);
@@ -287,6 +336,70 @@ public class RegisterInfoActivity extends BaseActivity<ActivityRegisterInfoBindi
 
             }
         }));
+    }
+
+    private void checkInfoData() {
+
+        if (currentSelect < 0) {
+            tipDialog = DialogUtils.getFailDialog(this, "请先选择性别", true);
+            tipDialog.show();
+            return;
+        }
+
+        if (!checkUtils.checkNick(binding.etNick.getText().toString())) {
+            tipDialog = DialogUtils.getFailDialog(this, getString(R.string.check_error_nick), true);
+            tipDialog.show();
+            return;
+        }
+
+        //先下载头像
+        if (!StringUtils.isEmpty(sync_login_id)) {
+            if (downloadService == null) {
+                downloadService = new DownloadService();
+            }
+            String downloadedVideoPath = sync_login_id + "avatar";
+            File file = new File(SDCardUtils.getRootPathPrivatePic() + "/" + downloadedVideoPath);
+
+//            if (!file.exists()) {
+            downloadService.downlaodAvatar(syncHeadUrl, downloadedVideoPath, new Consumer<Status>() {
+                @Override
+                public void accept(Status status) throws Exception {
+                    if (status instanceof Succeed) {
+                        UploadService.doUploadAvatar(SDCardUtils.getRootPathPrivatePic() + "/" + downloadedVideoPath, new Observer<UploadAvatarReq>() {
+                            @Override
+                            public void onSubscribe(Disposable d) {
+                                addDisposable(d);
+                            }
+
+                            @Override
+                            public void onNext(UploadAvatarReq uploadAvatarReq) {
+                                if (uploadAvatarReq != null) {
+                                    RegisterInfoActivity.this.uploadAvatarReq = uploadAvatarReq;
+                                }
+                                doSubmit();
+                            }
+
+                            @Override
+                            public void onError(Throwable e) {
+                            }
+
+                            @Override
+                            public void onComplete() {
+
+                            }
+                        });
+                    } else if (status instanceof Failed) {
+                        ToastUtils.showToast("下载失败，请稍后重试");
+                    }
+                }
+            });
+            RxDownload.INSTANCE.start(syncHeadUrl).
+                    subscribe();
+//            }
+
+        } else {
+            doSubmit();
+        }
 
 
     }

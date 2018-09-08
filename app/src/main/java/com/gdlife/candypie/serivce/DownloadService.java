@@ -25,4 +25,11 @@ public class DownloadService {
 
     }
 
+    public Disposable downlaodAvatar(String videoPath, String localName, Consumer<Status> observer) {
+        Mission mission = new Mission(videoPath, localName, SDCardUtils.getRootPathPrivatePic());
+        RxDownload rxDownload = RxDownload.INSTANCE;
+        return rxDownload.create(mission).observeOn(AndroidSchedulers.mainThread()).subscribe(observer);
+
+    }
+
 }

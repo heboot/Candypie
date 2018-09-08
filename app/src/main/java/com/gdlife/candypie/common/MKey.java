@@ -209,4 +209,8 @@ public class MKey {
     public static final String OPENID = "openid";
 
     public static final String UNIONID = "unionid";
+
+    public static final String MAP = "mmap";
+    public static final String SYNC_LOGIN_ID = "sync_login_id";
+
 }

@@ -33,6 +33,7 @@ import com.gdlife.candypie.activitys.login2register.LoginActivity;
 import com.gdlife.candypie.activitys.login2register.RegisterActivity;
 import com.gdlife.candypie.activitys.login2register.RegisterCodeActivity;
 import com.gdlife.candypie.activitys.login2register.RegisterForgetActivity;
+import com.gdlife.candypie.activitys.login2register.RegisterInfoActivity;
 import com.gdlife.candypie.activitys.login2register.RegisterPwdActivity;
 import com.gdlife.candypie.activitys.message.RecentContactsActivity;
 import com.gdlife.candypie.activitys.message.SystemMessageActivity;
@@ -68,6 +69,7 @@ import com.gdlife.candypie.activitys.video.PlayerActivity2;
 import com.gdlife.candypie.activitys.video.UserVideosActivity;
 import com.gdlife.candypie.activitys.video.VideoChatActivity;
 import com.gdlife.candypie.activitys.video.VideoFrameActivity;
+import com.gdlife.candypie.common.LoginType;
 import com.gdlife.candypie.common.MKey;
 import com.gdlife.candypie.common.MValue;
 import com.gdlife.candypie.common.PayFrom;
@@ -97,6 +99,7 @@ import com.netease.nim.uikit.api.NimUIKit;
 
 import java.io.File;
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -181,6 +184,14 @@ public class IntentUtils {
         Intent intent = new Intent(context, RegisterPwdActivity.class);
         intent.putExtra(MKey.MOBILE, mobile);
         intent.putExtra(MKey.TYPE, type);
+        context.startActivity(intent);
+    }
+
+    public static void toRegisterInfoActivity(Context context, String syncid, LoginType type, HashMap hashMap) {
+        Intent intent = new Intent(context, RegisterInfoActivity.class);
+        intent.putExtra(MKey.ACTION_ID, syncid);
+        intent.putExtra(MKey.TYPE, type);
+        intent.putExtra(MKey.MAP, hashMap);
         context.startActivity(intent);
     }
 
