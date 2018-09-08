@@ -490,8 +490,12 @@ public interface HttpClient {
     @POST("order/user_cash/cash_account")
     Observable<BaseBean<UserCashAccountBean>> cash_account(@FieldMap Map<String, Object> params);
 
-//    /**
+    @FormUrlEncoded
+    @POST("app/user/third_login")
+    Observable<BaseBean<BaseBeanEntity>> third_login(@FieldMap Map<String, Object> params);
 
+
+//    /**
 
 
 //     * 首页轮播图

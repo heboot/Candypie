@@ -203,4 +203,10 @@ public class MKey {
     public static final String K = "k";
 
     public static final String PUSH_TOKEN = "push_token";
+
+    public static final String HEAD_PIC = "head_pic";
+
+    public static final String OPENID = "openid";
+
+    public static final String UNIONID = "unionid";
 }

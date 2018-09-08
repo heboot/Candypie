@@ -25,6 +25,16 @@ public class BaseBeanEntity {
 
     private int service_cancel_result;
 
+    private String sync_login_id;
+
+    public String getSync_login_id() {
+        return sync_login_id;
+    }
+
+    public void setSync_login_id(String sync_login_id) {
+        this.sync_login_id = sync_login_id;
+    }
+
     public int getService_cancel_result() {
         return service_cancel_result;
     }

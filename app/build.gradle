@@ -192,6 +192,10 @@ MobSDK {
                 appId "wx6487bff92e6d5912"
                 appSecret "836b0a080ae621bcad46d2d4c07363f0"
             }
+            QQ {
+                appId "1106673292"
+                appKey "Wz3l8PIdinprxyUa"
+            }
         }
     }
 }

@@ -12,6 +12,7 @@ import com.gdlife.candypie.utils.NotificationsUtils;
 import com.gdlife.candypie.utils.SignUtils;
 import com.gdlife.candypie.utils.ToastUtils;
 import com.heboot.base.BaseBean;
+import com.heboot.base.BaseBeanEntity;
 import com.heboot.bean.login2register.RegisterBean;
 import com.heboot.entity.IMUser;
 import com.heboot.entity.User;
@@ -19,8 +20,14 @@ import com.heboot.entity.VideoUser;
 import com.heboot.utils.LogUtil;
 import com.netease.nimlib.sdk.auth.LoginInfo;
 
+import java.util.HashMap;
 import java.util.Map;
 
+import cn.sharesdk.framework.Platform;
+import cn.sharesdk.framework.PlatformActionListener;
+import cn.sharesdk.framework.ShareSDK;
+import cn.sharesdk.tencent.qq.QQ;
+import cn.sharesdk.wechat.friends.Wechat;
 import io.agora.AgoraAPI;
 import io.agora.AgoraAPIOnlySignal;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -31,6 +38,61 @@ import io.reactivex.schedulers.Schedulers;
  */
 
 public class LoginService {
+
+    private PlatformActionListener platformActionListener;
+
+    private String loginType;
+
+    private void initListener() {
+        if (platformActionListener == null) {
+            platformActionListener = new PlatformActionListener() {
+                @Override
+                public void onComplete(Platform platform, int i, HashMap<String, Object> hashMap) {
+
+                }
+
+                @Override
+                public void onError(Platform platform, int i, Throwable throwable) {
+
+                }
+
+                @Override
+                public void onCancel(Platform platform, int i) {
+
+                }
+            };
+        }
+    }
+
+    public void doWXLogin() {
+        Platform plat = ShareSDK.getPlatform(Wechat.NAME);
+        plat.SSOSetting(false);
+        plat.showUser(null);
+        plat.setPlatformActionListener(platformActionListener);
+    }
+
+    private void doThirdLogin(String nickName, String headPic, int sex, String openId, String type, String unionid) {
+        Map<String, Object> params = SignUtils.getNormalParams();
+        params.put(MKey.NICK_NAME, nickName);
+        params.put(MKey.HEAD_PIC, headPic);
+        params.put(MKey.SEX, sex);
+        params.put(MKey.OPENID, openId);
+        params.put(MKey.TYPE, type);
+        params.put(MKey.UNIONID, unionid);
+        String sign = SignUtils.doSign(params);
+        params.put(MKey.SIGN, sign);
+        HttpClient.Builder.getGuodongServer().third_login(params).observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribe(new HttpObserver<BaseBeanEntity>() {
+            @Override
+            public void onSuccess(BaseBean<BaseBeanEntity> baseBean) {
+                UserService.getInstance().setUser(baseBean.getData().getUser());
+            }
+
+            @Override
+            public void onError(BaseBean<BaseBeanEntity> baseBean) {
+            }
+        });
+    }
+
 
     public void doLoginAgora(VideoUser videoUser, IMUser imUser) {
         // 登录 Agora 信令系统
@@ -59,10 +121,7 @@ public class LoginService {
                 public void onError(BaseBean<RegisterBean> baseBean) {
                 }
             });
-
         }
-
-
     }
 
 
