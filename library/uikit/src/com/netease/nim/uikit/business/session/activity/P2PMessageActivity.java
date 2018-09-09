@@ -195,32 +195,32 @@ public class P2PMessageActivity extends BaseMessageActivity {
             vAgain.setVisibility(View.GONE);
             tvAgain.setVisibility(View.GONE);
         } else {
-            vAgain.setVisibility(View.VISIBLE);
-            tvAgain.setVisibility(View.VISIBLE);
-            vAgain.setOnClickListener((v) -> {
-                if (hideBottom != null && hideBottom) {
-                    return;
-                }
-
-                if (is_black == 1) {
-                    TipCustomOneDialog tipCustomOneDialog = new TipCustomOneDialog.Builder(this, "当前你们处于屏蔽状态，无法下单", "知道了").create();
-                    tipCustomOneDialog.show();
-                    return;
-                }
-
-                final UserInfo userInfo = NimUIKit.getUserInfoProvider().getUserInfo(contactId);
-
-
-//            LogUtil.e("测试扩展", user2.getExtension());
-
-
-//            Toast.makeText(this, contactId + "", Toast.LENGTH_SHORT).show();
-//                User user = new User();
-                currentuser.setId(Integer.parseInt(contactId.replace("cdp", "")));
-//                user.setAvatar(userInfo.getAvatar());
-                currentuser.setAvatar(userInfo.getAvatar());
-                RxBus.getInstance().post(new MessageEvent.TO_AGAIN_ORDER_EVENT(currentuser));
-            });
+            vAgain.setVisibility(View.GONE);
+            tvAgain.setVisibility(View.GONE);
+//            vAgain.setOnClickListener((v) -> {
+//                if (hideBottom != null && hideBottom) {
+//                    return;
+//                }
+//
+//                if (is_black == 1) {
+//                    TipCustomOneDialog tipCustomOneDialog = new TipCustomOneDialog.Builder(this, "当前你们处于屏蔽状态，无法下单", "知道了").create();
+//                    tipCustomOneDialog.show();
+//                    return;
+//                }
+//
+//                final UserInfo userInfo = NimUIKit.getUserInfoProvider().getUserInfo(contactId);
+//
+//
+////            LogUtil.e("测试扩展", user2.getExtension());
+//
+//
+////            Toast.makeText(this, contactId + "", Toast.LENGTH_SHORT).show();
+////                User user = new User();
+//                currentuser.setId(Integer.parseInt(contactId.replace("cdp", "")));
+////                user.setAvatar(userInfo.getAvatar());
+//                currentuser.setAvatar(userInfo.getAvatar());
+//                RxBus.getInstance().post(new MessageEvent.TO_AGAIN_ORDER_EVENT(currentuser));
+//            });
         }
 
         // 单聊特例话数据，包括个人信息，

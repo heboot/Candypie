@@ -102,6 +102,8 @@ public class MessageFragment extends TFragment implements ModuleProxy {
 
     private ChatService chatService = new ChatService();
 
+    private View sendVideoChat;
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -111,6 +113,9 @@ public class MessageFragment extends TFragment implements ModuleProxy {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.nim_message_fragment, container, false);
+
+        sendVideoChat = rootView.findViewById(R.id.v1);
+
 
         RxBus.getInstance().toObserverable().subscribe(new io.reactivex.Observer<Object>() {
             @Override
@@ -138,6 +143,13 @@ public class MessageFragment extends TFragment implements ModuleProxy {
             public void onComplete() {
 
             }
+        });
+
+        sendVideoChat.setOnClickListener((v) -> {
+//            currentuser.setId(Integer.parseInt(contactId.replace("cdp", "")));
+//                user.setAvatar(userInfo.getAvatar());
+//            currentuser.setAvatar(userInfo.getAvatar());
+            RxBus.getInstance().post(new MessageEvent.TO_AGAIN_ORDER_EVENT(toUser));
         });
 
         return rootView;

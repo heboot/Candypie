@@ -196,21 +196,24 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toLeftOf="@+id/iv_pan" />
 
-        <ImageView
+
+        <include
             android:id="@+id/iv_gift"
-            android:layout_width="@dimen/x40"
-            android:layout_height="@dimen/y40"
+            layout="@layout/layout_liwu"
+            android:layout_width="@dimen/x38"
+            android:layout_height="@dimen/y38"
             android:layout_marginBottom="@dimen/y16"
             android:layout_marginRight="@dimen/x16"
-            android:background="@drawable/icon_video_gift"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent" />
 
-        <ImageView
+
+        <include
             android:id="@+id/iv_pan"
-            android:layout_width="@dimen/x40"
-            android:layout_height="@dimen/y40"
+            layout="@layout/layout_zhuanpan"
+            android:layout_width="@dimen/x38"
+            android:layout_height="@dimen/y38"
             android:layout_marginBottom="@dimen/y16"
             android:layout_marginRight="@dimen/x21"
             android:background="@drawable/icon_pan"

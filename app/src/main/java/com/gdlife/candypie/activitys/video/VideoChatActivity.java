@@ -504,7 +504,7 @@ public class VideoChatActivity extends BaseActivity<ActivityVideoChatBinding> im
             orderService.cancelOrder(userServiceId);
         });
 
-        binding.ivGift.setOnClickListener((v) -> {
+        binding.ivGift.getRoot().setOnClickListener((v) -> {
 //            BottomVideoGiftSheetDialog2 bottomVideoGiftSheetDialog = new BottomVideoGiftSheetDialog2.Builder(this, getSupportFragmentManager(), new WeakReference<>(this)).create();
 //            bottomVideoGiftSheetDialog.show();
             BottomVideoGiftSheetDialogHehe bottomVideoGiftSheetDialogHehe = new BottomVideoGiftSheetDialogHehe(String.valueOf(postVideoChatBean.getUser().getId()), userServiceId);
@@ -535,7 +535,7 @@ public class VideoChatActivity extends BaseActivity<ActivityVideoChatBinding> im
             }
         });
 
-        RxView.clicks(binding.ivPan).throttleFirst(3, TimeUnit.SECONDS).subscribe(new Consumer<Object>() {
+        RxView.clicks(binding.ivPan.getRoot()).throttleFirst(3, TimeUnit.SECONDS).subscribe(new Consumer<Object>() {
             @Override
             public void accept(Object o) throws Exception {
                 if (luckpanDialog == null || !luckpanDialog.isShowing()) {
@@ -906,7 +906,7 @@ public class VideoChatActivity extends BaseActivity<ActivityVideoChatBinding> im
                         currentState = VideoCatState.ing;
                         binding.ivPublishCancel.setVisibility(View.GONE);
                         binding.ivIngCancel.setVisibility(View.VISIBLE);
-                        binding.ivPan.setVisibility(View.VISIBLE);
+                        binding.ivPan.getRoot().setVisibility(View.VISIBLE);
                         binding.bgb.setVisibility(View.GONE);
                         binding.tvWait.setVisibility(View.GONE);
                         timeHandler.sendEmptyMessageDelayed(0, 1000);
@@ -938,8 +938,8 @@ public class VideoChatActivity extends BaseActivity<ActivityVideoChatBinding> im
                         binding.ivIngCancel.setVisibility(View.VISIBLE);
                         binding.tvWaitInfo.setVisibility(View.GONE);
                         if (videoChatFrom == VideoChatFrom.USER) {
-                            binding.ivPan.setVisibility(View.VISIBLE);
-                            binding.ivGift.setVisibility(View.VISIBLE);
+                            binding.ivPan.getRoot().setVisibility(View.VISIBLE);
+                            binding.ivGift.getRoot().setVisibility(View.VISIBLE);
                             binding.bgb.setVisibility(View.GONE);
                             binding.ivAvatarBg.setVisibility(View.INVISIBLE);
                             binding.ivEnableLocalvideo.setVisibility(View.VISIBLE);

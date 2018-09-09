@@ -85,8 +85,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@id/audioTextSwitchLayout"
-        android:layout_toLeftOf="@+id/gift_button"
-        android:layout_marginRight="5dp">
+        android:layout_marginRight="5dp"
+        android:layout_toLeftOf="@+id/gift_button">
 
         <ImageView
             android:id="@+id/buttonMoreFuntionInText"
@@ -110,14 +110,14 @@
             android:textSize="14sp" />
     </FrameLayout>
 
-    <ImageView
+    <include
         android:id="@+id/gift_button"
+        layout="@layout/layout_liwu"
         android:layout_width="@dimen/x39"
         android:layout_height="@dimen/y40"
         android:layout_alignBottom="@id/audioTextSwitchLayout"
         android:layout_alignParentRight="true"
         android:layout_marginRight="@dimen/bottom_component_margin_horizontal"
         android:background="@drawable/icon_im_gift_button"
-        android:contentDescription="@string/empty"
-        android:scaleType="fitXY" />
+        android:contentDescription="@string/empty" />
 </RelativeLayout>

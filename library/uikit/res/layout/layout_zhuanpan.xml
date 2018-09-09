@@ -1,6 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-</android.support.constraint.ConstraintLayout>
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="@dimen/x38"
+        android:layout_height="@dimen/y38"
+        android:background="@drawable/icon_pan">
+
+        <TextView
+            android:layout_width="@dimen/x40"
+            android:layout_height="@dimen/y12"
+            android:background="@drawable/bg_gradient_fav"
+            android:gravity="center"
+            android:text="转盘冒险"
+            android:textColor="@color/white"
+            android:textSize="@dimen/x8"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

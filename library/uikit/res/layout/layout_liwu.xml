@@ -5,14 +5,14 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="@dimen/x38"
         android:layout_height="@dimen/y38"
-        android:background="@drawable/icon_pan">
+        android:background="@drawable/icon_userpage_gift">
 
         <TextView
             android:layout_width="@dimen/x40"
             android:layout_height="@dimen/y12"
             android:background="@drawable/bg_gradient_fav"
             android:gravity="center"
-            android:text="转盘冒险"
+            android:text="送礼物"
             android:textColor="@color/white"
             android:textSize="@dimen/x8"
             android:textStyle="bold"
