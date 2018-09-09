@@ -35,6 +35,7 @@ import com.heboot.common.RANK_FILTER;
 import com.heboot.entity.User;
 import com.heboot.utils.ViewUtils;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,9 +57,6 @@ public class RankListFragment extends BaseFragment<FragmentIndexListBinding> {
 
     private RankBean rankBean;
 
-    private View.OnClickListener topUserClickListener;
-
-    private User selectTopUser;
 
     public static RankListFragment newInstance(String name) {
         Bundle args = new Bundle();
@@ -92,16 +90,11 @@ public class RankListFragment extends BaseFragment<FragmentIndexListBinding> {
 
     @Override
     public void initData() {
-
     }
 
 
     @Override
     public void initListener() {
-
-        topUserClickListener = (v) -> {
-            toTopUserHomepage(selectTopUser);
-        };
 
         binding.srytIndex.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -253,13 +246,18 @@ public class RankListFragment extends BaseFragment<FragmentIndexListBinding> {
             if (topUsers != null && topUsers.size() > 0) {
                 ImageUtils.showAvatar(headBinding.avatar1, topUsers.get(0).getAvatar());
                 headBinding.tv1.setText(topUsers.get(0).getNickname());
-                selectTopUser = topUsers.get(0);
-                headBinding.avatar1.setOnClickListener(topUserClickListener);
+//                selectTopUser = topUsers.get(0);
+//                topUserClickListener.setUser(topUsers.get(0));
+                headBinding.avatar1.setOnClickListener((v) -> {
+                    toTopUserHomepage(topUsers.get(0));
+                });
+
                 if (topUsers.size() >= 2) {
                     ImageUtils.showAvatar(headBinding.avatar2, topUsers.get(1).getAvatar());
                     headBinding.tv2.setText(topUsers.get(1).getNickname());
-                    selectTopUser = topUsers.get(1);
-                    headBinding.avatar2.setOnClickListener(topUserClickListener);
+                    headBinding.avatar2.setOnClickListener((v) -> {
+                        toTopUserHomepage(topUsers.get(1));
+                    });
                 } else {
                     headBinding.v2.setVisibility(View.INVISIBLE);
                     headBinding.avatar2.setVisibility(View.INVISIBLE);
@@ -269,8 +267,9 @@ public class RankListFragment extends BaseFragment<FragmentIndexListBinding> {
                 if (topUsers.size() >= 3) {
                     ImageUtils.showAvatar(headBinding.avatar3, topUsers.get(2).getAvatar());
                     headBinding.tv3.setText(topUsers.get(2).getNickname());
-                    selectTopUser = topUsers.get(2);
-                    headBinding.avatar3.setOnClickListener(topUserClickListener);
+                    headBinding.avatar3.setOnClickListener((v) -> {
+                        toTopUserHomepage(topUsers.get(2));
+                    });
                 } else {
                     headBinding.v3.setVisibility(View.INVISIBLE);
                     headBinding.avatar3.setVisibility(View.INVISIBLE);
@@ -286,13 +285,15 @@ public class RankListFragment extends BaseFragment<FragmentIndexListBinding> {
             if (topUsers != null && topUsers.size() > 0) {
                 ImageUtils.showAvatar(headBinding.avatar1, topUsers.get(0).getAvatar());
                 headBinding.tv1.setText(topUsers.get(0).getNickname());
-                selectTopUser = topUsers.get(0);
-                headBinding.avatar1.setOnClickListener(topUserClickListener);
+                headBinding.avatar1.setOnClickListener((v) -> {
+                    toTopUserHomepage(topUsers.get(0));
+                });
                 if (topUsers.size() >= 2) {
                     ImageUtils.showAvatar(headBinding.avatar2, topUsers.get(1).getAvatar());
                     headBinding.tv2.setText(topUsers.get(1).getNickname());
-                    selectTopUser = topUsers.get(1);
-                    headBinding.avatar2.setOnClickListener(topUserClickListener);
+                    headBinding.avatar2.setOnClickListener((v) -> {
+                        toTopUserHomepage(topUsers.get(1));
+                    });
                 } else {
                     headBinding.v2.setVisibility(View.INVISIBLE);
                     headBinding.avatar2.setVisibility(View.INVISIBLE);
@@ -302,8 +303,9 @@ public class RankListFragment extends BaseFragment<FragmentIndexListBinding> {
                 if (topUsers.size() >= 3) {
                     ImageUtils.showAvatar(headBinding.avatar3, topUsers.get(2).getAvatar());
                     headBinding.tv3.setText(topUsers.get(2).getNickname());
-                    selectTopUser = topUsers.get(2);
-                    headBinding.avatar3.setOnClickListener(topUserClickListener);
+                    headBinding.avatar3.setOnClickListener((v) -> {
+                        toTopUserHomepage(topUsers.get(2));
+                    });
                 } else {
                     headBinding.v3.setVisibility(View.INVISIBLE);
                     headBinding.avatar3.setVisibility(View.INVISIBLE);

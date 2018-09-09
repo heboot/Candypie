@@ -305,9 +305,10 @@ public class UserPageActivity extends BaseActivity<ActivityUserpageBinding> {
     }
 
     private void initUserVideo() {
-        binding.includeVideos.includeTitle.setTitle(user.getUser_video().getTitle());
-        binding.includeVideos.tvVideoNum.setText("( " + user.getUser_video().getNums() + " )");
+
         if (user.getUser_video() != null && user.getUser_video().getList() != null && user.getUser_video().getList().size() > 0) {
+            binding.includeVideos.includeTitle.setTitle(user.getUser_video().getTitle());
+            binding.includeVideos.tvVideoNum.setText("( " + user.getUser_video().getNums() + " )");
             binding.includeVideos.getRoot().setVisibility(View.VISIBLE);
             binding.includeVideos.getRoot().setFocusable(false);
             binding.includeVideos.rvList.setFocusable(false);
@@ -432,6 +433,7 @@ public class UserPageActivity extends BaseActivity<ActivityUserpageBinding> {
      * 初始化顶部头像和收藏等区域
      */
     private void initTop() {
+        binding.includeAvatar.tvName.setText(user.getNickname());
         //展示头像
         ImageUtils.showIndexUserImage(binding.includeAvatar.ivAvatar, user.getAvatar());
         //设置年龄 性别
