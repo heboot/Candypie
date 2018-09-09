@@ -50,7 +50,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/x5"
                 android:autoLink="all"
-                android:text="蜜糖派服务条款及隐私协议"
+                android:text="@string/xieyi"
                 android:textColor="@color/white"
                 android:textSize="@dimen/x12" />
         </LinearLayout>

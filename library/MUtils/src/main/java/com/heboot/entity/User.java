@@ -15,6 +15,7 @@ import com.heboot.bean.video.HomepageVideoBean;
 import com.heboot.bean.video.UserVideosBean;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -149,6 +150,17 @@ public class User implements Serializable {
     private UserAbstBean signature;
 
     private UserVideosBean user_video;
+
+    //三方登录
+    private HashMap syncMap;
+
+    public HashMap getSyncMap() {
+        return syncMap;
+    }
+
+    public void setSyncMap(HashMap syncMap) {
+        this.syncMap = syncMap;
+    }
 
     public UserVideosBean getUser_video() {
         return user_video;

@@ -82,4 +82,7 @@
 
     <string name="upload_video">上传视频</string>
 
+    <string name="xieyi"><u>蜜糖派服务条款及隐私协议</u></string>
+    <string name="find_pwd_u"><u>找回密码</u></string>
+    <string name="gologin_u"><u>去登录</u></string>
 </resources>

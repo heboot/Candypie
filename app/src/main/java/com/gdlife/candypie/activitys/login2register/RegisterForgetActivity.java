@@ -3,9 +3,12 @@ package com.gdlife.candypie.activitys.login2register;
 import android.content.Intent;
 import android.support.v4.content.ContextCompat;
 
+import com.gdlife.candypie.MAPP;
 import com.gdlife.candypie.R;
+import com.gdlife.candypie.activitys.common.SplashActivity;
 import com.gdlife.candypie.base.BaseActivity;
 import com.gdlife.candypie.base.BaseObserver;
+import com.gdlife.candypie.common.LoginType;
 import com.gdlife.candypie.common.MKey;
 import com.gdlife.candypie.common.MValue;
 import com.gdlife.candypie.common.NumEventKeys;
@@ -13,12 +16,14 @@ import com.gdlife.candypie.common.RegisterForgetFrom;
 import com.gdlife.candypie.databinding.ActivityRegisterForgetBinding;
 import com.gdlife.candypie.http.HttpCallBack;
 import com.gdlife.candypie.http.HttpClient;
+import com.gdlife.candypie.serivce.LoginService;
 import com.gdlife.candypie.serivce.UserService;
 import com.gdlife.candypie.utils.CheckUtils;
 import com.gdlife.candypie.utils.DialogUtils;
 import com.gdlife.candypie.utils.IntentUtils;
 import com.gdlife.candypie.utils.ObserableUtils;
 import com.gdlife.candypie.utils.SignUtils;
+import com.gdlife.candypie.utils.StringUtils;
 import com.heboot.base.BaseBean;
 import com.heboot.base.BaseBeanEntity;
 import com.heboot.bean.login2register.SendSMSBean;
@@ -28,7 +33,10 @@ import com.heboot.utils.MStatusBarUtils;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 import com.qmuiteam.qmui.util.QMUIKeyboardHelper;
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
+import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
 import com.umeng.analytics.MobclickAgent;
+
+import java.util.HashMap;
 
 import io.reactivex.Observable;
 import io.reactivex.Observer;
@@ -54,6 +62,13 @@ public class RegisterForgetActivity extends BaseActivity<ActivityRegisterForgetB
     private Observer observer;
 
     private User user;
+
+
+    private LoginService loginService = new LoginService();
+
+    private QMUITipDialog loadingDialog;
+
+    private Observer<HashMap> loginObs;
 
     @Override
     protected int getLayoutId() {
@@ -94,7 +109,31 @@ public class RegisterForgetActivity extends BaseActivity<ActivityRegisterForgetB
 
     @Override
     public void initData() {
+        observer = new Observer<HashMap>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+                addDisposable(d);
+            }
 
+            @Override
+            public void onNext(HashMap o) {
+                loadingDialog.dismiss();
+                if (!StringUtils.isEmpty((String) o.get("syncid"))) {
+//                    IntentUtils.toRegisterActivity();
+                    IntentUtils.toRegisterInfoActivity(RegisterForgetActivity.this, (String) o.get("syncid"), (LoginType) o.get("loginType"), o);
+                }
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                loadingDialog.dismiss();
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        };
     }
 
     @Override
@@ -225,6 +264,32 @@ public class RegisterForgetActivity extends BaseActivity<ActivityRegisterForgetB
                 checkBottom();
             }
         });
+
+        binding.includeOtherLogin.llytWx.setOnClickListener((v) -> {
+            if (loadingDialog == null) {
+                loadingDialog = DialogUtils.getLoadingDialog(this, "", false);
+            }
+            loadingDialog.show();
+            loginService.doWXLogin(loginObs);
+        });
+        binding.includeOtherLogin.llytQq.setOnClickListener((v) -> {
+            if (loadingDialog == null) {
+                loadingDialog = DialogUtils.getLoadingDialog(this, "", false);
+            }
+            loadingDialog.show();
+            loginService.doQQLogin(loginObs);
+        });
+        binding.includeOtherLogin.llytYk.setOnClickListener((v) -> {
+            MobclickAgent.onEvent(this, NumEventKeys.tourist_login.toString());
+            UserService.getInstance().doTouristPreview();
+            if (MAPP.mapp.getConfigBean().getIs_review_status() == 1) {
+                IntentUtils.toIndexActivity(RegisterForgetActivity.this);
+            } else {
+                IntentUtils.toMainActivity(RegisterForgetActivity.this);
+            }
+            finish();
+        });
+
     }
 
     private void checkBottom() {

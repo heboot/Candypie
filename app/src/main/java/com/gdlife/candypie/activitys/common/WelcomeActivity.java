@@ -13,6 +13,7 @@ import com.gdlife.candypie.MAPP;
 import com.gdlife.candypie.R;
 import com.gdlife.candypie.base.BaseActivity;
 import com.gdlife.candypie.base.HttpObserver;
+import com.gdlife.candypie.common.LoginType;
 import com.gdlife.candypie.common.MCode;
 import com.gdlife.candypie.common.MKey;
 import com.gdlife.candypie.common.MValue;
@@ -173,59 +174,70 @@ public class WelcomeActivity extends BaseActivity<ActivityWelcomeBinding> implem
             @Override
             public void onComplete() {
                 User user = UserService.getInstance().getSPUser();
-                if (user != null && user.getPwd() != null) {
-                    params.put(MKey.MOBILE, user.getMobile());
-                    params.put(MKey.PASSWORD, user.getPwd());
-                    String sign = SignUtils.doSign(params);
-                    params.put(MKey.SIGN, sign);
+                if ((user != null && user.getSyncMap() != null) || (user != null && user.getPwd() != null)) {
+                    if (user.getSyncMap() != null) {
+                        if (loginService == null) {
+                            loginService = new LoginService();
+                        }
+                        if ((LoginType) user.getSyncMap().get("loginType") == LoginType.WX) {
+                            loginService.doThirdLogin((String) user.getSyncMap().get("nickname"), (String) user.getSyncMap().get("headimgurl"), (int) user.getSyncMap().get("sex"), (String) user.getSyncMap().get("openid"), "weixin", (String) user.getSyncMap().get("unionid"), user.getSyncMap());
+                        } else if ((LoginType) user.getSyncMap().get("loginType") == LoginType.QQ) {
+                            loginService.doThirdLogin((String) user.getSyncMap().get("nickname"), (String) user.getSyncMap().get("figureurl_qq_2"), user.getSyncMap().get("gender").equals("男") ? 1 : 0, (String) user.getSyncMap().get("openid"), "qq", null, user.getSyncMap());
+                        }
+                    } else {
+                        params.put(MKey.MOBILE, user.getMobile());
+                        params.put(MKey.PASSWORD, user.getPwd());
+                        String sign = SignUtils.doSign(params);
+                        params.put(MKey.SIGN, sign);
 
-                    HttpClient.Builder.getGuodongServer().user_login(params).observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribe(new HttpObserver<RegisterBean>() {
-                        @Override
-                        public void onSuccess(BaseBean<RegisterBean> baseBean) {
-                            MobclickAgent.onEvent(WelcomeActivity.this, NumEventKeys.auto_login_success.toString());
-                            RegisterBean registerBean = baseBean.getData();
-                            registerBean.getUser().setMobile(user.getMobile().replaceAll(" ", ""));
-                            registerBean.getUser().setPwd(user.getPwd());
-                            UserService.getInstance().setUser(registerBean.getUser());
-                            UserService.getInstance().putSPUser(registerBean.getUser());
-                            UserService.getInstance().setVideo_first_order(registerBean.getVideo_first_order());
+                        HttpClient.Builder.getGuodongServer().user_login(params).observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribe(new HttpObserver<RegisterBean>() {
+                            @Override
+                            public void onSuccess(BaseBean<RegisterBean> baseBean) {
+                                MobclickAgent.onEvent(WelcomeActivity.this, NumEventKeys.auto_login_success.toString());
+                                RegisterBean registerBean = baseBean.getData();
+                                registerBean.getUser().setMobile(user.getMobile().replaceAll(" ", ""));
+                                registerBean.getUser().setPwd(user.getPwd());
+                                UserService.getInstance().setUser(registerBean.getUser());
+                                UserService.getInstance().putSPUser(registerBean.getUser());
+                                UserService.getInstance().setVideo_first_order(registerBean.getVideo_first_order());
 //                            loginService.doLoginAgora(registerBean.getVideo_user(), registerBean.getIm_user());
-                            loginService.doLoginAgora(baseBean.getData().getVideo_user(), baseBean.getData().getIm_user());
-                            if (baseBean.getData().getRun_service_tip() != null && !StringUtils.isEmpty(baseBean.getData().getRun_service_tip().getUser_service_id())) {
-                                serverService.doRuningService(WelcomeActivity.this, baseBean.getData().getRun_service_tip());
-                            } else {
-
-                                if (registerBean.getUser().getRole() == MValue.USER_ROLE_SERVICER && registerBean.getUser().getService_auth_status() != null && registerBean.getUser().getService_auth_status() == MValue.AUTH_STATUS_SUC) {
-                                    if (MAPP.mapp.getConfigBean().getIs_review_status() == 1) {
-                                        IntentUtils.toIndexActivity(WelcomeActivity.this);
-                                    } else {
-                                        IntentUtils.toMainActivity(WelcomeActivity.this);
-                                    }
+                                loginService.doLoginAgora(baseBean.getData().getVideo_user(), baseBean.getData().getIm_user());
+                                if (baseBean.getData().getRun_service_tip() != null && !StringUtils.isEmpty(baseBean.getData().getRun_service_tip().getUser_service_id())) {
+                                    serverService.doRuningService(WelcomeActivity.this, baseBean.getData().getRun_service_tip());
                                 } else {
-                                    if (MAPP.mapp.getConfigBean().getIs_review_status() == 1) {
-                                        IntentUtils.toIndexActivity(WelcomeActivity.this);
+
+                                    if (registerBean.getUser().getRole() == MValue.USER_ROLE_SERVICER && registerBean.getUser().getService_auth_status() != null && registerBean.getUser().getService_auth_status() == MValue.AUTH_STATUS_SUC) {
+                                        if (MAPP.mapp.getConfigBean().getIs_review_status() == 1) {
+                                            IntentUtils.toIndexActivity(WelcomeActivity.this);
+                                        } else {
+                                            IntentUtils.toMainActivity(WelcomeActivity.this);
+                                        }
                                     } else {
-                                        IntentUtils.toMainActivity(WelcomeActivity.this);
+                                        if (MAPP.mapp.getConfigBean().getIs_review_status() == 1) {
+                                            IntentUtils.toIndexActivity(WelcomeActivity.this);
+                                        } else {
+                                            IntentUtils.toMainActivity(WelcomeActivity.this);
+                                        }
                                     }
                                 }
-                            }
 
-                            //更新改到配置文件那一步了
+                                //更新改到配置文件那一步了
 //                            if (registerBean.getApp_version_update() != null && !StringUtils.isEmpty(registerBean.getApp_version_update().getContent())) {
 //                                MValue.updateVersionBean = registerBean.getApp_version_update();
 //                            }
 
 
-                            finish();
+                                finish();
 
-                        }
+                            }
 
-                        @Override
-                        public void onError(BaseBean<RegisterBean> baseBean) {
-                            IntentUtils.toSplashActivity(WelcomeActivity.this);
-                            finish();
-                        }
-                    });
+                            @Override
+                            public void onError(BaseBean<RegisterBean> baseBean) {
+                                IntentUtils.toSplashActivity(WelcomeActivity.this);
+                                finish();
+                            }
+                        });
+                    }
 
 
                 } else {

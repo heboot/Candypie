@@ -2,6 +2,7 @@ package com.gdlife.candypie.serivce;
 
 import com.alibaba.fastjson.JSON;
 import com.gdlife.candypie.MAPP;
+import com.gdlife.candypie.activitys.login2register.LoginActivity;
 import com.gdlife.candypie.base.HttpObserver;
 import com.gdlife.candypie.common.LoginType;
 import com.gdlife.candypie.common.MKey;
@@ -20,6 +21,8 @@ import com.heboot.bean.login2register.RegisterBean;
 import com.heboot.entity.IMUser;
 import com.heboot.entity.User;
 import com.heboot.entity.VideoUser;
+import com.heboot.event.UserEvent;
+import com.heboot.rxbus.RxBus;
 import com.heboot.utils.LogUtil;
 import com.netease.nimlib.sdk.auth.LoginInfo;
 
@@ -50,16 +53,22 @@ public class LoginService {
 
     private Observer<HashMap> observer;
 
+
     private void initListener() {
         if (platformActionListener == null) {
             platformActionListener = new PlatformActionListener() {
                 @Override
                 public void onComplete(Platform platform, int action, HashMap<String, Object> hashMap) {
                     LogUtil.e("LoginService", JSON.toJSONString(hashMap));
+                    LogUtil.e("LoginService", JSON.toJSONString(platform.getDb()));
                     if (action == Platform.ACTION_USER_INFOR) {
                         //通过DB获取各种数据
+                        hashMap.put("loginType", loginType);
                         if (loginType == LoginType.WX) {
                             doThirdLogin((String) hashMap.get("nickname"), (String) hashMap.get("headimgurl"), (int) hashMap.get("sex"), (String) hashMap.get("openid"), "weixin", (String) hashMap.get("unionid"), hashMap);
+                        } else if (loginType == LoginType.QQ) {
+                            hashMap.put("openid", platform.getDb().getToken());
+                            doThirdLogin((String) hashMap.get("nickname"), (String) hashMap.get("figureurl_qq_2"), hashMap.get("gender").equals("男") ? 1 : 0, platform.getDb().getToken(), "qq", null, hashMap);
                         }
                     }
                 }
@@ -87,30 +96,57 @@ public class LoginService {
         plat.setPlatformActionListener(platformActionListener);
     }
 
-    private void doThirdLogin(String nickName, String headPic, int sex, String openId, String type, String unionid, HashMap map) {
+    public void doQQLogin(Observer observer) {
+        this.observer = observer;
+        loginType = LoginType.QQ;
+        initListener();
+        Platform plat = ShareSDK.getPlatform(QQ.NAME);
+        plat.SSOSetting(false);
+        plat.showUser(null);
+        plat.setPlatformActionListener(platformActionListener);
+    }
+
+    public void doThirdLogin(String nickName, String headPic, int sex, String openId, String type, String unionid, HashMap map) {
         Map<String, Object> params = SignUtils.getNormalParams();
         params.put(MKey.NICK_NAME, nickName);
         params.put(MKey.HEAD_PIC, headPic);
         params.put(MKey.SEX, sex);
         params.put(MKey.OPENID, openId);
         params.put(MKey.TYPE, type);
-        params.put(MKey.UNIONID, unionid);
+        if (!StringUtils.isEmpty(unionid)) {
+            params.put(MKey.UNIONID, unionid);
+        }
         String sign = SignUtils.doSign(params);
         params.put(MKey.SIGN, sign);
-        HttpClient.Builder.getGuodongServer().third_login(params).observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribe(new HttpObserver<BaseBeanEntity>() {
+        HttpClient.Builder.getGuodongServer().third_login(params).observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribe(new HttpObserver<RegisterBean>() {
             @Override
-            public void onSuccess(BaseBean<BaseBeanEntity> baseBean) {
+            public void onSuccess(BaseBean<RegisterBean> baseBean) {
 //                UserService.getInstance().setUser(baseBean.getData().getUser());
                 if (baseBean != null && baseBean.getData() != null && !StringUtils.isEmpty(baseBean.getData().getSync_login_id())) {
                     map.put("syncid", baseBean.getData().getSync_login_id());
                     map.put("loginType", loginType);
                     observer.onNext(map);
+                } else if (baseBean != null && baseBean.getData() != null && baseBean.getData().getUser() != null) {
+
+                    baseBean.getData().getUser().setSyncMap(map);
+                    UserService.getInstance().putSPUser(baseBean.getData().getUser());
+
+                    RxBus.getInstance().post(UserEvent.LOGIN_SUC);
+                    doLoginAgora(baseBean.getData().getVideo_user(), baseBean.getData().getIm_user());
+
+                    UserService.getInstance().setUser(baseBean.getData().getUser());
+                    RxBus.getInstance().post(UserEvent.LOGIN_SUC);
+                    if (MAPP.mapp.getConfigBean().getIs_review_status() == 1) {
+                        IntentUtils.toIndexActivity(MAPP.mapp.getCurrentActivity());
+                    } else {
+                        IntentUtils.toMainActivity(MAPP.mapp.getCurrentActivity());
+                    }
                 }
 
             }
 
             @Override
-            public void onError(BaseBean<BaseBeanEntity> baseBean) {
+            public void onError(BaseBean<RegisterBean> baseBean) {
                 observer.onError(new Throwable(baseBean.getMessage()));
             }
         });

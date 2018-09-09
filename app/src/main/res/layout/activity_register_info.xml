@@ -51,7 +51,14 @@
             android:layout_height="@dimen/y20"
             android:layout_marginBottom="@dimen/y17"
             android:layout_marginRight="@dimen/x29"
-            android:background="@color/aliyun_red"
+            android:background="@drawable/icon_close_oval_gray"
+            app:layout_constraintBottom_toTopOf="@+id/v_line"
+            app:layout_constraintRight_toRightOf="parent"></View>
+
+        <View
+            android:id="@+id/v_clear"
+            android:layout_width="@dimen/x60"
+            android:layout_height="@dimen/y60"
             app:layout_constraintBottom_toTopOf="@+id/v_line"
             app:layout_constraintRight_toRightOf="parent"></View>
 

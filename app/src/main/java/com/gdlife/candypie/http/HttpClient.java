@@ -492,7 +492,7 @@ public interface HttpClient {
 
     @FormUrlEncoded
     @POST("app/user/third_login")
-    Observable<BaseBean<BaseBeanEntity>> third_login(@FieldMap Map<String, Object> params);
+    Observable<BaseBean<RegisterBean>> third_login(@FieldMap Map<String, Object> params);
 
 
 //    /**

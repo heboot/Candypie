@@ -29,6 +29,7 @@ import com.gdlife.candypie.utils.SignUtils;
 import com.gdlife.candypie.utils.StringUtils;
 import com.gdlife.candypie.utils.ToastUtils;
 import com.gdlife.candypie.widget.common.BottomSheetDialog;
+import com.gdlife.candypie.widget.dialog.login2register.ChooseSexTipDialog;
 import com.heboot.base.BaseBean;
 import com.heboot.base.BaseBeanEntity;
 import com.heboot.bean.login2register.RegisterBean;
@@ -77,7 +78,7 @@ public class RegisterInfoActivity extends BaseActivity<ActivityRegisterInfoBindi
 
     private int currentSelect = -1;
 
-    private TipCustomOneDialog chooseSexTipDialog;
+    private ChooseSexTipDialog chooseSexTipDialog;
 
     private Consumer<Integer> avatarConsumer;
 
@@ -95,6 +96,8 @@ public class RegisterInfoActivity extends BaseActivity<ActivityRegisterInfoBindi
 
     private DownloadService downloadService;
 
+
+    private QMUITipDialog loadingDialog;
 
     private UploadAvatarReq uploadAvatarReq;
 
@@ -120,9 +123,9 @@ public class RegisterInfoActivity extends BaseActivity<ActivityRegisterInfoBindi
         }
         initOtherLoginData();
 
+        chooseSexTipDialog = new ChooseSexTipDialog(currentSelect == 1 ? "男" : "女");
 
-        chooseSexTipDialog = new TipCustomOneDialog.Builder(this, "性别设定后不可更改", "知道了").create();
-
+        loadingDialog = DialogUtils.getLoadingDialog(this, "", false);
     }
 
     private void initOtherLoginData() {
@@ -134,6 +137,20 @@ public class RegisterInfoActivity extends BaseActivity<ActivityRegisterInfoBindi
                 ImageUtils.showImage(binding.ivAvatar, (String) hashMap.get("headimgurl"));
                 binding.etNick.setText((String) hashMap.get("nickname"));
                 if ((int) hashMap.get("sex") == 1) {
+                    currentSelect = 1;
+                    binding.includeSex.tvMan.setSelected(true);
+                    binding.includeSex.tvWoman.setSelected(false);
+                } else {
+                    currentSelect = 0;
+                    binding.includeSex.tvMan.setSelected(false);
+                    binding.includeSex.tvWoman.setSelected(true);
+                }
+            } else if (sync_login_type == LoginType.QQ) {
+                syncHeadUrl = (String) hashMap.get("figureurl_qq_2");
+                ImageUtils.showImage(binding.ivAvatar, (String) hashMap.get("figureurl_qq_2"));
+                binding.etNick.setText((String) hashMap.get("nickname"));
+                int qqsex = hashMap.get("gender").equals("男") ? 1 : 0;
+                if (qqsex == 1) {
                     currentSelect = 1;
                     binding.includeSex.tvMan.setSelected(true);
                     binding.includeSex.tvWoman.setSelected(false);
@@ -168,7 +185,8 @@ public class RegisterInfoActivity extends BaseActivity<ActivityRegisterInfoBindi
             currentSelect = 1;
             binding.includeSex.tvMan.setSelected(true);
             binding.includeSex.tvWoman.setSelected(false);
-            chooseSexTipDialog.show();
+            chooseSexTipDialog.setSex("男");
+            chooseSexTipDialog.show(getSupportFragmentManager(), "");
 
         });
 
@@ -176,7 +194,12 @@ public class RegisterInfoActivity extends BaseActivity<ActivityRegisterInfoBindi
             currentSelect = 0;
             binding.includeSex.tvMan.setSelected(false);
             binding.includeSex.tvWoman.setSelected(true);
-            chooseSexTipDialog.show();
+            chooseSexTipDialog.setSex("女");
+            chooseSexTipDialog.show(getSupportFragmentManager(), "");
+        });
+
+        binding.vClear.setOnClickListener((v) -> {
+            binding.etNick.setText("");
         });
 
 
@@ -354,6 +377,7 @@ public class RegisterInfoActivity extends BaseActivity<ActivityRegisterInfoBindi
 
         //先下载头像
         if (!StringUtils.isEmpty(sync_login_id)) {
+            loadingDialog.show();
             if (downloadService == null) {
                 downloadService = new DownloadService();
             }
@@ -373,6 +397,7 @@ public class RegisterInfoActivity extends BaseActivity<ActivityRegisterInfoBindi
 
                             @Override
                             public void onNext(UploadAvatarReq uploadAvatarReq) {
+                                loadingDialog.dismiss();
                                 if (uploadAvatarReq != null) {
                                     RegisterInfoActivity.this.uploadAvatarReq = uploadAvatarReq;
                                 }
@@ -381,6 +406,8 @@ public class RegisterInfoActivity extends BaseActivity<ActivityRegisterInfoBindi
 
                             @Override
                             public void onError(Throwable e) {
+                                loadingDialog.dismiss();
+                                ToastUtils.showToast(e.getMessage());
                             }
 
                             @Override

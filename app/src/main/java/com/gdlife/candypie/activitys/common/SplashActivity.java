@@ -125,6 +125,13 @@ public class SplashActivity extends BaseActivity<ActivitySplashBinding> {//EasyP
             loadingDialog.show();
             loginService.doWXLogin(observer);
         });
+        binding.includeOtherLogin.llytQq.setOnClickListener((v) -> {
+            if (loadingDialog == null) {
+                loadingDialog = DialogUtils.getLoadingDialog(this, "", false);
+            }
+            loadingDialog.show();
+            loginService.doQQLogin(observer);
+        });
         binding.includeOtherLogin.llytYk.setOnClickListener((v) -> {
             MobclickAgent.onEvent(this, NumEventKeys.tourist_login.toString());
             UserService.getInstance().doTouristPreview();
@@ -134,6 +141,9 @@ public class SplashActivity extends BaseActivity<ActivitySplashBinding> {//EasyP
                 IntentUtils.toMainActivity(SplashActivity.this);
             }
             finish();
+        });
+        binding.llytXieyi.setOnClickListener((v) -> {
+            IntentUtils.toHTMLActivity(this, "", MAPP.mapp.getConfigBean().getStatic_url_config().getReg_protocol());
         });
 //        binding.btnRegister.setOnClickListener((v) -> {
 //            IntentUtils.toRegisterActivity(this, MValue.CHECK_SMS_CODE.REG);

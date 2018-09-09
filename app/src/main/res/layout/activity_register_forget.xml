@@ -168,7 +168,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:autoLink="all"
-                android:text="去登录"
+                android:text="@string/gologin_u"
                 android:textColor="@color/theme_color"
                 android:textSize="14sp" />
         </LinearLayout>
@@ -191,6 +191,7 @@
             app:layout_constraintTop_toBottomOf="@+id/v3" />
 
         <include
+            android:id="@+id/include_other_login"
             layout="@layout/layout_other_login"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

@@ -36,10 +36,10 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/vt"
-            tl:tl_indicator_color="@color/theme_color"
+            tl:tl_indicator_color="@color/color_FF6363"
             tl:tl_indicator_width="@dimen/x36"
             tl:tl_tab_space_equal="true"
-            tl:tl_textSelectColor="@color/theme_color"
+            tl:tl_textSelectColor="@color/color_FF6363"
             tl:tl_textUnselectColor="@color/color_898A9E"
             tl:tl_textsize="@dimen/x15"
             tl:tl_underline_height="@dimen/y5"></com.flyco.tablayout.SlidingTabLayout>

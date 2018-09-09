@@ -118,7 +118,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:autoLink="all"
-                android:text="@string/fogget_pwd"
+                android:text="@string/find_pwd_u"
                 android:textColor="@color/theme_color"
                 android:textSize="14sp" />
         </LinearLayout>
