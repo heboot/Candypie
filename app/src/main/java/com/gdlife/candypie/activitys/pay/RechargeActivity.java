@@ -22,6 +22,7 @@ import com.gdlife.candypie.http.HttpClient;
 import com.gdlife.candypie.serivce.PayService;
 import com.gdlife.candypie.serivce.UserService;
 import com.gdlife.candypie.utils.DialogUtils;
+import com.gdlife.candypie.utils.NumberUtils;
 import com.gdlife.candypie.utils.SignUtils;
 import com.gdlife.candypie.widget.dialog.account.ChoosePayTypeDialog;
 import com.heboot.base.BaseBean;
@@ -80,7 +81,7 @@ public class RechargeActivity extends BaseActivity<ActivityRechargeBinding> {
     public void initData() {
 
         DaggerServiceComponent.builder().build().inject(this);
-        binding.tvBalance.setText(UserService.getInstance().getUser().getBalance());
+        binding.tvBalance.setText(NumberUtils.qianweifenge(Double.parseDouble(UserService.getInstance().getUser().getBalance())));
         rechargeType = RechargeType.RECHARGE;
         initRechargeConfig();
 

@@ -42,13 +42,13 @@ public class RankUserAdapter extends BaseQuickAdapter<User, BaseViewHolder> {
 
         helper.setText(R.id.tv_abst, s.getAbst());
 
-        if (rank_title.equals("consume")) {
-            helper.setText(R.id.tv_action, "充值钻石");
-        } else if (rank_title.equals("rq")) {
-            helper.setText(R.id.tv_action, "人气值");
-        } else if (rank_title.equals("wealth")) {
-            helper.setText(R.id.tv_action, "财富值");
-        }
+//        if (rank_title.equals("consume")) {
+//            helper.setText(R.id.tv_action, "充值钻石");
+//        } else if (rank_title.equals("rq")) {
+//            helper.setText(R.id.tv_action, "人气值");
+//        } else if (rank_title.equals("wealth")) {
+        helper.setText(R.id.tv_action, rank_title);
+//        }
 
 
         helper.setText(R.id.tv_value, s.getRank_value());

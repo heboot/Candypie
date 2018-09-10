@@ -16,6 +16,7 @@ import com.gdlife.candypie.serivce.UIService;
 import com.gdlife.candypie.serivce.UserService;
 import com.gdlife.candypie.utils.DialogUtils;
 import com.gdlife.candypie.utils.IntentUtils;
+import com.gdlife.candypie.utils.NumberUtils;
 import com.gdlife.candypie.utils.SignUtils;
 import com.gdlife.candypie.utils.StringUtils;
 import com.heboot.base.BaseBean;
@@ -73,7 +74,7 @@ public class CashIndexActivity extends BaseActivity<ActivityCashIndexBinding> {
 
         payService = new PayService();
         cash_account();
-        binding.tvBalance.setText(UserService.getInstance().getUser().getCash_balance());
+        binding.tvBalance.setText(NumberUtils.qianweifenge(Double.parseDouble(UserService.getInstance().getUser().getCash_balance())));
 
         binding.tvInfo.setText
                 ("系统将扣除支付宝手续费" + MAPP.mapp.getConfigBean().getUser_cash_config().getTax() + "%");

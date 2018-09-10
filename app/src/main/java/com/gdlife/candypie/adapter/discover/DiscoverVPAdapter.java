@@ -84,9 +84,11 @@ public class DiscoverVPAdapter extends PagerAdapter {
 
         if (user.getIs_favs() == 1) {
             binding.tvFav.setText("已收藏");
+            binding.tvFav.setBackgroundResource(R.drawable.bg_gradient_white);
             binding.tvFav.setTextColor(ContextCompat.getColor(context, R.color.color_FF5252));
         } else {
             binding.tvFav.setText("收藏");
+            binding.tvFav.setBackgroundResource(R.drawable.bg_gradient_fav);
             binding.tvFav.setTextColor(Color.WHITE);
         }
 
@@ -114,29 +116,29 @@ public class DiscoverVPAdapter extends PagerAdapter {
         });
 
 
-        binding.tvFav.setOnClickListener((v) -> {
-            if (UserService.getInstance().checkTourist(container.getContext())) {
-                return;
-            }
-            if (user.getId().intValue() == UserService.getInstance().getUser().getId().intValue()) {
-                tipDialog = DialogUtils.getFailDialog(container.getContext(), "不能对自己操作", true);
-                tipDialog.show();
-                return;
-            }
-            doFav(user.getIs_favs(), user, binding);
-        });
-
-        binding.tvFav.setOnClickListener((v) -> {
-            if (UserService.getInstance().checkTourist(container.getContext())) {
-                return;
-            }
-            if (user.getId().intValue() == UserService.getInstance().getUser().getId().intValue()) {
-                tipDialog = DialogUtils.getFailDialog(container.getContext(), "不能对自己操作", true);
-                tipDialog.show();
-                return;
-            }
-            doFav(user.getIs_favs(), user, binding);
-        });
+//        binding.tvFav.setOnClickListener((v) -> {
+//            if (UserService.getInstance().checkTourist(container.getContext())) {
+//                return;
+//            }
+//            if (user.getId().intValue() == UserService.getInstance().getUser().getId().intValue()) {
+//                tipDialog = DialogUtils.getFailDialog(container.getContext(), "不能对自己操作", true);
+//                tipDialog.show();
+//                return;
+//            }
+//            doFav(user.getIs_favs(), user, binding);
+//        });
+//
+//        binding.tvFav.setOnClickListener((v) -> {
+//            if (UserService.getInstance().checkTourist(container.getContext())) {
+//                return;
+//            }
+//            if (user.getId().intValue() == UserService.getInstance().getUser().getId().intValue()) {
+//                tipDialog = DialogUtils.getFailDialog(container.getContext(), "不能对自己操作", true);
+//                tipDialog.show();
+//                return;
+//            }
+//            doFav(user.getIs_favs(), user, binding);
+//        });
 
 
         binding.clytChildContainer.setOnClickListener((v) -> {

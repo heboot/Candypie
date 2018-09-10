@@ -136,7 +136,7 @@ public class ChoosePayTypeDialog extends DialogFragment {
             }
         });
         binding.vWx.setOnClickListener((v) -> {
-            payType = PayType.ALIPAY.toString().toLowerCase();
+            payType = PayType.WEIXIN.toString().toLowerCase();
             try {
                 dismiss();
                 consumer.accept(payType);

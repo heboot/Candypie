@@ -22,6 +22,7 @@ import com.gdlife.candypie.serivce.UIService;
 import com.gdlife.candypie.serivce.UserService;
 import com.gdlife.candypie.utils.DialogUtils;
 import com.gdlife.candypie.utils.IntentUtils;
+import com.gdlife.candypie.utils.NumberUtils;
 import com.gdlife.candypie.utils.SignUtils;
 import com.gdlife.candypie.widget.dialog.account.ChoosePayTypeDialog;
 import com.heboot.base.BaseBean;
@@ -88,9 +89,9 @@ public class AccountActivity extends BaseActivity<ActivityAccountBinding> {
         initRechargeCoinConfig();
 
 
-        binding.tvCoinBalance.setText(UserService.getInstance().getUser().getCoin());
+        binding.tvCoinBalance.setText(NumberUtils.qianweifengecoin(Double.parseDouble(UserService.getInstance().getUser().getCoin())));
 
-        binding.tvMoneyBalance.setText("¥" + UserService.getInstance().getUser().getBalance());
+        binding.tvMoneyBalance.setText("¥" + NumberUtils.qianweifenge(Double.parseDouble(UserService.getInstance().getUser().getBalance())));
 
         binding.rvList.setLayoutManager(new GridLayoutManager(this, 2) {
             @Override

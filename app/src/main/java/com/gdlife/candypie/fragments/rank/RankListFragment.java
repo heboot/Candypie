@@ -57,6 +57,8 @@ public class RankListFragment extends BaseFragment<FragmentIndexListBinding> {
 
     private RankBean rankBean;
 
+    private String rankTitle;
+
 
     public static RankListFragment newInstance(String name) {
         Bundle args = new Bundle();
@@ -135,6 +137,7 @@ public class RankListFragment extends BaseFragment<FragmentIndexListBinding> {
             public void onSuccess(BaseBean<RankBean> baseBean) {
                 rankBean = baseBean.getData();
                 total = baseBean.getData().getTotalPages();
+                rankTitle = baseBean.getData().getRank_title();
                 binding.srytIndex.setRefreshing(false);
                 if (currentSelect == RANK_FILTER.WEEK) {
                     List<User> temp = new ArrayList<>();
@@ -159,7 +162,7 @@ public class RankListFragment extends BaseFragment<FragmentIndexListBinding> {
 
     private void initUserListData(List<User> monthData) {
         if (rankUserAdapter == null) {
-            rankUserAdapter = new RankUserAdapter(R.layout.layout_rank_item, subRankListData(monthData), pageName);
+            rankUserAdapter = new RankUserAdapter(R.layout.layout_rank_item, subRankListData(monthData), rankTitle);
             binding.rvList.setAdapter(rankUserAdapter);
             initFilterHeadView();
             if (monthData != null && monthData.size() > 0) {
