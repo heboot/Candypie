@@ -4,42 +4,26 @@ import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.os.Build;
-import android.support.annotation.RequiresApi;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
-import android.util.TypedValue;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.gdlife.candypie.MAPP;
 import com.gdlife.candypie.R;
-import com.gdlife.candypie.activitys.user.HomepageActivity;
-import com.gdlife.candypie.activitys.user.UserPageActivity;
 import com.gdlife.candypie.adapter.discover.HomepageBottomVideosAdapter;
-import com.gdlife.candypie.adapter.homepage.HomepageSkillAdapter;
 import com.gdlife.candypie.adapter.index.IndexVisitAdapter;
 import com.gdlife.candypie.adapter.user.UserGiftAdapter;
-import com.gdlife.candypie.base.BaseActivity;
 import com.gdlife.candypie.base.BaseFragment;
-import com.gdlife.candypie.base.BaseObserver;
 import com.gdlife.candypie.base.HttpObserver;
 import com.gdlife.candypie.common.MKey;
 import com.gdlife.candypie.common.MValue;
 import com.gdlife.candypie.common.ReportFromType;
 import com.gdlife.candypie.common.UserVideoActivityFrom;
 import com.gdlife.candypie.databinding.ActivityUserpageBinding;
-import com.gdlife.candypie.databinding.FragmentHomepageBottomBinding;
-import com.gdlife.candypie.http.HttpCallBack;
 import com.gdlife.candypie.http.HttpClient;
-import com.gdlife.candypie.serivce.NimChatService;
-import com.gdlife.candypie.serivce.ThemeService;
 import com.gdlife.candypie.serivce.UIService;
 import com.gdlife.candypie.serivce.UserService;
 import com.gdlife.candypie.serivce.theme.VideoChatService;
@@ -49,23 +33,17 @@ import com.gdlife.candypie.utils.ImageUtils;
 import com.gdlife.candypie.utils.IntentUtils;
 import com.gdlife.candypie.utils.PermissionUtils;
 import com.gdlife.candypie.utils.SignUtils;
-import com.gdlife.candypie.view.verticalview.DragLayout;
 import com.gdlife.candypie.widget.common.BottomSheetDialog;
 import com.gdlife.candypie.widget.common.ShareDialog;
-import com.gdlife.candypie.widget.common.TipDialog;
 import com.gdlife.candypie.widget.gift.BottomVideoGiftSheetDialogHehe;
 import com.heboot.base.BaseBean;
 import com.heboot.base.BaseBeanEntity;
-import com.heboot.bean.user.TagsChildBean;
 import com.heboot.bean.user.UserInfoBean;
 import com.heboot.entity.User;
 import com.heboot.event.DiscoverEvent;
-import com.heboot.rxbus.RxBus;
 import com.heboot.utils.LogUtil;
 import com.heboot.utils.MStatusBarUtils;
-import com.heboot.utils.ViewUtils;
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
-import com.qmuiteam.qmui.util.QMUIViewHelper;
 
 import java.lang.ref.WeakReference;
 
@@ -493,9 +471,9 @@ public class HomepageBottomFragment extends BaseFragment<ActivityUserpageBinding
         if (user.getMeet_tags() != null && user.getMeet_tags().getSelect_items() != null && user.getMeet_tags().getSelect_items().size() > 0) {
             binding.includeAbst.qfytContainerMeetTag.setVisibility(View.VISIBLE);
             uiService.initMeetSelectedTagsLayout(user.getMeet_tags().getSelect_items(), binding.includeAbst.qfytContainerMeetTag, getResources().getDimensionPixelOffset(R.dimen.y12), getResources().getDimensionPixelOffset(R.dimen.x10));
-            binding.includeAbst.qfytContainerMeetTag.setOnClickListener((v) -> {
-                IntentUtils.toUserInfoActivity(binding.getRoot().getContext(), MValue.FROM_MY, MValue.USER_INFO_TYPE_EDIT, UserService.getInstance().getUser(), null, null);
-            });
+//            binding.includeAbst.qfytContainerMeetTag.setOnClickListener((v) -> {
+//                IntentUtils.toUserInfoActivity(binding.getRoot().getContext(), MValue.FROM_MY, MValue.USER_INFO_TYPE_EDIT, UserService.getInstance().getUser(), null, null);
+//            });
         } else {
             binding.includeAbst.qfytContainerMeetTag.setVisibility(View.GONE);
         }

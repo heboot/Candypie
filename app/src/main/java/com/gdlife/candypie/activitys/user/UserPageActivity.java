@@ -418,9 +418,9 @@ public class UserPageActivity extends BaseActivity<ActivityUserpageBinding> {
         if (user.getMeet_tags() != null && user.getMeet_tags().getSelect_items() != null && user.getMeet_tags().getSelect_items().size() > 0) {
             binding.includeAbst.qfytContainerMeetTag.setVisibility(View.VISIBLE);
             uiService.initMeetSelectedTagsLayout(user.getMeet_tags().getSelect_items(), binding.includeAbst.qfytContainerMeetTag, getResources().getDimensionPixelOffset(R.dimen.y12), getResources().getDimensionPixelOffset(R.dimen.x10));
-            binding.includeAbst.qfytContainerMeetTag.setOnClickListener((v) -> {
-                IntentUtils.toUserInfoActivity(binding.getRoot().getContext(), MValue.FROM_MY, MValue.USER_INFO_TYPE_EDIT, UserService.getInstance().getUser(), null, null);
-            });
+//            binding.includeAbst.qfytContainerMeetTag.setOnClickListener((v) -> {
+//                IntentUtils.toUserInfoActivity(binding.getRoot().getContext(), MValue.FROM_MY, MValue.USER_INFO_TYPE_EDIT, UserService.getInstance().getUser(), null, null);
+//            });
         } else {
             binding.includeAbst.qfytContainerMeetTag.setVisibility(View.GONE);
         }
