@@ -30,7 +30,6 @@ import com.gdlife.candypie.activitys.kpi.KpiActivity;
 import com.gdlife.candypie.activitys.kpi.MyLevelActivity;
 import com.gdlife.candypie.activitys.kpi.WeeklyActivity;
 import com.gdlife.candypie.activitys.login2register.LoginActivity;
-import com.gdlife.candypie.activitys.login2register.RegisterActivity;
 import com.gdlife.candypie.activitys.login2register.RegisterCodeActivity;
 import com.gdlife.candypie.activitys.login2register.RegisterForgetActivity;
 import com.gdlife.candypie.activitys.login2register.RegisterInfoActivity;
@@ -53,9 +52,6 @@ import com.gdlife.candypie.activitys.theme.ServerCancelCauseActivity;
 import com.gdlife.candypie.activitys.theme.ServiceCancelActivity;
 import com.gdlife.candypie.activitys.theme.ServiceUserListActivity;
 import com.gdlife.candypie.activitys.theme.ThemeListActivity;
-import com.gdlife.candypie.activitys.user.HomepageActivity;
-import com.gdlife.candypie.activitys.user.HomepageOtherActivity;
-import com.gdlife.candypie.activitys.user.HomepageOtherActivity2;
 import com.gdlife.candypie.activitys.user.SetPriceActivity;
 import com.gdlife.candypie.activitys.user.UserBlackListActivity;
 import com.gdlife.candypie.activitys.user.UserFavsListActivity;
@@ -401,7 +397,7 @@ public class IntentUtils {
 
     public static void toUserVideosActivity(Context context, User user, UserVideoActivityFrom from) {
         Intent intent = new Intent(context, UserVideosActivity.class);
-        intent.putExtra(MKey.USER, user);
+        intent.putExtra(MKey.USER, (Serializable) user);
         intent.putExtra(MKey.FROM, from);
         context.startActivity(intent);
     }

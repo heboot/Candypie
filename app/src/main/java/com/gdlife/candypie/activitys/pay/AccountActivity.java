@@ -87,11 +87,22 @@ public class AccountActivity extends BaseActivity<ActivityAccountBinding> {
 
         initRechargeCoinConfig();
 
+
         binding.tvCoinBalance.setText(UserService.getInstance().getUser().getCoin());
 
         binding.tvMoneyBalance.setText("¥" + UserService.getInstance().getUser().getBalance());
 
-        binding.rvList.setLayoutManager(new GridLayoutManager(this, 2));
+        binding.rvList.setLayoutManager(new GridLayoutManager(this, 2) {
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+
+            @Override
+            public boolean canScrollHorizontally() {
+                return false;
+            }
+        });
 
     }
 
@@ -103,7 +114,13 @@ public class AccountActivity extends BaseActivity<ActivityAccountBinding> {
             public void accept(String s) throws Exception {
                 doRecharge(s, rechargeConfigBean);
             }
+
         };
+
+        binding.vCoupon.setOnClickListener((v) -> {
+            IntentUtils.toCouponsActivity(this, false, null, null);
+        });
+
 
         binding.includeToolbar.vBack.setOnClickListener((v) -> {
             finish();
@@ -178,6 +195,7 @@ public class AccountActivity extends BaseActivity<ActivityAccountBinding> {
             @Override
             public void onSuccess(BaseBean<RechargeConfigBean> baseBean) {
                 if (baseBean.getData().getConfig() != null && baseBean.getData().getConfig().size() > 0) {
+                    binding.tvSubTitle.setText(baseBean.getData().getTitle());
                     accountCoinAdapter = new AccountCoinAdapter(R.layout.item_account_coin, baseBean.getData().getConfig());
                     accountCoinAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
                         @Override

@@ -384,11 +384,17 @@ public class DiscoverVideoFragment4 extends BaseFragment<FragmentDiscoverVideoBi
 //        });
 
         binding.includeBottom.ivMsg.setOnClickListener((v) -> {
+            if (UserService.getInstance().checkTourist(getContext())) {
+                return;
+            }
             IntentUtils.intent2ChatActivity(getContext(), MValue.CHAT_PRIEX + user.getId());
         });
 
 
         binding.includeBottom.ivSendGift.setOnClickListener(v -> {
+            if (UserService.getInstance().checkTourist(getContext())) {
+                return;
+            }
             BottomVideoGiftSheetDialogHehe bottomVideoGiftSheetDialogHehe = new BottomVideoGiftSheetDialogHehe(String.valueOf(user.getId()), null);
             bottomVideoGiftSheetDialogHehe.show(getFragmentManager(), "");
         });
@@ -414,7 +420,7 @@ public class DiscoverVideoFragment4 extends BaseFragment<FragmentDiscoverVideoBi
 
 
                 user = users.get(currentShowIndex);
-                RxBus.getInstance().post(new DiscoverEvent.DiscoverUpdateUserEvent(users.get(currentShowIndex)));
+
 
                 // 满足此种条件，表明需要加载直播视频，以及聊天室了
                 if (viewGroup.getId() == currentShowIndex && position == 0 && currentShowIndex != mRoomId) {// && currentShowIndex != mRoomId
@@ -423,7 +429,7 @@ public class DiscoverVideoFragment4 extends BaseFragment<FragmentDiscoverVideoBi
                     }
                     layoutDiscoverVideoBinding = DataBindingUtil.bind(page);
                     loadVideoAndChatRoom(user.getMain_video_list().get(0).getPath(), currentShowIndex, (ViewGroup) viewGroup.findViewById(R.id.clyt_child_container));
-
+                    RxBus.getInstance().post(new DiscoverEvent.DiscoverUpdateUserEvent(users.get(currentShowIndex)));
 //                    if (layoutDiscoverVideoBinding != null) {
 //                        layoutDiscoverVideoBinding.PLVideoView.stopPlayback();
 //                    }
@@ -552,7 +558,7 @@ public class DiscoverVideoFragment4 extends BaseFragment<FragmentDiscoverVideoBi
                 }
             }
 
-            RxBus.getInstance().post(new DiscoverEvent.DiscoverUpdateUserEvent(weakReference.get().users.get(weakReference.get().currentShowIndex)));
+//            RxBus.getInstance().post(new DiscoverEvent.DiscoverUpdateUserEvent(weakReference.get().users.get(weakReference.get().currentShowIndex)));
             RxBus.getInstance().post(new DiscoverEvent.DiscoverUpdatePositionEvent(position));
 
 

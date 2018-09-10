@@ -102,7 +102,7 @@ public class UserVisitActivity extends BaseActivity<ActivityUserVisitListBinding
             return;
         }
         params = SignUtils.getNormalParams();
-        params.put(MKey.TO_UID, to_uid);
+        params.put(MKey.UID, to_uid);
         params.put(MKey.SP, sp);
         params.put(MKey.PAGESIZE, pageSize);
         String sign = SignUtils.doSign(params);
@@ -132,7 +132,7 @@ public class UserVisitActivity extends BaseActivity<ActivityUserVisitListBinding
 
                 } else {
                     binding.plytContainer.toNoData();
-                    binding.plytContainer.setNoDataInfo(MAPP.mapp.getString(R.string.order_null_tip));
+                    binding.plytContainer.setNoDataInfo("暂时没有数据哦");
                 }
 
             }

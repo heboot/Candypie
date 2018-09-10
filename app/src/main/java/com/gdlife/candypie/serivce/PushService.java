@@ -66,30 +66,30 @@ public class PushService {
     };
 
     public void initPushService() {
-        if (MzSystemUtils.isBrandMeizu()) {
-            com.meizu.cloud.pushsdk.PushManager.register(MAPP.mapp.getCurrentActivity(), "1000031", "29fc2e1946014c8d99eafe44fc89db7b");
-        } else if (MOSUtils.isEMUI()) {
-            initHuawei(MAPP.mapp.getCurrentActivity());
-        } else if (PushManager.isSupportPush(MAPP.mapp)) {
-            ToastUtils.showToast("init oppo");
-            initOPPO();
-        } else if (!MOSUtils.isMIUI()) {
-            PushAgent mPushAgent = PushAgent.getInstance(MAPP.mapp);
-            //注册推送服务，每次调用register方法都会回调该接口
-            mPushAgent.register(new IUmengRegisterCallback() {
-                @Override
-                public void onSuccess(String deviceToken) {
-                    //注册成功会返回device token
-                    uploadPushToken(deviceToken);
-                }
+        if (UserService.getInstance().getUser() != null && !StringUtils.isEmpty(UserService.getInstance().getToken())) {
+            if (MzSystemUtils.isBrandMeizu()) {
+                com.meizu.cloud.pushsdk.PushManager.register(MAPP.mapp.getCurrentActivity(), "1000031", "29fc2e1946014c8d99eafe44fc89db7b");
+            } else if (MOSUtils.isEMUI()) {
+                initHuawei(MAPP.mapp.getCurrentActivity());
+            } else if (PushManager.isSupportPush(MAPP.mapp)) {
+                ToastUtils.showToast("init oppo");
+                initOPPO();
+            } else if (!MOSUtils.isMIUI()) {
+                PushAgent mPushAgent = PushAgent.getInstance(MAPP.mapp);
+                //注册推送服务，每次调用register方法都会回调该接口
+                mPushAgent.register(new IUmengRegisterCallback() {
+                    @Override
+                    public void onSuccess(String deviceToken) {
+                        //注册成功会返回device token
+                        uploadPushToken(deviceToken);
+                    }
 
-                @Override
-                public void onFailure(String s, String s1) {
-                }
-            });
+                    @Override
+                    public void onFailure(String s, String s1) {
+                    }
+                });
+            }
         }
-
-
     }
 
     private void uploadPushToken(String token) {

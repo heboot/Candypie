@@ -207,12 +207,16 @@ public class ShareService {
             link = link.replace("{#video_id}", uid);
             link = link.replace("{#video_idmd5}", MD5.getMessageDigest(MValue.CHAT_PRIEX + "_" + uid));
             LogUtil.e("shareservice link=", link);
-        } else {
+        }
+        if (link.indexOf("uid") > -1) {
             link = link.replace("{#uid}", uid);
             link = link.replace("{#uidmd5}", MD5.getMessageDigest(MValue.CHAT_PRIEX + "_" + uid));
             LogUtil.e("shareservice link=", link);
         }
-
+        if (link.indexOf("share_uid") > -1) {
+            link = link.replace("{#share_uid}", UserService.getInstance().getUser() == null ? "0" : UserService.getInstance().getUser().getId() + "");
+//            link = link.replace("{#uidmd5}", MD5.getMessageDigest(MValue.CHAT_PRIEX + "_" + uid));
+        }
         return link;
     }
 

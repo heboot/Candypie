@@ -209,7 +209,7 @@ public class MyFragment extends BaseFragment<FragmentMyBinding> {
 //            } else {
 //                IntentUtils.toUserInfoActivity(binding.getRoot().getContext(), MValue.FROM_MY, MValue.USER_INFO_TYPE_NORMAL, UserService.getInstance().getUser(), null, null);
 //            }
-            IntentUtils.toUserPageActivity(MAPP.mapp.getCurrentActivity(), String.valueOf( UserService.getInstance().getUser().getId()));
+            IntentUtils.toUserPageActivity(MAPP.mapp.getCurrentActivity(), String.valueOf(UserService.getInstance().getUser().getId()));
         });
         /**
          * 编辑按钮
@@ -497,7 +497,17 @@ public class MyFragment extends BaseFragment<FragmentMyBinding> {
         MyBottomMenuModel feeback = new MyBottomMenuModel("意见反馈", R.drawable.icon_my_menu_feedback);
         myBottomMenuModels.add(feeback);
 
-        binding.includeMyMenuBottom.rvList.setLayoutManager(new GridLayoutManager(_mActivity, 3));
+        binding.includeMyMenuBottom.rvList.setLayoutManager(new GridLayoutManager(_mActivity, 3) {
+            @Override
+            public boolean canScrollHorizontally() {
+                return false;
+            }
+
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        });
 
         binding.includeMyMenuBottom.rvList.setAdapter(new MyBottomMenuAdapter(R.layout.layout_my_bottom_menus_item, myBottomMenuModels));
 

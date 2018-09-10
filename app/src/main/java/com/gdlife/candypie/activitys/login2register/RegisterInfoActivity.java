@@ -253,9 +253,9 @@ public class RegisterInfoActivity extends BaseActivity<ActivityRegisterInfoBindi
 
     private void doSubmit() {
 
-
-        tipDialog = DialogUtils.getLoadingDialog(this, "", false);
-        tipDialog.show();
+//
+//        tipDialog = DialogUtils.getLoadingDialog(this, "", false);
+        loadingDialog.show();
 
         params = SignUtils.getNormalParams();
         params.put(MKey.NICK_NAME, binding.etNick.getText().toString());
@@ -305,7 +305,7 @@ public class RegisterInfoActivity extends BaseActivity<ActivityRegisterInfoBindi
                         RxBus.getInstance().post(NormalEvent.FINISH_PAGE);
                         LoginService loginService = new LoginService();
                         loginService.doLoginAgora(sendSMSBeanBaseBean.getVideo_user(), sendSMSBeanBaseBean.getIm_user());
-                        tipDialog.dismiss();
+                        loadingDialog.dismiss();
                         RxBus.getInstance().post(UserEvent.LOGIN_SUC);
 //                        if (MValue.IS_FROM_TOURIST) {
 //                            MValue.IS_FROM_TOURIST = false;
@@ -328,7 +328,7 @@ public class RegisterInfoActivity extends BaseActivity<ActivityRegisterInfoBindi
 
                     @Override
                     public void onError(Throwable throwable) {
-                        tipDialog.dismiss();
+                        loadingDialog.dismiss();
                         tipDialog = DialogUtils.getFailDialog(RegisterInfoActivity.this, throwable.getMessage(), true);
                         tipDialog.show();
                     }
@@ -349,7 +349,9 @@ public class RegisterInfoActivity extends BaseActivity<ActivityRegisterInfoBindi
 
             @Override
             public void onError(Throwable throwable) {
-                tipDialog.dismiss();
+                if (tipDialog != null && tipDialog.isShowing()) {
+                    tipDialog.dismiss();
+                }
                 tipDialog = DialogUtils.getFailDialog(RegisterInfoActivity.this, throwable.getMessage(), true);
                 tipDialog.show();
             }
@@ -420,8 +422,10 @@ public class RegisterInfoActivity extends BaseActivity<ActivityRegisterInfoBindi
                     }
                 }
             });
+
             RxDownload.INSTANCE.start(syncHeadUrl).
                     subscribe();
+
 //            }
 
         } else {

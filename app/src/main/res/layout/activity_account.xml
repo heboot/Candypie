@@ -139,6 +139,16 @@
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_money_balance_tip"></View>
 
+                <TextView
+                    android:id="@+id/v_coupon"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/y60"
+                    android:textColor="@color/color_343445"
+                    android:textSize="@dimen/x16"
+                    android:textStyle="bold"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/v_line" />
 
                 <TextView
                     android:id="@+id/tv_coupon"

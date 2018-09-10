@@ -22,6 +22,15 @@ public class RechargeConfigBean extends BaseBeanEntity {
     private int used_balance;
     private List<ConfigBean> config;
     private List<String> payment_config;
+    private String title;
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
     public int getUsed_coupons() {
         return used_coupons;

@@ -18,6 +18,7 @@
             android:id="@+id/tv_video_num"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x5"
             android:textColor="@color/color_343445"
             android:textSize="@dimen/x11"
             app:layout_constraintBottom_toBottomOf="@+id/include_title"

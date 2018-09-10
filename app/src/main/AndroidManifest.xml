@@ -284,14 +284,6 @@
             android:screenOrientation="portrait"></activity>
 
         <activity
-            android:name=".activitys.user.HomepageOtherActivity"
-            android:screenOrientation="portrait"></activity>
-
-        <activity
-            android:name=".activitys.user.HomepageOtherActivity2"
-            android:screenOrientation="portrait"></activity>
-
-        <activity
             android:name=".activitys.video.AutoPlayActivity"
             android:screenOrientation="portrait"></activity>
 

@@ -2,13 +2,14 @@ package com.heboot.bean.video;
 
 import com.heboot.base.BaseBeanEntity;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by heboot on 2018/3/21.
  */
 
-public class UserVideosBean extends BaseBeanEntity {
+public class UserVideosBean extends BaseBeanEntity implements Serializable {
 
     private String title;
 

@@ -69,7 +69,7 @@ public class DiscoverActivity2 extends BaseActivity<FragmentDiscoverBinding> {
         total = (int) getIntent().getExtras().get(MKey.TOTAL_PAGES);
 
         discoverVideoFragment = new DiscoverVideoFragment4(userClickPosition, list, sp, total);
-        homepageBottomFragment = new HomepageBottomFragment();
+        homepageBottomFragment = new HomepageBottomFragment(list.get(userClickPosition));
         fragmentList.add(discoverVideoFragment);
         fragmentList.add(homepageBottomFragment);
         discoverFragmentAdapter = new DiscoverFragmentAdapter(getSupportFragmentManager(), fragmentList);

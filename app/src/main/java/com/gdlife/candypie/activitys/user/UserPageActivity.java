@@ -8,6 +8,8 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.gdlife.candypie.MAPP;
 import com.gdlife.candypie.R;
 import com.gdlife.candypie.adapter.discover.HomepageBottomVideosAdapter;
@@ -24,6 +26,7 @@ import com.gdlife.candypie.http.HttpClient;
 import com.gdlife.candypie.serivce.UIService;
 import com.gdlife.candypie.serivce.UserService;
 import com.gdlife.candypie.serivce.theme.VideoChatService;
+import com.gdlife.candypie.serivce.user.UserPageService;
 import com.gdlife.candypie.utils.DialogUtils;
 import com.gdlife.candypie.utils.ImageUtils;
 import com.gdlife.candypie.utils.IntentUtils;
@@ -69,6 +72,8 @@ public class UserPageActivity extends BaseActivity<ActivityUserpageBinding> {
 
     private HomepageBottomVideosAdapter videosAdapter;//视频集适配器
 
+    private UserPageService userPageService = new UserPageService();
+
     @Override
 
     protected int getLayoutId() {
@@ -86,18 +91,36 @@ public class UserPageActivity extends BaseActivity<ActivityUserpageBinding> {
     @Override
     public void initData() {
         initUserInfo();
+
+        if (userPageService.isFirst()) {
+            binding.vTipMsg.setVisibility(View.VISIBLE);
+            YoYo.with(Techniques.Bounce).repeat(1000).playOn(binding.vTipMsg);
+        } else {
+            binding.vTipMsg.setVisibility(View.GONE);
+        }
+
     }
 
     @Override
     public void initListener() {
         binding.includeBottom.ivMsg.setOnClickListener((v) -> {
+            if (UserService.getInstance().checkTourist(this)) {
+                return;
+            }
+            userPageService.setFirst();
             IntentUtils.intent2ChatActivity(this, MValue.CHAT_PRIEX + user.getId());
         });
         binding.includeBottom.ivSendGift.setOnClickListener((v) -> {
+            if (UserService.getInstance().checkTourist(this)) {
+                return;
+            }
             BottomVideoGiftSheetDialogHehe bottomVideoGiftSheetDialogHehe = new BottomVideoGiftSheetDialogHehe(userId, null);
             bottomVideoGiftSheetDialogHehe.show(getSupportFragmentManager(), "");
         });
         binding.includeBottom.vVideoBg.setOnClickListener((v) -> {
+            if (UserService.getInstance().checkTourist(this)) {
+                return;
+            }
             if (videoChatService == null) {
                 videoChatService = new VideoChatService();
             }
@@ -110,6 +133,9 @@ public class UserPageActivity extends BaseActivity<ActivityUserpageBinding> {
             videoChatService.postVideoService(permissionUtils, this, user, null);
         });
         binding.includeAvatar.includeFav.getRoot().setOnClickListener((v) -> {
+            if (UserService.getInstance().checkTourist(this)) {
+                return;
+            }
             doFav(user.getIs_favs());
         });
         binding.svContainer.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
@@ -321,7 +347,7 @@ public class UserPageActivity extends BaseActivity<ActivityUserpageBinding> {
 
                 @Override
                 public boolean canScrollHorizontally() {
-                    if (user.getUser_video().getList().size() >= 4) {
+                    if (user.getUser_video() != null && user.getUser_video().getList() != null && user.getUser_video().getList().size() >= 4) {
                         return true;
                     }
                     return false;
@@ -361,7 +387,7 @@ public class UserPageActivity extends BaseActivity<ActivityUserpageBinding> {
             binding.includeVisit.includeVisit.tvTitle.setText(user.getVisit_list().getTitle());
 
             binding.includeVisit.includeVisit.getRoot().setOnClickListener((v) -> {
-                IntentUtils.toUserVisitActivity(this, String.valueOf(UserService.getInstance().getUser().getId()));
+                IntentUtils.toUserVisitActivity(this, user.getId() + "");
             });
         } else {
             binding.includeVisit.includeVisit.getRoot().setVisibility(View.GONE);

@@ -49,6 +49,7 @@
             layout="@layout/layout_sex_age"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x10"
             app:layout_constraintBottom_toBottomOf="@+id/tv_name"
             app:layout_constraintLeft_toRightOf="@+id/tv_name"
             app:layout_constraintTop_toTopOf="@+id/tv_name"></include>

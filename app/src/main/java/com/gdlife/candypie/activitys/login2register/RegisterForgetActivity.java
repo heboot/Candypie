@@ -109,7 +109,7 @@ public class RegisterForgetActivity extends BaseActivity<ActivityRegisterForgetB
 
     @Override
     public void initData() {
-        observer = new Observer<HashMap>() {
+        loginObs = new Observer<HashMap>() {
             @Override
             public void onSubscribe(Disposable d) {
                 addDisposable(d);
@@ -134,6 +134,8 @@ public class RegisterForgetActivity extends BaseActivity<ActivityRegisterForgetB
 
             }
         };
+
+
     }
 
     @Override
