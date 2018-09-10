@@ -16,6 +16,7 @@ import com.gdlife.candypie.activitys.video.AutoPlayActivity;
 import com.gdlife.candypie.activitys.video.PlayerActivity2;
 import com.gdlife.candypie.activitys.video.UserVideosActivity;
 import com.gdlife.candypie.activitys.video.VideoChatActivity;
+import com.gdlife.candypie.activitys.video.VideoChatActivity2;
 import com.gdlife.candypie.adapter.order.UserOrderAdapter;
 import com.gdlife.candypie.module.CommonServiceModule;
 import com.gdlife.candypie.module.PayServiceModule;
@@ -55,6 +56,8 @@ public interface ServiceComponent {
     void inject(NewThemeActivity newThemeActivity);
 
     void inject(AuthCommitActivity authCommitActivity);
+
+    void inject(VideoChatActivity2 authCommitActivity);
 
     void inject(UserVideosActivity userVideosActivity);
 

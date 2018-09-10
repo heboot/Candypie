@@ -159,6 +159,11 @@ public class HomepageBottomFragment extends BaseFragment<ActivityUserpageBinding
             if (UserService.getInstance().checkTourist(_mActivity)) {
                 return;
             }
+            if (user.getId().intValue() == UserService.getInstance().getUser().getId().intValue()) {
+                tipDialog = DialogUtils.getFailDialog(_mActivity, "不能对自己操作", true);
+                tipDialog.show();
+                return;
+            }
             userPageService.setFirst();
             IntentUtils.intent2ChatActivity(_mActivity, MValue.CHAT_PRIEX + user.getId());
         });
@@ -166,11 +171,21 @@ public class HomepageBottomFragment extends BaseFragment<ActivityUserpageBinding
             if (UserService.getInstance().checkTourist(_mActivity)) {
                 return;
             }
+            if (user.getId().intValue() == UserService.getInstance().getUser().getId().intValue()) {
+                tipDialog = DialogUtils.getFailDialog(_mActivity, "不能对自己操作", true);
+                tipDialog.show();
+                return;
+            }
             BottomVideoGiftSheetDialogHehe bottomVideoGiftSheetDialogHehe = new BottomVideoGiftSheetDialogHehe(user.getId() + "", null);
             bottomVideoGiftSheetDialogHehe.show(getFragmentManager(), "");
         });
         binding.includeBottom.vVideoBg.setOnClickListener((v) -> {
             if (UserService.getInstance().checkTourist(_mActivity)) {
+                return;
+            }
+            if (user.getId().intValue() == UserService.getInstance().getUser().getId().intValue()) {
+                tipDialog = DialogUtils.getFailDialog(_mActivity, "不能对自己操作", true);
+                tipDialog.show();
                 return;
             }
             if (videoChatService == null) {

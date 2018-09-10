@@ -107,6 +107,11 @@ public class UserPageActivity extends BaseActivity<ActivityUserpageBinding> {
             if (UserService.getInstance().checkTourist(this)) {
                 return;
             }
+            if (user.getId().intValue() == UserService.getInstance().getUser().getId().intValue()) {
+                tipDialog = DialogUtils.getFailDialog(this, "不能对自己操作", true);
+                tipDialog.show();
+                return;
+            }
             userPageService.setFirst();
             IntentUtils.intent2ChatActivity(this, MValue.CHAT_PRIEX + user.getId());
         });
@@ -114,11 +119,21 @@ public class UserPageActivity extends BaseActivity<ActivityUserpageBinding> {
             if (UserService.getInstance().checkTourist(this)) {
                 return;
             }
+            if (user.getId().intValue() == UserService.getInstance().getUser().getId().intValue()) {
+                tipDialog = DialogUtils.getFailDialog(this, "不能对自己操作", true);
+                tipDialog.show();
+                return;
+            }
             BottomVideoGiftSheetDialogHehe bottomVideoGiftSheetDialogHehe = new BottomVideoGiftSheetDialogHehe(userId, null);
             bottomVideoGiftSheetDialogHehe.show(getSupportFragmentManager(), "");
         });
         binding.includeBottom.vVideoBg.setOnClickListener((v) -> {
             if (UserService.getInstance().checkTourist(this)) {
+                return;
+            }
+            if (user.getId().intValue() == UserService.getInstance().getUser().getId().intValue()) {
+                tipDialog = DialogUtils.getFailDialog(this, "不能对自己操作", true);
+                tipDialog.show();
                 return;
             }
             if (videoChatService == null) {
@@ -134,6 +149,11 @@ public class UserPageActivity extends BaseActivity<ActivityUserpageBinding> {
         });
         binding.includeAvatar.includeFav.getRoot().setOnClickListener((v) -> {
             if (UserService.getInstance().checkTourist(this)) {
+                return;
+            }
+            if (user.getId().intValue() == UserService.getInstance().getUser().getId().intValue()) {
+                tipDialog = DialogUtils.getFailDialog(this, "不能对自己操作", true);
+                tipDialog.show();
                 return;
             }
             doFav(user.getIs_favs());

@@ -15,7 +15,6 @@
         <com.qmuiteam.qmui.widget.QMUIRadiusImageView
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:src="@drawable/bg_coin_card_delete"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"

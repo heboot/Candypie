@@ -104,6 +104,8 @@ public class MessageFragment extends TFragment implements ModuleProxy {
 
     private View sendVideoChat;
 
+    private Boolean hideAgain;
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -113,8 +115,6 @@ public class MessageFragment extends TFragment implements ModuleProxy {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.nim_message_fragment, container, false);
-
-        sendVideoChat = rootView.findViewById(R.id.v1);
 
 
         RxBus.getInstance().toObserverable().subscribe(new io.reactivex.Observer<Object>() {
@@ -145,12 +145,6 @@ public class MessageFragment extends TFragment implements ModuleProxy {
             }
         });
 
-        sendVideoChat.setOnClickListener((v) -> {
-//            currentuser.setId(Integer.parseInt(contactId.replace("cdp", "")));
-//                user.setAvatar(userInfo.getAvatar());
-//            currentuser.setAvatar(userInfo.getAvatar());
-            RxBus.getInstance().post(new MessageEvent.TO_AGAIN_ORDER_EVENT(toUser));
-        });
 
         return rootView;
     }
@@ -214,9 +208,23 @@ public class MessageFragment extends TFragment implements ModuleProxy {
         sessionType = (SessionTypeEnum) getArguments().getSerializable(Extras.EXTRA_TYPE);
         IMMessage anchor = (IMMessage) getArguments().getSerializable(Extras.EXTRA_ANCHOR);
         hideBottom = getArguments().getString("hideBottom");
-
+        hideAgain = getArguments().getBoolean("hideAgain");
         customization = (SessionCustomization) getArguments().getSerializable(Extras.EXTRA_CUSTOMIZATION);
         Container container = new Container(getActivity(), sessionId, sessionType, this);
+        sendVideoChat = rootView.findViewById(R.id.v1);
+
+        if (hideAgain != null && hideAgain) {
+            sendVideoChat.setVisibility(View.GONE);
+        } else {
+            sendVideoChat.setVisibility(View.VISIBLE);
+            sendVideoChat.setOnClickListener((v) -> {
+//            currentuser.setId(Integer.parseInt(contactId.replace("cdp", "")));
+//                user.setAvatar(userInfo.getAvatar());
+//            currentuser.setAvatar(userInfo.getAvatar());
+                RxBus.getInstance().post(new MessageEvent.TO_AGAIN_ORDER_EVENT(toUser));
+            });
+        }
+
 
         if (messageListPanel == null) {
             messageListPanel = new MessageListPanelEx(container, rootView, anchor, false, false);
