@@ -79,6 +79,10 @@ public class ShareDialog extends Dialog {
                     ImageUtils.showImage(binding.includeWeibo.ivIcon, R.drawable.icon_weibo);
                     binding.includeWeibo.getRoot().setVisibility(View.VISIBLE);
                     binding.includeWeibo.tvName.setText(MAPP.mapp.getString(R.string.weibo));
+                } else if (shareType.equals("qq")) {
+                    ImageUtils.showImage(binding.includeQq.ivIcon, R.drawable.icon_login_qq);
+                    binding.includeQq.getRoot().setVisibility(View.VISIBLE);
+                    binding.includeQq.tvName.setText("QQ");
                 }
             }
 
@@ -87,7 +91,10 @@ public class ShareDialog extends Dialog {
                 shareService.doShareWeibo(context, avatar, nick, shareConfigBeanModel);
                 dialog.dismiss();
             });
-
+            binding.includeQq.getRoot().setOnClickListener((v) -> {
+                shareService.doShareQQCircleByWebpage(context, uid, avatar, nick, shareConfigBeanModel);
+                dialog.dismiss();
+            });
             binding.includeWx.getRoot().setOnClickListener((v) -> {
 //                if (StringUtils.isEmpty(uid) && StringUtils.isEmpty(nick) && StringUtils.isEmpty(avatar)) {
 //                    shareService.doShareWXByImage(context, shareConfigBeanModel);

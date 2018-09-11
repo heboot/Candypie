@@ -27,6 +27,7 @@ import cn.sharesdk.framework.Platform;
 import cn.sharesdk.framework.PlatformActionListener;
 import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.sina.weibo.SinaWeibo;
+import cn.sharesdk.tencent.qq.QQ;
 import cn.sharesdk.wechat.friends.Wechat;
 import cn.sharesdk.wechat.moments.WechatMoments;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -83,6 +84,26 @@ public class ShareService {
         weibo.share(sp);
     }
 
+    public void doShareWXQQImage(Context context, ConfigBean.ShareConfigBeanModel shareConfigBeanModel) {
+
+//        if (loadingDialog == null) {
+//            loadingDialog = DialogUtils.getLoadingDialog(context, null, false);
+//        }
+//
+//        loadingDialog.show();
+        currentShareConfigModel = shareConfigBeanModel;
+        myPlatformActionListener = new MyPlatformActionListener();
+
+        Platform.ShareParams sp = new Platform.ShareParams();
+        sp.setImageUrl(shareConfigBeanModel.getImg());
+        sp.setTitle(shareConfigBeanModel.getTitle());
+        sp.setText(shareConfigBeanModel.getContent());
+        sp.setShareType(Platform.SHARE_IMAGE);
+        Platform weibo = ShareSDK.getPlatform(Wechat.NAME);
+        weibo.setPlatformActionListener(myPlatformActionListener); // 设置分享事件回调
+// 执行图文分享
+        weibo.share(sp);
+    }
 
     public void doShareWXCircleByImage(Context context, ConfigBean.ShareConfigBeanModel shareConfigBeanModel) {
 
@@ -181,6 +202,46 @@ public class ShareService {
 
 
         Platform moments = ShareSDK.getPlatform(WechatMoments.NAME);
+        moments.setPlatformActionListener(myPlatformActionListener); // 设置分享事件回调
+// 执行图文分享
+        moments.share(sp);
+    }
+
+    public void doShareQQCircleByWebpage(Context context, String uid, String avatar, String nick, ConfigBean.ShareConfigBeanModel shareConfigBeanModel) {
+
+//        if (loadingDialog == null) {
+//            loadingDialog = DialogUtils.getLoadingDialog(context, null, false);
+//        }
+//
+//        loadingDialog.show();
+        currentShareConfigModel = shareConfigBeanModel;
+        myPlatformActionListener = new MyPlatformActionListener();
+        this.uid = uid;
+        Platform.ShareParams sp = new Platform.ShareParams();
+        sp.setTitle(StringUtils.isEmpty(nick) ? shareConfigBeanModel.getTitle() : getShareTitle(nick, shareConfigBeanModel.getTitle()));
+        sp.setText(StringUtils.isEmpty(nick) ? shareConfigBeanModel.getContent() : getShareTitle(nick, shareConfigBeanModel.getContent()));
+        sp.setImageUrl(StringUtils.isEmpty(avatar) ? shareConfigBeanModel.getImg() : getShareAvatar(avatar, shareConfigBeanModel.getImg()));
+        sp.setShareType(Platform.SHARE_WEBPAGE);
+
+        if (StringUtils.isEmpty(uid)) {
+            if (!StringUtils.isEmpty(shareConfigBeanModel.getLink())) {
+                sp.setUrl(shareConfigBeanModel.getLink());
+                sp.setTitleUrl(shareConfigBeanModel.getLink());
+            }
+        } else {
+            if (!StringUtils.isEmpty(shareConfigBeanModel.getLink())) {
+                sp.setUrl(getShareLink(uid, shareConfigBeanModel.getLink()));
+                sp.setTitleUrl(getShareLink(uid, shareConfigBeanModel.getLink()));
+            }
+        }
+
+        if (StringUtils.isEmpty(shareConfigBeanModel.getLink())) {
+            doShareWXQQImage(context, shareConfigBeanModel);
+            return;
+        }
+
+
+        Platform moments = ShareSDK.getPlatform(QQ.NAME);
         moments.setPlatformActionListener(myPlatformActionListener); // 设置分享事件回调
 // 执行图文分享
         moments.share(sp);

@@ -114,7 +114,7 @@ public interface HttpClient {
 
     @FormUrlEncoded
     @POST("app/user/check_nickname")
-    Observable<BaseBean> user_check_nick(@FieldMap Map<String, Object> params);
+    Observable<BaseBean<BaseBeanEntity>> user_check_nick(@FieldMap Map<String, Object> params);
 
     @FormUrlEncoded
     @POST("app/user/find_password")

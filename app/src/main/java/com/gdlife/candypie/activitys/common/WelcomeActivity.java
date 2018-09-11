@@ -11,6 +11,7 @@ import com.example.http.HttpResponse;
 import com.example.http.HttpUtils;
 import com.gdlife.candypie.MAPP;
 import com.gdlife.candypie.R;
+import com.gdlife.candypie.activitys.login2register.LoginActivity;
 import com.gdlife.candypie.base.BaseActivity;
 import com.gdlife.candypie.base.HttpObserver;
 import com.gdlife.candypie.common.LoginType;
@@ -46,6 +47,7 @@ import com.tencent.bugly.crashreport.CrashReport;
 import com.umeng.analytics.MobclickAgent;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -78,6 +80,8 @@ public class WelcomeActivity extends BaseActivity<ActivityWelcomeBinding> implem
 
     private TipCustomOneDialog timeoutDialog;
 
+    private Observer<HashMap> loginObs;
+
     @Override
     public void initUI() {
         MobclickAgent.onEvent(this, NumEventKeys.start_app.toString());
@@ -105,6 +109,29 @@ public class WelcomeActivity extends BaseActivity<ActivityWelcomeBinding> implem
         } else {
             permissionUtils.requestStorgePermission(this);
         }
+        loginObs = new Observer<HashMap>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+                addDisposable(d);
+            }
+
+            @Override
+            public void onNext(HashMap o) {
+                if (!StringUtils.isEmpty((String) o.get("syncid"))) {
+//                    IntentUtils.toRegisterActivity();
+                    IntentUtils.toRegisterInfoActivity(WelcomeActivity.this, (String) o.get("syncid"), (LoginType) o.get("loginType"), o);
+                }
+            }
+
+            @Override
+            public void onError(Throwable e) {
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        };
 
     }
 
@@ -180,9 +207,9 @@ public class WelcomeActivity extends BaseActivity<ActivityWelcomeBinding> implem
                             loginService = new LoginService();
                         }
                         if ((LoginType) user.getSyncMap().get("loginType") == LoginType.WX) {
-                            loginService.doThirdLogin((String) user.getSyncMap().get("nickname"), (String) user.getSyncMap().get("headimgurl"), (int) user.getSyncMap().get("sex"), (String) user.getSyncMap().get("openid"), "weixin", (String) user.getSyncMap().get("unionid"), user.getSyncMap());
+                            loginService.doThirdLogin(loginObs, (String) user.getSyncMap().get("nickname"), (String) user.getSyncMap().get("headimgurl"), (int) user.getSyncMap().get("sex"), (String) user.getSyncMap().get("openid"), "weixin", (String) user.getSyncMap().get("unionid"), user.getSyncMap());
                         } else if ((LoginType) user.getSyncMap().get("loginType") == LoginType.QQ) {
-                            loginService.doThirdLogin((String) user.getSyncMap().get("nickname"), (String) user.getSyncMap().get("figureurl_qq_2"), user.getSyncMap().get("gender").equals("男") ? 1 : 0, (String) user.getSyncMap().get("openid"), "qq", null, user.getSyncMap());
+                            loginService.doThirdLogin(loginObs, (String) user.getSyncMap().get("nickname"), (String) user.getSyncMap().get("figureurl_qq_2"), user.getSyncMap().get("gender").equals("男") ? 1 : 0, (String) user.getSyncMap().get("openid"), "qq", null, user.getSyncMap());
                         }
                     } else {
                         params.put(MKey.MOBILE, user.getMobile());

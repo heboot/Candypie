@@ -261,14 +261,9 @@ public class RegisterInfoActivity extends BaseActivity<ActivityRegisterInfoBindi
         params.put(MKey.NICK_NAME, binding.etNick.getText().toString());
         String sign = SignUtils.doSign(params);
         params.put(MKey.SIGN, sign);
-        HttpClient.Builder.getGuodongServer().user_check_nick(params).observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribe(new BaseObserver(new HttpCallBack<BaseBeanEntity>() {
+        HttpClient.Builder.getGuodongServer().user_check_nick(params).observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribe(new HttpObserver<BaseBeanEntity>() {
             @Override
-            public void onSubscribe(Disposable disposable) {
-                addDisposable(disposable);
-            }
-
-            @Override
-            public void onSuccess(BaseBeanEntity o) {
+            public void onSuccess(BaseBean<BaseBeanEntity> baseBean) {
                 params = SignUtils.getNormalParams();
                 if (StringUtils.isEmpty(sync_login_id)) {
                     params.put(MKey.MOBILE, UserService.getInstance().getUser().getMobile());
@@ -286,16 +281,11 @@ public class RegisterInfoActivity extends BaseActivity<ActivityRegisterInfoBindi
 
                 String sign = SignUtils.doSign(params);
                 params.put(MKey.SIGN, sign);
-                HttpClient.Builder.getGuodongServer().user_register(params).observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribe(new BaseObserver(new HttpCallBack<RegisterBean>() {
+                HttpClient.Builder.getGuodongServer().user_register(params).observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribe(new HttpObserver<RegisterBean>() {
                     @Override
-                    public void onSubscribe(Disposable disposable) {
-                        addDisposable(disposable);
-                    }
-
-                    @Override
-                    public void onSuccess(RegisterBean sendSMSBeanBaseBean) {
+                    public void onSuccess(BaseBean<RegisterBean> baseBean) {
                         MobclickAgent.onEvent(RegisterInfoActivity.this, NumEventKeys.register_success.toString());
-                        User user = sendSMSBeanBaseBean.getUser();
+                        User user = baseBean.getData().getUser();
                         if (StringUtils.isEmpty(sync_login_id)) {
                             user.setPwd(UserService.getInstance().getUser().getPwd());
                             user.setMobile(UserService.getInstance().getUser().getMobile().replaceAll(" ", ""));
@@ -304,7 +294,7 @@ public class RegisterInfoActivity extends BaseActivity<ActivityRegisterInfoBindi
                         UserService.getInstance().putSPUser(user);
                         RxBus.getInstance().post(NormalEvent.FINISH_PAGE);
                         LoginService loginService = new LoginService();
-                        loginService.doLoginAgora(sendSMSBeanBaseBean.getVideo_user(), sendSMSBeanBaseBean.getIm_user());
+                        loginService.doLoginAgora(baseBean.getData().getVideo_user(), baseBean.getData().getIm_user());
                         loadingDialog.dismiss();
                         RxBus.getInstance().post(UserEvent.LOGIN_SUC);
 //                        if (MValue.IS_FROM_TOURIST) {
@@ -322,45 +312,128 @@ public class RegisterInfoActivity extends BaseActivity<ActivityRegisterInfoBindi
 //                        startActivity(intent);
                         finish();
 //                        }
-
                     }
 
-
                     @Override
-                    public void onError(Throwable throwable) {
+                    public void onError(BaseBean<RegisterBean> baseBean) {
                         loadingDialog.dismiss();
-                        tipDialog = DialogUtils.getFailDialog(RegisterInfoActivity.this, throwable.getMessage(), true);
+                        tipDialog = DialogUtils.getFailDialog(RegisterInfoActivity.this, baseBean.getMessage(), true);
                         tipDialog.show();
                     }
-
-                    @Override
-                    public void onError(BaseBean<RegisterBean> basebean) {
-                        if (tipDialog != null && tipDialog.isShowing()) {
-                            tipDialog.dismiss();
-                        }
-
-                        tipDialog = DialogUtils.getFailDialog(RegisterInfoActivity.this, basebean.getMessage(), true);
-                        tipDialog.show();
-                    }
-
-
-                }));
+                });
             }
 
             @Override
-            public void onError(Throwable throwable) {
+            public void onError(BaseBean<BaseBeanEntity> baseBean) {
                 if (tipDialog != null && tipDialog.isShowing()) {
                     tipDialog.dismiss();
                 }
-                tipDialog = DialogUtils.getFailDialog(RegisterInfoActivity.this, throwable.getMessage(), true);
+                tipDialog = DialogUtils.getFailDialog(RegisterInfoActivity.this, baseBean.getMessage(), true);
                 tipDialog.show();
             }
+        });
 
-            @Override
-            public void onError(BaseBean<BaseBeanEntity> basebean) {
 
-            }
-        }));
+//        HttpClient.Builder.getGuodongServer().user_check_nick(params).observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribe(new BaseObserver(new HttpCallBack<BaseBeanEntity>() {
+//            @Override
+//            public void onSubscribe(Disposable disposable) {
+//                addDisposable(disposable);
+//            }
+//
+//            @Override
+//            public void onSuccess(BaseBeanEntity o) {
+//                params = SignUtils.getNormalParams();
+//                if (StringUtils.isEmpty(sync_login_id)) {
+//                    params.put(MKey.MOBILE, UserService.getInstance().getUser().getMobile());
+//                    params.put(MKey.CODE, UserService.getInstance().getUser().getSmscode());
+//                    params.put(MKey.PASSWORD, UserService.getInstance().getUser().getPwd());
+//                }
+//
+//                params.put(MKey.NICK_NAME, binding.etNick.getText().toString());
+//                params.put(MKey.SEX, currentSelect);
+//                params.put(MKey.AVATAR, uploadAvatarReq == null ? "" : JSON.toJSONString(uploadAvatarReq));
+//                if (!StringUtils.isEmpty(sync_login_id)) {
+//                    params.put(MKey.SYNC_LOGIN_ID, sync_login_id);
+//                }
+//
+//
+//                String sign = SignUtils.doSign(params);
+//                params.put(MKey.SIGN, sign);
+//                HttpClient.Builder.getGuodongServer().user_register(params).observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribe(new BaseObserver(new HttpCallBack<RegisterBean>() {
+//                    @Override
+//                    public void onSubscribe(Disposable disposable) {
+//                        addDisposable(disposable);
+//                    }
+//
+//                    @Override
+//                    public void onSuccess(RegisterBean sendSMSBeanBaseBean) {
+//                        MobclickAgent.onEvent(RegisterInfoActivity.this, NumEventKeys.register_success.toString());
+//                        User user = sendSMSBeanBaseBean.getUser();
+//                        if (StringUtils.isEmpty(sync_login_id)) {
+//                            user.setPwd(UserService.getInstance().getUser().getPwd());
+//                            user.setMobile(UserService.getInstance().getUser().getMobile().replaceAll(" ", ""));
+//                        }
+//                        UserService.getInstance().setUser(user);
+//                        UserService.getInstance().putSPUser(user);
+//                        RxBus.getInstance().post(NormalEvent.FINISH_PAGE);
+//                        LoginService loginService = new LoginService();
+//                        loginService.doLoginAgora(sendSMSBeanBaseBean.getVideo_user(), sendSMSBeanBaseBean.getIm_user());
+//                        loadingDialog.dismiss();
+//                        RxBus.getInstance().post(UserEvent.LOGIN_SUC);
+////                        if (MValue.IS_FROM_TOURIST) {
+////                            MValue.IS_FROM_TOURIST = false;
+////                            finish();
+////                        } else {
+//
+//                        if (MAPP.mapp.getConfigBean().getIs_review_status() == 1) {
+//                            IntentUtils.toIndexActivity(RegisterInfoActivity.this);
+//                        } else {
+//                            IntentUtils.toMainActivity(RegisterInfoActivity.this);
+//                        }
+//
+////                        Intent intent = new Intent(RegisterInfoActivity.this, IndexActivity.class);
+////                        startActivity(intent);
+//                        finish();
+////                        }
+//
+//                    }
+//
+//
+//                    @Override
+//                    public void onError(Throwable throwable) {
+//                        loadingDialog.dismiss();
+//                        tipDialog = DialogUtils.getFailDialog(RegisterInfoActivity.this, throwable.getMessage(), true);
+//                        tipDialog.show();
+//                    }
+//
+//                    @Override
+//                    public void onError(BaseBean<RegisterBean> basebean) {
+//                        if (tipDialog != null && tipDialog.isShowing()) {
+//                            tipDialog.dismiss();
+//                        }
+//
+//                        tipDialog = DialogUtils.getFailDialog(RegisterInfoActivity.this, basebean.getMessage(), true);
+//                        tipDialog.show();
+//                    }
+//
+//
+//                }));
+//            }
+//
+//            @Override
+//            public void onError(Throwable throwable) {
+//                if (tipDialog != null && tipDialog.isShowing()) {
+//                    tipDialog.dismiss();
+//                }
+//                tipDialog = DialogUtils.getFailDialog(RegisterInfoActivity.this, throwable.getMessage(), true);
+//                tipDialog.show();
+//            }
+//
+//            @Override
+//            public void onError(BaseBean<BaseBeanEntity> basebean) {
+//
+//            }
+//        }));
     }
 
     private void checkInfoData() {

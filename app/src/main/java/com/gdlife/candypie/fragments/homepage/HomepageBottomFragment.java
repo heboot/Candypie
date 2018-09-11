@@ -203,6 +203,11 @@ public class HomepageBottomFragment extends BaseFragment<ActivityUserpageBinding
             if (UserService.getInstance().checkTourist(_mActivity)) {
                 return;
             }
+            if (user.getId().intValue() == UserService.getInstance().getUser().getId().intValue()) {
+                tipDialog = DialogUtils.getFailDialog(_mActivity, "不能对自己操作", true);
+                tipDialog.show();
+                return;
+            }
             doFav(user.getIs_favs());
         });
         binding.svContainer.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
@@ -237,6 +242,11 @@ public class HomepageBottomFragment extends BaseFragment<ActivityUserpageBinding
         });
         binding.vMore.setOnClickListener((v) -> {
             if (UserService.getInstance().checkTourist()) {
+                return;
+            }
+            if (user.getId().intValue() == UserService.getInstance().getUser().getId().intValue()) {
+                tipDialog = DialogUtils.getFailDialog(_mActivity, "不能对自己操作", true);
+                tipDialog.show();
                 return;
             }
             bottomSheetDialog = DialogUtils.getHomepageBottomSheet(_mActivity, new Consumer<Integer>() {
@@ -502,6 +512,7 @@ public class HomepageBottomFragment extends BaseFragment<ActivityUserpageBinding
         if (user.getGift() != null && user.getGift().getList() != null && user.getGift().getList().size() > 0) {
             binding.includeGift.getRoot().setVisibility(View.VISIBLE);
             binding.includeGift.tvTitle.setText(user.getGift().getTitle());
+            binding.includeGift.tvNum.setText("( " + user.getGift().getNums() + " )");
             userGiftAdapter = new UserGiftAdapter(R.layout.item_userpage_gift, user.getGift().getList());
             userGiftAdapter.setEnableLoadMore(false);
             userGiftAdapter.setUpFetchEnable(false);

@@ -4,6 +4,7 @@ import com.gdlife.candypie.MAPP;
 import com.gdlife.candypie.R;
 import com.gdlife.candypie.base.BaseActivity;
 import com.gdlife.candypie.base.HttpObserver;
+import com.gdlife.candypie.common.LoginType;
 import com.gdlife.candypie.common.MKey;
 import com.gdlife.candypie.common.MValue;
 import com.gdlife.candypie.common.NumEventKeys;
@@ -27,7 +28,10 @@ import com.heboot.utils.MStatusBarUtils;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 import com.qmuiteam.qmui.util.QMUIKeyboardHelper;
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
+import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
 import com.umeng.analytics.MobclickAgent;
+
+import java.util.HashMap;
 
 import javax.inject.Inject;
 
@@ -56,6 +60,11 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> {
 
     private int lastContentLength;
 
+
+    private QMUITipDialog loadingDialog;
+
+    private Observer<HashMap> loginObs;
+
     @Override
     public void initUI() {
         MobclickAgent.onEvent(LoginActivity.this, NumEventKeys.login_view.toString());
@@ -73,6 +82,31 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> {
         loginService = new LoginService();
         serverService = new ServerService();
         DaggerUtilsComponent.builder().build().inject(this);
+        loginObs = new Observer<HashMap>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+                addDisposable(d);
+            }
+
+            @Override
+            public void onNext(HashMap o) {
+                loadingDialog.dismiss();
+                if (!StringUtils.isEmpty((String) o.get("syncid"))) {
+//                    IntentUtils.toRegisterActivity();
+                    IntentUtils.toRegisterInfoActivity(LoginActivity.this, (String) o.get("syncid"), (LoginType) o.get("loginType"), o);
+                }
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                loadingDialog.dismiss();
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        };
 //        DaggerServiceComponent.builder().build().inject(this);
     }
 
@@ -280,6 +314,32 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> {
 //            }));
 
         });
+
+        binding.includeOtherLogin.llytWx.setOnClickListener((v) -> {
+            if (loadingDialog == null) {
+                loadingDialog = DialogUtils.getLoadingDialog(this, "", false);
+            }
+            loadingDialog.show();
+            loginService.doWXLogin(loginObs);
+        });
+        binding.includeOtherLogin.llytQq.setOnClickListener((v) -> {
+            if (loadingDialog == null) {
+                loadingDialog = DialogUtils.getLoadingDialog(this, "", false);
+            }
+            loadingDialog.show();
+            loginService.doQQLogin(loginObs);
+        });
+        binding.includeOtherLogin.llytYk.setOnClickListener((v) -> {
+            MobclickAgent.onEvent(this, NumEventKeys.tourist_login.toString());
+            UserService.getInstance().doTouristPreview();
+            if (MAPP.mapp.getConfigBean().getIs_review_status() == 1) {
+                IntentUtils.toIndexActivity(LoginActivity.this);
+            } else {
+                IntentUtils.toMainActivity(LoginActivity.this);
+            }
+            finish();
+        });
+
     }
 
 

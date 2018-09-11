@@ -72,7 +72,7 @@ public class PushService {
             } else if (MOSUtils.isEMUI()) {
                 initHuawei(MAPP.mapp.getCurrentActivity());
             } else if (PushManager.isSupportPush(MAPP.mapp)) {
-                ToastUtils.showToast("init oppo");
+//                ToastUtils.showToast("init oppo");
                 initOPPO();
             } else if (!MOSUtils.isMIUI()) {
                 PushAgent mPushAgent = PushAgent.getInstance(MAPP.mapp);
@@ -129,7 +129,6 @@ public class PushService {
                 @Override
                 public void onRegister(int i, String s) {
                     super.onRegister(i, s);
-                    ToastUtils.showToast("init oppo " + s);
                     uploadPushToken(s);
                 }
             });

@@ -124,7 +124,11 @@ public class LoginService {
 //                UserService.getInstance().setUser(baseBean.getData().getUser());
                 if (baseBean != null && baseBean.getData() != null && !StringUtils.isEmpty(baseBean.getData().getSync_login_id())) {
                     map.put("syncid", baseBean.getData().getSync_login_id());
-                    map.put("loginType", loginType);
+                    map.put("loginType", loginType.toString());
+                    //如果服务器没有查到绑定 可能被删了之类的
+                    if (map == null) {
+
+                    }
                     observer.onNext(map);
                 } else if (baseBean != null && baseBean.getData() != null && baseBean.getData().getUser() != null) {
 
@@ -152,6 +156,59 @@ public class LoginService {
         });
     }
 
+    public void doThirdLogin(Observer<HashMap> observer, String nickName, String headPic, int sex, String openId, String type, String unionid, HashMap map) {
+        Map<String, Object> params = SignUtils.getNormalParams();
+        params.put(MKey.NICK_NAME, nickName);
+        params.put(MKey.HEAD_PIC, headPic);
+        params.put(MKey.SEX, sex);
+        params.put(MKey.OPENID, openId);
+        params.put(MKey.TYPE, type);
+        if (!StringUtils.isEmpty(unionid)) {
+            params.put(MKey.UNIONID, unionid);
+        }
+        String sign = SignUtils.doSign(params);
+        params.put(MKey.SIGN, sign);
+        HttpClient.Builder.getGuodongServer().third_login(params).observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribe(new HttpObserver<RegisterBean>() {
+            @Override
+            public void onSuccess(BaseBean<RegisterBean> baseBean) {
+//                UserService.getInstance().setUser(baseBean.getData().getUser());
+                if (baseBean != null && baseBean.getData() != null && !StringUtils.isEmpty(baseBean.getData().getSync_login_id())) {
+                    map.put("syncid", baseBean.getData().getSync_login_id());
+                    if (type.equals("weixin")) {
+                        map.put("loginType", LoginType.WX);
+                    } else if (type.equals("qq")) {
+                        map.put("loginType", LoginType.QQ);
+                    }
+
+
+                    LogUtil.e("本地Map", JSON.toJSONString(map));
+                    //如果服务器没有查到绑定 可能被删了之类的
+                    observer.onNext(map);
+                } else if (baseBean != null && baseBean.getData() != null && baseBean.getData().getUser() != null) {
+
+                    baseBean.getData().getUser().setSyncMap(map);
+                    UserService.getInstance().putSPUser(baseBean.getData().getUser());
+
+                    RxBus.getInstance().post(UserEvent.LOGIN_SUC);
+                    doLoginAgora(baseBean.getData().getVideo_user(), baseBean.getData().getIm_user());
+
+                    UserService.getInstance().setUser(baseBean.getData().getUser());
+                    RxBus.getInstance().post(UserEvent.LOGIN_SUC);
+                    if (MAPP.mapp.getConfigBean().getIs_review_status() == 1) {
+                        IntentUtils.toIndexActivity(MAPP.mapp.getCurrentActivity());
+                    } else {
+                        IntentUtils.toMainActivity(MAPP.mapp.getCurrentActivity());
+                    }
+                }
+
+            }
+
+            @Override
+            public void onError(BaseBean<RegisterBean> baseBean) {
+                observer.onError(new Throwable(baseBean.getMessage()));
+            }
+        });
+    }
 
     public void doLoginAgora(VideoUser videoUser, IMUser imUser) {
         // 登录 Agora 信令系统

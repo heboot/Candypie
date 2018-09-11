@@ -811,6 +811,9 @@ public class UserInfoActivity extends BaseActivity<ActivityUserInfoBinding> {
                         if (tipDialog != null) {
                             tipDialog.dismiss();
                         }
+                        if (loadingDialog != null) {
+                            loadingDialog.dismiss();
+                        }
                         tipDialog = DialogUtils.getFailDialog(UserInfoActivity.this, baseBean.getMessage(), true);
                         tipDialog.show();
                     }
@@ -819,6 +822,9 @@ public class UserInfoActivity extends BaseActivity<ActivityUserInfoBinding> {
 
             @Override
             public void onError(Throwable throwable) {
+                if (tipDialog != null) {
+                    tipDialog.dismiss();
+                }
                 loadingDialog.dismiss();
                 loadingDialog = DialogUtils.getFailDialog(UserInfoActivity.this, throwable.getMessage(), true);
                 loadingDialog.show();

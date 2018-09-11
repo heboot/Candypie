@@ -103,6 +103,9 @@ public class UserPageActivity extends BaseActivity<ActivityUserpageBinding> {
 
     @Override
     public void initListener() {
+        binding.includeToolbar.vBack.setOnClickListener((v) -> {
+            finish();
+        });
         binding.includeBottom.ivMsg.setOnClickListener((v) -> {
             if (UserService.getInstance().checkTourist(this)) {
                 return;
@@ -190,6 +193,11 @@ public class UserPageActivity extends BaseActivity<ActivityUserpageBinding> {
         });
         binding.vMore.setOnClickListener((v) -> {
             if (UserService.getInstance().checkTourist()) {
+                return;
+            }
+            if (user.getId().intValue() == UserService.getInstance().getUser().getId().intValue()) {
+                tipDialog = DialogUtils.getFailDialog(this, "不能对自己操作", true);
+                tipDialog.show();
                 return;
             }
             bottomSheetDialog = DialogUtils.getHomepageBottomSheet(this, new Consumer<Integer>() {
@@ -454,6 +462,7 @@ public class UserPageActivity extends BaseActivity<ActivityUserpageBinding> {
         if (user.getGift() != null && user.getGift().getList() != null && user.getGift().getList().size() > 0) {
             binding.includeGift.getRoot().setVisibility(View.VISIBLE);
             binding.includeGift.tvTitle.setText(user.getGift().getTitle());
+            binding.includeGift.tvNum.setText("( " + user.getGift().getNums() + " )");
             userGiftAdapter = new UserGiftAdapter(R.layout.item_userpage_gift, user.getGift().getList());
             userGiftAdapter.setEnableLoadMore(false);
             userGiftAdapter.setUpFetchEnable(false);

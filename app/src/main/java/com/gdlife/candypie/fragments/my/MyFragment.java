@@ -241,7 +241,7 @@ public class MyFragment extends BaseFragment<FragmentMyBinding> {
          * 充值
          */
         binding.includeMyMenuCenter.qbRecharge.setOnClickListener((v) -> {
-            IntentUtils.toRechargeActivity(_mActivity, RechargeType.COIN);
+            IntentUtils.toAccountActivity(_mActivity);
         });
         /**
          * 视频接听状态

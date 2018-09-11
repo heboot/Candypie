@@ -2,6 +2,7 @@ package com.gdlife.candypie.activitys.login2register;
 
 import android.content.Intent;
 import android.support.v4.content.ContextCompat;
+import android.view.View;
 
 import com.gdlife.candypie.MAPP;
 import com.gdlife.candypie.R;
@@ -83,7 +84,9 @@ public class RegisterForgetActivity extends BaseActivity<ActivityRegisterForgetB
         if (type.equals(MValue.CHECK_SMS_CODE.REG)) {
             binding.includeToolbar.tvTitle.setText("注册");
             binding.btnBottom.setText("下一步");
+            binding.includeOtherLogin.getRoot().setVisibility(View.VISIBLE);
         } else {
+            binding.includeOtherLogin.getRoot().setVisibility(View.GONE);
             binding.includeToolbar.tvTitle.setText("找回密码");
             binding.btnBottom.setText("去登录");
         }
