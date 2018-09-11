@@ -193,6 +193,7 @@ public class PermissionUtils {
      * @return
      */
     public boolean hasNoticicationPermission() {
+//        NotificationManagerCompat.from(context).areNotificationsEnabled();
         NotificationManagerCompat managerCompat = NotificationManagerCompat.from(MAPP.mapp);
         boolean isOpened = managerCompat.areNotificationsEnabled();
         return isOpened;

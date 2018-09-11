@@ -82,7 +82,6 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
 
     @Override
     public void initUI() {
-        LogUtil.e(TAG, "init ui");
         QMUIStatusBarHelper.translucent(this);
         MStatusBarUtils.setActivityNOLightMode(this);
         permissionUtils = new PermissionUtils();
@@ -105,7 +104,6 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
         mScreenManager = ScreenManager.getScreenManagerInstance(this);
         mScreenListener.setScreenReceiverListener(mScreenListenerer);
 //
-
 
 
     }

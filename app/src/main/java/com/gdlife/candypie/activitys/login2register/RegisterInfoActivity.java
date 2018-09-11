@@ -268,6 +268,7 @@ public class RegisterInfoActivity extends BaseActivity<ActivityRegisterInfoBindi
         submitFlag = true;
 //
 //        tipDialog = DialogUtils.getLoadingDialog(this, "", false);
+//        loadingDialog = DialogUtils.getLoadingDialog(this, "", false);
         loadingDialog.show();
 
         params = SignUtils.getNormalParams();
@@ -308,7 +309,7 @@ public class RegisterInfoActivity extends BaseActivity<ActivityRegisterInfoBindi
                         RxBus.getInstance().post(NormalEvent.FINISH_PAGE);
                         LoginService loginService = new LoginService();
                         loginService.doLoginAgora(baseBean.getData().getVideo_user(), baseBean.getData().getIm_user());
-                        loadingDialog.dismiss();
+
                         RxBus.getInstance().post(UserEvent.LOGIN_SUC);
 //                        if (MValue.IS_FROM_TOURIST) {
 //                            MValue.IS_FROM_TOURIST = false;
@@ -320,7 +321,7 @@ public class RegisterInfoActivity extends BaseActivity<ActivityRegisterInfoBindi
                         } else {
                             IntentUtils.toMainActivity(RegisterInfoActivity.this);
                         }
-
+                        loadingDialog.dismiss();
 //                        Intent intent = new Intent(RegisterInfoActivity.this, IndexActivity.class);
 //                        startActivity(intent);
                         finish();
@@ -477,47 +478,52 @@ public class RegisterInfoActivity extends BaseActivity<ActivityRegisterInfoBindi
             if (!file.exists()) {
                 downloadService.downlaodAvatar(syncHeadUrl, downloadedVideoPath, new Consumer<Status>() {
                     @Override
-                    public void accept(Status status) throws Exception {
-                        if (status instanceof Succeed) {
-                            if (!submitFlag) {
-                                UploadService.doUploadAvatar(SDCardUtils.getRootPathPrivatePic() + "/" + downloadedVideoPath, new Observer<UploadAvatarReq>() {
-                                    @Override
-                                    public void onSubscribe(Disposable d) {
-                                        addDisposable(d);
-                                    }
-
-                                    @Override
-                                    public void onNext(UploadAvatarReq uploadAvatarReq) {
-                                        loadingDialog.dismiss();
-                                        if (uploadAvatarReq != null) {
-                                            RegisterInfoActivity.this.uploadAvatarReq = uploadAvatarReq;
-                                        }
-                                        if (!submitFlag) {
-                                            doSubmit();
+                    public void accept(Status status) {
+                        try {
+                            if (status instanceof Succeed) {
+                                if (!submitFlag) {
+                                    UploadService.doUploadAvatar(SDCardUtils.getRootPathPrivatePic() + "/" + downloadedVideoPath, new Observer<UploadAvatarReq>() {
+                                        @Override
+                                        public void onSubscribe(Disposable d) {
+                                            addDisposable(d);
                                         }
 
-                                    }
+                                        @Override
+                                        public void onNext(UploadAvatarReq uploadAvatarReq) {
+                                            loadingDialog.dismiss();
+                                            if (uploadAvatarReq != null) {
+                                                RegisterInfoActivity.this.uploadAvatarReq = uploadAvatarReq;
+                                            }
+                                            if (!submitFlag) {
+                                                doSubmit();
+                                            }
 
-                                    @Override
-                                    public void onError(Throwable e) {
-                                        loadingDialog.dismiss();
-                                        ToastUtils.showToast(e.getMessage());
-                                    }
+                                        }
 
-                                    @Override
-                                    public void onComplete() {
+                                        @Override
+                                        public void onError(Throwable e) {
+                                            loadingDialog.dismiss();
+                                            ToastUtils.showToast(e.getMessage());
+                                        }
 
-                                    }
-                                });
+                                        @Override
+                                        public void onComplete() {
+
+                                        }
+                                    });
+                                }
+                            } else if (status instanceof Failed) {
+                                loadingDialog.dismiss();
+                                ToastUtils.showToast("下载失败，请稍后重试");
                             }
-                        } else if (status instanceof Failed) {
-                            loadingDialog.dismiss();
-                            ToastUtils.showToast("下载失败，请稍后重试");
+                        } catch (Exception e) {
+                            e.printStackTrace();
                         }
+
                     }
                 });
 
-                RxDownload.INSTANCE.start(syncHeadUrl).
+                RxDownload.INSTANCE.start(syncHeadUrl).observeOn(AndroidSchedulers.mainThread()).
                         subscribe();
 
             } else {

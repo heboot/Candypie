@@ -93,7 +93,10 @@ public class UserPageActivity extends BaseActivity<ActivityUserpageBinding> {
         initUserInfo();
 
 
-        permissionUtils.showPermissionDialog(this, null);
+        if(!permissionUtils.hasNoticicationPermission()){
+            permissionUtils.showPermissionDialog(this, null);
+        }
+
     }
 
     @Override
@@ -500,7 +503,7 @@ public class UserPageActivity extends BaseActivity<ActivityUserpageBinding> {
     private void initTop() {
         binding.includeAvatar.tvName.setText(user.getNickname());
         //展示头像
-        ImageUtils.showIndexUserImage(binding.includeAvatar.ivAvatar, user.getAvatar());
+        ImageUtils.showImage(binding.includeAvatar.ivAvatar, user.getAvatar());
         //设置年龄 性别
         binding.includeAvatar.includeSexage.setUser(user);
         //设置在线状态

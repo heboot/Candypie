@@ -21,6 +21,8 @@ public class VerService {
             textView.setText(textView.getContext().getString(R.string.ver_service_status_ing));
         } else if (user.getService_auth_status() == MValue.AUTH_STATUS_SUC) {
             textView.setText(textView.getContext().getString(R.string.ver_service_status_suc));
+        } else {
+            textView.setText("未认证");
         }
     }
 
