@@ -81,6 +81,7 @@
             app:layout_constraintTop_toTopOf="@+id/v_video_bg"></View>
 
         <TextView
+            android:id="@+id/tv_price"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/x55"

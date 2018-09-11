@@ -81,6 +81,7 @@ public class LoginService {
                 @Override
                 public void onCancel(Platform platform, int i) {
                     LogUtil.e("LoginService", "cancel");
+                    observer.onError(new Throwable("取消登录"));
                 }
             };
         }
@@ -124,7 +125,11 @@ public class LoginService {
 //                UserService.getInstance().setUser(baseBean.getData().getUser());
                 if (baseBean != null && baseBean.getData() != null && !StringUtils.isEmpty(baseBean.getData().getSync_login_id())) {
                     map.put("syncid", baseBean.getData().getSync_login_id());
-                    map.put("loginType", loginType.toString());
+                    if (type.equals("weixin")) {
+                        map.put("loginType", LoginType.WX);
+                    } else if (type.equals("qq")) {
+                        map.put("loginType", LoginType.QQ);
+                    }
                     //如果服务器没有查到绑定 可能被删了之类的
                     if (map == null) {
 

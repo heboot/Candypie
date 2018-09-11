@@ -249,7 +249,7 @@ public class MAPP extends Application {
                         }
                     });
                 } else if (o.equals(TO_RECHARGE_BY_IM)) {
-                    IntentUtils.toRechargeActivity(currentActivity, RechargeType.COIN);
+                    IntentUtils.toAccountActivity(MAPP.mapp.getCurrentActivity());
                 } else if (o instanceof IMEvent.UPDATE_COIN_BALANCE_EVENT) {
 //                    UserService.getInstance().getUser().setCoin(String.valueOf(Integer.parseInt(UserService.getInstance().getUser().getCoin()) - ((IMEvent.UPDATE_COIN_BALANCE_EVENT) o).getCoinAmount()));
                 }

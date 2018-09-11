@@ -44,6 +44,7 @@
             android:layout_marginLeft="@dimen/x4"
             android:layout_marginRight="@dimen/x4"
             android:layout_marginTop="@dimen/y15"
+
             android:focusable="false"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"

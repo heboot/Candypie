@@ -6,6 +6,7 @@ import android.view.View;
 
 import com.alibaba.fastjson.JSON;
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.gdlife.candypie.MAPP;
 import com.gdlife.candypie.R;
 import com.gdlife.candypie.adapter.account.RechargeAdapter;
 import com.gdlife.candypie.base.BaseActivity;
@@ -193,12 +194,14 @@ public class RechargeActivity extends BaseActivity<ActivityRechargeBinding> {
 
             @Override
             public void onSubscribe(Disposable d) {
-
+                addDisposable(d);
             }
 
             @Override
             public void onNext(Object o) {
                 if (o.equals(PayEvent.RechargeSUCEvent)) {
+                    tipDialog = DialogUtils.getSuclDialog(MAPP.mapp.getCurrentActivity(), "充值成功", true);
+                    tipDialog.show();
                     finish();
                 } else if (o.equals(NormalEvent.FINISH_PAGE_BY_SELECT_USER)) {
                     finish();

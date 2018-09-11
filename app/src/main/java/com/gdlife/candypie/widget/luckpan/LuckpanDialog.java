@@ -212,7 +212,7 @@ public class LuckpanDialog extends Dialog {
             binding.tvCoinBalance.setText(UserService.getInstance().getUser().getCoin());
 
             binding.qrbRecharge.setOnClickListener((v) -> {
-                IntentUtils.toRechargeActivity(context, RechargeType.COIN);
+                IntentUtils.toAccountActivity(MAPP.mapp.getCurrentActivity());
             });
 
             binding.vClose.setOnClickListener((v) -> {
@@ -299,7 +299,7 @@ public class LuckpanDialog extends Dialog {
                                         if (integer == 0) {
                                             tipDialog.dismiss();
                                         } else {
-                                            IntentUtils.toRechargeActivity(context, RechargeType.COIN);
+                                            IntentUtils.toAccountActivity(MAPP.mapp.getCurrentActivity());
                                         }
                                     }
                                 }, "你的钻石余额不足\n" +

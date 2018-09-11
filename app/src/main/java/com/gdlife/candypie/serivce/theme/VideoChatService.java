@@ -115,7 +115,7 @@ public class VideoChatService {
                         @Override
                         public void accept(Integer integer) throws Exception {
                             if (integer == 1) {
-                                IntentUtils.toRechargeActivity(activity, RechargeType.COIN);
+                                IntentUtils.toAccountActivity(MAPP.mapp.getCurrentActivity());
                             }
 
                         }
@@ -137,7 +137,7 @@ public class VideoChatService {
                     @Override
                     public void accept(Integer integer) throws Exception {
                         if (integer == 1) {
-                            IntentUtils.toRechargeActivity(activity, RechargeType.COIN);
+                            IntentUtils.toAccountActivity(MAPP.mapp.getCurrentActivity());
                         }
 
                     }

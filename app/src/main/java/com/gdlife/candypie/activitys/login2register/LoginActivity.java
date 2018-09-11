@@ -74,7 +74,6 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding> {
         binding.includeToolbar.tvRight.setText("注册");
         binding.includeToolbar.tvTitle.setText("登录蜜糖派");
         binding.btnBottom.setText("立即登录");
-        QMUIKeyboardHelper.showKeyboard(binding.etMobile, true);
     }
 
     @Override

@@ -463,7 +463,7 @@ public class DiscoverVideoFragment extends BaseFragment<FragmentDiscoverVideoBin
                     @Override
                     public void accept(Integer integer) throws Exception {
                         if (integer == 1) {
-                            IntentUtils.toRechargeActivity(getContext(), RechargeType.COIN);
+                            IntentUtils.toAccountActivity(getContext());
                         }
                     }
                 }, MValue.TIP_DIALOG_TYPE.FIRST_VIDEO_ORDER, null, user.getAvatar(), UserService.getInstance().getVideo_first_order().getInit_recharge_amount()).create();
@@ -476,7 +476,7 @@ public class DiscoverVideoFragment extends BaseFragment<FragmentDiscoverVideoBin
                         @Override
                         public void accept(Integer integer) throws Exception {
                             if (integer == 1) {
-                                IntentUtils.toRechargeActivity(getContext(), RechargeType.COIN);
+                                IntentUtils.toAccountActivity(getContext());
                             }
 
                         }

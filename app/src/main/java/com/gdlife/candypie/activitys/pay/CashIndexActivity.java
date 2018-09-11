@@ -181,6 +181,11 @@ public class CashIndexActivity extends BaseActivity<ActivityCashIndexBinding> {
     }
 
     private void cash() {
+        if (user_account == null) {
+            tipDialog = DialogUtils.getFailDialog(this, "请添加支付宝账号", true);
+            tipDialog.show();
+            return;
+        }
         if (StringUtils.isEmpty(user_account.getAccount())) {
             tipDialog = DialogUtils.getFailDialog(this, "请添加支付宝账号", true);
             tipDialog.show();

@@ -118,7 +118,7 @@ public class BottomVideoGiftSheetDialogHehe extends DialogFragment {
 
         //去充值跳转
         binding.qrbRecharge.setOnClickListener((v) -> {
-            IntentUtils.toRechargeActivity(getContext(), RechargeType.COIN);
+            IntentUtils.toAccountActivity(getContext());
         });
 
         List<GiftBean> allGifts = giftRepository.getAllGifts();

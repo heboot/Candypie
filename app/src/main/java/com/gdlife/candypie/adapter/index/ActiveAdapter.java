@@ -27,10 +27,20 @@ public class ActiveAdapter extends BaseRecyclerViewAdapter {
 
     private boolean isSearch;
 
+    private boolean showTime = false;
+
     public ActiveAdapter(List<User> list, boolean isSearch) {
         this.data = list;
         this.isSearch = isSearch;
     }
+
+    public ActiveAdapter(List<User> list, boolean isSearch,
+                         boolean showTime) {
+        this.data = list;
+        this.isSearch = isSearch;
+        this.showTime = showTime;
+    }
+
 
     @Override
     public BaseRecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -48,7 +58,12 @@ public class ActiveAdapter extends BaseRecyclerViewAdapter {
         public void onBindViewHolder(final User s, int position) {
             binding.setUser(s);
             binding.includeSexage.setUser(s);
-            binding.tvInfo.setText(s.getCity());//+ "·" + DateUtil.getRecommendUserInterval(s.getUpdate_time() * 1000l) + "登录"
+            if (showTime) {
+                binding.tvInfo.setText(s.getCity() + "·" + DateUtil.getRecommendUserInterval(s.getUpdate_time() * 1000l));//+ "·" + DateUtil.getRecommendUserInterval(s.getUpdate_time() * 1000l) + "登录"
+            } else {
+                binding.tvInfo.setText(s.getCity());//+ "·" + DateUtil.getRecommendUserInterval(s.getUpdate_time() * 1000l) + "登录"
+            }
+
 
             binding.ivMsg.setOnClickListener((v) -> {
                 if (UserService.getInstance().checkTourist()) {

@@ -62,7 +62,7 @@ public class UserPageActivity extends BaseActivity<ActivityUserpageBinding> {
 
     private VideoChatService videoChatService;
 
-    private PermissionUtils permissionUtils;
+    private PermissionUtils permissionUtils = new PermissionUtils();
 
     private BottomSheetDialog bottomSheetDialog;
 
@@ -92,13 +92,8 @@ public class UserPageActivity extends BaseActivity<ActivityUserpageBinding> {
     public void initData() {
         initUserInfo();
 
-        if (userPageService.isFirst()) {
-            binding.vTipMsg.setVisibility(View.VISIBLE);
-            YoYo.with(Techniques.Bounce).repeat(1000).playOn(binding.vTipMsg);
-        } else {
-            binding.vTipMsg.setVisibility(View.GONE);
-        }
 
+        permissionUtils.showPermissionDialog(this, null);
     }
 
     @Override
@@ -330,6 +325,20 @@ public class UserPageActivity extends BaseActivity<ActivityUserpageBinding> {
                 binding.plytContainer.toMain();
                 user = baseBean.getData().getUser_profile();
                 initUserUI();
+                if (UserService.getInstance().getUser() != null && user.getId().intValue() == UserService.getInstance().getUser().getId().intValue()) {
+                    binding.includeBottom.getRoot().setVisibility(View.GONE);
+                    binding.vBottom.setVisibility(View.GONE);
+                    binding.vTipMsg.setVisibility(View.GONE);
+                } else {
+                    binding.includeBottom.getRoot().setVisibility(View.VISIBLE);
+                    binding.vBottom.setVisibility(View.VISIBLE);
+                    if (userPageService.isFirst()) {
+                        binding.vTipMsg.setVisibility(View.VISIBLE);
+                        YoYo.with(Techniques.Bounce).repeat(1000).playOn(binding.vTipMsg);
+                    } else {
+                        binding.vTipMsg.setVisibility(View.GONE);
+                    }
+                }
             }
 
             @Override
@@ -394,6 +403,7 @@ public class UserPageActivity extends BaseActivity<ActivityUserpageBinding> {
         } else {
             binding.includeBottom.vVideoBg.setBackgroundResource(R.drawable.bg_rect_d6d6df_22);
         }
+        binding.includeBottom.tvPrice.setText("聊天" + user.getVideo_chat_price() + "钻/分钟");
     }
 
 

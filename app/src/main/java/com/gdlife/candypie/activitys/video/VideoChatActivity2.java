@@ -337,7 +337,7 @@ public class VideoChatActivity2 extends BaseActivity<ActivityVideoChatBinding> i
                                 @Override
                                 public void accept(Integer integer) throws Exception {
                                     if (integer == 1) {
-                                        IntentUtils.toRechargeActivity(VideoChatActivity2.this, RechargeType.COIN);
+                                        IntentUtils.toAccountActivity(MAPP.mapp.getCurrentActivity());
                                     }
                                 }
                             }, getString(R.string.video_balance_tip), "知道了", "充值").create();

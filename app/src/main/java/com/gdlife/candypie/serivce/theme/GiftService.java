@@ -17,6 +17,8 @@ import com.gdlife.candypie.widget.gift.GiftPlayView;
 import com.heboot.base.BaseBean;
 import com.heboot.bean.gift.GiftBean;
 import com.heboot.bean.video.VideoChatStratEndBean;
+import com.heboot.event.VideoChatEvent;
+import com.heboot.rxbus.RxBus;
 import com.yalantis.dialog.TipCustomDialog;
 
 import java.util.Map;
@@ -34,7 +36,7 @@ public class GiftService {
                 @Override
                 public void accept(Integer integer) throws Exception {
                     if (integer == 1) {
-                        IntentUtils.toRechargeActivity(MAPP.mapp.getCurrentActivity(), RechargeType.COIN);
+                        IntentUtils.toAccountActivity(MAPP.mapp.getCurrentActivity());
                     }
 
                 }
@@ -58,6 +60,10 @@ public class GiftService {
             public void onSuccess(BaseBean<VideoChatStratEndBean> baseBean) {
 //                    ((ViewGroup) MAPP.mapp.getCurrentActivity().findViewById(android.R.id.content)).addView(new GiftPlayView(MAPP.mapp.getCurrentActivity(), giftBean));
 
+                if (!StringUtils.isEmpty(userServiceId)) {
+                    RxBus.getInstance().post(new VideoChatEvent.UPDATE_VIDEO_SERVICE_TIME_ENENT(baseBean.getData().getService_time()));
+                }
+
                 try {
                     new GiftPlayView(giftBean).show(((FragmentActivity) MAPP.mapp.getCurrentActivity()).getFragmentManager(), "gift");
                 } catch (Exception e) {
@@ -72,7 +78,7 @@ public class GiftService {
                     @Override
                     public void accept(Integer integer) throws Exception {
                         if (integer == 1) {
-                            IntentUtils.toRechargeActivity(MAPP.mapp.getCurrentActivity(), RechargeType.COIN);
+                            IntentUtils.toAccountActivity(MAPP.mapp.getCurrentActivity());
                         }
 
                     }

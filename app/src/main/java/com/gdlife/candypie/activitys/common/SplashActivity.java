@@ -1,6 +1,7 @@
 package com.gdlife.candypie.activitys.common;
 
 import android.content.Intent;
+import android.view.KeyEvent;
 
 import com.gdlife.candypie.MAPP;
 import com.gdlife.candypie.R;
@@ -150,6 +151,22 @@ public class SplashActivity extends BaseActivity<ActivitySplashBinding> {//EasyP
 //            finish();
 ////            RxBus.getInstance().post(NormalEvent.FINISH_PAGE);
 //        });
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if (tipDialog != null && tipDialog.isShowing()) {
+                tipDialog.dismiss();
+                return false;
+            }
+            if (loadingDialog != null && loadingDialog.isShowing()) {
+                loadingDialog.dismiss();
+                return false;
+            }
+            return true;
+        }
+        return true;
     }
 
     @Override

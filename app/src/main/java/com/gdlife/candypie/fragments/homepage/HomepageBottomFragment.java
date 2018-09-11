@@ -104,12 +104,12 @@ public class HomepageBottomFragment extends BaseFragment<ActivityUserpageBinding
 
     @Override
     public void initData() {
-        if (userPageService.isFirst()) {
-            binding.vTipMsg.setVisibility(View.VISIBLE);
-            YoYo.with(Techniques.Bounce).repeat(1000).playOn(binding.vTipMsg);
-        } else {
-            binding.vTipMsg.setVisibility(View.GONE);
-        }
+//        if (userPageService.isFirst()) {
+//            binding.vTipMsg.setVisibility(View.VISIBLE);
+//            YoYo.with(Techniques.Bounce).repeat(1000).playOn(binding.vTipMsg);
+//        } else {
+//            binding.vTipMsg.setVisibility(View.GONE);
+//        }
 
     }
 
@@ -378,6 +378,20 @@ public class HomepageBottomFragment extends BaseFragment<ActivityUserpageBinding
                 binding.plytContainer.toMain();
                 user = baseBean.getData().getUser_profile();
                 initUserUI();
+                if (UserService.getInstance().getUser() != null && user.getId().intValue() == UserService.getInstance().getUser().getId().intValue()) {
+                    binding.includeBottom.getRoot().setVisibility(View.GONE);
+                    binding.vBottom.setVisibility(View.GONE);
+                    binding.vTipMsg.setVisibility(View.GONE);
+                } else {
+                    binding.includeBottom.getRoot().setVisibility(View.VISIBLE);
+                    binding.vBottom.setVisibility(View.VISIBLE);
+                    if (userPageService.isFirst()) {
+                        binding.vTipMsg.setVisibility(View.VISIBLE);
+                        YoYo.with(Techniques.Bounce).repeat(1000).playOn(binding.vTipMsg);
+                    } else {
+                        binding.vTipMsg.setVisibility(View.GONE);
+                    }
+                }
             }
 
             @Override
@@ -442,6 +456,7 @@ public class HomepageBottomFragment extends BaseFragment<ActivityUserpageBinding
         } else {
             binding.includeBottom.vVideoBg.setBackgroundResource(R.drawable.bg_rect_d6d6df_22);
         }
+        binding.includeBottom.tvPrice.setText("聊天" + user.getVideo_chat_price() + "钻/分钟");
     }
 
 

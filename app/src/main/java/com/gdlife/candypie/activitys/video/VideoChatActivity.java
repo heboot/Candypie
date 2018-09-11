@@ -20,6 +20,7 @@ import android.widget.FrameLayout;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.faceunity.FURenderer;
+import com.gdlife.candypie.BuildConfig;
 import com.gdlife.candypie.MAPP;
 import com.gdlife.candypie.R;
 import com.gdlife.candypie.base.BaseActivity;
@@ -180,6 +181,7 @@ public class VideoChatActivity extends BaseActivity<ActivityVideoChatBinding> im
         setSwipeBackEnable(false);
         QMUIStatusBarHelper.translucent(this);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
     }
 
     @Override
@@ -338,7 +340,7 @@ public class VideoChatActivity extends BaseActivity<ActivityVideoChatBinding> im
                                 @Override
                                 public void accept(Integer integer) throws Exception {
                                     if (integer == 1) {
-                                        IntentUtils.toRechargeActivity(VideoChatActivity.this, RechargeType.COIN);
+                                        IntentUtils.toAccountActivity(MAPP.mapp.getCurrentActivity());
                                     }
                                 }
                             }, getString(R.string.video_balance_tip), "知道了", "充值").create();
@@ -408,6 +410,8 @@ public class VideoChatActivity extends BaseActivity<ActivityVideoChatBinding> im
                             }).playOn(binding.includeHehe.getRoot());
                         }
                     });
+                } else if (o instanceof VideoChatEvent.UPDATE_VIDEO_SERVICE_TIME_ENENT) {
+                    serviceTime = ((VideoChatEvent.UPDATE_VIDEO_SERVICE_TIME_ENENT) o).getServiceTime();
                 } else if (o instanceof TurntableEvent.TurntableRefuseEvent) {
                     ToastUtils.showToast("对方拒绝了你的邀请");
                     if (luckpanDialog != null && luckpanDialog.isShowing()) {
@@ -1434,6 +1438,7 @@ public class VideoChatActivity extends BaseActivity<ActivityVideoChatBinding> im
 //            }
 //        }
     }
+
 
     @Override
     protected int getLayoutId() {

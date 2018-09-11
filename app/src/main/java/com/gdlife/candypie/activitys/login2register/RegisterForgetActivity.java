@@ -90,7 +90,6 @@ public class RegisterForgetActivity extends BaseActivity<ActivityRegisterForgetB
             binding.includeToolbar.tvTitle.setText("找回密码");
             binding.btnBottom.setText("去登录");
         }
-        QMUIKeyboardHelper.showKeyboard(binding.etMobile, true);
         setSendBtn(true);
     }
 
@@ -145,6 +144,9 @@ public class RegisterForgetActivity extends BaseActivity<ActivityRegisterForgetB
     public void initListener() {
         binding.includeToolbar.vBack.setOnClickListener((v) -> {
             finish();
+        });
+        binding.llytForget.setOnClickListener((v)->{
+            IntentUtils.toLoginActivity(this);
         });
         rxObservable.subscribe(new Observer<Object>() {
             @Override
@@ -294,6 +296,7 @@ public class RegisterForgetActivity extends BaseActivity<ActivityRegisterForgetB
             }
             finish();
         });
+
 
     }
 

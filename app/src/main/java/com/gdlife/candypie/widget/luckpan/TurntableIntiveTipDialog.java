@@ -121,7 +121,7 @@ public class TurntableIntiveTipDialog extends Dialog {
                 if (Integer.parseInt(UserService.getInstance().getUser().getCoin()) <= PayService.getTurntableNeedCoin(MValue.currentVideoCoinAmount, Integer.parseInt(MAPP.mapp.getConfigBean().getIm_chat_config().getTurntable_amount()))) {
                     binding.tvApply.setText(MAPP.mapp.getString(R.string.to_recharge));
                     binding.tvApply.setOnClickListener((v) -> {
-                        IntentUtils.toRechargeActivity(context, RechargeType.COIN);
+                        IntentUtils.toAccountActivity(MAPP.mapp.getCurrentActivity());
                     });
 
 

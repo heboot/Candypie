@@ -83,7 +83,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/x72"
-                android:text="支付宝快捷支付"
+                android:text="微信快捷支付"
                 android:textColor="@color/color_24AF41"
                 android:textSize="@dimen/x20"
                 android:textStyle="bold"

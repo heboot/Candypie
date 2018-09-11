@@ -92,7 +92,7 @@ ext {
             // 应用程序包名
             APPLICATION_ID     : 'com.gdlife.candypie',
 
-            DEBUGENABLE        : false,
+            DEBUGENABLE        : true,
 
             // Version of "com.android.support:appcompat-v7", refer it as folow:
             //  compile "com.android.support:appcompat-v7:${APPCOMPAT_VERSION}"

@@ -76,6 +76,7 @@ public class AutoPlayActivity extends BaseActivity<ActivityAutoPlayerBinding> {
         onPageChangeListener = new MOnPageChangeListener(new WeakReference<>(this));
         completedListener = new MComLis(this);
         permissionUtils = new PermissionUtils();
+
     }
 
     @Override
@@ -88,7 +89,7 @@ public class AutoPlayActivity extends BaseActivity<ActivityAutoPlayerBinding> {
         binding.vvp.setAdapter(userVideosVPAdapter);
 
         binding.vvp.setCurrentItem(currentShowIndex);
-
+        binding.tvShareContent.setText(MAPP.mapp.getConfigBean().getShare_config().getVideo_share_config().getTip());
 
     }
 

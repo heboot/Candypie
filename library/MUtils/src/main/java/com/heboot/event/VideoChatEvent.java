@@ -41,6 +41,18 @@ public class VideoChatEvent {
         }
     }
 
+    public static class UPDATE_VIDEO_SERVICE_TIME_ENENT {
+        private String serviceTime;
+
+        public UPDATE_VIDEO_SERVICE_TIME_ENENT(String serviceTime) {
+            this.serviceTime = serviceTime;
+        }
+
+        public String getServiceTime() {
+            return serviceTime;
+        }
+    }
+
     public static class UPDATE_CAMERA_STATUS_EVENT {
         private SystemNotification systemNotification;
 

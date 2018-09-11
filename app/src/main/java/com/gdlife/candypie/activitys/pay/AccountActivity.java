@@ -142,11 +142,14 @@ public class AccountActivity extends BaseActivity<ActivityAccountBinding> {
                 if (o.equals(NormalEvent.FINISH_PAGE_BY_SELECT_USER)) {
                     finish();
                 } else if (o.equals(UserEvent.UPDATE_PROFILE)) {
-                    binding.tvMoneyBalance.setText(getString(R.string.price_symbol) + UserService.getInstance().getUser().getBalance());
-                    binding.tvCoinBalance.setText(UserService.getInstance().getUser().getCoin());
+                    binding.tvMoneyBalance.setText(getString(R.string.price_symbol) + (NumberUtils.qianweifenge(Double.parseDouble(UserService.getInstance().getUser().getBalance()))));
+                    binding.tvCoinBalance.setText((NumberUtils.qianweifengecoin(Double.parseDouble(UserService.getInstance().getUser().getCoin()))));
                 } else if (o.equals(PayEvent.RechargeGoldVipSUCEvent)) {
                     DialogUtils.showUpGoldVipDialog(AccountActivity.this);
                     checkUpLevel("from");
+                } else if (o.equals(PayEvent.RechargeSUCEvent)) {
+                    tipDialog = DialogUtils.getSuclDialog(MAPP.mapp.getCurrentActivity(), "充值成功", true);
+                    tipDialog.show();
                 }
             }
 
@@ -234,7 +237,7 @@ public class AccountActivity extends BaseActivity<ActivityAccountBinding> {
 
         }
 
-        binding.tvCouponNum.setText(getString(R.string.coupons) + "  （" + UserService.getInstance().getUser().getCoupons_nums() + getString(R.string.unit_coupon) + ")");
+        binding.tvCouponNum.setText("（" + UserService.getInstance().getUser().getCoupons_nums() + getString(R.string.unit_coupon) + ")");
 
 //        if (!StringUtils.isEmpty(from)) {
 //            UserService.getInstance().getUser().setVip_level(2);
