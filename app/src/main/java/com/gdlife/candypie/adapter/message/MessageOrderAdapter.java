@@ -125,7 +125,7 @@ public class MessageOrderAdapter extends BaseQuickAdapter<OrderListBean.ListBean
 //            } else {
 //                IntentUtils.toUserInfoActivity(v.getContext(), MValue.USER_INFO_TYPE_NORMAL, MValue.USER_INFO_TYPE_NORMAL, s.getUser(), null, null);
 //            }
-            IntentUtils.toUserPageActivity(MAPP.mapp.getCurrentActivity(), String.valueOf(s.getId()));
+            IntentUtils.toUserPageActivity(MAPP.mapp.getCurrentActivity(), String.valueOf(s.getUser().getId()));
         });
 
         binding.getRoot().setOnClickListener((v) -> {

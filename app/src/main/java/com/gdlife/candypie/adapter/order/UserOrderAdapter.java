@@ -152,7 +152,7 @@ public class UserOrderAdapter extends BaseRecyclerViewAdapter {
 //                        IntentUtils.toUserInfoActivity(v.getContext(), MValue.USER_INFO_TYPE_NORMAL, MValue.USER_INFO_TYPE_NORMAL, s.getUsers().get(0), null, null);
 //                    }
 
-                    IntentUtils.toUserPageActivity(MAPP.mapp.getCurrentActivity(), String.valueOf(s.getId()));
+                    IntentUtils.toUserPageActivity(MAPP.mapp.getCurrentActivity(), String.valueOf(s.getUsers().get(0).getId()));
                 }
 
 
