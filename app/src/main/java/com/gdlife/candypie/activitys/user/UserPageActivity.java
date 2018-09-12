@@ -38,11 +38,14 @@ import com.gdlife.candypie.widget.gift.BottomVideoGiftSheetDialogHehe;
 import com.heboot.base.BaseBean;
 import com.heboot.base.BaseBeanEntity;
 import com.heboot.bean.user.UserInfoBean;
+import com.heboot.bean.video.HomepageVideoBean;
 import com.heboot.entity.User;
 import com.heboot.utils.MStatusBarUtils;
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
@@ -93,7 +96,7 @@ public class UserPageActivity extends BaseActivity<ActivityUserpageBinding> {
         initUserInfo();
 
 
-        if(!permissionUtils.hasNoticicationPermission()){
+        if (!permissionUtils.hasNoticicationPermission()) {
             permissionUtils.showPermissionDialog(this, null);
         }
 
@@ -267,11 +270,23 @@ public class UserPageActivity extends BaseActivity<ActivityUserpageBinding> {
         });
         binding.includeVideos.includeTitle.getRoot().setOnClickListener((v) -> {
             IntentUtils.toUserVideosActivity(this, user, UserVideoActivityFrom.NORMAL);
+//            videoUsers.clear();
+//            for (HomepageVideoBean homepageVideoBean : user.getUser_video().getList()) {
+//                videoUsers.add(user);
+//            }
+//            IntentUtils.toUserVideoAudioPlayActivity(this, 0, user.getUser_video().getTotal(), videoUsers);
         });
         binding.includeVideos.tvRight.setOnClickListener((v) -> {
+//            videoUsers.clear();
+//            for (HomepageVideoBean homepageVideoBean : user.getUser_video().getList()) {
+//                videoUsers.add(user);
+//            }
+//            IntentUtils.toUserVideoAudioPlayActivity(this, 0, user.getUser_video().getTotal(), videoUsers);
             IntentUtils.toUserVideosActivity(this, user, UserVideoActivityFrom.NORMAL);
         });
     }
+
+    private List<User> videoUsers = new ArrayList();
 
     private void doFav(int fav) {
         params = SignUtils.getNormalParams();

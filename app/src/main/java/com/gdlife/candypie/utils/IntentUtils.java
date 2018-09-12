@@ -59,6 +59,7 @@ import com.gdlife.candypie.activitys.user.UserInfoActivity;
 import com.gdlife.candypie.activitys.user.UserInfoInputActivity;
 import com.gdlife.candypie.activitys.user.UserPageActivity;
 import com.gdlife.candypie.activitys.user.UserSkillListActivity;
+import com.gdlife.candypie.activitys.user.UserVideoAudioPlayActivity;
 import com.gdlife.candypie.activitys.user.UserYueAttitudeActivity;
 import com.gdlife.candypie.activitys.video.AutoPlayActivity;
 import com.gdlife.candypie.activitys.video.PlayerActivity2;
@@ -128,6 +129,15 @@ public class IntentUtils {
     public static void toUserPageActivity(Context context, String uid) {
         Intent intent = new Intent(context, UserPageActivity.class);
         intent.putExtra(MKey.UID, uid);
+        context.startActivity(intent);
+    }
+
+    public static void toUserVideoAudioPlayActivity(Context context, int position, int total, List<User> users) {
+        Intent intent = new Intent(context, UserVideoAudioPlayActivity.class);
+        intent.putExtra(MKey.INDEX, position);
+        intent.putExtra(MKey.TOTAL_PAGES, total);
+//        intent.putExtra(MKey.USER_LIST, (Serializable) users);
+        MValue.currentUserVideosList = users;
         context.startActivity(intent);
     }
 
@@ -431,11 +441,11 @@ public class IntentUtils {
     }
 
     public static void toLoginActivity(Context context) {
-        RxBus.getInstance().post(NormalEvent.FINISH_INDEX_PAGE);
+//        RxBus.getInstance().post(NormalEvent.FINISH_INDEX_PAGE);
         Intent intent = new Intent(context, LoginActivity.class);
-        if (context.getClass().getSimpleName().equals(MAPP.mapp.getClass().getSimpleName())) {
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        }
+//        if (context.getClass().getSimpleName().equals(MAPP.mapp.getClass().getSimpleName())) {
+//            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//        }
         context.startActivity(intent);
     }
 

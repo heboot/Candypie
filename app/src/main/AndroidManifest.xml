@@ -97,7 +97,9 @@
         <activity
             android:name=".activitys.common.SearchUserActivity"
             android:screenOrientation="portrait"></activity>
-
+        <activity
+            android:name=".activitys.user.UserVideoAudioPlayActivity"
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".activitys.video.VideoFrameActivity"
             android:screenOrientation="portrait"></activity>
@@ -156,10 +158,6 @@
 
         <activity
             android:name=".activitys.user.UserInfoActivity"
-            android:screenOrientation="portrait"></activity>
-
-        <activity
-            android:name=".activitys.user.HomepageActivity"
             android:screenOrientation="portrait"></activity>
 
         <activity

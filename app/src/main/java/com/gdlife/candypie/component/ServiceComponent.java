@@ -11,7 +11,6 @@ import com.gdlife.candypie.activitys.pay.PayActivity;
 import com.gdlife.candypie.activitys.pay.RechargeActivity;
 import com.gdlife.candypie.activitys.theme.NewThemeActivity;
 import com.gdlife.candypie.activitys.theme.ServiceCancelActivity;
-import com.gdlife.candypie.activitys.user.HomepageActivity;
 import com.gdlife.candypie.activitys.video.AutoPlayActivity;
 import com.gdlife.candypie.activitys.video.PlayerActivity2;
 import com.gdlife.candypie.activitys.video.UserVideosActivity;
@@ -61,7 +60,6 @@ public interface ServiceComponent {
 
     void inject(UserVideosActivity userVideosActivity);
 
-    void inject(HomepageActivity homepageActivity);
 
     void inject(AuthSkillActivity authSkillActivity);
 

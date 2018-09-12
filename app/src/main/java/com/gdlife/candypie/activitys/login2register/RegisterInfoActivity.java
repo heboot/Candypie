@@ -341,6 +341,10 @@ public class RegisterInfoActivity extends BaseActivity<ActivityRegisterInfoBindi
             @Override
             public void onError(BaseBean<BaseBeanEntity> baseBean) {
                 submitFlag = false;
+                loadingDialog.dismiss();
+                if (loadingDialog != null && loadingDialog.isShowing()) {
+                    loadingDialog.dismiss();
+                }
                 if (tipDialog != null && tipDialog.isShowing()) {
                     tipDialog.dismiss();
                 }

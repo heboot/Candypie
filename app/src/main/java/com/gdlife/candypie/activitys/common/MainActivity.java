@@ -99,13 +99,9 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
     public void initData() {
         pushService.initPushService();
         DialogUtils.showIndexDialog(this, permissionUtils, false, null);
-
         mScreenListener = new ScreenReceiverUtil(this);
         mScreenManager = ScreenManager.getScreenManagerInstance(this);
         mScreenListener.setScreenReceiverListener(mScreenListenerer);
-//
-
-
     }
 
     @Override

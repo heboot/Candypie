@@ -4,19 +4,9 @@ import android.view.ViewGroup;
 
 import com.gdlife.candypie.MAPP;
 import com.gdlife.candypie.R;
-import com.gdlife.candypie.activitys.user.HomepageActivity;
 import com.gdlife.candypie.activitys.user.UserBlackListActivity;
-import com.gdlife.candypie.base.HttpObserver;
-import com.gdlife.candypie.common.MKey;
-import com.gdlife.candypie.common.MValue;
 import com.gdlife.candypie.databinding.ItemFavUserListBinding;
-import com.gdlife.candypie.http.HttpClient;
 import com.gdlife.candypie.serivce.UserService;
-import com.gdlife.candypie.utils.DialogUtils;
-import com.gdlife.candypie.utils.IntentUtils;
-import com.gdlife.candypie.utils.SignUtils;
-import com.heboot.base.BaseBean;
-import com.heboot.base.BaseBeanEntity;
 import com.heboot.entity.User;
 import com.heboot.recyclerview.baseadapter.BaseRecyclerViewAdapter;
 import com.heboot.recyclerview.baseadapter.BaseRecyclerViewHolder;
@@ -26,9 +16,7 @@ import java.lang.ref.WeakReference;
 import java.util.List;
 import java.util.Map;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Schedulers;
 
 public class UserBlackAdapter extends BaseRecyclerViewAdapter {
 

@@ -39,6 +39,7 @@ import com.gdlife.candypie.widget.gift.BottomVideoGiftSheetDialogHehe;
 import com.heboot.base.BaseBean;
 import com.heboot.base.BaseBeanEntity;
 import com.heboot.bean.user.UserInfoBean;
+import com.heboot.bean.video.HomepageVideoBean;
 import com.heboot.entity.User;
 import com.heboot.event.DiscoverEvent;
 import com.heboot.utils.LogUtil;
@@ -46,6 +47,8 @@ import com.heboot.utils.MStatusBarUtils;
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.List;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -316,12 +319,24 @@ public class HomepageBottomFragment extends BaseFragment<ActivityUserpageBinding
             shareDialog.show();
         });
         binding.includeVideos.includeTitle.getRoot().setOnClickListener((v) -> {
+//            videoUsers.clear();
+//            for (HomepageVideoBean homepageVideoBean : user.getUser_video().getList()) {
+//                videoUsers.add(user);
+//            }
+//            IntentUtils.toUserVideoAudioPlayActivity(_mActivity, 0, user.getUser_video().getTotal(), videoUsers);
             IntentUtils.toUserVideosActivity(_mActivity, user, UserVideoActivityFrom.NORMAL);
         });
         binding.includeVideos.tvRight.setOnClickListener((v) -> {
+//            videoUsers.clear();
+//            for (HomepageVideoBean homepageVideoBean : user.getUser_video().getList()) {
+//                videoUsers.add(user);
+//            }
+//            IntentUtils.toUserVideoAudioPlayActivity(_mActivity, 0, user.getUser_video().getTotal(), videoUsers);
             IntentUtils.toUserVideosActivity(_mActivity, user, UserVideoActivityFrom.NORMAL);
         });
     }
+
+    private List<User> videoUsers = new ArrayList();
 
     private void doFav(int fav) {
         params = SignUtils.getNormalParams();

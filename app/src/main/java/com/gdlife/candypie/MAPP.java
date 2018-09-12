@@ -2,7 +2,6 @@ package com.gdlife.candypie;
 
 import android.app.Activity;
 import android.app.Application;
-import android.app.Notification;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
@@ -18,12 +17,11 @@ import com.example.http.HttpUtils;
 import com.gdlife.candypie.activitys.order.OrderDetailActivity;
 import com.gdlife.candypie.activitys.pay.BalanceLogActivity;
 import com.gdlife.candypie.activitys.pay.CouponsActivity;
-import com.gdlife.candypie.activitys.user.HomepageActivity;
+import com.gdlife.candypie.activitys.user.UserPageActivity;
 import com.gdlife.candypie.activitys.video.VideoChatActivity;
 import com.gdlife.candypie.base.HttpObserver;
 import com.gdlife.candypie.common.MKey;
 import com.gdlife.candypie.common.MValue;
-import com.gdlife.candypie.common.RechargeType;
 import com.gdlife.candypie.common.VideoChatFrom;
 import com.gdlife.candypie.common.VideoUploadType;
 import com.gdlife.candypie.component.DaggerUtilsComponent;
@@ -47,7 +45,6 @@ import com.gdlife.candypie.widget.gift.BottomVideoGiftSheetDialogHehe;
 import com.heboot.base.BaseBean;
 import com.heboot.bean.config.ConfigBean;
 import com.heboot.bean.im.ImChatStatusBean;
-import com.heboot.bean.luckypan.TurntableConfigBean;
 import com.heboot.common.ConfigValue;
 import com.heboot.entity.User;
 import com.heboot.event.IMEvent;
@@ -56,8 +53,6 @@ import com.heboot.event.VideoEvent;
 import com.heboot.message.MessageToAction;
 import com.heboot.rxbus.RxBus;
 import com.heboot.utils.PreferencesUtils;
-import com.meizu.cloud.pushsdk.PushManager;
-import com.meizu.cloud.pushsdk.util.MzSystemUtils;
 import com.mob.MobSDK;
 import com.tencent.bugly.crashreport.CrashReport;
 import com.umeng.commonsdk.UMConfigure;
@@ -310,9 +305,8 @@ public class MAPP extends Application {
                     intent.putExtra(MKey.FROM, VideoChatFrom.SERVICER);
                     pendingIntent = PendingIntent.getActivity(currentActivity, 0, intent, 0);
                 } else if (((MessageEvent.ShowMessageNotiEvent) o).getSystemNotification().getValue().getTo_action().equals(MessageToAction.service_profile.toString())) {
-                    intent = new Intent(currentActivity, HomepageActivity.class);
-                    intent.putExtra(MKey.FROM, MValue.FROM_MY);
-                    intent.putExtra(MKey.USER, UserService.getInstance().getUser());
+                    intent = new Intent(currentActivity, UserPageActivity.class);
+                    intent.putExtra(MKey.UID, UserService.getInstance().getUser().getId() + "");
                     pendingIntent = PendingIntent.getActivity(currentActivity, 0, intent, 0);
                 }
             }

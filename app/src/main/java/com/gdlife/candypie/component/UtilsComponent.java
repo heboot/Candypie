@@ -13,7 +13,6 @@ import com.gdlife.candypie.activitys.login2register.RegisterActivity;
 import com.gdlife.candypie.activitys.login2register.RegisterCodeActivity;
 import com.gdlife.candypie.activitys.login2register.RegisterInfoActivity;
 import com.gdlife.candypie.activitys.login2register.RegisterPwdActivity;
-import com.gdlife.candypie.activitys.user.HomepageActivity;
 import com.gdlife.candypie.activitys.user.UserInfoActivity;
 import com.gdlife.candypie.activitys.video.UserVideosActivity;
 import com.gdlife.candypie.listener.MyLocationListener;
@@ -64,8 +63,6 @@ public interface UtilsComponent {
     void inject(AuthSkillActivity authSkillActivity);
 
     void inject(UserVideosActivity userVideosActivity);
-
-    void inject(HomepageActivity homepageActivity);
 
 
     void inject(HTMLActivity htmlActivity);

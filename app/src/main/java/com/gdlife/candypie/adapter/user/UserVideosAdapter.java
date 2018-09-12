@@ -22,6 +22,7 @@ import com.heboot.recyclerview.baseadapter.BaseRecyclerViewHolder;
 import com.jakewharton.rxbinding2.view.RxView;
 
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -36,6 +37,8 @@ public class UserVideosAdapter extends BaseRecyclerViewAdapter {
     private boolean isMe = false;
 
     private WeakReference<UserVideosActivity> weakReference;
+
+    private List<User> videoUsers = new ArrayList();
 
     private boolean isReplace;
 
@@ -93,12 +96,24 @@ public class UserVideosAdapter extends BaseRecyclerViewAdapter {
                     ImageUtils.showImage(binding.ivImg, s.getCover_img());
                     binding.getRoot().setOnClickListener((v) -> {
                         if (s.getStatus() == MValue.VIDEO_AUTH_STATUS_ING) {
+                            videoUsers.clear();
+                            for (HomepageVideoBean homepageVideoBean : user.getUser_video().getList()) {
+                                videoUsers.add(user);
+                            }
+                            IntentUtils.toUserVideoAudioPlayActivity(binding.getRoot().getContext(), position - 1, user.getUser_video().getTotal(), videoUsers);
                             return;
                         } else {
                             if (isReplace) {
                                 MValue.REPLACE_VIDEO = true;
+                                IntentUtils.toPlayerActivity2(binding.getRoot().getContext(), s.getPath(), isReplace ? VideoPreviewFrom.CHOOSE : VideoPreviewFrom.USER, s.getId(), s.getCover_img());
+                            } else {
+                                videoUsers.clear();
+                                for (HomepageVideoBean homepageVideoBean : user.getUser_video().getList()) {
+                                    videoUsers.add(user);
+                                }
+                                IntentUtils.toUserVideoAudioPlayActivity(binding.getRoot().getContext(), position - 1, user.getUser_video().getTotal(), videoUsers);
                             }
-                            IntentUtils.toPlayerActivity2(binding.getRoot().getContext(), s.getPath(), isReplace ? VideoPreviewFrom.CHOOSE : VideoPreviewFrom.USER, s.getId(), s.getCover_img());
+
                         }
                     });
                     if (s.getStatus() == MValue.VIDEO_AUTH_STATUS_ING) {
@@ -118,7 +133,14 @@ public class UserVideosAdapter extends BaseRecyclerViewAdapter {
                 RxView.clicks(binding.getRoot()).throttleFirst(3, TimeUnit.SECONDS).subscribe(new Consumer<Object>() {
                     @Override
                     public void accept(Object o) throws Exception {
-                        IntentUtils.toPlayerActivity3(binding.getRoot().getContext(), data, position, user.getNickname());
+
+                        videoUsers.clear();
+                        for (HomepageVideoBean homepageVideoBean : user.getUser_video().getList()) {
+                            videoUsers.add(user);
+                        }
+                        IntentUtils.toUserVideoAudioPlayActivity(binding.getRoot().getContext(), position, user.getUser_video().getTotal(), videoUsers);
+
+//                        IntentUtils.toPlayerActivity3(binding.getRoot().getContext(), data, position, user.getNickname());
                     }
                 });
 

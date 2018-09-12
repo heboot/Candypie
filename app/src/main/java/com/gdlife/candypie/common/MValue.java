@@ -8,6 +8,9 @@ import com.gdlife.candypie.widget.luckpan.LuckpanDialog;
 import com.heboot.bean.gift.GiftBean;
 import com.heboot.bean.login2register.UpdateVersionBean;
 import com.heboot.bean.message.TurntableResultBean;
+import com.heboot.entity.User;
+
+import java.util.List;
 
 /**
  * Created by heboot on 2018/2/3.
@@ -155,5 +158,7 @@ public class MValue {
      * 当前选择要送出去的礼物
      */
     public static GiftBean currentSelectedGiftBean = null;
+
+    public static List<User> currentUserVideosList;
 
 }
