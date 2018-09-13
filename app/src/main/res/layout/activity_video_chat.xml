@@ -6,7 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <RelativeLayout
+        <com.gdlife.candypie.widget.MyDragFrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -48,11 +48,8 @@
                 android:id="@+id/local_video_view_container"
                 android:layout_width="@dimen/x92"
                 android:layout_height="@dimen/y166"
-                android:layout_alignParentRight="true"
                 android:layout_marginTop="25dp"
-                android:visibility="gone"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                android:visibility="gone">
 
                 <android.opengl.GLSurfaceView
                     android:id="@+id/m_glview"
@@ -62,7 +59,20 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
             </FrameLayout>
-        </RelativeLayout>
+
+
+            <ImageView
+                android:id="@+id/user_avatar"
+                android:layout_width="@dimen/x92"
+                android:layout_height="@dimen/y166"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/x10"
+                android:layout_marginTop="25dp"
+                android:scaleType="centerCrop"
+                android:visibility="gone"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"></ImageView>
+        </com.gdlife.candypie.widget.MyDragFrameLayout>
 
 
         <com.qmuiteam.qmui.widget.QMUIRadiusImageView

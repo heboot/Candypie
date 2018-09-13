@@ -10,12 +10,15 @@ import android.media.AudioManager;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.widget.ViewDragHelper;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
@@ -50,6 +53,7 @@ import com.gdlife.candypie.widget.gift.BottomVideoGiftSheetDialogHehe;
 import com.gdlife.candypie.widget.luckpan.LuckpanDialog;
 import com.gdlife.candypie.widget.luckpan.TurntableIntiveTipDialog;
 import com.heboot.base.BaseBean;
+import com.heboot.base.BaseBeanEntity;
 import com.heboot.bean.gift.GiftBean;
 import com.heboot.bean.luckypan.TurntableConfigBean;
 import com.heboot.bean.theme.PostVideoChatBean;
@@ -62,11 +66,13 @@ import com.heboot.event.VideoChatEvent;
 import com.heboot.faceunity_unit.fulivedemo.renderer.CameraRenderer;
 import com.heboot.rxbus.RxBus;
 import com.heboot.utils.LogUtil;
+import com.heboot.utils.ViewUtils;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.opensource.svgaplayer.SVGACallback;
 import com.opensource.svgaplayer.SVGADrawable;
 import com.opensource.svgaplayer.SVGAParser;
 import com.opensource.svgaplayer.SVGAVideoEntity;
+import com.qmuiteam.qmui.util.QMUIDisplayHelper;
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 import com.yalantis.dialog.TipCustomDialog;
 
@@ -478,9 +484,17 @@ public class VideoChatActivity extends BaseActivity<ActivityVideoChatBinding> im
                 permissionUtils.getCameraPermission(this);
                 return;
             }
-            MAPP.mapp.getM_agoraAPI().channelInviteAccept(postVideoChatBean.getChannel_name(), String.valueOf(postVideoChatBean.getUser().getId()), 0, "");
-            joinChannel();
-            setupLocalVideo();
+
+            if (videoChatService == null) {
+                videoChatService = new VideoChatService();
+            }
+
+            checkVideoService();
+
+//
+//            MAPP.mapp.getM_agoraAPI().channelInviteAccept(postVideoChatBean.getChannel_name(), String.valueOf(postVideoChatBean.getUser().getId()), 0, "");
+//            joinChannel();
+//            setupLocalVideo();
         });
         binding.ivReject.setOnClickListener((v) -> {
 //            AudioUtil.stop();
@@ -545,9 +559,185 @@ public class VideoChatActivity extends BaseActivity<ActivityVideoChatBinding> im
                 }
             }
         });
+//
+        binding.localVideoViewContainer.setOnClickListener((v) -> {
+            setLocalView2Full();
+        });
+//        binding.mGlview.setOnClickListener((v) -> {
+//            setLocalView2Full();
+//        });
+        binding.remoteVideoViewContainer.setOnClickListener((v) -> {
+            setLocalView2Full();
+        });
+        binding.userAvatar.setOnClickListener((v) -> {
+            setLocalView2Full();
+        });
+
+//        binding.localVideoViewContainer.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                switch (event.getAction()) {
+//                    case MotionEvent.ACTION_DOWN:
+//                        moveX = event.getX();
+//                        moveY = event.getY();
+//                        break;
+//                    case MotionEvent.ACTION_MOVE:
+//                        binding.localVideoViewContainer.setTranslationX(binding.localVideoViewContainer.getX() + (event.getX() - moveX));
+//                        binding.localVideoViewContainer.setTranslationY(binding.localVideoViewContainer.getY() + (event.getY() - moveY));
+//                        break;
+//                    case MotionEvent.ACTION_UP:
+//                        break;
+//                    case MotionEvent.ACTION_CANCEL:
+//                        break;
+//                }
+//
+//                return true;
+//
+//            }
+//        });
+//
+//        binding.remoteVideoViewContainer.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                switch (event.getAction()) {
+//                    case MotionEvent.ACTION_DOWN:
+//                        moveX = event.getX();
+//                        moveY = event.getY();
+//                        break;
+//                    case MotionEvent.ACTION_MOVE:
+//                        binding.remoteVideoViewContainer.setTranslationX(binding.remoteVideoViewContainer.getX() + (event.getX() - moveX));
+//                        binding.remoteVideoViewContainer.setTranslationY(binding.remoteVideoViewContainer.getY() + (event.getY() - moveY));
+//                        break;
+//                    case MotionEvent.ACTION_UP:
+//                        break;
+//                    case MotionEvent.ACTION_CANCEL:
+//                        break;
+//                }
+//
+//                return true;
+//
+//            }
+//        });
 
 
     }
+
+
+    public void checkVideoService() {
+        params = SignUtils.getNormalParams();
+        String sign = SignUtils.doSign(params);
+        params.put(MKey.SIGN, sign);
+        HttpClient.Builder.getGuodongServer()._check_run_service(params).observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribe(new HttpObserver<BaseBeanEntity>() {
+            @Override
+            public void onSuccess(BaseBean<BaseBeanEntity> baseBean) {
+                if (baseBean.getData().getRun_service_tip() != null) {
+                    MAPP.mapp.getM_agoraAPI().channelInviteAccept(postVideoChatBean.getChannel_name(), String.valueOf(postVideoChatBean.getUser().getId()), 0, "");
+                    joinChannel();
+                    setupLocalVideo();
+                } else {
+                    finish();
+                }
+
+            }
+
+            @Override
+            public void onError(BaseBean<BaseBeanEntity> baseBean) {
+                finish();
+            }
+        });
+    }
+
+    float moveX;
+    float moveY;
+
+
+    private boolean localViewFullFlag = false;
+
+
+    private void setLocalView2Full() {
+
+        if (!localViewFullFlag) {
+            setLocalView(true);
+            //服务者点击 本地视频
+            if (videoChatFrom == VideoChatFrom.SERVICER) {
+                //如果用户远程视频在打开状态 设为小窗口显示模式
+                if (binding.remoteVideoViewContainer != null && binding.remoteVideoViewContainer.getVisibility() == View.VISIBLE) {
+                    binding.userAvatar.setVisibility(View.GONE);
+                    ViewUtils.setViewWidth(binding.remoteVideoViewContainer, getResources().getDimensionPixelOffset(R.dimen.x92));
+                    ViewUtils.setViewHeight(binding.remoteVideoViewContainer, getResources().getDimensionPixelOffset(R.dimen.y166));
+                    binding.remoteVideoViewContainer.setZ(100f);
+                    binding.localVideoViewContainer.setZ(0f);
+                    binding.mGlview.setZ(0f);
+                    binding.remoteVideoViewContainer.setEnabled(true);
+                    binding.userAvatar.setEnabled(false);
+                }
+                //如果用户远程视频没有打开，把头像挪到右上角显示小头像
+                else if (binding.remoteVideoViewContainer != null && binding.remoteVideoViewContainer.getVisibility() != View.VISIBLE) {
+//                    ViewUtils.setViewWidth(binding.ivAvatarBg, getResources().getDimensionPixelOffset(R.dimen.x92));
+//                    ViewUtils.setViewHeight(binding.ivAvatarBg, getResources().getDimensionPixelOffset(R.dimen.y166));
+                    ImageUtils.showImage(binding.userAvatar, postVideoChatBean.getUser().getAvatar());
+                    binding.userAvatar.setVisibility(View.VISIBLE);
+                    binding.userAvatar.setZ(100f);
+                    binding.userAvatar.setEnabled(true);
+                    binding.remoteVideoViewContainer.setEnabled(false);
+                    binding.localVideoViewContainer.setZ(0f);
+                }
+
+            }
+            binding.localVideoViewContainer.setEnabled(false);
+            binding.mGlview.setEnabled(false);
+            localViewFullFlag = true;
+        } else {
+            setLocalView(false);
+            //服务者点击 本地视频全屏->小屏
+            if (videoChatFrom == VideoChatFrom.SERVICER) {
+                //如果用户远程视频在打开状态 设为全屏
+                if (binding.remoteVideoViewContainer != null && binding.remoteVideoViewContainer.getVisibility() == View.VISIBLE) {
+                    binding.userAvatar.setVisibility(View.GONE);
+                    ViewUtils.setViewWidth(binding.remoteVideoViewContainer, QMUIDisplayHelper.getScreenWidth(this));
+                    ViewUtils.setViewHeight(binding.remoteVideoViewContainer, QMUIDisplayHelper.getScreenHeight(this));
+                    binding.remoteVideoViewContainer.setZ(0f);
+                    binding.localVideoViewContainer.setZ(100f);
+                }
+                //如果用户远程视频没有打开，把头像挪到右上角显示小头像
+                else if (binding.userAvatar.getVisibility() == View.VISIBLE) {
+                    ViewUtils.setViewWidth(binding.remoteVideoViewContainer, QMUIDisplayHelper.getScreenWidth(this));
+                    ViewUtils.setViewHeight(binding.remoteVideoViewContainer, QMUIDisplayHelper.getScreenHeight(this));
+//                    ViewUtils.setViewWidth(binding.ivAvatarBg, getResources().getDimensionPixelOffset(R.dimen.x92));
+//                    ViewUtils.setViewHeight(binding.ivAvatarBg, getResources().getDimensionPixelOffset(R.dimen.y166));
+                    binding.userAvatar.setVisibility(View.GONE);
+                    binding.ivAvatarBg.setVisibility(View.VISIBLE);
+
+                    binding.ivAvatarBg.setZ(0f);
+                    binding.localVideoViewContainer.setZ(100f);
+
+                }
+            }
+            binding.userAvatar.setEnabled(false);
+            binding.localVideoViewContainer.setEnabled(true);
+            binding.remoteVideoViewContainer.setEnabled(false);
+            binding.mGlview.setEnabled(true);
+            localViewFullFlag = false;
+        }
+
+
+    }
+
+    private void setLocalView(boolean full) {
+        if (full) {
+            ViewUtils.setViewWidth(binding.localVideoViewContainer, QMUIDisplayHelper.getScreenWidth(this));
+            ViewUtils.setViewHeight(binding.localVideoViewContainer, QMUIDisplayHelper.getScreenHeight(this));
+            ViewUtils.setViewWidth(binding.mGlview, QMUIDisplayHelper.getScreenWidth(this));
+            ViewUtils.setViewHeight(binding.mGlview, QMUIDisplayHelper.getScreenHeight(this));
+        } else {
+            ViewUtils.setViewWidth(binding.localVideoViewContainer, getResources().getDimensionPixelOffset(R.dimen.x92));
+            ViewUtils.setViewHeight(binding.localVideoViewContainer, getResources().getDimensionPixelOffset(R.dimen.y166));
+            ViewUtils.setViewWidth(binding.mGlview, getResources().getDimensionPixelOffset(R.dimen.x92));
+            ViewUtils.setViewHeight(binding.mGlview, getResources().getDimensionPixelOffset(R.dimen.y166));
+        }
+
+    }
+
 
     private LuckpanDialog luckpanDialog;
 
@@ -1261,6 +1451,9 @@ public class VideoChatActivity extends BaseActivity<ActivityVideoChatBinding> im
         if (mCameraRenderer != null) {
             mCameraRenderer.onPause();
             mCameraRenderer.onDestroy();
+        }
+        if (currentState == VideoCatState.shutdown) {
+            finish();
         }
     }
 
