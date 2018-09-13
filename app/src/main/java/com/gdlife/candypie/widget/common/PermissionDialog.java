@@ -65,7 +65,7 @@ public class PermissionDialog extends Dialog {
             if (hasNoti) {
                 binding.llytContent.setVisibility(View.GONE);
             } else {
-                if (UserService.getInstance().getUser().getService_auth_status() != null && UserService.getInstance().getUser().getService_auth_status().intValue() == MValue.AUTH_STATUS_SUC) {
+                if (UserService.getInstance().getUser() != null && UserService.getInstance().getUser().getService_auth_status() != null && UserService.getInstance().getUser().getService_auth_status().intValue() == MValue.AUTH_STATUS_SUC) {
                     binding.tvCancel.setVisibility(View.GONE);
                 }
             }
