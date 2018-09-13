@@ -18,6 +18,7 @@ import com.gdlife.candypie.utils.IntentUtils;
 import com.gdlife.candypie.utils.PermissionUtils;
 import com.gdlife.candypie.utils.SignUtils;
 import com.gdlife.candypie.utils.StringUtils;
+import com.gdlife.candypie.utils.ToastUtils;
 import com.gdlife.candypie.widget.common.TipDialog;
 import com.gdlife.candypie.widget.dialog.ServiceTipDialog;
 import com.heboot.base.BaseBean;
@@ -41,6 +42,32 @@ public class VideoChatService {
     private Map<String, Object> params;
 
 
+    public void checkVideoService() {
+        params = SignUtils.getNormalParams();
+        String sign = SignUtils.doSign(params);
+        params.put(MKey.SIGN, sign);
+        HttpClient.Builder.getGuodongServer()._check_run_service(params).observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribe(new HttpObserver<BaseBeanEntity>() {
+            @Override
+            public void onSuccess(BaseBean<BaseBeanEntity> baseBean) {
+                if (baseBean.getData().getRun_service_tip() != null) {
+                    IntentUtils.toVideoChatActivity(MAPP.mapp, baseBean.getData().getRun_service_tip().getUser_service_id(), baseBean.getData().getRun_service_tip().getChat_room_config(), VideoChatFrom.SERVICER);
+                }
+
+            }
+
+            @Override
+            public void onError(BaseBean<BaseBeanEntity> baseBean) {
+
+            }
+        });
+    }
+
+
+    /**
+     * 切换视频接听状态
+     *
+     * @param switchButton
+     */
     public void switch_video_chat_status(SwitchButton switchButton) {
         params = SignUtils.getNormalParams();
         String sign = SignUtils.doSign(params);

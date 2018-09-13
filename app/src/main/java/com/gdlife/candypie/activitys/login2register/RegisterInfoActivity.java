@@ -139,7 +139,9 @@ public class RegisterInfoActivity extends BaseActivity<ActivityRegisterInfoBindi
             hashMap = (HashMap) getIntent().getExtras().get(MKey.MAP);
             if (sync_login_type == LoginType.WX) {
                 syncHeadUrl = (String) hashMap.get("headimgurl");
-                ImageUtils.showImage(binding.ivAvatar, (String) hashMap.get("headimgurl"));
+                if (!StringUtils.isEmpty(syncHeadUrl)) {
+                    ImageUtils.showImage(binding.ivAvatar, syncHeadUrl);
+                }
                 binding.etNick.setText((String) hashMap.get("nickname"));
                 if ((int) hashMap.get("sex") == 1) {
                     currentSelect = 1;
@@ -152,7 +154,10 @@ public class RegisterInfoActivity extends BaseActivity<ActivityRegisterInfoBindi
                 }
             } else if (sync_login_type == LoginType.QQ) {
                 syncHeadUrl = (String) hashMap.get("figureurl_qq_2");
-                ImageUtils.showImage(binding.ivAvatar, (String) hashMap.get("figureurl_qq_2"));
+                if (!StringUtils.isEmpty(syncHeadUrl)) {
+                    ImageUtils.showImage(binding.ivAvatar, syncHeadUrl);
+                }
+
                 binding.etNick.setText((String) hashMap.get("nickname"));
                 int qqsex = hashMap.get("gender").equals("男") ? 1 : 0;
                 if (qqsex == 1) {
@@ -321,7 +326,9 @@ public class RegisterInfoActivity extends BaseActivity<ActivityRegisterInfoBindi
                         } else {
                             IntentUtils.toMainActivity(RegisterInfoActivity.this);
                         }
-                        loadingDialog.dismiss();
+                        if (loadingDialog != null && loadingDialog.isShowing()) {
+                            loadingDialog.dismiss();
+                        }
 //                        Intent intent = new Intent(RegisterInfoActivity.this, IndexActivity.class);
 //                        startActivity(intent);
                         finish();
@@ -341,7 +348,6 @@ public class RegisterInfoActivity extends BaseActivity<ActivityRegisterInfoBindi
             @Override
             public void onError(BaseBean<BaseBeanEntity> baseBean) {
                 submitFlag = false;
-                loadingDialog.dismiss();
                 if (loadingDialog != null && loadingDialog.isShowing()) {
                     loadingDialog.dismiss();
                 }
@@ -471,7 +477,7 @@ public class RegisterInfoActivity extends BaseActivity<ActivityRegisterInfoBindi
         }
 
         //先下载头像
-        if (!StringUtils.isEmpty(sync_login_id)) {
+        if (!StringUtils.isEmpty(sync_login_id) && !StringUtils.isEmpty(syncHeadUrl)) {
             loadingDialog.show();
             if (downloadService == null) {
                 downloadService = new DownloadService();
@@ -480,55 +486,57 @@ public class RegisterInfoActivity extends BaseActivity<ActivityRegisterInfoBindi
             File file = new File(SDCardUtils.getRootPathPrivatePic() + "/" + downloadedVideoPath);
 
             if (!file.exists()) {
-                downloadService.downlaodAvatar(syncHeadUrl, downloadedVideoPath, new Consumer<Status>() {
-                    @Override
-                    public void accept(Status status) {
-                        try {
-                            if (status instanceof Succeed) {
-                                if (!submitFlag) {
-                                    UploadService.doUploadAvatar(SDCardUtils.getRootPathPrivatePic() + "/" + downloadedVideoPath, new Observer<UploadAvatarReq>() {
-                                        @Override
-                                        public void onSubscribe(Disposable d) {
-                                            addDisposable(d);
-                                        }
-
-                                        @Override
-                                        public void onNext(UploadAvatarReq uploadAvatarReq) {
-                                            loadingDialog.dismiss();
-                                            if (uploadAvatarReq != null) {
-                                                RegisterInfoActivity.this.uploadAvatarReq = uploadAvatarReq;
-                                            }
-                                            if (!submitFlag) {
-                                                doSubmit();
+                if (!StringUtils.isEmpty(syncHeadUrl)) {
+                    downloadService.downlaodAvatar(syncHeadUrl, downloadedVideoPath, new Consumer<Status>() {
+                        @Override
+                        public void accept(Status status) {
+                            try {
+                                if (status instanceof Succeed) {
+                                    if (!submitFlag) {
+                                        UploadService.doUploadAvatar(SDCardUtils.getRootPathPrivatePic() + "/" + downloadedVideoPath, new Observer<UploadAvatarReq>() {
+                                            @Override
+                                            public void onSubscribe(Disposable d) {
+                                                addDisposable(d);
                                             }
 
-                                        }
+                                            @Override
+                                            public void onNext(UploadAvatarReq uploadAvatarReq) {
+                                                loadingDialog.dismiss();
+                                                if (uploadAvatarReq != null) {
+                                                    RegisterInfoActivity.this.uploadAvatarReq = uploadAvatarReq;
+                                                }
+                                                if (!submitFlag) {
+                                                    doSubmit();
+                                                }
 
-                                        @Override
-                                        public void onError(Throwable e) {
-                                            loadingDialog.dismiss();
-                                            ToastUtils.showToast(e.getMessage());
-                                        }
+                                            }
 
-                                        @Override
-                                        public void onComplete() {
+                                            @Override
+                                            public void onError(Throwable e) {
+                                                loadingDialog.dismiss();
+                                                ToastUtils.showToast(e.getMessage());
+                                            }
 
-                                        }
-                                    });
+                                            @Override
+                                            public void onComplete() {
+
+                                            }
+                                        });
+                                    }
+                                } else if (status instanceof Failed) {
+                                    loadingDialog.dismiss();
+                                    ToastUtils.showToast("下载失败，请稍后重试");
                                 }
-                            } else if (status instanceof Failed) {
-                                loadingDialog.dismiss();
-                                ToastUtils.showToast("下载失败，请稍后重试");
+                            } catch (Exception e) {
+                                e.printStackTrace();
                             }
-                        } catch (Exception e) {
-                            e.printStackTrace();
+
                         }
+                    });
 
-                    }
-                });
-
-                RxDownload.INSTANCE.start(syncHeadUrl).observeOn(AndroidSchedulers.mainThread()).
-                        subscribe();
+                    RxDownload.INSTANCE.start(syncHeadUrl).observeOn(AndroidSchedulers.mainThread()).
+                            subscribe();
+                }
 
             } else {
                 if (!submitFlag) {

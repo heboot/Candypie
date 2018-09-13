@@ -357,6 +357,10 @@ public interface HttpClient {
     @POST("service/user_kpi/level")
     Observable<BaseBean<KpiLevelBean>> level(@FieldMap Map<String, Object> params);
 
+    @FormUrlEncoded
+    @POST("service/user_service/_check_run_service")
+    Observable<BaseBean<BaseBeanEntity>> _check_run_service(@FieldMap Map<String, Object> params);
+
 
     @FormUrlEncoded
     @POST("service/user_score_log/score_list")

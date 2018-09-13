@@ -203,6 +203,7 @@
                     android:layout_marginRight="@dimen/x16"
                     android:layout_marginTop="@dimen/y9"
                     android:text="充值"
+                    android:visibility="gone"
                     android:textColor="@color/white"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent"

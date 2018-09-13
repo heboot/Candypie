@@ -87,6 +87,7 @@
             android:screenOrientation="portrait"></activity>
 
         <activity
+            android:launchMode="singleTask"
             android:name=".activitys.common.MainActivity"
             android:screenOrientation="portrait"></activity>
 

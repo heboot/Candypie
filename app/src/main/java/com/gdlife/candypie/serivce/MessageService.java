@@ -7,6 +7,7 @@ import com.gdlife.candypie.R;
 import com.gdlife.candypie.common.MValue;
 import com.gdlife.candypie.common.VideoChatFrom;
 import com.gdlife.candypie.repository.GiftRepository;
+import com.gdlife.candypie.serivce.theme.VideoChatService;
 import com.gdlife.candypie.utils.AudioUtil;
 import com.gdlife.candypie.utils.AudioUtil2;
 import com.gdlife.candypie.utils.IntentUtils;
@@ -150,9 +151,12 @@ public class MessageService {
                     }
                     RxBus.getInstance().post(new MessageEvent.NewOrderEvent(systemNotification.getValue().getUser_service_id(), systemNotification.getValue().getPush_service()));
                 } else if (systemNotification.getValue() != null && !StringUtils.isEmpty(systemNotification.getValue().getTo_action()) && systemNotification.getValue().getTo_action().equals(MessageToAction.start_video_chat.toString())) {
-//                    if (!APPUtils.isBackground(MAPP.mapp)) {
                     // TODO: 2018/4/13  3秒延迟
-                    IntentUtils.toVideoChatActivity(MAPP.mapp, systemNotification.getValue().getUser_service_id(), systemNotification.getValue().getChat_room_config(), VideoChatFrom.SERVICER);
+                    if (videoChatService == null) {
+                        videoChatService = new VideoChatService();
+                    }
+                    videoChatService.checkVideoService();
+//                    IntentUtils.toVideoChatActivity(MAPP.mapp, systemNotification.getValue().getUser_service_id(), systemNotification.getValue().getChat_room_config(), VideoChatFrom.SERVICER);
 //                    }
                 }
                 if (systemNotification.getValue() != null && systemNotification.getValue().getIs_tip() == 1) {
@@ -175,6 +179,8 @@ public class MessageService {
 
 
     }
+
+    private VideoChatService videoChatService;
 
     public void doSystemMessageAction(String toAction, SystemMessage systemMessage) {
 

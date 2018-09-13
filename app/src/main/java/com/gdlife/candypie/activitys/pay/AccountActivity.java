@@ -227,15 +227,15 @@ public class AccountActivity extends BaseActivity<ActivityAccountBinding> {
 
     private void checkUpLevel(String from) {
 
-        if (UserService.getInstance().getUser().getService_auth_status() != null && UserService.getInstance().getUser().getService_auth_status() == MValue.AUTH_STATUS_SUC) {
-
-            if (MAPP.mapp.getConfigBean().getFunction_module_switch() != null && MAPP.mapp.getConfigBean().getFunction_module_switch().getServicer_rechage() == 1) {
-                binding.qrbRecharge.setVisibility(View.VISIBLE);
-            } else {
-                binding.qrbRecharge.setVisibility(View.GONE);
-            }
-
-        }
+//        if (UserService.getInstance().getUser().getService_auth_status() != null && UserService.getInstance().getUser().getService_auth_status() == MValue.AUTH_STATUS_SUC) {
+//
+//            if (MAPP.mapp.getConfigBean().getFunction_module_switch() != null && MAPP.mapp.getConfigBean().getFunction_module_switch().getServicer_rechage() == 1) {
+//                binding.qrbRecharge.setVisibility(View.VISIBLE);
+//            } else {
+//                binding.qrbRecharge.setVisibility(View.GONE);
+//            }
+//
+//        }
 
         binding.tvCouponNum.setText("（" + UserService.getInstance().getUser().getCoupons_nums() + getString(R.string.unit_coupon) + ")");
 

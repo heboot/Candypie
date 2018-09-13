@@ -169,7 +169,7 @@ public class PermissionUtils {
                     }
                 });
             }
-            if (!noti && UserService.getInstance().getUser().getService_auth_status() != null && UserService.getInstance().getUser().getService_auth_status().intValue() == MValue.AUTH_STATUS_SUC) {
+            if (!noti && UserService.getInstance().getUser() != null && UserService.getInstance().getUser().getService_auth_status() != null && UserService.getInstance().getUser().getService_auth_status().intValue() == MValue.AUTH_STATUS_SUC) {
                 permissionDialog.setCancelable(false);
                 permissionDialog.setCanceledOnTouchOutside(false);
             }

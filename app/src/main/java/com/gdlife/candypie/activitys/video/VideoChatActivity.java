@@ -20,14 +20,12 @@ import android.widget.FrameLayout;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.faceunity.FURenderer;
-import com.gdlife.candypie.BuildConfig;
 import com.gdlife.candypie.MAPP;
 import com.gdlife.candypie.R;
 import com.gdlife.candypie.base.BaseActivity;
 import com.gdlife.candypie.base.HttpObserver;
 import com.gdlife.candypie.common.MKey;
 import com.gdlife.candypie.common.MValue;
-import com.gdlife.candypie.common.RechargeType;
 import com.gdlife.candypie.common.VideoChatFrom;
 import com.gdlife.candypie.component.DaggerServiceComponent;
 import com.gdlife.candypie.databinding.ActivityVideoChatBinding;
@@ -39,7 +37,6 @@ import com.gdlife.candypie.serivce.ThemeService;
 import com.gdlife.candypie.serivce.UserInfoService;
 import com.gdlife.candypie.serivce.UserService;
 import com.gdlife.candypie.serivce.theme.VideoChatService;
-import com.gdlife.candypie.utils.AudioUtil;
 import com.gdlife.candypie.utils.AudioUtil2;
 import com.gdlife.candypie.utils.DialogUtils;
 import com.gdlife.candypie.utils.ImageUtils;
@@ -64,6 +61,7 @@ import com.heboot.event.TurntableEvent;
 import com.heboot.event.VideoChatEvent;
 import com.heboot.faceunity_unit.fulivedemo.renderer.CameraRenderer;
 import com.heboot.rxbus.RxBus;
+import com.heboot.utils.LogUtil;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.opensource.svgaplayer.SVGACallback;
 import com.opensource.svgaplayer.SVGADrawable;
@@ -895,7 +893,7 @@ public class VideoChatActivity extends BaseActivity<ActivityVideoChatBinding> im
 
         @Override
         public void onJoinChannelSuccess(final String channel, final int uid, final int elapsed) {
-
+            LogUtil.e("自己加入房间", "uid=" + uid);
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
@@ -930,6 +928,7 @@ public class VideoChatActivity extends BaseActivity<ActivityVideoChatBinding> im
 
         @Override
         public void onUserJoined(int uid, int elapsed) {
+            LogUtil.e("用户加入房间", "uid=" + uid);
             if (uid != UserService.getInstance().getUser().getId().intValue()) {
                 runOnUiThread(new Runnable() {
                     @Override
@@ -1415,28 +1414,6 @@ public class VideoChatActivity extends BaseActivity<ActivityVideoChatBinding> im
 
     @Override
     public void onPermissionsDenied(int requestCode, List<String> perms) {
-//        if (EasyPermissions.somePermissionPermanentlyDenied(this, perms)) {
-//            permissionUtils.re(this);
-//
-//        }
-//        TipCustomOnePermissionDialog tipCustomOnePermissionDialog = null;
-//
-//        if (requestCode == 4002) {
-//            if (tipCustomOnePermissionDialog == null || !tipCustomOnePermissionDialog.isShowing()) {
-//                tipCustomOnePermissionDialog = new TipCustomOnePermissionDialog.Builder(this, "需要摄像头权限才能正常视频", getString(R.string.goto_setting), new Consumer<Integer>() {
-//                    @Override
-//                    public void accept(Integer integer) throws Exception {
-//                        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-//                        Uri uri = Uri.fromParts("package", getPackageName(), null);
-//                        intent.setData(uri);
-//
-//                        // Start for result
-//                        startActivityForResult(intent, MCode.REQUEST_CODE.GET_PERMISSION_LOC);
-//                    }
-//                }).create();
-//                tipCustomOnePermissionDialog.show();
-//            }
-//        }
     }
 
 

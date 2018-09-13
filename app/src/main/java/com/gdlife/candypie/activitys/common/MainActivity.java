@@ -12,6 +12,8 @@ import com.faceunity.FURenderer;
 import com.gdlife.candypie.MAPP;
 import com.gdlife.candypie.R;
 import com.gdlife.candypie.base.BaseActivity;
+import com.gdlife.candypie.common.MKey;
+import com.gdlife.candypie.common.VideoChatFrom;
 import com.gdlife.candypie.databinding.ActivityMainBinding;
 import com.gdlife.candypie.fragments.index.IndexFragment;
 import com.gdlife.candypie.fragments.message.MessageContainerFragment;
@@ -321,6 +323,20 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (myFragment != null) {
             myFragment.onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        LogUtil.e(TAG, "onNewIntent");
+        super.onNewIntent(intent);
+        if (intent.getExtras() != null && intent.getExtras().get(MKey.FROM) != null) {
+            if ((VideoChatFrom) intent.getExtras().get(MKey.FROM) == VideoChatFrom.SERVICER) {
+                if (videoChatService == null) {
+                    videoChatService = new VideoChatService();
+                }
+                videoChatService.checkVideoService();
+            }
         }
     }
 

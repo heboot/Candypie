@@ -1,13 +1,10 @@
 package com.gdlife.candypie.serivce.theme;
 
 import android.support.v4.app.FragmentActivity;
-import android.view.ViewGroup;
 
 import com.gdlife.candypie.MAPP;
-import com.gdlife.candypie.activitys.video.VideoChatActivity;
 import com.gdlife.candypie.base.HttpObserver;
 import com.gdlife.candypie.common.MKey;
-import com.gdlife.candypie.common.RechargeType;
 import com.gdlife.candypie.http.HttpClient;
 import com.gdlife.candypie.serivce.UserService;
 import com.gdlife.candypie.utils.IntentUtils;

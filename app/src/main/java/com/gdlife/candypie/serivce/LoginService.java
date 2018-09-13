@@ -107,6 +107,7 @@ public class LoginService {
         plat.setPlatformActionListener(platformActionListener);
     }
 
+
     public void doThirdLogin(String nickName, String headPic, int sex, String openId, String type, String unionid, HashMap map) {
         Map<String, Object> params = SignUtils.getNormalParams();
         params.put(MKey.NICK_NAME, nickName);
@@ -145,7 +146,10 @@ public class LoginService {
 
                     UserService.getInstance().setUser(baseBean.getData().getUser());
                     RxBus.getInstance().post(UserEvent.LOGIN_SUC);
-                    if (MAPP.mapp.getConfigBean().getIs_review_status() == 1) {
+
+                    if (baseBean.getData().getRun_service_tip() != null && !StringUtils.isEmpty(baseBean.getData().getRun_service_tip().getUser_service_id())) {
+                        new ServerService().doRuningService(MAPP.mapp.getCurrentActivity(), baseBean.getData().getRun_service_tip());
+                    } else if (MAPP.mapp.getConfigBean().getIs_review_status() == 1) {
                         IntentUtils.toIndexActivity(MAPP.mapp.getCurrentActivity());
                     } else {
                         IntentUtils.toMainActivity(MAPP.mapp.getCurrentActivity());

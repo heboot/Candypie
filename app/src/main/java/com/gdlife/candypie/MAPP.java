@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.integration.okhttp3.OkHttpUrlLoader;
 import com.bumptech.glide.load.model.GlideUrl;
 import com.example.http.HttpUtils;
+import com.gdlife.candypie.activitys.common.MainActivity;
 import com.gdlife.candypie.activitys.order.OrderDetailActivity;
 import com.gdlife.candypie.activitys.pay.BalanceLogActivity;
 import com.gdlife.candypie.activitys.pay.CouponsActivity;
@@ -298,12 +299,15 @@ public class MAPP extends Application {
                     intent.putExtra(MKey.USED, false);
                     pendingIntent = PendingIntent.getActivity(currentActivity, 0, intent, 0);
                 } else if (((MessageEvent.ShowMessageNotiEvent) o).getSystemNotification().getValue().getTo_action().equals(MessageToAction.start_video_chat.toString())) {
-//                    IntentUtils.toVideoChatActivity(MAPP.mapp, systemNotification.getValue().getUser_service_id(), systemNotification.getValue().getChat_room_config(), VideoChatFrom.SERVICER);
-                    intent = new Intent(currentActivity, VideoChatActivity.class);
-                    intent.putExtra(MKey.USER_SERVICE_ID, o.getSystemNotification().getValue().getUser_service_id());
-                    intent.putExtra(MKey.POST_THEME_BEAN, o.getSystemNotification().getValue().getChat_room_config());
-                    intent.putExtra(MKey.FROM, VideoChatFrom.SERVICER);
-                    pendingIntent = PendingIntent.getActivity(currentActivity, 0, intent, 0);
+
+//                    intent.putExtra(MKey.USER_SERVICE_ID, o.getSystemNotification().getValue().getUser_service_id());
+//                    intent.putExtra(MKey.POST_THEME_BEAN, o.getSystemNotification().getValue().getChat_room_config());
+                    if (!(currentActivity instanceof MainActivity)) {
+                        intent = new Intent(currentActivity, MainActivity.class);
+                        intent.putExtra(MKey.FROM, VideoChatFrom.SERVICER);
+                        pendingIntent = PendingIntent.getActivity(currentActivity, 0, intent, 0);
+                    }
+
                 } else if (((MessageEvent.ShowMessageNotiEvent) o).getSystemNotification().getValue().getTo_action().equals(MessageToAction.service_profile.toString())) {
                     intent = new Intent(currentActivity, UserPageActivity.class);
                     intent.putExtra(MKey.UID, UserService.getInstance().getUser().getId() + "");
@@ -311,15 +315,19 @@ public class MAPP extends Application {
                 }
             }
             title = ((MessageEvent.ShowMessageNotiEvent) o).getSystemNotification().getValue().getMsg();
-            NotificationsUtils.showNotification(title, intent, pendingIntent);
+            if (!((MessageEvent.ShowMessageNotiEvent) o).getSystemNotification().getValue().getTo_action().equals(MessageToAction.start_video_chat.toString())) {
+                NotificationsUtils.showNotification(title, intent, pendingIntent);
+            }
+
         } else {
             try {
                 popupNotificationSnack = new PopupNotificationSnack(currentActivity.findViewById(android.R.id.content), getApplicationContext(), ((MessageEvent.ShowMessageNotiEvent) o).getSystemNotification().getValue());
                 popupNotificationSnack.setModel(((MessageEvent.ShowMessageNotiEvent) o).getSystemNotification().getValue());
-                if (!(getCurrentActivity() instanceof VideoChatActivity)) {
-                    popupNotificationSnack.show();
+                if (!((MessageEvent.ShowMessageNotiEvent) o).getSystemNotification().getValue().getTo_action().equals(MessageToAction.start_video_chat.toString())) {
+                    if (!(getCurrentActivity() instanceof VideoChatActivity)) {
+                        popupNotificationSnack.show();
+                    }
                 }
-
             } catch (Exception e) {
                 CrashReport.postCatchedException(new Throwable("弹5秒窗出现问题"));
                 CrashReport.postCatchedException(e);
