@@ -38,44 +38,44 @@ public class CustomCrashActivity extends Activity {
 
 
         if (BuildConfig.DEBUG) {
-//            binding = DataBindingUtil.setContentView(this, R.layout.activity_custom_crash);
-//            //        binding.tvDetail.setText(CustomActivityOnCrash.getStackTraceFromIntent(getIntent()));
-//            binding.tvDetail.setVisibility(View.VISIBLE);
-//            binding.tvDetail.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    detailDialog = new QMUIDialog.MessageDialogBuilder(CustomCrashActivity.this).setTitle("问题详情")
-//                            .setMessage(CustomActivityOnCrash.getStackTraceFromIntent(getIntent()))
-//                            .addAction("复制到剪切板", new QMUIDialogAction.ActionListener() {
-//                                @Override
-//                                public void onClick(QMUIDialog dialog, int index) {
-//                                    ClipboardManager cm = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-//                                    // 将文本内容放到系统剪贴板里。
-//                                    ClipData mClipData = ClipData.newPlainText("Label", CustomActivityOnCrash.getStackTraceFromIntent(getIntent()));
-//                                    // 将ClipData内容放到系统剪贴板里。
-//                                    cm.setPrimaryClip(mClipData);
-//                                    ToastUtils.showToast("复制成功");
-//                                    detailDialog.dismiss();
-//                                }
-//                            }).addAction("关闭", new QMUIDialogAction.ActionListener() {
-//                                @Override
-//                                public void onClick(QMUIDialog dialog, int index) {
-//                                    detailDialog.dismiss();
-//                                }
-//                            })
-//                            .create();
-//                    detailDialog.show();
-//
-//                }
-//            });
-//
-//            binding.tvRestart.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    CustomActivityOnCrash.restartApplication(CustomCrashActivity.this, config);
-//                }
-//            });
-            CustomActivityOnCrash.restartApplication(CustomCrashActivity.this, config);
+            binding = DataBindingUtil.setContentView(this, R.layout.activity_custom_crash);
+            //        binding.tvDetail.setText(CustomActivityOnCrash.getStackTraceFromIntent(getIntent()));
+            binding.tvDetail.setVisibility(View.VISIBLE);
+            binding.tvDetail.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    detailDialog = new QMUIDialog.MessageDialogBuilder(CustomCrashActivity.this).setTitle("问题详情")
+                            .setMessage(CustomActivityOnCrash.getStackTraceFromIntent(getIntent()))
+                            .addAction("复制到剪切板", new QMUIDialogAction.ActionListener() {
+                                @Override
+                                public void onClick(QMUIDialog dialog, int index) {
+                                    ClipboardManager cm = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                                    // 将文本内容放到系统剪贴板里。
+                                    ClipData mClipData = ClipData.newPlainText("Label", CustomActivityOnCrash.getStackTraceFromIntent(getIntent()));
+                                    // 将ClipData内容放到系统剪贴板里。
+                                    cm.setPrimaryClip(mClipData);
+                                    ToastUtils.showToast("复制成功");
+                                    detailDialog.dismiss();
+                                }
+                            }).addAction("关闭", new QMUIDialogAction.ActionListener() {
+                                @Override
+                                public void onClick(QMUIDialog dialog, int index) {
+                                    detailDialog.dismiss();
+                                }
+                            })
+                            .create();
+                    detailDialog.show();
+
+                }
+            });
+
+            binding.tvRestart.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    CustomActivityOnCrash.restartApplication(CustomCrashActivity.this, config);
+                }
+            });
+//            CustomActivityOnCrash.restartApplication(CustomCrashActivity.this, config);
         } else {
             CustomActivityOnCrash.restartApplication(CustomCrashActivity.this, config);
         }

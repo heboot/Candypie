@@ -25,10 +25,12 @@ import com.heboot.base.BaseBean;
 import com.heboot.base.BaseBeanEntity;
 import com.heboot.bean.theme.PostThemeBean;
 import com.heboot.bean.video.VideoChatStratEndBean;
+import com.heboot.bean.videochat.VideoChatTipBean;
 import com.heboot.entity.User;
 import com.heboot.utils.LogUtil;
 import com.qmuiteam.qmui.widget.dialog.QMUITipDialog;
 import com.suke.widget.SwitchButton;
+import com.yalantis.dialog.TipCustomDialog;
 
 import java.util.Map;
 
@@ -264,5 +266,44 @@ public class VideoChatService {
 
     }
 
+    private TipCustomDialog videoChatTipDialog;
+
+    private PermissionUtils permissionUtils;
+
+    public void video_chat_tip(User user) {
+
+        Map<String, Object> params;
+        params = SignUtils.getNormalParams();
+        params.put(MKey.UID, user.getId());
+        String sign = SignUtils.doSign(params);
+        params.put(MKey.SIGN, sign);
+
+        HttpClient.Builder.getGuodongServer().video_chat_tip(params).observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribe(new HttpObserver<VideoChatTipBean>() {
+            @Override
+            public void onSuccess(BaseBean<VideoChatTipBean> baseBean) {
+                if (baseBean.getData().getStatus() == 1) {
+                videoChatTipDialog = new TipCustomDialog.Builder(MAPP.mapp.getCurrentActivity(), new Consumer<Integer>() {
+                    @Override
+                    public void accept(Integer integer) throws Exception {
+                        if (integer == 1) {
+                            if (permissionUtils == null) {
+                                permissionUtils = new PermissionUtils();
+                            }
+                            postVideoService(permissionUtils, MAPP.mapp.getCurrentActivity(), user, null);
+                        }
+
+                    }
+                },  baseBean.getData().getTip_message() , "再看看", "视频聊天").create();
+                videoChatTipDialog.show();
+            }
+            }
+
+            @Override
+            public void onError(BaseBean<VideoChatTipBean> baseBean) {
+
+
+            }
+        });
+    }
 
 }

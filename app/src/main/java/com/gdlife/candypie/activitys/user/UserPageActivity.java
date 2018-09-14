@@ -100,6 +100,7 @@ public class UserPageActivity extends BaseActivity<ActivityUserpageBinding> {
             permissionUtils.showPermissionDialog(this, null);
         }
 
+
     }
 
     @Override
@@ -357,6 +358,19 @@ public class UserPageActivity extends BaseActivity<ActivityUserpageBinding> {
                         binding.vTipMsg.setVisibility(View.GONE);
                     }
                 }
+
+                if (user != null) {
+                    if (UserService.getInstance().getUser() != null) {
+                        if (!UserService.getInstance().isServicer() && !UserService.isMe(user)) {
+                            if (videoChatService == null) {
+                                videoChatService = new VideoChatService();
+                            }
+                            videoChatService.video_chat_tip(user);
+                        }
+                    }
+                }
+
+
             }
 
             @Override

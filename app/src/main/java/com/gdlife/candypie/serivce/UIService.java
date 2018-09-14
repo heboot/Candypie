@@ -215,7 +215,25 @@ public class UIService {
 
         for (TagsChildBean tagsChildBean : tagsChildBeanList) {
 
-            floatLayout.addView(getMeetPriviewTag(floatLayout.getContext(), tagsChildBean));
+            floatLayout.addView(getMeetPriviewTag(floatLayout.getContext(), tagsChildBean, null));
+
+        }
+
+    }
+
+    public void initMeetSelectedTagsLayout(List<TagsChildBean> tagsChildBeanList, QMUIFloatLayout floatLayout, int verticalSpacing, int horizontalSpacing, Consumer consumer) {
+        if (tagsChildBeanList == null || tagsChildBeanList.size() <= 0) {
+            return;
+        }
+
+        floatLayout.removeAllViews();
+
+        floatLayout.setChildHorizontalSpacing(verticalSpacing);
+        floatLayout.setChildVerticalSpacing(horizontalSpacing);
+
+        for (TagsChildBean tagsChildBean : tagsChildBeanList) {
+
+            floatLayout.addView(getMeetPriviewTag(floatLayout.getContext(), tagsChildBean, consumer));
 
         }
 
@@ -356,7 +374,7 @@ public class UIService {
      * @param tagsChildBean
      * @return
      */
-    private TextView getMeetPriviewTag(Context context, TagsChildBean tagsChildBean) {
+    private TextView getMeetPriviewTag(Context context, TagsChildBean tagsChildBean, Consumer consumer) {
         TextView qmuiRoundButton = new TextView(context);
 //        qmuiRoundButton.setTag(tagsChildBean);
 
@@ -380,6 +398,16 @@ public class UIService {
         QMUIViewHelper.setPaddingLeft(qmuiRoundButton, context.getResources().getDimensionPixelSize(R.dimen.x10));
         QMUIViewHelper.setPaddingRight(qmuiRoundButton, context.getResources().getDimensionPixelSize(R.dimen.x10));
         qmuiRoundButton.setText(tagsChildBean.getContent());
+
+        if (consumer != null) {
+            qmuiRoundButton.setOnClickListener(v -> {
+                try {
+                    consumer.accept(tagsChildBean);
+                } catch (Exception e) {
+                }
+            });
+        }
+
         return qmuiRoundButton;
     }
 

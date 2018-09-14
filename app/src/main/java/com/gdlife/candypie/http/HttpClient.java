@@ -35,6 +35,7 @@ import com.heboot.bean.pay.ServicePaymentBean;
 import com.heboot.bean.pay.UpVipBean;
 import com.heboot.bean.pay.UpdatePaymentStatusBean;
 import com.heboot.bean.rank.RankBean;
+import com.heboot.bean.search.SearchInitBean;
 import com.heboot.bean.search.SearchUserBean;
 import com.heboot.bean.theme.ApplyOrderBean;
 import com.heboot.bean.theme.CancelCauseBean;
@@ -58,6 +59,7 @@ import com.heboot.bean.video.UserVideosBean;
 import com.heboot.bean.video.VideoChatStratEndBean;
 import com.heboot.bean.video.VideoPlayerURLBean;
 import com.heboot.bean.video.VideoUploadConfigBean;
+import com.heboot.bean.videochat.VideoChatTipBean;
 
 import java.util.Map;
 
@@ -139,6 +141,10 @@ public interface HttpClient {
     @FormUrlEncoded
     @POST("service/user_service/video_chat")
     Observable<BaseBean<PostThemeBean>> video_chat(@FieldMap Map<String, Object> params);
+
+    @FormUrlEncoded
+    @POST("user/user/video_chat_tip")
+    Observable<BaseBean<VideoChatTipBean>> video_chat_tip(@FieldMap Map<String, Object> params);
 
     @FormUrlEncoded
     @POST("service/user_service/post_meet_service")
@@ -426,6 +432,9 @@ public interface HttpClient {
     @POST("app/index/index_v8")
     Observable<BaseBean<IndexV5Bean>> index_v8(@FieldMap Map<String, Object> params);
 
+    @FormUrlEncoded
+    @POST("user/search/tag_user_list")
+    Observable<BaseBean<IndexV5Bean>> tag_user_list(@FieldMap Map<String, Object> params);
 
     @FormUrlEncoded
     @POST("app/user/pre_edit_meet_tags")
@@ -497,6 +506,10 @@ public interface HttpClient {
     @FormUrlEncoded
     @POST("app/user/third_login")
     Observable<BaseBean<RegisterBean>> third_login(@FieldMap Map<String, Object> params);
+
+    @FormUrlEncoded
+    @POST("user/search/init")
+    Observable<BaseBean<SearchInitBean>> search_init(@FieldMap Map<String, Object> params);
 
 
 //    /**

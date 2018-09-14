@@ -149,6 +149,11 @@ public class RankListFragment extends BaseFragment<FragmentIndexListBinding> {
                     temp.addAll(rankBean.getMonth());
 //                    initUserListData(subRankListData(rankBean.getMonth()));
                     initUserListData(baseBean.getData().getMonth());
+                } else if (currentSelect == RANK_FILTER.DAY) {
+                    List<User> temp = new ArrayList<>();
+                    temp.addAll(rankBean.getDay());
+//                    initUserListData(subRankListData(rankBean.getMonth()));
+                    initUserListData(baseBean.getData().getDay());
                 }
             }
 
@@ -210,11 +215,34 @@ public class RankListFragment extends BaseFragment<FragmentIndexListBinding> {
 
             layoutRankFilterBinding.getRoot().setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, getResources().getDimensionPixelOffset(R.dimen.y60)));
 
+            if (rankBean != null && rankBean.getDay() != null && rankBean.getDay().size() > 0) {
+                layoutRankFilterBinding.tvDay.setVisibility(View.VISIBLE);
+                layoutRankFilterBinding.vDay.setVisibility(View.VISIBLE);
+                layoutRankFilterBinding.tvDay.setOnClickListener((v) -> {
+                    layoutRankFilterBinding.tvDay.setBackgroundResource(R.drawable.bg_rect_rank_filter);
+                    layoutRankFilterBinding.tvDay.setTextColor(Color.WHITE);
+                    layoutRankFilterBinding.tvWeek.setBackground(null);
+                    layoutRankFilterBinding.tvWeek.setTextColor(ContextCompat.getColor(_mActivity, R.color.color_FF6363));
+                    layoutRankFilterBinding.tvMonth.setBackground(null);
+                    layoutRankFilterBinding.tvMonth.setTextColor(ContextCompat.getColor(_mActivity, R.color.color_FF6363));
+                    currentSelect = RANK_FILTER.DAY;
+                    List<User> temp = new ArrayList<>();
+                    temp.addAll(rankBean.getDay());
+                    initUserListData(temp);
+                });
+            } else {
+                layoutRankFilterBinding.tvDay.setVisibility(View.GONE);
+                layoutRankFilterBinding.vDay.setVisibility(View.GONE);
+            }
+
+
             layoutRankFilterBinding.tvMonth.setOnClickListener((v) -> {
                 layoutRankFilterBinding.tvMonth.setBackgroundResource(R.drawable.bg_rect_rank_filter);
                 layoutRankFilterBinding.tvMonth.setTextColor(Color.WHITE);
                 layoutRankFilterBinding.tvWeek.setBackground(null);
                 layoutRankFilterBinding.tvWeek.setTextColor(ContextCompat.getColor(_mActivity, R.color.color_FF6363));
+                layoutRankFilterBinding.tvDay.setBackground(null);
+                layoutRankFilterBinding.tvDay.setTextColor(ContextCompat.getColor(_mActivity, R.color.color_FF6363));
                 currentSelect = RANK_FILTER.MONTH;
                 List<User> temp = new ArrayList<>();
                 temp.addAll(rankBean.getMonth());
@@ -226,6 +254,8 @@ public class RankListFragment extends BaseFragment<FragmentIndexListBinding> {
                 layoutRankFilterBinding.tvWeek.setTextColor(Color.WHITE);
                 layoutRankFilterBinding.tvMonth.setBackground(null);
                 layoutRankFilterBinding.tvMonth.setTextColor(ContextCompat.getColor(_mActivity, R.color.color_FF6363));
+                layoutRankFilterBinding.tvDay.setBackground(null);
+                layoutRankFilterBinding.tvDay.setTextColor(ContextCompat.getColor(_mActivity, R.color.color_FF6363));
                 currentSelect = RANK_FILTER.WEEK;
                 List<User> temp = new ArrayList<>();
                 temp.addAll(rankBean.getWeek());

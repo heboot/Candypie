@@ -53,6 +53,7 @@ import com.gdlife.candypie.activitys.theme.ServiceCancelActivity;
 import com.gdlife.candypie.activitys.theme.ServiceUserListActivity;
 import com.gdlife.candypie.activitys.theme.ThemeListActivity;
 import com.gdlife.candypie.activitys.user.SetPriceActivity;
+import com.gdlife.candypie.activitys.user.TagUserListActivity;
 import com.gdlife.candypie.activitys.user.UserBlackListActivity;
 import com.gdlife.candypie.activitys.user.UserFavsListActivity;
 import com.gdlife.candypie.activitys.user.UserInfoActivity;
@@ -123,6 +124,13 @@ public class IntentUtils {
     public static void toSetPriceActivity(Context context, Boolean fromIndex) {
         Intent intent = new Intent(context, SetPriceActivity.class);
         intent.putExtra(MKey.FROM, fromIndex);
+        context.startActivity(intent);
+    }
+
+    public static void toTagUserlistActivity(Context context, String tag_id, String title) {
+        Intent intent = new Intent(context, TagUserListActivity.class);
+        intent.putExtra(MKey.TAG_ID, tag_id);
+        intent.putExtra(MKey.TITLE, title);
         context.startActivity(intent);
     }
 

@@ -87,8 +87,8 @@
             android:screenOrientation="portrait"></activity>
 
         <activity
-            android:launchMode="singleTask"
             android:name=".activitys.common.MainActivity"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait"></activity>
 
         <activity
@@ -280,6 +280,10 @@
 
         <activity
             android:name=".activitys.theme.ServerCancelCauseActivity"
+            android:screenOrientation="portrait"></activity>
+
+        <activity
+            android:name=".activitys.user.TagUserListActivity"
             android:screenOrientation="portrait"></activity>
 
         <activity

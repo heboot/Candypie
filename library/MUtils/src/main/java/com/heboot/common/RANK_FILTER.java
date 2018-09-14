@@ -4,5 +4,7 @@ public enum RANK_FILTER {
 
     WEEK,
 
-    MONTH
+    MONTH,
+
+    DAY
 }

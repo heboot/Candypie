@@ -186,6 +186,7 @@ public class VideoChatActivity extends BaseActivity<ActivityVideoChatBinding> im
         QMUIStatusBarHelper.translucent(this);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
+        binding.localVideoViewContainer.setX(getResources().getDimensionPixelOffset(R.dimen.x92));
     }
 
     @Override
