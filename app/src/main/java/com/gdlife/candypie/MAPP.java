@@ -30,6 +30,7 @@ import com.gdlife.candypie.component.UtilsComponent;
 import com.gdlife.candypie.http.HttpClient;
 import com.gdlife.candypie.serivce.AuthService;
 import com.gdlife.candypie.serivce.MessageService;
+import com.gdlife.candypie.serivce.OrderService;
 import com.gdlife.candypie.serivce.UserService;
 import com.gdlife.candypie.serivce.VideoService;
 import com.gdlife.candypie.serivce.theme.VideoChatService;
@@ -50,6 +51,7 @@ import com.heboot.common.ConfigValue;
 import com.heboot.entity.User;
 import com.heboot.event.IMEvent;
 import com.heboot.event.MessageEvent;
+import com.heboot.event.OrderEvent;
 import com.heboot.event.VideoEvent;
 import com.heboot.message.MessageToAction;
 import com.heboot.rxbus.RxBus;
@@ -66,14 +68,17 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
 import io.agora.AgoraAPIOnlySignal;
 import io.reactivex.Observable;
 import io.reactivex.Observer;
+import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 import static com.heboot.event.IMEvent.TO_RECHARGE_BY_IM;
@@ -111,6 +116,8 @@ public class MAPP extends Application {
     private Activity currentActivity;
 
     private VideoChatService videoChatService;
+
+    private OrderService orderService;
 
 
     @Override
@@ -248,6 +255,23 @@ public class MAPP extends Application {
                     IntentUtils.toAccountActivity(MAPP.mapp.getCurrentActivity());
                 } else if (o instanceof IMEvent.UPDATE_COIN_BALANCE_EVENT) {
 //                    UserService.getInstance().getUser().setCoin(String.valueOf(Integer.parseInt(UserService.getInstance().getUser().getCoin()) - ((IMEvent.UPDATE_COIN_BALANCE_EVENT) o).getCoinAmount()));
+                } else if (o instanceof OrderEvent.DO_COMMENT_VIDEO_EVENT) {
+                    if (orderService == null) {
+                        orderService = new OrderService();
+                    }
+                    Observable.just("Amit")
+                            //延时两秒，第一个参数是数值，第二个参数是事件单位
+                            .delay(1100, TimeUnit.MILLISECONDS)
+                            // Run on a background thread
+                            .subscribeOn(Schedulers.io())
+                            // Be notified on the main thread
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe(new Consumer<String>() {
+                                @Override
+                                public void accept(String s) throws Exception {
+                                    orderService.doCommentOrder(getCurrentActivity(), ((OrderEvent.DO_COMMENT_VIDEO_EVENT) o).getUserServiceId(), null);
+                                }
+                            });//这里的观察者依然不重要
                 }
             }
 

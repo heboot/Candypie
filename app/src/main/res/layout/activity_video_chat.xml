@@ -45,6 +45,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <FrameLayout
+                android:clickable="true"
                 android:id="@+id/local_video_view_container"
                 android:layout_width="@dimen/x92"
                 android:layout_height="@dimen/y166"
@@ -62,6 +63,7 @@
 
 
             <ImageView
+                android:clickable="true"
                 android:id="@+id/user_avatar"
                 android:layout_width="@dimen/x92"
                 android:layout_height="@dimen/y166"

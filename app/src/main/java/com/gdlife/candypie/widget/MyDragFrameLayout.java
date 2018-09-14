@@ -2,6 +2,7 @@ package com.gdlife.candypie.widget;
 
 import android.content.Context;
 import android.graphics.Rect;
+import android.support.v4.view.MotionEventCompat;
 import android.support.v4.widget.ViewDragHelper;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -101,12 +102,12 @@ public class MyDragFrameLayout extends FrameLayout {
 
             @Override
             public int getViewHorizontalDragRange(View child) {
-                return 1;
+                return 0;
             }
 
             @Override
             public int getViewVerticalDragRange(View child) {
-                return 1;
+                return 0;
             }
 
         });
@@ -130,8 +131,8 @@ public class MyDragFrameLayout extends FrameLayout {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         mDragHelper.processTouchEvent(event);
-//        LogUtil.e("用户点击区域", isTouchChildView(event) + "");
-        return true;
+        LogUtil.e("用户点击区域", isTouchChildView(event) + "");
+        return isTouchChildView(event);
     }
 
     @Override

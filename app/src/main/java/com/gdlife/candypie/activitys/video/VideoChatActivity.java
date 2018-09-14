@@ -2,6 +2,7 @@ package com.gdlife.candypie.activitys.video;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -64,6 +65,7 @@ import com.heboot.event.OrderEvent;
 import com.heboot.event.TurntableEvent;
 import com.heboot.event.VideoChatEvent;
 import com.heboot.faceunity_unit.fulivedemo.renderer.CameraRenderer;
+import com.heboot.faceunity_unit.fulivedemo.utils.ToastUtil;
 import com.heboot.rxbus.RxBus;
 import com.heboot.utils.LogUtil;
 import com.heboot.utils.ViewUtils;
@@ -185,8 +187,7 @@ public class VideoChatActivity extends BaseActivity<ActivityVideoChatBinding> im
         setSwipeBackEnable(false);
         QMUIStatusBarHelper.translucent(this);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-
-        binding.localVideoViewContainer.setX(getResources().getDimensionPixelOffset(R.dimen.x92));
+//        binding.localVideoViewContainer.setTranslationX(getResources().getDimensionPixelOffset(R.dimen.x92));
     }
 
     @Override
@@ -562,62 +563,17 @@ public class VideoChatActivity extends BaseActivity<ActivityVideoChatBinding> im
         });
 //
         binding.localVideoViewContainer.setOnClickListener((v) -> {
+            ToastUtils.showToast("click 2");
             setLocalView2Full();
         });
-//        binding.mGlview.setOnClickListener((v) -> {
+//        binding.remoteVideoViewContainer.setOnClickListener((v) -> {
 //            setLocalView2Full();
 //        });
-        binding.remoteVideoViewContainer.setOnClickListener((v) -> {
-            setLocalView2Full();
-        });
-        binding.userAvatar.setOnClickListener((v) -> {
-            setLocalView2Full();
-        });
-
-//        binding.localVideoViewContainer.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View v, MotionEvent event) {
-//                switch (event.getAction()) {
-//                    case MotionEvent.ACTION_DOWN:
-//                        moveX = event.getX();
-//                        moveY = event.getY();
-//                        break;
-//                    case MotionEvent.ACTION_MOVE:
-//                        binding.localVideoViewContainer.setTranslationX(binding.localVideoViewContainer.getX() + (event.getX() - moveX));
-//                        binding.localVideoViewContainer.setTranslationY(binding.localVideoViewContainer.getY() + (event.getY() - moveY));
-//                        break;
-//                    case MotionEvent.ACTION_UP:
-//                        break;
-//                    case MotionEvent.ACTION_CANCEL:
-//                        break;
-//                }
-//
-//                return true;
-//
-//            }
+//        binding.userAvatar.setOnClickListener((v) -> {
+//            setLocalView2Full();
 //        });
-//
-//        binding.remoteVideoViewContainer.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View v, MotionEvent event) {
-//                switch (event.getAction()) {
-//                    case MotionEvent.ACTION_DOWN:
-//                        moveX = event.getX();
-//                        moveY = event.getY();
-//                        break;
-//                    case MotionEvent.ACTION_MOVE:
-//                        binding.remoteVideoViewContainer.setTranslationX(binding.remoteVideoViewContainer.getX() + (event.getX() - moveX));
-//                        binding.remoteVideoViewContainer.setTranslationY(binding.remoteVideoViewContainer.getY() + (event.getY() - moveY));
-//                        break;
-//                    case MotionEvent.ACTION_UP:
-//                        break;
-//                    case MotionEvent.ACTION_CANCEL:
-//                        break;
-//                }
-//
-//                return true;
-//
-//            }
+//        binding.getRoot().setOnClickListener((v) -> {
+//            setLocalView2Full();
 //        });
 
 
@@ -920,14 +876,15 @@ public class VideoChatActivity extends BaseActivity<ActivityVideoChatBinding> im
     }
 
     private void doComment() {
-
+        RxBus.getInstance().post(new OrderEvent.DO_COMMENT_VIDEO_EVENT(userServiceId));
+        finish();
         //请求评价的标签
-        orderService.doCommentOrder(VideoChatActivity.this, userServiceId, new DialogInterface.OnDismissListener() {
-            @Override
-            public void onDismiss(DialogInterface dialog) {
-                finish();
-            }
-        });
+//        orderService.doCommentOrder(VideoChatActivity.this, userServiceId, new DialogInterface.OnDismissListener() {
+//            @Override
+//            public void onDismiss(DialogInterface dialog) {
+//                finish();
+//            }
+//        });
     }
 
 
