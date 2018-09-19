@@ -349,25 +349,20 @@ public class UserPageActivity extends BaseActivity<ActivityUserpageBinding> {
                     binding.vBottom.setVisibility(View.GONE);
                     binding.vTipMsg.setVisibility(View.GONE);
                 } else {
-                    binding.includeBottom.getRoot().setVisibility(View.VISIBLE);
-                    binding.vBottom.setVisibility(View.VISIBLE);
-                    if (userPageService.isFirst()) {
-                        binding.vTipMsg.setVisibility(View.VISIBLE);
-                        YoYo.with(Techniques.Bounce).repeat(1000).playOn(binding.vTipMsg);
-                    } else {
-                        binding.vTipMsg.setVisibility(View.GONE);
-                    }
-                }
-
-                if (user != null) {
-                    if (UserService.getInstance().getUser() != null) {
-                        if (!UserService.getInstance().isServicer() && !UserService.isMe(user)) {
-                            if (videoChatService == null) {
-                                videoChatService = new VideoChatService();
-                            }
-                            videoChatService.video_chat_tip(user);
+                    if (UserService.getInstance().getUser() != null && !UserService.getInstance().isServicer()) {
+                        if (user.getOnline_status().getStatus() == 1) {
+                            binding.includeBottom.getRoot().setVisibility(View.VISIBLE);
+                            binding.vBottom.setVisibility(View.VISIBLE);
+//                    if (userPageService.isFirst()) {
+                            binding.vTipMsg.setVisibility(View.VISIBLE);
+                            YoYo.with(Techniques.Bounce).repeat(1000).playOn(binding.vTipMsg);
                         }
                     }
+
+
+//                    } else {
+//                        binding.vTipMsg.setVisibility(View.GONE);
+//                    }
                 }
 
 
