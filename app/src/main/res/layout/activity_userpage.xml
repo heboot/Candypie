@@ -177,14 +177,16 @@
                     app:layout_constraintRight_toRightOf="parent"></include>
 
                 <View
+                    android:visibility="gone"
                     android:id="@+id/v_tip_msg"
-                    android:layout_width="@dimen/x160"
+                    android:layout_width="@dimen/x200"
                     android:layout_height="@dimen/y40"
                     android:layout_marginBottom="@dimen/y50"
                     android:layout_marginLeft="@dimen/x8"
-                    android:background="@drawable/tip_userpage_msg"
+                    android:layout_marginRight="@dimen/x10"
+                    android:background="@drawable/tip_userpage_video"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"></View>
+                    app:layout_constraintRight_toRightOf="parent"></View>
 
 
             </android.support.constraint.ConstraintLayout>

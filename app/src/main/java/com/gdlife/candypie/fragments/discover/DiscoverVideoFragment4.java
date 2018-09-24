@@ -216,7 +216,6 @@ public class DiscoverVideoFragment4 extends BaseFragment<FragmentDiscoverVideoBi
         }
     }
 
-    private boolean showTip = true;
 
     private void showVideoProgressInfo() {
 
@@ -250,13 +249,7 @@ public class DiscoverVideoFragment4 extends BaseFragment<FragmentDiscoverVideoBi
                 layoutDiscoverVideoBinding.pb.setProgress((int) pos);
             }
 
-            if (pos > 900 && showTip) {
-                showTip = false;
-                if (videoChatService == null) {
-                    videoChatService = new VideoChatService();
-                }
-                videoChatService.video_chat_tip(user);
-            }
+
 
         }
 
@@ -560,7 +553,6 @@ public class DiscoverVideoFragment4 extends BaseFragment<FragmentDiscoverVideoBi
 
         @Override
         public void onPageSelected(int position) {
-            weakReference.get().showTip = true;
             if ((weakReference.get().sp * 10) - weakReference.get().currentShowIndex < 3) {
                 if (weakReference.get().sp < weakReference.get().totalPage) {
                     weakReference.get().sp = weakReference.get().sp + 1;

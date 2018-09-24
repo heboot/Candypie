@@ -103,13 +103,15 @@
                     app:layout_constraintTop_toTopOf="@+id/qrb_cash" />
 
                 <TextView
+                    android:gravity="left"
                     android:id="@+id/tv_money_balance"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/x10"
                     android:text=""
                     android:textColor="@color/color_343445"
                     android:textSize="@dimen/x16"
+
                     app:layout_constraintBottom_toBottomOf="@+id/qrb_cash"
                     app:layout_constraintLeft_toRightOf="@+id/tv_money_balance_tip"
                     app:layout_constraintRight_toLeftOf="@+id/qrb_cash"

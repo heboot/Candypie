@@ -2,17 +2,19 @@ package com.gdlife.candypie.widget;
 
 import android.content.Context;
 import android.graphics.Rect;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v4.widget.ViewDragHelper;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 
 import com.gdlife.candypie.R;
 import com.heboot.utils.LogUtil;
 
-public class MyDragFrameLayout extends FrameLayout {
+public class MyDragFrameLayout extends RelativeLayout {
 
     private static final String TAG = "TestViewGroup";
 
@@ -25,6 +27,17 @@ public class MyDragFrameLayout extends FrameLayout {
 
     private int finalLeft = -1;
     private int finalTop = -1;
+
+
+    private boolean localEnable = true;
+
+    public boolean isLocalEnable() {
+        return localEnable;
+    }
+
+    public void setLocalEnable(boolean localEnable) {
+        this.localEnable = localEnable;
+    }
 
     public MyDragFrameLayout(Context context) {
         this(context, null);
@@ -40,10 +53,16 @@ public class MyDragFrameLayout extends FrameLayout {
         mDragHelper = ViewDragHelper.create(this, new ViewDragHelper.Callback() {
             @Override
             public boolean tryCaptureView(View child, int pointerId) {
-                if (child.getId() == R.id.local_video_view_container) {
-                    LogUtil.e(TAG, "tryCaptureView id is true");
+                if (localEnable) {
+                    if (child.getId() == R.id.local_video_view_container) {
+                        return true;
+                    }
+                } else {
+                    if (child.getId() == R.id.user_avatar) {
+                        return true;
+                    }
                 }
-                return true;
+                return false;
             }
 
             @Override
@@ -102,13 +121,14 @@ public class MyDragFrameLayout extends FrameLayout {
 
             @Override
             public int getViewHorizontalDragRange(View child) {
-                return 0;
+                return getMeasuredWidth() - child.getMeasuredWidth();
             }
 
             @Override
             public int getViewVerticalDragRange(View child) {
-                return 0;
+                return getMeasuredHeight() - child.getMeasuredHeight();
             }
+
 
         });
 

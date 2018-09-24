@@ -9,6 +9,7 @@ import android.hardware.SensorEventListener;
 import android.media.AudioManager;
 import android.os.Handler;
 import android.os.Message;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -16,6 +17,7 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
@@ -774,7 +776,7 @@ public class VideoChatActivity2 extends BaseActivity<ActivityVideoChatBinding> i
      * 设置本地视频视图
      */
     private void setupLocalVideo() {
-        FrameLayout container = binding.localVideoViewContainer;
+        RelativeLayout container = binding.localVideoViewContainer;
         container.setVisibility(View.VISIBLE);
     }
 

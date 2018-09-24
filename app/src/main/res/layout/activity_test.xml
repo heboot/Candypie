@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout>
 
-    <android.support.constraint.ConstraintLayout
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <RelativeLayout
-            android:id="@+id/drag_container"
+        <com.gdlife.candypie.widget.MyDragFrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -19,11 +18,11 @@
                 android:id="@+id/remote_video_view_container"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@color/color_FF5252"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
 
             <ImageView
                 android:id="@+id/iv_avatar_bg"
@@ -46,15 +45,13 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <RelativeLayout
+
+            <FrameLayout
                 android:id="@+id/local_video_view_container"
                 android:layout_width="@dimen/x92"
                 android:layout_height="@dimen/y166"
-                android:layout_alignParentRight="true"
                 android:layout_marginRight="@dimen/x10"
-                android:layout_marginTop="@dimen/y20"
-                android:clickable="true"
-                android:visibility="gone"
+                android:background="@color/color_FF5252"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
@@ -62,79 +59,42 @@
                     android:id="@+id/m_glview"
                     android:layout_width="@dimen/x92"
                     android:layout_height="@dimen/y166"
-                    android:clickable="true"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:visibility="gone" />
 
-            </RelativeLayout>
-
-            <!--<RelativeLayout-->
-            <!--android:id="@+id/local_video_view_container_full"-->
-            <!--android:layout_width="@dimen/x92"-->
-            <!--android:layout_height="@dimen/y166"-->
-            <!--android:layout_alignParentRight="true"-->
-            <!--android:layout_marginRight="@dimen/x10"-->
-            <!--android:layout_marginTop="@dimen/y20"-->
-            <!--android:clickable="true"-->
-            <!--android:visibility="gone"-->
-            <!--app:layout_constraintRight_toRightOf="parent"-->
-            <!--app:layout_constraintTop_toTopOf="parent">-->
-
-            <!--<android.opengl.GLSurfaceView-->
-            <!--android:id="@+id/m_glview_full"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:clickable="true"-->
-            <!--app:layout_constraintBottom_toBottomOf="parent"-->
-            <!--app:layout_constraintLeft_toLeftOf="parent"-->
-            <!--app:layout_constraintRight_toRightOf="parent"-->
-            <!--app:layout_constraintTop_toTopOf="parent" />-->
-
-            <!--</RelativeLayout>-->
-
-
-            <ImageView
-
-                android:id="@+id/user_avatar"
-                android:layout_width="@dimen/x92"
-                android:layout_height="@dimen/y166"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="@dimen/x10"
-                android:layout_marginTop="@dimen/y20"
-                android:clickable="true"
-                android:scaleType="centerCrop"
-                android:visibility="gone"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"></ImageView>
+            </FrameLayout>
 
             <FrameLayout
-                android:id="@+id/remote_video_view_container_small"
                 android:layout_width="@dimen/x92"
                 android:layout_height="@dimen/y166"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="@dimen/x10"
-                android:layout_marginTop="@dimen/y20"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
+                android:background="@color/color_FF5252"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </RelativeLayout>
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/user_avatar"
+                    android:layout_width="@dimen/x92"
+                    android:layout_height="@dimen/y166"
+                    android:layout_marginRight="@dimen/x10"
+                    android:background="@color/colorPrimary"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"></ImageView>
+            </FrameLayout>
+
+        </com.gdlife.candypie.widget.MyDragFrameLayout>
 
 
-        <com.qmuiteam.qmui.widget.QMUIRadiusImageView
+        <View
             android:id="@+id/iv_avatar"
             android:layout_width="@dimen/x70"
             android:layout_height="@dimen/y70"
             android:layout_marginLeft="@dimen/x16"
             android:layout_marginTop="@dimen/y36"
-            android:src="@color/theme_color"
+            android:src="@color/colorPrimary"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:qmui_border_width="0dp"
-            app:qmui_is_circle="true" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tv_name"
@@ -164,7 +124,7 @@
             android:layout_width="@dimen/x60"
             android:layout_height="@dimen/y60"
             android:layout_marginBottom="@dimen/y44"
-            android:background="@drawable/icon_video_chat_over_gray"
+            android:background="@drawable/ic_launcher_foreground"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -176,7 +136,7 @@
             android:layout_height="@dimen/y40"
             android:layout_marginBottom="@dimen/y16"
             android:layout_marginLeft="@dimen/x16"
-            android:background="@drawable/icon_video_chat_over"
+            android:background="@drawable/ic_launcher_foreground"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent" />
@@ -198,7 +158,7 @@
             android:layout_height="@dimen/y60"
             android:layout_marginBottom="@dimen/y44"
             android:layout_marginLeft="@dimen/x38"
-            android:background="@drawable/icon_video_chat_over"
+            android:background="@drawable/ic_launcher_foreground"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent" />
 
@@ -222,7 +182,7 @@
             android:layout_height="@dimen/y60"
             android:layout_marginBottom="@dimen/y44"
             android:layout_marginRight="@dimen/x38"
-            android:background="@drawable/icon_video_chat_apply"
+            android:background="@drawable/ic_launcher_foreground"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent" />
 
@@ -247,67 +207,26 @@
             android:layout_height="@dimen/y40"
             android:layout_marginBottom="@dimen/y16"
             android:layout_marginRight="@dimen/x21"
-            android:background="@drawable/icon_camera_disable"
+            android:background="@drawable/ic_launcher_foreground"
             android:gravity="center"
             android:textColor="@color/white"
             android:textSize="@dimen/x14"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintRight_toLeftOf="@+id/iv_pan" />
-
-
-        <include
-            android:id="@+id/iv_gift"
-            layout="@layout/layout_liwu"
-            android:layout_width="@dimen/x38"
-            android:layout_height="@dimen/y38"
-            android:layout_marginBottom="@dimen/y16"
-            android:layout_marginRight="@dimen/x16"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent" />
 
-
-        <include
-            android:id="@+id/iv_pan"
-            layout="@layout/layout_zhuanpan"
-            android:layout_width="@dimen/x38"
-            android:layout_height="@dimen/y38"
-            android:layout_marginBottom="@dimen/y16"
-            android:layout_marginRight="@dimen/x21"
-            android:background="@drawable/icon_pan"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintRight_toLeftOf="@+id/iv_gift" />
 
         <ImageView
             android:id="@+id/iv_gift_bg"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="#80000000"
-            android:visibility="invisible"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <include
-            android:id="@+id/include_hehe"
-            layout="@layout/layout_video_gift_tip"
-            android:layout_width="@dimen/x300"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/y120"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"></include>
-
-        <include
-            android:id="@+id/include_tip_tese"
-            layout="@layout/layout_video_tese_tip"
-            android:layout_width="@dimen/x300"
-            android:layout_height="@dimen/y78"
-            android:layout_marginBottom="@dimen/y130"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"></include>
 
         <TextView
             android:id="@+id/tv_wait_info"
@@ -321,13 +240,12 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.opensource.svgaplayer.SVGAImageView
+        <View
             android:id="@+id/svgaview"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:scaleType="fitCenter"
             android:visibility="gone"
-            app:antiAlias="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"

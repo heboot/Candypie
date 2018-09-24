@@ -334,6 +334,14 @@ public class UserVideosActivity extends BaseActivity<ActivityUserVideosBinding> 
                             user.getUser_video().getList().clear();
                             user.getUser_video().getList().addAll(sendSMSBeanBaseBean.getList());
                         }
+                        else if (user.getUser_video() != null && user.getUser_video().getList() == null) {
+                            user.getUser_video().setList(new ArrayList<>());
+                            user.getUser_video().getList().addAll(sendSMSBeanBaseBean.getList());
+                        } else if (user.getUser_video() == null) {
+                            user.setUser_video(new UserVideosBean());
+                            user.getUser_video().setList(new ArrayList<>());
+                            user.getUser_video().getList().addAll(sendSMSBeanBaseBean.getList());
+                        }
                         if (UserService.getInstance().getUser() == null) {
                             userVideosAdapter = new UserVideosAdapter(new WeakReference<UserVideosActivity>(UserVideosActivity.this), false, sendSMSBeanBaseBean.getList(), from.equals(UserVideoActivityFrom.REPLACE_MAIN_VIDEO), user);
                         } else {

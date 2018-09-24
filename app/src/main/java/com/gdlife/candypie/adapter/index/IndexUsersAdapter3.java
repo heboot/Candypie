@@ -53,7 +53,7 @@ public class IndexUsersAdapter3 extends BaseQuickAdapter<User, BaseViewHolder> {
             }
             binding.includeSexage.setUser(s);
             binding.tvName.setText(s.getNickname());
-            ImageUtils.showIndexRecommendUserImage(binding.ivImg, s.getAvatar());
+            ImageUtils.showIndexRecommendUserImage(binding.ivImg, s.getCover_img());
         } else {
             LayoutIndexUserHuoyueBinding binding = DataBindingUtil.bind(helper.itemView);
 

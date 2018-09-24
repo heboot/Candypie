@@ -1,6 +1,7 @@
 package com.gdlife.candypie.fragments.index;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.view.View;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.gdlife.candypie.MAPP;
 import com.gdlife.candypie.R;
+import com.gdlife.candypie.activitys.common.TestActivity;
 import com.gdlife.candypie.adapter.index.IndexUsersAdapter3;
 import com.gdlife.candypie.base.BaseFragment;
 import com.gdlife.candypie.base.HttpObserver;
@@ -243,7 +245,8 @@ public class IndexListFragment extends BaseFragment<FragmentIndexListBinding> {
                     }
                     IntentUtils.toHomepageActivity(_mActivity, MValue.FROM_OTHER, (User) adapter.getData().get(position), null, null);
                 }
-
+//                Intent intent = new Intent(_mActivity, TestActivity.class);
+//                _mActivity.startActivity(intent);
 
             }
         });

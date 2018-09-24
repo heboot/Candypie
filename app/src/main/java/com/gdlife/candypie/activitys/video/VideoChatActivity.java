@@ -4,22 +4,28 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Rect;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.media.AudioManager;
+import android.opengl.GLSurfaceView;
 import android.os.Handler;
 import android.os.Message;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.ViewDragHelper;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
@@ -187,12 +193,10 @@ public class VideoChatActivity extends BaseActivity<ActivityVideoChatBinding> im
         setSwipeBackEnable(false);
         QMUIStatusBarHelper.translucent(this);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-//        binding.localVideoViewContainer.setTranslationX(getResources().getDimensionPixelOffset(R.dimen.x92));
     }
 
     @Override
     public void initData() {
-
         permissionUtils = new PermissionUtils();
         timeHandler = new MHandler(new WeakReference<VideoChatActivity>(this));
 
@@ -217,7 +221,9 @@ public class VideoChatActivity extends BaseActivity<ActivityVideoChatBinding> im
 
         ImageUtils.showImage(binding.ivAvatarBg, postVideoChatBean.getUser().getAvatar());
 
+
         if (videoChatFrom == VideoChatFrom.SERVICER) {
+            ImageUtils.showImage(binding.userAvatar, postVideoChatBean.getUser().getAvatar());
             binding.ivPublishCancel.setVisibility(View.GONE);
             binding.ivReject.setVisibility(View.VISIBLE);
             binding.tvReject.setVisibility(View.VISIBLE);
@@ -236,6 +242,7 @@ public class VideoChatActivity extends BaseActivity<ActivityVideoChatBinding> im
             }
 
         } else {
+            ImageUtils.showImage(binding.userAvatar, UserService.getInstance().getUser().getAvatar());
             setCancelEnable(false);
 //            AudioUtil.playSound(R.raw.voip_calling_stay, 1, 0);
             AudioUtil2.getInstance(this).playUserCalling();
@@ -301,6 +308,7 @@ public class VideoChatActivity extends BaseActivity<ActivityVideoChatBinding> im
 
         binding.tvName.setText(postVideoChatBean.getUser().getNickname());
 
+        binding.userAvatar.clearAnimation();
 
     }
 
@@ -534,18 +542,58 @@ public class VideoChatActivity extends BaseActivity<ActivityVideoChatBinding> im
             @Override
             public void accept(Object o) throws Exception {
                 if (localVideoEnable) {
-//                mRtcEngine.disableVideo();
+                    //如果自己头像是全屏状态
+                    if (localViewFullFlag) {
+                        binding.ivAvatarBg.setVisibility(View.VISIBLE);
+                    } else {
+                        binding.userAvatar.setVisibility(View.VISIBLE);
+                    }
+
                     localVideoEnable = false;
 //                    binding.localVideoViewContainer.removeAllViews();
                     binding.localVideoViewContainer.setVisibility(View.GONE);
                     binding.mGlview.setVisibility(View.INVISIBLE);
                     NimChatService.getInstance().updateUserCameraStatus(localVideoEnable, postVideoChatBean.getUser().getId(), userServiceId);
                     binding.ivEnableLocalvideo.setBackgroundResource(R.drawable.icon_camera_disable);
+
                 } else {
-                    binding.localVideoViewContainer.setVisibility(View.VISIBLE);
-                    binding.mGlview.setVisibility(View.VISIBLE);
+                    //如果自己头像是全屏状态
+                    if (localViewFullFlag) {
+                        binding.ivAvatarBg.setVisibility(View.GONE);
+                        binding.localVideoViewContainer.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                binding.localVideoViewContainer.setLayoutParams(new RelativeLayout.LayoutParams(QMUIDisplayHelper.getScreenWidth(VideoChatActivity.this), QMUIDisplayHelper.getScreenHeight(VideoChatActivity.this)));
+                                binding.localVideoViewContainer.requestLayout();
+                            }
+                        });
+
+                        binding.mGlview.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                binding.mGlview.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+                                binding.mGlview.requestLayout();
+                            }
+                        });
+                        binding.userAvatar.setVisibility(View.GONE);
+                        binding.localVideoViewContainer.setVisibility(View.VISIBLE);
+                        binding.mGlview.setVisibility(View.VISIBLE);
+                        binding.remoteVideoViewContainerSmall.setVisibility(View.VISIBLE);
+                        binding.remoteVideoViewContainer.setVisibility(View.GONE);
+                        setupLocalVideo();
+                    } else {
+                        binding.userAvatar.setVisibility(View.GONE);
+                        binding.localVideoViewContainer.setVisibility(View.VISIBLE);
+                        binding.mGlview.setVisibility(View.VISIBLE);
 //                mRtcEngine.enableVideo();
-                    setupLocalVideo();
+                        setupLocalVideo();
+                    }
+
+                    if (smallSurfaceView != null) {
+                        smallSurfaceView.setZOrderOnTop(true);
+                        smallSurfaceView.setZOrderMediaOverlay(true);
+                    }
+
                     localVideoEnable = true;
                     NimChatService.getInstance().updateUserCameraStatus(localVideoEnable, postVideoChatBean.getUser().getId(), userServiceId);
                     binding.ivEnableLocalvideo.setBackgroundResource(R.drawable.icon_camera_enable);
@@ -561,14 +609,19 @@ public class VideoChatActivity extends BaseActivity<ActivityVideoChatBinding> im
                 }
             }
         });
-//
-        binding.localVideoViewContainer.setOnClickListener((v) -> {
-            ToastUtils.showToast("click 2");
-            setLocalView2Full();
-        });
-//        binding.remoteVideoViewContainer.setOnClickListener((v) -> {
+////
+//        binding.localVideoViewContainer.setOnClickListener((v) -> {
+//            ToastUtils.showToast("111");
 //            setLocalView2Full();
 //        });
+////
+//        binding.mGlview.setOnClickListener((v) -> {
+//            ToastUtils.showToast("222");
+//            setLocalView2Full();
+//        });
+////        binding.remoteVideoViewContainer.setOnClickListener((v) -> {
+////            setLocalView2Full();
+////        });
 //        binding.userAvatar.setOnClickListener((v) -> {
 //            setLocalView2Full();
 //        });
@@ -577,8 +630,25 @@ public class VideoChatActivity extends BaseActivity<ActivityVideoChatBinding> im
 //        });
 
 
-    }
+        binding.mGlview.setOnClickListener((v) -> {
+            if (binding.userAvatar.getVisibility() != View.VISIBLE) {
+                setLocalView2Full();
+            }
+        });
 
+        binding.userAvatar.setOnClickListener((v) -> {
+            setLocalView2Full();
+        });
+
+        binding.remoteVideoViewContainerSmall.setOnClickListener((v) -> {
+            if (localViewFullFlag) {
+                binding.remoteVideoViewContainerSmall.setVisibility(View.GONE);
+            }
+            setLocalView2Full();
+        });
+
+
+    }
 
     public void checkVideoService() {
         params = SignUtils.getNormalParams();
@@ -604,9 +674,6 @@ public class VideoChatActivity extends BaseActivity<ActivityVideoChatBinding> im
         });
     }
 
-    float moveX;
-    float moveY;
-
 
     private boolean localViewFullFlag = false;
 
@@ -614,83 +681,302 @@ public class VideoChatActivity extends BaseActivity<ActivityVideoChatBinding> im
     private void setLocalView2Full() {
 
         if (!localViewFullFlag) {
-            setLocalView(true);
-            //服务者点击 本地视频
+            //服务者点击了视频区域
             if (videoChatFrom == VideoChatFrom.SERVICER) {
-                //如果用户远程视频在打开状态 设为小窗口显示模式
-                if (binding.remoteVideoViewContainer != null && binding.remoteVideoViewContainer.getVisibility() == View.VISIBLE) {
-                    binding.userAvatar.setVisibility(View.GONE);
-                    ViewUtils.setViewWidth(binding.remoteVideoViewContainer, getResources().getDimensionPixelOffset(R.dimen.x92));
-                    ViewUtils.setViewHeight(binding.remoteVideoViewContainer, getResources().getDimensionPixelOffset(R.dimen.y166));
-                    binding.remoteVideoViewContainer.setZ(100f);
-                    binding.localVideoViewContainer.setZ(0f);
-                    binding.mGlview.setZ(0f);
-                    binding.remoteVideoViewContainer.setEnabled(true);
-                    binding.userAvatar.setEnabled(false);
-                }
-                //如果用户远程视频没有打开，把头像挪到右上角显示小头像
-                else if (binding.remoteVideoViewContainer != null && binding.remoteVideoViewContainer.getVisibility() != View.VISIBLE) {
-//                    ViewUtils.setViewWidth(binding.ivAvatarBg, getResources().getDimensionPixelOffset(R.dimen.x92));
-//                    ViewUtils.setViewHeight(binding.ivAvatarBg, getResources().getDimensionPixelOffset(R.dimen.y166));
-                    ImageUtils.showImage(binding.userAvatar, postVideoChatBean.getUser().getAvatar());
+                //用户大头像还在显示状态 说明用户没有开摄像头
+                if (binding.ivAvatarBg.getVisibility() == View.VISIBLE) {
+                    //点击后把用户的头像展示到右上角 把自己的视频全屏
+                    setLocalView(true);
+                    //全屏在底部
+//                    binding.localVideoViewContainer.setZ(0f);
+                    //用户头像在顶部
                     binding.userAvatar.setVisibility(View.VISIBLE);
-                    binding.userAvatar.setZ(100f);
-                    binding.userAvatar.setEnabled(true);
-                    binding.remoteVideoViewContainer.setEnabled(false);
-                    binding.localVideoViewContainer.setZ(0f);
+                    binding.userAvatar.bringToFront();
+//                    binding.userAvatar.setZ(100f);
+                    //底部大头像隐藏
+                    binding.ivAvatarBg.setVisibility(View.GONE);
                 }
-
-            }
-            binding.localVideoViewContainer.setEnabled(false);
-            binding.mGlview.setEnabled(false);
-            localViewFullFlag = true;
-        } else {
-            setLocalView(false);
-            //服务者点击 本地视频全屏->小屏
-            if (videoChatFrom == VideoChatFrom.SERVICER) {
-                //如果用户远程视频在打开状态 设为全屏
-                if (binding.remoteVideoViewContainer != null && binding.remoteVideoViewContainer.getVisibility() == View.VISIBLE) {
+                //用户大头像 没有显示 说明用户打开了摄像头
+                else if (binding.ivAvatarBg.getVisibility() != View.VISIBLE) {
+                    //点击后把用户的头像展示到右上角 把自己的视频全屏
+                    setLocalView(true);
+                    //全屏在底部
+//                    binding.localVideoViewContainer.setZ(100f);
+                    //用户小视频在顶部
                     binding.userAvatar.setVisibility(View.GONE);
-                    ViewUtils.setViewWidth(binding.remoteVideoViewContainer, QMUIDisplayHelper.getScreenWidth(this));
-                    ViewUtils.setViewHeight(binding.remoteVideoViewContainer, QMUIDisplayHelper.getScreenHeight(this));
-                    binding.remoteVideoViewContainer.setZ(0f);
-                    binding.localVideoViewContainer.setZ(100f);
+//                    ViewUtils.setViewWidth(binding.remoteVideoViewContainer, getResources().getDimensionPixelOffset(R.dimen.x92));
+//                    ViewUtils.setViewHeight(binding.remoteVideoViewContainer, getResources().getDimensionPixelOffset(R.dimen.y166));
+//                    binding.remoteVideoViewContainer.setZ(0f);
+
+                    binding.remoteVideoViewContainerSmall.setVisibility(View.VISIBLE);
+                    binding.remoteVideoViewContainer.setVisibility(View.GONE);
+                    binding.remoteVideoViewContainerSmall.bringToFront();
+                    binding.remoteVideoViewContainerSmall.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(getResources().getDimensionPixelOffset(R.dimen.x92), getResources().getDimensionPixelOffset(R.dimen.y166));
+                            lp.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, 1);
+                            lp.rightMargin = getResources().getDimensionPixelOffset(R.dimen.x10);
+                            lp.topMargin = getResources().getDimensionPixelOffset(R.dimen.y30);
+                            binding.remoteVideoViewContainerSmall.setLayoutParams(lp);
+//                            binding.remoteVideoViewContainer.requestLayout();
+                        }
+                    });
+
+                    setupRemoteVideoSmall(postVideoChatBean.getUser().getId());
+//                    binding.remoteVideoViewContainer.bringToFront();
+//                    binding.remoteVideoViewContainer.post(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(getResources().getDimensionPixelOffset(R.dimen.x92), getResources().getDimensionPixelOffset(R.dimen.y166));
+//                            lp.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, 1);
+//                            lp.rightMargin = getResources().getDimensionPixelOffset(R.dimen.x10);
+//                            lp.topMargin = getResources().getDimensionPixelOffset(R.dimen.y30);
+//                            binding.remoteVideoViewContainer.setLayoutParams(lp);
+////                            binding.remoteVideoViewContainer.requestLayout();
+//                        }
+//                    });
                 }
-                //如果用户远程视频没有打开，把头像挪到右上角显示小头像
-                else if (binding.userAvatar.getVisibility() == View.VISIBLE) {
-                    ViewUtils.setViewWidth(binding.remoteVideoViewContainer, QMUIDisplayHelper.getScreenWidth(this));
-                    ViewUtils.setViewHeight(binding.remoteVideoViewContainer, QMUIDisplayHelper.getScreenHeight(this));
-//                    ViewUtils.setViewWidth(binding.ivAvatarBg, getResources().getDimensionPixelOffset(R.dimen.x92));
-//                    ViewUtils.setViewHeight(binding.ivAvatarBg, getResources().getDimensionPixelOffset(R.dimen.y166));
+            }
+            //用户点击了本地视频区域
+            else if (videoChatFrom == VideoChatFrom.USER) {
+                //用户自己没有开摄像头 默认显示的是头像区域的情况下 点击了头像区域
+                if (!localVideoEnable) {
+                    //把头像最大化，把服务者的视频 移动到右上角
+                    ImageUtils.showImage(binding.ivAvatarBg, UserService.getInstance().getUser().getAvatar());
                     binding.userAvatar.setVisibility(View.GONE);
                     binding.ivAvatarBg.setVisibility(View.VISIBLE);
-
-                    binding.ivAvatarBg.setZ(0f);
-                    binding.localVideoViewContainer.setZ(100f);
+                    setupRemoteVideoSmall(postVideoChatBean.getUser().getId());
+//                    ViewUtils.setViewWidth(binding.remoteVideoViewContainer, getResources().getDimensionPixelOffset(R.dimen.x92));
+//                    ViewUtils.setViewHeight(binding.remoteVideoViewContainer, getResources().getDimensionPixelOffset(R.dimen.y166));
+//                    binding.remoteVideoViewContainer.bringToFront();
+//                    binding.remoteVideoViewContainer.post(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(getResources().getDimensionPixelOffset(R.dimen.x92), getResources().getDimensionPixelOffset(R.dimen.y166));
+//                            lp.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, 1);
+//                            lp.rightMargin = getResources().getDimensionPixelOffset(R.dimen.x10);
+//                            lp.topMargin = getResources().getDimensionPixelOffset(R.dimen.y30);
+//                            binding.remoteVideoViewContainer.setLayoutParams(lp);
+////                            binding.remoteVideoViewContainer.requestLayout();
+//                        }
+//                    });
 
                 }
+                //用户开了摄像头 点击了本地视频区域
+                else if (localVideoEnable) {
+                    //把本地视频最大化 把服务者的视频 缩小 移动到右上角
+                    setLocalView(true);
+//                    ViewUtils.setViewWidth(binding.remoteVideoViewContainer, getResources().getDimensionPixelOffset(R.dimen.x92));
+//                    ViewUtils.setViewHeight(binding.remoteVideoViewContainer, getResources().getDimensionPixelOffset(R.dimen.y166));
+
+                    binding.userAvatar.setVisibility(View.GONE);
+                    setupRemoteVideoSmall(postVideoChatBean.getUser().getId());
+                    binding.remoteVideoViewContainer.setVisibility(View.GONE);
+                    binding.remoteVideoViewContainerSmall.setVisibility(View.VISIBLE);
+                    smallSurfaceView.setZOrderMediaOverlay(true);
+                    smallSurfaceView.setZOrderOnTop(true);
+                }
             }
-            binding.userAvatar.setEnabled(false);
-            binding.localVideoViewContainer.setEnabled(true);
-            binding.remoteVideoViewContainer.setEnabled(false);
-            binding.mGlview.setEnabled(true);
+//            binding.localVideoViewContainer.setEnabled(false);
+//            binding.mGlview.setEnabled(false);
+            localViewFullFlag = true;
+        } else {
+            //本地视频处于全屏状态下的点击
+            //服务者点击了用户的头像 或者是用户的视频区域
+            if (videoChatFrom == VideoChatFrom.SERVICER) {
+                //用户的右上角头像区域在显示状态 说明用户没有开视频
+                if (binding.userAvatar.getVisibility() == View.VISIBLE) {
+                    //把用户头像显示
+                    binding.ivAvatarBg.setVisibility(View.VISIBLE);
+                    binding.ivAvatarBg.setZ(0f);
+//                    binding.localVideoViewContainer.setZ(100f);
+                    binding.userAvatar.setVisibility(View.GONE);
+                    //先把服务者自己的全屏视频 缩小 移动到右上角
+                    setLocalView(false);
+                }
+                //用户打开了视频
+                else if (binding.userAvatar.getVisibility() != View.VISIBLE) {
+
+                    binding.remoteVideoViewContainer.setVisibility(View.VISIBLE);
+                    binding.remoteVideoViewContainerSmall.setVisibility(View.GONE);
+//
+//                    //把用户的视频全屏
+                    binding.remoteVideoViewContainer.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            binding.remoteVideoViewContainer.setLayoutParams(new RelativeLayout.LayoutParams(QMUIDisplayHelper.getScreenWidth(VideoChatActivity.this), QMUIDisplayHelper.getScreenHeight(VideoChatActivity.this)));
+                            binding.remoteVideoViewContainer.requestLayout();
+                        }
+                    });
+                    setupRemoteVideo(postVideoChatBean.getUser().getId());
+
+                    //先把服务者自己的全屏视频 缩小 移动到右上角
+                    setLocalView(false);
+
+//                    binding.remoteVideoViewContainer.setZ(0f);
+//                    binding.localVideoViewContainer.setZ(100f);
+                }
+            }
+            //用户在自己的视频全屏 或者头像全屏状态下 点击了右上角的服务者视频
+            else if (videoChatFrom == VideoChatFrom.USER) {
+                //用户打开了视频
+                if (localVideoEnable) {
+                    //先把自己的全屏视频缩小，移动到右上角
+                    setLocalView(false);
+                    //把服务者的视频全屏
+//                    ViewUtils.setViewWidth(binding.remoteVideoViewContainer, QMUIDisplayHelper.getScreenWidth(this));
+//                    ViewUtils.setViewHeight(binding.remoteVideoViewContainer, QMUIDisplayHelper.getScreenHeight(this));
+
+
+                    binding.remoteVideoViewContainer.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            binding.remoteVideoViewContainer.setLayoutParams(new RelativeLayout.LayoutParams(QMUIDisplayHelper.getScreenWidth(VideoChatActivity.this), QMUIDisplayHelper.getScreenHeight(VideoChatActivity.this)));
+                            binding.remoteVideoViewContainer.requestLayout();
+                        }
+                    });
+                    binding.remoteVideoViewContainer.setVisibility(View.VISIBLE);
+                    setupRemoteVideo(postVideoChatBean.getUser().getId());
+                    binding.remoteVideoViewContainerSmall.setVisibility(View.GONE);
+                }
+                //用户没有打开视频
+                else if (!localVideoEnable) {
+                    //把自己右上角的头像显示出来
+                    binding.userAvatar.setVisibility(View.VISIBLE);
+                    binding.ivAvatarBg.setVisibility(View.GONE);
+                    binding.remoteVideoViewContainerSmall.setVisibility(View.GONE);
+                    //把服务者的视频全屏
+                    //把用户的视频全屏
+                    binding.remoteVideoViewContainer.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            binding.remoteVideoViewContainer.setLayoutParams(new RelativeLayout.LayoutParams(QMUIDisplayHelper.getScreenWidth(VideoChatActivity.this), QMUIDisplayHelper.getScreenHeight(VideoChatActivity.this)));
+                            binding.remoteVideoViewContainer.requestLayout();
+                        }
+                    });
+                    setupRemoteVideo(postVideoChatBean.getUser().getId());
+                }
+
+            }
+//            binding.userAvatar.setEnabled(false);
+//            binding.localVideoViewContainer.setEnabled(true);
+//            binding.remoteVideoViewContainer.setEnabled(false);
+//            binding.mGlview.setEnabled(true);
             localViewFullFlag = false;
         }
 
 
     }
 
+    private RelativeLayout.LayoutParams fullLayoutparams = new RelativeLayout.LayoutParams(MAPP.mapp.getResources().getDimensionPixelOffset(R.dimen.x375), MAPP.mapp.getResources().getDimensionPixelOffset(R.dimen.y667));
+
+    private RelativeLayout.LayoutParams smallLayoutparams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+
     private void setLocalView(boolean full) {
+
         if (full) {
-            ViewUtils.setViewWidth(binding.localVideoViewContainer, QMUIDisplayHelper.getScreenWidth(this));
-            ViewUtils.setViewHeight(binding.localVideoViewContainer, QMUIDisplayHelper.getScreenHeight(this));
-            ViewUtils.setViewWidth(binding.mGlview, QMUIDisplayHelper.getScreenWidth(this));
-            ViewUtils.setViewHeight(binding.mGlview, QMUIDisplayHelper.getScreenHeight(this));
+//            binding.dragContainer.setLocalEnable(false);
+//            ViewUtils.setViewWidth(binding.localVideoViewContainer, QMUIDisplayHelper.getScreenWidth(this));
+//            ViewUtils.setViewHeight(binding.localVideoViewContainer, QMUIDisplayHelper.getScreenHeight(this));
+//            ViewUtils.setViewWidth(binding.mGlview, QMUIDisplayHelper.getScreenWidth(this));
+//            ViewUtils.setViewHeight(binding.mGlview, QMUIDisplayHelper.getScreenHeight(this));
+
+//            ((RelativeLayout.LayoutParams) binding.localVideoViewContainer.getLayoutParams()).setMarginStart(0);
+//            ((RelativeLayout.LayoutParams) binding.localVideoViewContainer.getLayoutParams()).setMarginEnd(0);
+//            binding.localVideoViewContainer.getLayoutParams().height = QMUIDisplayHelper.getScreenHeight(this);
+//            binding.localVideoViewContainer.getLayoutParams().width = QMUIDisplayHelper.getScreenWidth(this);
+//            binding.mGlview.getLayoutParams().height = QMUIDisplayHelper.getScreenHeight(this);
+//            binding.mGlview.getLayoutParams().width = QMUIDisplayHelper.getScreenWidth(this);
+
+//            ((ConstraintLayout.LayoutParams) binding.localVideoViewContainer.getLayoutParams()).rightMargin = 0;
+//            ((ConstraintLayout.LayoutParams) binding.localVideoViewContainer.getLayoutParams()).topMargin = 0;
+//            binding.localVideoViewContainer.postInvalidate();
+//            binding.mGlview.postInvalidate();
+            LogUtil.e(TAG, "计算" + QMUIDisplayHelper.getScreenWidth(this) + "==" + QMUIDisplayHelper.getScreenHeight(this));
+
+            binding.localVideoViewContainer.post(new Runnable() {
+                @Override
+                public void run() {
+                    binding.localVideoViewContainer.setLayoutParams(new RelativeLayout.LayoutParams(QMUIDisplayHelper.getScreenWidth(VideoChatActivity.this), QMUIDisplayHelper.getScreenHeight(VideoChatActivity.this)));
+                    binding.localVideoViewContainer.requestLayout();
+                }
+            });
+
+            binding.mGlview.post(new Runnable() {
+                @Override
+                public void run() {
+                    binding.mGlview.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+                    binding.mGlview.requestLayout();
+                }
+            });
+
+//            binding.localVideoViewContainer.postInvalidate();
+//            binding.mGlview.postInvalidate();
+
+            LogUtil.e(TAG, "设置全屏1>" + binding.localVideoViewContainer.getWidth() + " = " + binding.localVideoViewContainer.getHeight() + ">" + binding.userAvatar.getVisibility());
+
+
         } else {
-            ViewUtils.setViewWidth(binding.localVideoViewContainer, getResources().getDimensionPixelOffset(R.dimen.x92));
-            ViewUtils.setViewHeight(binding.localVideoViewContainer, getResources().getDimensionPixelOffset(R.dimen.y166));
-            ViewUtils.setViewWidth(binding.mGlview, getResources().getDimensionPixelOffset(R.dimen.x92));
-            ViewUtils.setViewHeight(binding.mGlview, getResources().getDimensionPixelOffset(R.dimen.y166));
+//            binding.dragContainer.setLocalEnable(true);
+//            ViewUtils.setViewWidth(binding.localVideoViewContainer, getResources().getDimensionPixelOffset(R.dimen.x92));
+//            ViewUtils.setViewHeight(binding.localVideoViewContainer, getResources().getDimensionPixelOffset(R.dimen.y166));
+//            ViewUtils.setViewWidth(binding.mGlview, getResources().getDimensionPixelOffset(R.dimen.x92));
+//            ViewUtils.setViewHeight(binding.mGlview, getResources().getDimensionPixelOffset(R.dimen.y166));
+
+//            binding.localVideoViewContainer.getLayoutParams().height = getResources().getDimensionPixelOffset(R.dimen.y166);
+//            binding.localVideoViewContainer.getLayoutParams().width = getResources().getDimensionPixelOffset(R.dimen.y92);
+//
+//            binding.mGlview.getLayoutParams().height = getResources().getDimensionPixelOffset(R.dimen.y166);
+//            binding.mGlview.getLayoutParams().width = getResources().getDimensionPixelOffset(R.dimen.y92);
+
+//            smallLayoutparams.width = getResources().getDimensionPixelOffset(R.dimen.x92);
+//            smallLayoutparams.height = getResources().getDimensionPixelOffset(R.dimen.y166);
+            binding.localVideoViewContainer.post(new Runnable() {
+                @Override
+                public void run() {
+                    RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(getResources().getDimensionPixelOffset(R.dimen.x92), getResources().getDimensionPixelOffset(R.dimen.y166));
+                    lp.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, 1);
+                    lp.rightMargin = getResources().getDimensionPixelOffset(R.dimen.x10);
+                    lp.topMargin = getResources().getDimensionPixelOffset(R.dimen.y30);
+                    binding.localVideoViewContainer.setLayoutParams(lp);
+                    binding.localVideoViewContainer.requestLayout();
+                }
+            });
+            binding.mGlview.post(new Runnable() {
+                @Override
+                public void run() {
+                    binding.mGlview.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+                    binding.mGlview.requestLayout();
+                }
+            });
+
+            if (fullSurfaceView != null) {
+                fullSurfaceView.setZOrderOnTop(false);
+                fullSurfaceView.setZOrderMediaOverlay(false);
+            }
+
+            if (smallSurfaceView != null) {
+                smallSurfaceView.setZOrderOnTop(false);
+                smallSurfaceView.setZOrderMediaOverlay(false);
+
+                smallSurfaceView.setVisibility(View.GONE);
+
+            }
+
+            binding.mGlview.setZOrderOnTop(true);
+            binding.mGlview.setZOrderMediaOverlay(true);
+
+
+//            binding.localVideoViewContainer.postInvalidate();
+//            binding.mGlview.postInvalidate();
+
+            LogUtil.e(TAG, "设置全屏2>" + binding.localVideoViewContainer.getWidth() + " = " + binding.localVideoViewContainer.getHeight() + ">" + binding.userAvatar.getVisibility());
+//            ((RelativeLayout.LayoutParams) binding.localVideoViewContainer.getLayoutParams()).rightMargin = getResources().getDimensionPixelOffset(R.dimen.x10);
+//            ((RelativeLayout.LayoutParams) binding.localVideoViewContainer.getLayoutParams()).topMargin = getResources().getDimensionPixelOffset(R.dimen.y20);
+//            ((RelativeLayout.LayoutParams) binding.mGlview.getLayoutParams()).rightMargin = getResources().getDimensionPixelOffset(R.dimen.x10);
+//            ((RelativeLayout.LayoutParams) binding.mGlview.getLayoutParams()).topMargin = getResources().getDimensionPixelOffset(R.dimen.y20);
+
         }
 
     }
@@ -922,7 +1208,7 @@ public class VideoChatActivity extends BaseActivity<ActivityVideoChatBinding> im
      * 设置本地视频视图
      */
     private void setupLocalVideo() {
-        FrameLayout container = binding.localVideoViewContainer;
+        RelativeLayout container = binding.localVideoViewContainer;
         container.setVisibility(View.VISIBLE);
     }
 
@@ -931,30 +1217,45 @@ public class VideoChatActivity extends BaseActivity<ActivityVideoChatBinding> im
         mRtcEngine.joinChannel(postVideoChatBean.getChannel_key(), postVideoChatBean.getChannel_name(), "Extra Optional Data", UserService.getInstance().getUser().getId()); // if you do not specify the uid, we will generate the uid for you
     }
 
+    private SurfaceView fullSurfaceView, smallSurfaceView;
+
     // Tutorial Step 5
     private void setupRemoteVideo(int uid) {
         remoteContainer = (FrameLayout) findViewById(R.id.remote_video_view_container);
-
+        remoteContainer.setVisibility(View.VISIBLE);
         if (remoteContainer.getChildCount() >= 1) {
-//            remoteContainer.removeAllViews();
-            binding.mGlview.onResume();
-            return;
+            remoteContainer.removeAllViews();
+//            binding.mGlview.onResume();
+//            return;
         }
-        SurfaceView surfaceView = RtcEngine.CreateRendererView(getBaseContext());
-        remoteContainer.addView(surfaceView);
-        mRtcEngine.setupRemoteVideo(new VideoCanvas(surfaceView, VideoCanvas.RENDER_MODE_ADAPTIVE, uid));
-
-        surfaceView.setTag(uid); // for mark purpose
-
-//        if (videoChatFrom == VideoChatFrom.SERVICER) {
-//            setLocalVideoToShow();
-////            showUserVideoView();
-//        } else if (videoChatFrom == VideoChatFrom.SERVICER && !localVideoEnable) {
-////            hideUserVideoView();
-//        }
+        fullSurfaceView = RtcEngine.CreateRendererView(getBaseContext());
+        remoteContainer.addView(fullSurfaceView);
+        mRtcEngine.setupRemoteVideo(new VideoCanvas(fullSurfaceView, VideoCanvas.RENDER_MODE_ADAPTIVE, uid));
+        fullSurfaceView.setZOrderOnTop(false);
+        fullSurfaceView.setZOrderMediaOverlay(false);
+        fullSurfaceView.setTag(uid); // for mark purpose
 
 
     }
+
+    private void setupRemoteVideoSmall(int uid) {
+        remoteContainer = (FrameLayout) findViewById(R.id.remote_video_view_container_small);
+        remoteContainer.setVisibility(View.VISIBLE);
+        if (remoteContainer.getChildCount() >= 1) {
+            remoteContainer.removeAllViews();
+//            binding.mGlview.onResume();
+//            return;
+        }
+        smallSurfaceView = RtcEngine.CreateRendererView(getBaseContext());
+        remoteContainer.addView(smallSurfaceView);
+        mRtcEngine.setupRemoteVideo(new VideoCanvas(smallSurfaceView, VideoCanvas.RENDER_MODE_ADAPTIVE, uid));
+        smallSurfaceView.setZOrderOnTop(true);
+        smallSurfaceView.setZOrderMediaOverlay(true);
+        smallSurfaceView.setTag(uid); // for mark purpose
+
+
+    }
+
 
     /**
      * 初始化glsurfaceview
@@ -982,18 +1283,41 @@ public class VideoChatActivity extends BaseActivity<ActivityVideoChatBinding> im
      */
     private void showUserVideoView() {
         binding.ivAvatarBg.setVisibility(View.INVISIBLE);
-        if (binding.remoteVideoViewContainer != null) {
+        //如果本地视频是全屏 用户的图像应该在右上角
+        if (localViewFullFlag && binding.ivAvatarBg.getVisibility() != View.VISIBLE) {
+            binding.remoteVideoViewContainer.setVisibility(View.INVISIBLE);
+            binding.remoteVideoViewContainerSmall.setVisibility(View.VISIBLE);
+            binding.userAvatar.setVisibility(View.GONE);
+            setupRemoteVideoSmall(postVideoChatBean.getUser().getId());
+        } else {
+            if (binding.remoteVideoViewContainer != null) {
 //            setRemoteVideoShow();
-            binding.remoteVideoViewContainer.setVisibility(View.VISIBLE);
+                binding.remoteVideoViewContainerSmall.setVisibility(View.INVISIBLE);
+                binding.remoteVideoViewContainer.setVisibility(View.VISIBLE);
+                setupRemoteVideo(postVideoChatBean.getUser().getId());
+            }
         }
+
+
     }
 
     private void hideUserVideoView() {
-        binding.ivAvatarBg.setVisibility(View.VISIBLE);
-        if (binding.remoteVideoViewContainer != null) {
+        //如果本地视频是全屏 用户的图像应该在右上角
+        if (localViewFullFlag && binding.ivAvatarBg.getVisibility() != View.VISIBLE) {
             binding.remoteVideoViewContainer.setVisibility(View.INVISIBLE);
+            binding.remoteVideoViewContainerSmall.setVisibility(View.INVISIBLE);
+            binding.userAvatar.setVisibility(View.VISIBLE);
+        } else {
+            binding.ivAvatarBg.setVisibility(View.VISIBLE);
+            if (binding.remoteVideoViewContainer != null) {
+                binding.remoteVideoViewContainer.setVisibility(View.INVISIBLE);
+                binding.remoteVideoViewContainerSmall.setVisibility(View.INVISIBLE);
+                binding.userAvatar.setVisibility(View.INVISIBLE);
 //            setRemoteVideoHide();
+            }
         }
+
+
     }
 
     private final IRtcEngineEventHandler mRtcEventHandler = new IRtcEngineEventHandler() { // Tutorial Step 1
@@ -1003,7 +1327,11 @@ public class VideoChatActivity extends BaseActivity<ActivityVideoChatBinding> im
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    setupRemoteVideo(uid);
+                    if (localViewFullFlag && binding.ivAvatarBg.getVisibility() != View.VISIBLE) {
+                        setupRemoteVideoSmall(uid);
+                    } else {
+                        setupRemoteVideo(uid);
+                    }
                 }
             });
         }
@@ -1095,6 +1423,7 @@ public class VideoChatActivity extends BaseActivity<ActivityVideoChatBinding> im
                             binding.ivAvatarBg.setVisibility(View.INVISIBLE);
                             binding.ivEnableLocalvideo.setVisibility(View.VISIBLE);
                             binding.remoteVideoViewContainer.setVisibility(View.VISIBLE);
+                            binding.userAvatar.setVisibility(View.VISIBLE);
 //                            setRemoteVideoShow();
                             hideTeseTip();
                         }

@@ -70,6 +70,8 @@ public class DiscoverVPAdapter extends PagerAdapter {
 
         binding.setUser(user);
 
+        ImageUtils.showImage(binding.ivAvatar, user.getAvatar());
+
         if (user.getVideo_tags() !=
                 null && user.getVideo_tags().size() > 0) {
             binding.tvTeseContent.setVisibility(View.VISIBLE);
