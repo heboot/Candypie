@@ -81,6 +81,9 @@ public class IndexFragment extends BaseFragment<FragmentIndexBinding> {
 //            IntentUtils.toSearchActivity(getContext());
 //        });
         binding.vSearchbg2.setOnClickListener((v) -> {
+            if (UserService.getInstance().checkTourist(getContext())) {
+                return;
+            }
             CustomEventUtil.onEvent(CustomEvent.INDEX_CLICK_SEARCH);
             IntentUtils.toSearchActivity(getContext());
         });

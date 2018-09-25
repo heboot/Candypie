@@ -1135,7 +1135,9 @@ public class VideoChatActivity extends BaseActivity<ActivityVideoChatBinding> im
             @Override
             public void onSuccess(BaseBean<VideoChatStratEndBean> baseBean) {
                 if (videoChatFrom == VideoChatFrom.USER) {
-                    mRtcEngine.leaveChannel();
+                    if (mRtcEngine != null) {
+                        mRtcEngine.leaveChannel();
+                    }
                     if (disposable != null && !disposable.isDisposed()) {
                         disposable.dispose();
                     }
@@ -1149,7 +1151,9 @@ public class VideoChatActivity extends BaseActivity<ActivityVideoChatBinding> im
 
             @Override
             public void onError(BaseBean<VideoChatStratEndBean> baseBean) {
-                mRtcEngine.leaveChannel();
+                if (mRtcEngine != null) {
+                    mRtcEngine.leaveChannel();
+                }
                 if (disposable != null && !disposable.isDisposed()) {
                     disposable.dispose();
                 }
@@ -1464,7 +1468,9 @@ public class VideoChatActivity extends BaseActivity<ActivityVideoChatBinding> im
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    mRtcEngine.leaveChannel();
+                    if (mRtcEngine != null) {
+                        mRtcEngine.leaveChannel();
+                    }
 
                     if (videoChatFrom == VideoChatFrom.USER) {
 //                        if (reason == 0) {

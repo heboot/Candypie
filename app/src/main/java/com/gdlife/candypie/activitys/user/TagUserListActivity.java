@@ -16,6 +16,7 @@ import com.gdlife.candypie.http.HttpClient;
 import com.gdlife.candypie.serivce.UIService;
 import com.gdlife.candypie.utils.DialogUtils;
 import com.gdlife.candypie.utils.SignUtils;
+import com.gdlife.candypie.utils.StringUtils;
 import com.gdlife.candypie.widget.rv.IndexUserWhite3ItemDecoration;
 import com.gdlife.candypie.widget.rv.SearchUserWhite3ItemDecoration;
 import com.heboot.base.BaseBean;
@@ -77,6 +78,9 @@ public class TagUserListActivity extends BaseActivity<FragmentTagUserListBinding
 
     @Override
     public void initListener() {
+        binding.includeToolbar.vBack.setOnClickListener((v) -> {
+            finish();
+        });
         binding.srytIndex.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -107,6 +111,9 @@ public class TagUserListActivity extends BaseActivity<FragmentTagUserListBinding
         HttpClient.Builder.getGuodongServer().tag_user_list(params).observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribe(new HttpObserver<IndexV5Bean>() {
             @Override
             public void onSuccess(BaseBean<IndexV5Bean> baseBean) {
+                if (baseBean.getData().getTag() != null && !StringUtils.isEmpty(baseBean.getData().getTag().get("content"))) {
+                    binding.includeToolbar.tvTitle.setText(baseBean.getData().getTag().get("content"));
+                }
                 indexBean = baseBean.getData();
                 total = indexBean.getTotalPages();
                 binding.srytIndex.setRefreshing(false);

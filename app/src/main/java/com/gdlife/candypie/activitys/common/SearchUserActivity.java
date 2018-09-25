@@ -66,7 +66,7 @@ public class SearchUserActivity extends BaseActivity<ActivitySearchBinding> {
         tagsChildBeanConsumer = new Consumer<TagsChildBean>() {
             @Override
             public void accept(TagsChildBean tagsChildBean) throws Exception {
-                IntentUtils.toTagUserlistActivity(SearchUserActivity.this, tagsChildBean.getId(), tagsChildBean.getContent());
+                IntentUtils.toTagUserlistActivity(SearchUserActivity.this, tagsChildBean.getId(), "");
             }
         };
         init();

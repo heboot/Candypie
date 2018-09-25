@@ -101,7 +101,7 @@ public class UserService {
 
     public boolean checkTourist() {
         if (getUser() == null) {
-            IntentUtils.toLoginActivity(MAPP.mapp);
+            IntentUtils.toLoginActivity(MAPP.mapp.getCurrentActivity());
             return true;
         } else {
             return false;

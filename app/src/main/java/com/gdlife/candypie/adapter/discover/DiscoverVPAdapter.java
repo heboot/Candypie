@@ -70,7 +70,7 @@ public class DiscoverVPAdapter extends PagerAdapter {
 
         binding.setUser(user);
 
-        ImageUtils.showImage(binding.ivAvatar, user.getAvatar());
+//        ImageUtils.showImage(binding.ivAvatar, user.getAvatar());
 
         if (user.getVideo_tags() !=
                 null && user.getVideo_tags().size() > 0) {

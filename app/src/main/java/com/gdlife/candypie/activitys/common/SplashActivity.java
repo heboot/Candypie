@@ -68,7 +68,10 @@ public class SplashActivity extends BaseActivity<ActivitySplashBinding> {//EasyP
 
             @Override
             public void onNext(HashMap o) {
-                loadingDialog.dismiss();
+                if (loadingDialog != null) {
+                    loadingDialog.dismiss();
+                }
+
                 if (!StringUtils.isEmpty((String) o.get("syncid"))) {
 //                    IntentUtils.toRegisterActivity();
                     IntentUtils.toRegisterInfoActivity(SplashActivity.this, (String) o.get("syncid"), (LoginType) o.get("loginType"), o);
@@ -77,7 +80,9 @@ public class SplashActivity extends BaseActivity<ActivitySplashBinding> {//EasyP
 
             @Override
             public void onError(Throwable e) {
-                loadingDialog.dismiss();
+                if (loadingDialog != null) {
+                    loadingDialog.dismiss();
+                }
             }
 
             @Override

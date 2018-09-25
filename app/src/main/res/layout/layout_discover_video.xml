@@ -72,6 +72,7 @@
             android:layout_height="@dimen/y60"
             android:layout_marginBottom="@dimen/y31"
             android:layout_marginRight="@dimen/x12"
+            android:showImg="@{user.avatar}"
             app:layout_constraintBottom_toTopOf="@+id/pb"
             app:layout_constraintRight_toRightOf="parent"
             app:qmui_border_color="@color/white"

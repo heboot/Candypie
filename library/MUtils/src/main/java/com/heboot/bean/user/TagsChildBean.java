@@ -10,6 +10,7 @@ public class TagsChildBean implements Serializable {
     private String bg_color;
     private String nums;
 
+
     public String getNums() {
         return nums;
     }

@@ -4,6 +4,7 @@ import com.heboot.base.BaseBeanEntity;
 import com.heboot.entity.User;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by heboot on 2018/2/8.
@@ -22,7 +23,15 @@ public class IndexV5Bean extends BaseBeanEntity {
     private IndexRecommendConfigBean recommend_config;
     private int service_auth_tip;
     private int service_auth;
+    private Map<String,String> tag;
 
+    public Map<String, String> getTag() {
+        return tag;
+    }
+
+    public void setTag(Map<String, String> tag) {
+        this.tag = tag;
+    }
 
     public int getService_auth() {
         return service_auth;
