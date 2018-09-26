@@ -9,15 +9,17 @@
         android:paddingLeft="@dimen/x2">
 
 
-        <ImageView
+        <com.qmuiteam.qmui.widget.QMUIRadiusImageView
             android:id="@+id/iv_img"
             android:layout_width="@dimen/x120"
             android:layout_height="0dp"
-            android:scaleType="center"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:qmui_border_width="0dp"
+            app:qmui_corner_radius="@dimen/x6"
+            app:qmui_is_circle="false" />
 
         <ImageView
             android:id="@+id/iv_play"
@@ -30,16 +32,40 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:visibility="gone"
-            android:text="审核中"
             android:id="@+id/tv_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="审核中"
             android:textColor="@color/white"
             android:textSize="@dimen/x16"
+            android:visibility="gone"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/iv_play" />
+
+
+        <View
+            android:id="@+id/v_bottom"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y30"
+            android:background="@drawable/bg_rect_uservideo_bottom"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="@+id/iv_img"
+            app:layout_constraintRight_toRightOf="@+id/iv_img"></View>
+
+        <TextView
+            android:id="@+id/tv_option"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/x14"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/v_bottom"
+            app:layout_constraintLeft_toLeftOf="@+id/v_bottom"
+            app:layout_constraintRight_toRightOf="@+id/v_bottom"
+            app:layout_constraintTop_toTopOf="@+id/v_bottom" />
 
     </android.support.constraint.ConstraintLayout>
 </layout>

@@ -92,6 +92,9 @@ public class UserVideosAdapter extends BaseRecyclerViewAdapter {
                     binding.getRoot().setOnClickListener((v) -> {
                         weakReference.get().chooseVideo(isReplace);
                     });
+
+                    binding.vBottom.setVisibility(View.GONE);
+                    binding.tvOption.setVisibility(View.GONE);
                 } else {
                     ImageUtils.showImage(binding.ivImg, s.getCover_img());
                     binding.getRoot().setOnClickListener((v) -> {
@@ -118,7 +121,21 @@ public class UserVideosAdapter extends BaseRecyclerViewAdapter {
                     });
                     if (s.getStatus() == MValue.VIDEO_AUTH_STATUS_ING) {
                         binding.tvStatus.setVisibility(View.VISIBLE);
+                        binding.vBottom.setVisibility(View.GONE);
+                        binding.tvOption.setVisibility(View.GONE);
                     } else {
+                        binding.vBottom.setVisibility(View.VISIBLE);
+                        binding.tvOption.setVisibility(View.VISIBLE);
+                        if (s.getIs_main_video() == 1) {
+                            binding.tvOption.setText("主视频");
+                            binding.tvOption.setEnabled(false);
+                        } else {
+                            binding.tvOption.setText("编辑");
+                            binding.tvOption.setEnabled(true);
+                            binding.vBottom.setOnClickListener(v->{
+                                weakReference.get().doVideoOption(s);
+                            });
+                        }
                         binding.tvStatus.setVisibility(View.GONE);
                     }
                 }

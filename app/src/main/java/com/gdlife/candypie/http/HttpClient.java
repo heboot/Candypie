@@ -512,6 +512,15 @@ public interface HttpClient {
     Observable<BaseBean<SearchInitBean>> search_init(@FieldMap Map<String, Object> params);
 
 
+    @FormUrlEncoded
+    @POST("user/user_video/delete_video")
+    Observable<BaseBean<BaseBeanEntity>> delete_video(@FieldMap Map<String, Object> params);
+
+    @FormUrlEncoded
+    @POST("user/user_video/set_video_price")
+    Observable<BaseBean<BaseBeanEntity>> set_video_price(@FieldMap Map<String, Object> params);
+
+
 //    /**
 
 

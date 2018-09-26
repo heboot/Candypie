@@ -9,10 +9,14 @@ import android.view.View;
 
 import com.aliyun.demo.recorder.AliyunVideoRecorder;
 import com.aliyun.struct.common.CropKey;
+import com.gdlife.candypie.MAPP;
 import com.gdlife.candypie.R;
+import com.gdlife.candypie.activitys.user.UserBlackListActivity;
+import com.gdlife.candypie.adapter.user.UserBlackAdapter;
 import com.gdlife.candypie.adapter.user.UserVideosAdapter;
 import com.gdlife.candypie.base.BaseActivity;
 import com.gdlife.candypie.base.BaseObserver;
+import com.gdlife.candypie.base.HttpObserver;
 import com.gdlife.candypie.common.MCode;
 import com.gdlife.candypie.common.MKey;
 import com.gdlife.candypie.common.MValue;
@@ -35,7 +39,11 @@ import com.gdlife.candypie.utils.ToastUtils;
 import com.gdlife.candypie.utils.VideoUtils;
 import com.gdlife.candypie.utils.rv.RVUtils;
 import com.gdlife.candypie.widget.common.BottomSheetDialog;
+import com.gdlife.candypie.widget.dialog.video.SetVideoPriceDialog;
 import com.heboot.base.BaseBean;
+import com.heboot.base.BaseBeanEntity;
+import com.heboot.bean.user.UserFavsListBean;
+import com.heboot.bean.user.UserInfoEditBean;
 import com.heboot.bean.video.HomepageVideoBean;
 import com.heboot.bean.video.UserVideosBean;
 import com.heboot.entity.User;
@@ -47,6 +55,7 @@ import com.heboot.utils.MStatusBarUtils;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 import com.yalantis.dialog.PublishAlbumDialog;
+import com.yalantis.dialog.TipCustomDialog;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -87,6 +96,14 @@ public class UserVideosActivity extends BaseActivity<ActivityUserVideosBinding> 
     private PublishAlbumDialog publishAlbumDialog;
 
     private boolean mReplace;
+
+    private Consumer<Integer> videoOptionConsumer;
+
+    private BottomSheetDialog videoOptionSheet;
+
+    private TipCustomDialog deleteTipDialog, setMainDialog;
+
+    private SetVideoPriceDialog setVideoPriceDialog;
 
     @Override
     public void initUI() {
@@ -243,6 +260,48 @@ public class UserVideosActivity extends BaseActivity<ActivityUserVideosBinding> 
             }
         });
 
+        videoOptionConsumer = new Consumer<Integer>() {
+            @Override
+            public void accept(Integer integer) throws Exception {
+                videoBottomSheet.dismiss();
+                switch (integer) {
+                    case 0:
+                        //删除
+                        if (deleteTipDialog == null) {
+                            deleteTipDialog = new TipCustomDialog.Builder(UserVideosActivity.this, new Consumer<Integer>() {
+                                @Override
+                                public void accept(Integer integer) throws Exception {
+                                    if (integer == 1) {
+                                        deleteVideo();
+                                    }
+                                }
+                            }, "确定删除此视频?", "取消", "确定").create();
+                        }
+                        deleteTipDialog.show();
+
+                        break;
+                    case 1:
+                        //设为主视频
+                        //删除
+                        if (setMainDialog == null) {
+                            setMainDialog = new TipCustomDialog.Builder(UserVideosActivity.this, new Consumer<Integer>() {
+                                @Override
+                                public void accept(Integer integer) throws Exception {
+                                    if (integer == 1) {
+                                        setMainVideo();
+                                    }
+                                }
+                            }, "确定设为主视频?", "取消", "确定").create();
+                        }
+                        setMainDialog.show();
+                        break;
+                    case 2:
+                        setVideoPrice();
+                        break;
+                }
+            }
+        };
+
 
     }
 
@@ -333,8 +392,7 @@ public class UserVideosActivity extends BaseActivity<ActivityUserVideosBinding> 
                         if (user.getUser_video() != null && user.getUser_video().getList() != null) {
                             user.getUser_video().getList().clear();
                             user.getUser_video().getList().addAll(sendSMSBeanBaseBean.getList());
-                        }
-                        else if (user.getUser_video() != null && user.getUser_video().getList() == null) {
+                        } else if (user.getUser_video() != null && user.getUser_video().getList() == null) {
                             user.getUser_video().setList(new ArrayList<>());
                             user.getUser_video().getList().addAll(sendSMSBeanBaseBean.getList());
                         } else if (user.getUser_video() == null) {
@@ -399,6 +457,125 @@ public class UserVideosActivity extends BaseActivity<ActivityUserVideosBinding> 
             }
 
         }));
+    }
+
+    private HomepageVideoBean currentOptionVideoBean;
+
+    public void doVideoOption(HomepageVideoBean optionVideoBean) {
+        currentOptionVideoBean = optionVideoBean;
+        if (videoBottomSheet == null) {
+            videoBottomSheet = DialogUtils.getVideoOptionBottomSheet(this, videoOptionConsumer);
+        }
+        videoBottomSheet.show();
+    }
+
+
+    private void setVideoPrice() {
+        if (setVideoPriceDialog == null) {
+            setVideoPriceDialog = new SetVideoPriceDialog.Builder(this, new Consumer<Integer>() {
+                @Override
+                public void accept(Integer integer) throws Exception {
+                    if (integer != null) {
+                        setVideoPriceDialog.dismiss();
+                        submitVideoPrice(MAPP.mapp.getConfigBean().getVideo_config().getPrice().get(integer));
+                    }
+                }
+            }).create();
+        }
+        setVideoPriceDialog.show();
+    }
+
+    private void submitVideoPrice(String price) {
+        if (currentOptionVideoBean == null) {
+            return;
+        }
+        params = SignUtils.getNormalParams();
+        params.put(MKey.VIDEO_ID, currentOptionVideoBean.getId());
+        params.put(MKey.PRICE, price);
+        String sign = SignUtils.doSign(params);
+        params.put(MKey.SIGN, sign);
+        HttpClient.Builder.getGuodongServer().set_video_price(params).observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribe(new HttpObserver<BaseBeanEntity>() {
+            @Override
+            public void onSuccess(BaseBean<BaseBeanEntity> baseBean) {
+                if (tipDialog != null && !tipDialog.isShowing()) {
+                    tipDialog.dismiss();
+                }
+                tipDialog = DialogUtils.getSuclDialog(UserVideosActivity.this, baseBean.getMessage(), true);
+                tipDialog.show();
+                initVideos();
+            }
+
+            @Override
+            public void onError(BaseBean<BaseBeanEntity> baseBean) {
+                if (tipDialog != null && !tipDialog.isShowing()) {
+                    tipDialog.dismiss();
+                }
+                tipDialog = DialogUtils.getFailDialog(UserVideosActivity.this, baseBean.getMessage(), true);
+                tipDialog.show();
+            }
+        });
+    }
+
+    private void setMainVideo() {
+        if (currentOptionVideoBean == null) {
+            return;
+        }
+        params = SignUtils.getNormalParams();
+        params.put(MKey.VIDEO_ID, currentOptionVideoBean.getId());
+        String sign = SignUtils.doSign(params);
+        params.put(MKey.SIGN, sign);
+        HttpClient.Builder.getGuodongServer().set_cover_video(params).observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribe(new HttpObserver<UserInfoEditBean>() {
+            @Override
+            public void onSuccess(BaseBean<UserInfoEditBean> baseBean) {
+                if (tipDialog != null && !tipDialog.isShowing()) {
+                    tipDialog.dismiss();
+                }
+                tipDialog = DialogUtils.getSuclDialog(UserVideosActivity.this, baseBean.getMessage(), true);
+                tipDialog.show();
+                initVideos();
+            }
+
+            @Override
+            public void onError(BaseBean<UserInfoEditBean> baseBean) {
+                if (tipDialog != null && !tipDialog.isShowing()) {
+                    tipDialog.dismiss();
+                }
+                tipDialog = DialogUtils.getFailDialog(UserVideosActivity.this, baseBean.getMessage(), true);
+                tipDialog.show();
+            }
+        });
+    }
+
+    public void deleteVideo() {
+        if (currentOptionVideoBean == null) {
+            return;
+        }
+        params = SignUtils.getNormalParams();
+        params.put(MKey.VIDEO_ID, currentOptionVideoBean.getId());
+        String sign = SignUtils.doSign(params);
+        params.put(MKey.SIGN, sign);
+        HttpClient.Builder.getGuodongServer().delete_video(params).observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribe(new HttpObserver<BaseBeanEntity>() {
+            @Override
+            public void onSuccess(BaseBean<BaseBeanEntity> baseBean) {
+                if (tipDialog != null && !tipDialog.isShowing()) {
+                    tipDialog.dismiss();
+                }
+                tipDialog = DialogUtils.getSuclDialog(UserVideosActivity.this, baseBean.getMessage(), true);
+                tipDialog.show();
+                initVideos();
+            }
+
+            @Override
+            public void onError(BaseBean<BaseBeanEntity> baseBean) {
+                if (tipDialog != null && !tipDialog.isShowing()) {
+                    tipDialog.dismiss();
+                }
+                tipDialog = DialogUtils.getFailDialog(UserVideosActivity.this, baseBean.getMessage(), true);
+                tipDialog.show();
+            }
+        });
+
+
     }
 
     @Override

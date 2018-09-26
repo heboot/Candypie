@@ -276,6 +276,15 @@ public class DialogUtils {
         return bottomSheetDialog;
     }
 
+    public static BottomSheetDialog getVideoOptionBottomSheet(Context context, Consumer<Integer> consumer) {
+        List<String> list = new ArrayList<>();
+        list.add("删除");
+        list.add("设为主视频");
+        list.add("设为收费视频");
+        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog.Builder(context, consumer, list).create();
+        return bottomSheetDialog;
+    }
+
 
     public static BottomSheetDialog getHomepageBottomSheet(Context context, Consumer<Integer> consumer, boolean isBlack) {
         List<String> list = new ArrayList<>();

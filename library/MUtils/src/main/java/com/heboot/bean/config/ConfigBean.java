@@ -46,6 +46,15 @@ public class ConfigBean implements Serializable {
     private int is_review_status;
     private List<TopMenuBean> index_top_menu;
     private List<TopMenuBean> rank_config;
+    private VideoConfigBean video_config;
+
+    public VideoConfigBean getVideo_config() {
+        return video_config;
+    }
+
+    public void setVideo_config(VideoConfigBean video_config) {
+        this.video_config = video_config;
+    }
 
     public List<TopMenuBean> getRank_config() {
         return rank_config;

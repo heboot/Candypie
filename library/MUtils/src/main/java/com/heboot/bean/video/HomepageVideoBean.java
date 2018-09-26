@@ -15,6 +15,44 @@ public class HomepageVideoBean implements Serializable {
     private String cover_img;
     private int status;
 
+    //收费视频新加的字段
+    private String price;
+    private String unlock_nums;
+    private String unlock;
+    private int is_main_video;
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public String getUnlock_nums() {
+        return unlock_nums;
+    }
+
+    public void setUnlock_nums(String unlock_nums) {
+        this.unlock_nums = unlock_nums;
+    }
+
+    public String getUnlock() {
+        return unlock;
+    }
+
+    public void setUnlock(String unlock) {
+        this.unlock = unlock;
+    }
+
+    public int getIs_main_video() {
+        return is_main_video;
+    }
+
+    public void setIs_main_video(int is_main_video) {
+        this.is_main_video = is_main_video;
+    }
+
     public String getId() {
         return id;
     }
