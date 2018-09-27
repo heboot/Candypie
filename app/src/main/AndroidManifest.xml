@@ -113,6 +113,10 @@
             android:screenOrientation="portrait"></activity>
 
         <activity
+            android:name=".activitys.video.UserUnlockVideosActivity"
+            android:screenOrientation="portrait"></activity>
+
+        <activity
             android:name=".activitys.common.TestActivity"
             android:screenOrientation="portrait"></activity>
 

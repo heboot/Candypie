@@ -34,6 +34,7 @@ import com.gdlife.candypie.utils.DialogUtils;
 import com.gdlife.candypie.utils.GlideImageLoaderByIndexTop;
 import com.gdlife.candypie.utils.IntentUtils;
 import com.gdlife.candypie.utils.SignUtils;
+import com.gdlife.candypie.widget.dialog.index.DongtaiServicerTipDialog;
 import com.gdlife.candypie.widget.index.FreeVideoDialog;
 import com.gdlife.candypie.widget.index.FreeVideoRecommendDialog;
 import com.gdlife.candypie.widget.rv.IndexUserWhite3ItemDecoration;
@@ -269,6 +270,7 @@ public class IndexListFragment extends BaseFragment<FragmentIndexListBinding> {
 
     }
 
+    private DongtaiServicerTipDialog dongtaiServicerTipDialog;
 
     @Override
     public void onSupportVisible() {
@@ -280,7 +282,18 @@ public class IndexListFragment extends BaseFragment<FragmentIndexListBinding> {
                 binding.srytIndex.setRefreshing(true);
                 initIndexData();
             }
+        }
 
+        if (pageName.equals("r")) {
+            if (UserService.getInstance().isServicer()) {
+                if (dongtaiServicerTipDialog == null) {
+                    dongtaiServicerTipDialog = new DongtaiServicerTipDialog();
+                }
+                if (!dongtaiServicerTipDialog.isAdded()) {
+                    dongtaiServicerTipDialog.show(getFragmentManager(), "");
+                }
+
+            }
         }
     }
 

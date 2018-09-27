@@ -5,6 +5,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.gdlife.candypie.R;
+import com.gdlife.candypie.activitys.user.UserPageActivity;
 import com.gdlife.candypie.activitys.video.UserVideosActivity;
 import com.gdlife.candypie.common.MValue;
 import com.gdlife.candypie.common.VideoPreviewFrom;
@@ -38,6 +39,8 @@ public class UserVideosAdapter extends BaseRecyclerViewAdapter {
 
     private WeakReference<UserVideosActivity> weakReference;
 
+    private WeakReference<UserPageActivity> userPageActivityWeakReference;
+
     private List<User> videoUsers = new ArrayList();
 
     private boolean isReplace;
@@ -68,6 +71,18 @@ public class UserVideosAdapter extends BaseRecyclerViewAdapter {
 
     }
 
+    public UserVideosAdapter(WeakReference<UserPageActivity> weakReference, boolean isMe, List<HomepageVideoBean> datas, User user) {
+        this.isMe = isMe;
+        this.userPageActivityWeakReference = weakReference;
+        this.isReplace = false;
+        this.user = user;
+        data.addAll(datas);
+        if (isMe) {
+            data.add(0, new HomepageVideoBean());
+        }
+
+    }
+
 
     @Override
     public BaseRecyclerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -83,7 +98,7 @@ public class UserVideosAdapter extends BaseRecyclerViewAdapter {
 
         @Override
         public void onBindViewHolder(final HomepageVideoBean s, int position) {
-            if (isMe) {
+            if (isMe && userPageActivityWeakReference == null) {
                 if (position == 0) {
                     binding.ivPlay.setVisibility(View.GONE);
                     ImageUtils.showImage(binding.ivImg, R.drawable.icon_add_video);
@@ -132,7 +147,7 @@ public class UserVideosAdapter extends BaseRecyclerViewAdapter {
                         } else {
                             binding.tvOption.setText("编辑");
                             binding.tvOption.setEnabled(true);
-                            binding.vBottom.setOnClickListener(v->{
+                            binding.vBottom.setOnClickListener(v -> {
                                 weakReference.get().doVideoOption(s);
                             });
                         }
@@ -161,6 +176,20 @@ public class UserVideosAdapter extends BaseRecyclerViewAdapter {
                     }
                 });
 
+            }
+
+            if (!StringUtils.isEmpty(s.getPrice()) && Integer.parseInt(s.getPrice()) > 0) {
+                if (s.getUnlock() == 0 || isMe) {
+                    binding.tvPriceTip.setVisibility(View.VISIBLE);
+                    binding.tvUnlockTip.setVisibility(View.GONE);
+                    binding.tvPriceTip.setText(s.getPrice() + "钻");
+                } else {
+                    binding.tvPriceTip.setVisibility(View.GONE);
+                    binding.tvUnlockTip.setVisibility(View.VISIBLE);
+                }
+            } else {
+                binding.tvPriceTip.setVisibility(View.GONE);
+                binding.tvUnlockTip.setVisibility(View.GONE);
             }
 
 

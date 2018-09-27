@@ -60,8 +60,13 @@ public class HomepageVPAdapter extends PagerAdapter {
 
         LayoutDiscoverVideoBinding binding = DataBindingUtil.inflate(LayoutInflater.from(container.getContext()), R.layout.layout_discover_video, null, false);
 
-        if (user.getUser_video().getList() != null) {
-            ImageUtils.showImage(binding.ivCover, user.getUser_video().getList().get(position).getCover_img());
+        if (user.getUser_video() != null && user.getUser_video().getList() != null) {
+            if (position >= user.getUser_video().getList().size()) {
+                ImageUtils.showImage(binding.ivCover, user.getUser_video().getList().get(0).getCover_img());
+            } else {
+                ImageUtils.showImage(binding.ivCover, user.getUser_video().getList().get(position).getCover_img());
+            }
+
         }
 
         binding.setUser(user);

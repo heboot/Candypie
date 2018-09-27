@@ -1,5 +1,7 @@
 package com.heboot.bean.video;
 
+import com.heboot.entity.User;
+
 import java.io.Serializable;
 
 /**
@@ -18,8 +20,18 @@ public class HomepageVideoBean implements Serializable {
     //收费视频新加的字段
     private String price;
     private String unlock_nums;
-    private String unlock;
+    private int unlock;
     private int is_main_video;
+
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public String getPrice() {
         return price;
@@ -37,11 +49,11 @@ public class HomepageVideoBean implements Serializable {
         this.unlock_nums = unlock_nums;
     }
 
-    public String getUnlock() {
+    public int getUnlock() {
         return unlock;
     }
 
-    public void setUnlock(String unlock) {
+    public void setUnlock(int unlock) {
         this.unlock = unlock;
     }
 

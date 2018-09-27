@@ -55,6 +55,7 @@ import com.heboot.bean.user.UserInfoBean;
 import com.heboot.bean.user.UserInfoEditBean;
 import com.heboot.bean.user.UserVisitListBean;
 import com.heboot.bean.video.StsUploadCredentialsBean;
+import com.heboot.bean.video.UnlockVideoBean;
 import com.heboot.bean.video.UserVideosBean;
 import com.heboot.bean.video.VideoChatStratEndBean;
 import com.heboot.bean.video.VideoPlayerURLBean;
@@ -519,6 +520,14 @@ public interface HttpClient {
     @FormUrlEncoded
     @POST("user/user_video/set_video_price")
     Observable<BaseBean<BaseBeanEntity>> set_video_price(@FieldMap Map<String, Object> params);
+
+    @FormUrlEncoded
+    @POST("user/user_video/unlock_video")
+    Observable<BaseBean<UnlockVideoBean>> unlock_video(@FieldMap Map<String, Object> params);
+
+    @FormUrlEncoded
+    @POST("user/user/unlock_video_list")
+    Observable<BaseBean<UserVideosBean>> unlock_video_list(@FieldMap Map<String, Object> params);
 
 
 //    /**

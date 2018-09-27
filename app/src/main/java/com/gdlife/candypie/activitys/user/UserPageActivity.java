@@ -15,6 +15,7 @@ import com.gdlife.candypie.R;
 import com.gdlife.candypie.adapter.discover.HomepageBottomVideosAdapter;
 import com.gdlife.candypie.adapter.index.IndexVisitAdapter;
 import com.gdlife.candypie.adapter.user.UserGiftAdapter;
+import com.gdlife.candypie.adapter.user.UserVideosAdapter;
 import com.gdlife.candypie.base.BaseActivity;
 import com.gdlife.candypie.base.HttpObserver;
 import com.gdlife.candypie.common.MKey;
@@ -73,7 +74,7 @@ public class UserPageActivity extends BaseActivity<ActivityUserpageBinding> {
 
     private int height = 400;
 
-    private HomepageBottomVideosAdapter videosAdapter;//视频集适配器
+    private UserVideosAdapter videosAdapter;//视频集适配器
 
     private UserPageService userPageService = new UserPageService();
 
@@ -402,7 +403,7 @@ public class UserPageActivity extends BaseActivity<ActivityUserpageBinding> {
             binding.includeVideos.getRoot().setVisibility(View.VISIBLE);
             binding.includeVideos.getRoot().setFocusable(false);
             binding.includeVideos.rvList.setFocusable(false);
-            videosAdapter = new HomepageBottomVideosAdapter(new WeakReference(this), false, user.getUser_video().getList(), user);
+            videosAdapter = new UserVideosAdapter(new WeakReference(this), UserService.isMe(user), user.getUser_video().getList(), user);
             binding.includeVideos.rvList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false) {
                 @Override
                 public boolean canScrollVertically() {

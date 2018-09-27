@@ -1,8 +1,10 @@
 package com.gdlife.candypie.fragments.my;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
@@ -119,7 +121,11 @@ public class MyFragment extends BaseFragment<FragmentMyBinding> {
 
     @Override
     public void initUI() {
-
+        binding.srytIndex.setEnabled(true);
+        binding.srytIndex.setColorSchemeColors(getResources().getColor(R.color.theme_color));
+        binding.srytIndex.setDistanceToTriggerSync(1200);
+        binding.srytIndex.setProgressBackgroundColorSchemeColor(Color.WHITE);
+        binding.srytIndex.setSize(SwipeRefreshLayout.DEFAULT);
     }
 
     @Override
@@ -129,7 +135,12 @@ public class MyFragment extends BaseFragment<FragmentMyBinding> {
 
     @Override
     public void initListener() {
-
+        binding.srytIndex.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                initMeData();
+            }
+        });
 
         rxObservable.subscribe(new Observer<Object>() {
             @Override
@@ -338,6 +349,7 @@ public class MyFragment extends BaseFragment<FragmentMyBinding> {
         HttpClient.Builder.getGuodongServer().me(params).observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribe(new HttpObserver<MeDataBean>() {
             @Override
             public void onSuccess(BaseBean<MeDataBean> baseBean) {
+                binding.srytIndex.setRefreshing(false);
                 meUser = baseBean.getData().getUser();
                 binding.plytContainer.toMain();
                 initCenterDatas();
@@ -345,7 +357,7 @@ public class MyFragment extends BaseFragment<FragmentMyBinding> {
 
             @Override
             public void onError(BaseBean<MeDataBean> baseBean) {
-
+                binding.srytIndex.setRefreshing(false);
             }
         });
     }
@@ -475,6 +487,9 @@ public class MyFragment extends BaseFragment<FragmentMyBinding> {
         if (myBottomMenuModels.size() > 0) {
             return;
         }
+
+        MyBottomMenuModel unlockVideos = new MyBottomMenuModel("解锁视频", R.drawable.icon_my_menu_unlock);
+        myBottomMenuModels.add(unlockVideos);
 
         MyBottomMenuModel meiyan = new MyBottomMenuModel("美颜设置", R.drawable.icon_my_menu_meiyan);
         myBottomMenuModels.add(meiyan);

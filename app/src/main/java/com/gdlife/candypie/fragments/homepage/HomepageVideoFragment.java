@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.gdlife.candypie.MAPP;
 import com.gdlife.candypie.R;
+import com.gdlife.candypie.activitys.video.UserVideosActivity;
 import com.gdlife.candypie.adapter.discover.DiscoverVPAdapter;
 import com.gdlife.candypie.adapter.homepage.HomepageVPAdapter;
 import com.gdlife.candypie.base.BaseActivity;
@@ -30,6 +31,7 @@ import com.gdlife.candypie.utils.DialogUtils;
 import com.gdlife.candypie.utils.IntentUtils;
 import com.gdlife.candypie.utils.PermissionUtils;
 import com.gdlife.candypie.utils.SignUtils;
+import com.gdlife.candypie.utils.StringUtils;
 import com.gdlife.candypie.view.QiniuPlayerView;
 import com.gdlife.candypie.widget.common.BottomSheetDialog;
 import com.gdlife.candypie.widget.common.ShareDialog;
@@ -38,12 +40,15 @@ import com.gdlife.candypie.widget.gift.BottomVideoGiftSheetDialogHehe;
 import com.heboot.base.BaseBean;
 import com.heboot.base.BaseBeanEntity;
 import com.heboot.bean.index.IndexV5Bean;
+import com.heboot.bean.video.UnlockVideoBean;
+import com.heboot.dialog.TipCustomOneDialog;
 import com.heboot.entity.User;
 import com.heboot.event.DiscoverEvent;
 import com.heboot.rxbus.RxBus;
 import com.heboot.utils.LogUtil;
 import com.pili.pldroid.player.PLOnCompletionListener;
 import com.pili.pldroid.player.PLOnInfoListener;
+import com.yalantis.dialog.TipCustomDialog;
 
 import java.lang.ref.WeakReference;
 import java.util.List;
@@ -143,6 +148,8 @@ public class HomepageVideoFragment extends BaseFragment<FragmentDiscoverVideoBin
 
         binding.tvShareContent.setText(MAPP.mapp.getConfigBean().getShare_config().getVideo_share_config().getTip());
 
+
+        checkLock();
     }
 
 
@@ -428,8 +435,13 @@ public class HomepageVideoFragment extends BaseFragment<FragmentDiscoverVideoBin
                         ((ViewGroup) (tempView.getParent())).removeView(tempView);
                     }
                     layoutDiscoverVideoBinding = DataBindingUtil.bind(page);
-                    loadVideoAndChatRoom(user.getUser_video().getList().get(currentShowIndex).getPath(), currentShowIndex, (ViewGroup) viewGroup.findViewById(R.id.clyt_child_container));
-                    RxBus.getInstance().post(new DiscoverEvent.DiscoverUpdateUserEvent(users.get(currentShowIndex)));
+                    if (currentShowIndex >= user.getUser_video().getList().size()) {
+                        loadVideoAndChatRoom(user.getUser_video().getList().get(0).getPath(), currentShowIndex, (ViewGroup) viewGroup.findViewById(R.id.clyt_child_container));
+                    } else {
+                        loadVideoAndChatRoom(user.getUser_video().getList().get(currentShowIndex).getPath(), currentShowIndex, (ViewGroup) viewGroup.findViewById(R.id.clyt_child_container));
+//                        RxBus.getInstance().post(new DiscoverEvent.DiscoverUpdateUserEvent(users.get(currentShowIndex)));
+                    }
+
 //                    if (layoutDiscoverVideoBinding != null) {
 //                        layoutDiscoverVideoBinding.PLVideoView.stopPlayback();
 //                    }
@@ -465,11 +477,13 @@ public class HomepageVideoFragment extends BaseFragment<FragmentDiscoverVideoBin
             layoutDiscoverVideoBinding.pb.setProgress(0);
         }
         LogUtil.e("播放器视图", "add" + currentShowIndex);
+
+
         if (tempView == null) {
             tempView = new QiniuPlayerView(getContext(), users.get(currentShowIndex).getUser_video().getList().get(currentShowIndex).getPath(), firstFrametListener, completedListener);
         }
-        v.addView(tempView);
-        tempView.updatePlayerUrl(url, null);
+//        v.addView(tempView);
+//        tempView.updatePlayerUrl(url, null);
         try {
             v.addView(tempView);
             tempView.updatePlayerUrl(url, null);
@@ -478,6 +492,10 @@ public class HomepageVideoFragment extends BaseFragment<FragmentDiscoverVideoBin
         }
 
         mRoomId = cur;
+
+        if (StringUtils.isEmpty(url)) {
+            doPauseAction();
+        }
     }
 
     private void postVideoService() {
@@ -544,7 +562,7 @@ public class HomepageVideoFragment extends BaseFragment<FragmentDiscoverVideoBin
         @Override
         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
             weakReference.get().currentShowIndex = position;
-
+            weakReference.get().checkLock();
 
         }
 
@@ -557,9 +575,6 @@ public class HomepageVideoFragment extends BaseFragment<FragmentDiscoverVideoBin
 //                    weakReference.get().initDiscoverData(weakReference.get().sp);
                 }
             }
-
-//            RxBus.getInstance().post(new DiscoverEvent.DiscoverUpdateUserEvent(weakReference.get().users.get(weakReference.get().currentShowIndex)));
-            RxBus.getInstance().post(new DiscoverEvent.DiscoverUpdatePositionEvent(position));
 
 
         }
@@ -633,5 +648,99 @@ public class HomepageVideoFragment extends BaseFragment<FragmentDiscoverVideoBin
             tempView.getmPlayer().stopPlayback();
         }
         super.onDestroy();
+    }
+
+
+    private TipCustomDialog lockTipDialog;
+
+    private int lockTioIndex = -1;
+
+    private void checkLock() {
+        if (currentShowIndex == lockTioIndex) {
+            return;
+        }
+        lockTioIndex = currentShowIndex;
+        if (user.getUser_video() != null && user.getUser_video().getList() != null && currentShowIndex >= user.getUser_video().getList().size()) {
+            if (user.getUser_video() != null && user.getUser_video().getList() != null && user.getUser_video().getList().get(0).getUnlock() == 0) {
+                doPauseAction();
+                lockTipDialog = new TipCustomDialog.Builder(_mActivity, new Consumer<Integer>() {
+                    @Override
+                    public void accept(Integer integer) throws Exception {
+                        if (integer == 1) {
+                            unlockVideo(user.getUser_video().getList().get(0).getId());
+                        }
+                    }
+                }, "观看此视频需要" + user.getUser_video().getList().get(0).getPrice() + "钻", "取消", "确定").create();
+                if (!lockTipDialog.isShowing()) {
+                    lockTipDialog.show();
+                }
+            }
+        } else {
+            if (user.getUser_video() != null && user.getUser_video().getList() != null && user.getUser_video().getList().get(currentShowIndex).getUnlock() == 0) {
+                doPauseAction();
+                lockTipDialog = new TipCustomDialog.Builder(_mActivity, new Consumer<Integer>() {
+                    @Override
+                    public void accept(Integer integer) throws Exception {
+                        if (integer == 1) {
+                            unlockVideo(user.getUser_video().getList().get(currentShowIndex).getId());
+                        }
+                    }
+                }, "观看此视频需要" + user.getUser_video().getList().get(currentShowIndex).getPrice() + "钻", "取消", "确定").create();
+                if (!lockTipDialog.isShowing()) {
+                    lockTipDialog.show();
+                }
+            }
+        }
+
+    }
+
+
+    public void unlockVideo(String vid) {
+        if (Integer.parseInt(UserService.getInstance().getUser().getCoin()) < Integer.parseInt(user.getUser_video().getList().get(currentShowIndex).getPrice())) {
+            if (coinDialog == null) {
+                coinDialog = new TipDialog.Builder(_mActivity, new Consumer<Integer>() {
+                    @Override
+                    public void accept(Integer integer) throws Exception {
+                        if (integer == 1) {
+                            IntentUtils.toAccountActivity(_mActivity);
+                        }
+                    }
+                }, "您的钻石余额不足", "去充值").create();
+            }
+            coinDialog.show();
+            return;
+        }
+        params = SignUtils.getNormalParams();
+        params.put(MKey.VIDEO_ID, vid);
+        String sign = SignUtils.doSign(params);
+        params.put(MKey.SIGN, sign);
+        HttpClient.Builder.getGuodongServer().unlock_video(params).observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribe(new HttpObserver<UnlockVideoBean>() {
+            @Override
+            public void onSuccess(BaseBean<UnlockVideoBean> baseBean) {
+                if (tipDialog != null && !tipDialog.isShowing()) {
+                    tipDialog.dismiss();
+                }
+                tipDialog = DialogUtils.getSuclDialog(_mActivity, baseBean.getMessage(), true);
+                tipDialog.show();
+                user.getUser_video().getList().set(currentShowIndex, baseBean.getData().getUnlock_video());
+//                binding.vvp.setCurrentItem(currentShowIndex);
+
+                if (tempView != null && tempView.getParent() != null && tempView.getParent() instanceof ViewGroup) {
+                    ((ViewGroup) (tempView.getParent())).removeView(tempView);
+                }
+                loadVideoAndChatRoom(user.getUser_video().getList().get(currentShowIndex).getPath(), currentShowIndex, layoutDiscoverVideoBinding.clytChildContainer);
+            }
+
+            @Override
+            public void onError(BaseBean<UnlockVideoBean> baseBean) {
+                if (tipDialog != null && !tipDialog.isShowing()) {
+                    tipDialog.dismiss();
+                }
+                tipDialog = DialogUtils.getFailDialog(_mActivity, baseBean.getMessage(), true);
+                tipDialog.show();
+            }
+        });
+
+
     }
 }

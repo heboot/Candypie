@@ -64,6 +64,7 @@ import com.gdlife.candypie.activitys.user.UserVideoAudioPlayActivity;
 import com.gdlife.candypie.activitys.user.UserYueAttitudeActivity;
 import com.gdlife.candypie.activitys.video.AutoPlayActivity;
 import com.gdlife.candypie.activitys.video.PlayerActivity2;
+import com.gdlife.candypie.activitys.video.UserUnlockVideosActivity;
 import com.gdlife.candypie.activitys.video.UserVideosActivity;
 import com.gdlife.candypie.activitys.video.VideoChatActivity;
 import com.gdlife.candypie.activitys.video.VideoFrameActivity;
@@ -714,6 +715,12 @@ public class IntentUtils {
             }
 
         }
+    }
+
+
+    public static void toUserUnlockVideosActivity(Context context) {
+        Intent intent = new Intent(context, UserUnlockVideosActivity.class);
+        context.startActivity(intent);
     }
 
     public static void callMobile(Context context, String mobile) {

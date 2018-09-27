@@ -148,8 +148,11 @@ public class AccountActivity extends BaseActivity<ActivityAccountBinding> {
                     DialogUtils.showUpGoldVipDialog(AccountActivity.this);
                     checkUpLevel("from");
                 } else if (o.equals(PayEvent.RechargeSUCEvent)) {
-                    tipDialog = DialogUtils.getSuclDialog(MAPP.mapp.getCurrentActivity(), "充值成功", true);
-                    tipDialog.show();
+                    if (!AccountActivity.this.isDestroyed()) {
+                        tipDialog = DialogUtils.getSuclDialog(MAPP.mapp.getCurrentActivity(), "充值成功", true);
+                        tipDialog.show();
+                    }
+
                 }
             }
 
@@ -295,6 +298,16 @@ public class AccountActivity extends BaseActivity<ActivityAccountBinding> {
         });
 
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (tipDialog != null) {
+            if (!isFinishing()) {
+                tipDialog.dismiss();
+            }
+        }
+        super.onDestroy();
     }
 
     @Override
