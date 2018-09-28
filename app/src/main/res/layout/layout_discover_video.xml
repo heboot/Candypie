@@ -58,6 +58,17 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
+            android:id="@+id/iv_lock"
+            android:layout_width="@dimen/x70"
+            android:layout_height="@dimen/y90"
+            android:background="@drawable/icon_video_lock"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
             android:layout_width="0dp"
             android:layout_height="@dimen/y180"
             android:background="@drawable/bg_homepage_black_gradient_bottom"

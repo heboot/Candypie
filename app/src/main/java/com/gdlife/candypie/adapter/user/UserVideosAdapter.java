@@ -138,12 +138,15 @@ public class UserVideosAdapter extends BaseRecyclerViewAdapter {
                         binding.tvStatus.setVisibility(View.VISIBLE);
                         binding.vBottom.setVisibility(View.GONE);
                         binding.tvOption.setVisibility(View.GONE);
+                        binding.tvOption.setEnabled(false);
                     } else {
                         binding.vBottom.setVisibility(View.VISIBLE);
                         binding.tvOption.setVisibility(View.VISIBLE);
                         if (s.getIs_main_video() == 1) {
                             binding.tvOption.setText("主视频");
                             binding.tvOption.setEnabled(false);
+                            binding.vBottom.setOnClickListener(v -> {
+                            });
                         } else {
                             binding.tvOption.setText("编辑");
                             binding.tvOption.setEnabled(true);

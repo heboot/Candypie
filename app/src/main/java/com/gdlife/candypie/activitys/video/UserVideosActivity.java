@@ -40,6 +40,7 @@ import com.gdlife.candypie.utils.VideoUtils;
 import com.gdlife.candypie.utils.rv.RVUtils;
 import com.gdlife.candypie.widget.common.BottomSheetDialog;
 import com.gdlife.candypie.widget.dialog.video.SetVideoPriceDialog;
+import com.gdlife.candypie.widget.rv.TransparentItemHorDecoration;
 import com.heboot.base.BaseBean;
 import com.heboot.base.BaseBeanEntity;
 import com.heboot.bean.user.UserFavsListBean;
@@ -48,6 +49,7 @@ import com.heboot.bean.video.HomepageVideoBean;
 import com.heboot.bean.video.UserVideosBean;
 import com.heboot.entity.User;
 import com.heboot.event.NormalEvent;
+import com.heboot.event.UserEvent;
 import com.heboot.event.VideoEvent;
 import com.heboot.rxbus.RxBus;
 import com.heboot.utils.LogUtil;
@@ -184,6 +186,8 @@ public class UserVideosActivity extends BaseActivity<ActivityUserVideosBinding> 
                     });
                 } else if (o.equals(NormalEvent.FINISH_USER_VIDEO_PAGE)) {
                     finish();
+                } else if (o.equals(UserEvent.UPDATE_USER_VIDEOS_BY_UNLOCK_VIDEO)) {
+                    initVideos();
                 }
             }
 
@@ -502,6 +506,7 @@ public class UserVideosActivity extends BaseActivity<ActivityUserVideosBinding> 
                 }
                 tipDialog = DialogUtils.getSuclDialog(UserVideosActivity.this, baseBean.getMessage(), true);
                 tipDialog.show();
+                sp = 1;
                 initVideos();
             }
 
@@ -532,6 +537,7 @@ public class UserVideosActivity extends BaseActivity<ActivityUserVideosBinding> 
                 }
                 tipDialog = DialogUtils.getSuclDialog(UserVideosActivity.this, baseBean.getMessage(), true);
                 tipDialog.show();
+                sp = 1;
                 initVideos();
             }
 
@@ -562,6 +568,7 @@ public class UserVideosActivity extends BaseActivity<ActivityUserVideosBinding> 
                 }
                 tipDialog = DialogUtils.getSuclDialog(UserVideosActivity.this, baseBean.getMessage(), true);
                 tipDialog.show();
+                sp = 1;
                 initVideos();
             }
 

@@ -90,7 +90,7 @@ public class UserUnlockVideosAdapter extends BaseRecyclerViewAdapter<HomepageVid
             });
 
             binding.tvPriceTip.setVisibility(View.GONE);
-            binding.tvUnlockTip.setVisibility(View.VISIBLE);
+            binding.tvUnlockTip.setVisibility(View.GONE);
 
 
 //            binding.getRoot().setOnClickListener((v) -> {

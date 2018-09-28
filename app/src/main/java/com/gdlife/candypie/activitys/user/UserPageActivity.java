@@ -36,11 +36,13 @@ import com.gdlife.candypie.utils.SignUtils;
 import com.gdlife.candypie.widget.common.BottomSheetDialog;
 import com.gdlife.candypie.widget.common.ShareDialog;
 import com.gdlife.candypie.widget.gift.BottomVideoGiftSheetDialogHehe;
+import com.gdlife.candypie.widget.rv.TransparentItemHorDecoration;
 import com.heboot.base.BaseBean;
 import com.heboot.base.BaseBeanEntity;
 import com.heboot.bean.user.UserInfoBean;
 import com.heboot.bean.video.HomepageVideoBean;
 import com.heboot.entity.User;
+import com.heboot.event.UserEvent;
 import com.heboot.utils.MStatusBarUtils;
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 
@@ -48,9 +50,13 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
+
+import static com.heboot.event.DiscoverEvent.DISCOVER_PAUSE_PLAY_EVENT;
 
 public class UserPageActivity extends BaseActivity<ActivityUserpageBinding> {
 
@@ -106,6 +112,32 @@ public class UserPageActivity extends BaseActivity<ActivityUserpageBinding> {
 
     @Override
     public void initListener() {
+
+        rxObservable.subscribe(new Observer<Object>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+                addDisposable(d);
+            }
+
+            @Override
+            public void onNext(Object o) {
+                if (o.equals(UserEvent.UPDATE_USER_PAGE_BY_UNLOCK_VIDEO)) {
+                    initUserInfo();
+                }
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
+
+
         binding.includeToolbar.vBack.setOnClickListener((v) -> {
             finish();
         });
@@ -404,6 +436,7 @@ public class UserPageActivity extends BaseActivity<ActivityUserpageBinding> {
             binding.includeVideos.getRoot().setFocusable(false);
             binding.includeVideos.rvList.setFocusable(false);
             videosAdapter = new UserVideosAdapter(new WeakReference(this), UserService.isMe(user), user.getUser_video().getList(), user);
+            binding.includeVideos.rvList.addItemDecoration(new TransparentItemHorDecoration());
             binding.includeVideos.rvList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false) {
                 @Override
                 public boolean canScrollVertically() {

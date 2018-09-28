@@ -23,6 +23,10 @@ public class UserEvent {
 
     public static final String UPDATE_USER_INFO_BY_MEET_TAG = "UPDATE_USER_INFO_BY_MEET_TAG";
 
+    public static final String UPDATE_USER_PAGE_BY_UNLOCK_VIDEO = "UPDATE_USER_PAGE_BY_UNLOCK_VIDEO";
+
+    public static final String UPDATE_USER_VIDEOS_BY_UNLOCK_VIDEO = "UPDATE_USER_VIDEOS_BY_UNLOCK_VIDEO";
+
     public static class UserBlackEvent {
 
         public int is_black;
@@ -79,8 +83,6 @@ public class UserEvent {
 
 
     }
-
-
 
 
 }
