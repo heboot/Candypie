@@ -37,6 +37,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
 import static com.heboot.event.DiscoverEvent.DISCOVER_PAUSE_PLAY_EVENT;
+import static com.heboot.event.DiscoverEvent.DISCOVER_PAUSE_PLAY_EVENT_VIDEOS;
 import static com.heboot.event.DiscoverEvent.DISCOVER_TO_USERINFO_EVENT;
 
 public class HomepageVPAdapter extends PagerAdapter {
@@ -113,7 +114,7 @@ public class HomepageVPAdapter extends PagerAdapter {
         });
 
         binding.clytChildContainer.setOnClickListener((v) -> {
-            RxBus.getInstance().post(DISCOVER_PAUSE_PLAY_EVENT);
+            RxBus.getInstance().post(DISCOVER_PAUSE_PLAY_EVENT_VIDEOS);
         });
 
 
@@ -143,7 +144,7 @@ public class HomepageVPAdapter extends PagerAdapter {
 
 
         binding.clytChildContainer.setOnClickListener((v) -> {
-            RxBus.getInstance().post(DISCOVER_PAUSE_PLAY_EVENT);
+            RxBus.getInstance().post(DISCOVER_PAUSE_PLAY_EVENT_VIDEOS);
         });
 
 

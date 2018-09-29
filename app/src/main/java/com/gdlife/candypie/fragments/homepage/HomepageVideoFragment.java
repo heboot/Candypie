@@ -11,19 +11,15 @@ import android.view.ViewGroup;
 
 import com.gdlife.candypie.MAPP;
 import com.gdlife.candypie.R;
-import com.gdlife.candypie.activitys.video.UserVideosActivity;
-import com.gdlife.candypie.adapter.discover.DiscoverVPAdapter;
 import com.gdlife.candypie.adapter.homepage.HomepageVPAdapter;
 import com.gdlife.candypie.base.BaseActivity;
 import com.gdlife.candypie.base.BaseFragment;
-import com.gdlife.candypie.base.BaseObserver;
 import com.gdlife.candypie.base.HttpObserver;
 import com.gdlife.candypie.common.MKey;
 import com.gdlife.candypie.common.MValue;
 import com.gdlife.candypie.common.ReportFromType;
 import com.gdlife.candypie.databinding.FragmentDiscoverVideoBinding;
 import com.gdlife.candypie.databinding.LayoutDiscoverVideoBinding;
-import com.gdlife.candypie.http.HttpCallBack;
 import com.gdlife.candypie.http.HttpClient;
 import com.gdlife.candypie.serivce.UserService;
 import com.gdlife.candypie.serivce.theme.VideoChatService;
@@ -39,12 +35,9 @@ import com.gdlife.candypie.widget.common.TipDialog;
 import com.gdlife.candypie.widget.gift.BottomVideoGiftSheetDialogHehe;
 import com.heboot.base.BaseBean;
 import com.heboot.base.BaseBeanEntity;
-import com.heboot.bean.index.IndexV5Bean;
 import com.heboot.bean.video.HomepageVideoBean;
 import com.heboot.bean.video.UnlockVideoBean;
-import com.heboot.dialog.TipCustomOneDialog;
 import com.heboot.entity.User;
-import com.heboot.event.DiscoverEvent;
 import com.heboot.event.UserEvent;
 import com.heboot.rxbus.RxBus;
 import com.heboot.utils.LogUtil;
@@ -61,7 +54,7 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
-import static com.heboot.event.DiscoverEvent.DISCOVER_PAUSE_PLAY_EVENT;
+import static com.heboot.event.DiscoverEvent.DISCOVER_PAUSE_PLAY_EVENT_VIDEOS;
 
 public class HomepageVideoFragment extends BaseFragment<FragmentDiscoverVideoBinding> {
 
@@ -269,7 +262,7 @@ public class HomepageVideoFragment extends BaseFragment<FragmentDiscoverVideoBin
 
             @Override
             public void onNext(Object o) {
-                if (o.equals(DISCOVER_PAUSE_PLAY_EVENT)) {
+                if (o.equals(DISCOVER_PAUSE_PLAY_EVENT_VIDEOS)) {
                     if (layoutDiscoverVideoBinding != null) {
                         if (layoutDiscoverVideoBinding.ivPlay.getVisibility() == View.VISIBLE && layoutDiscoverVideoBinding.ivLock.getVisibility() != View.VISIBLE) {
                             doPlayAction();
@@ -440,9 +433,11 @@ public class HomepageVideoFragment extends BaseFragment<FragmentDiscoverVideoBin
                     layoutDiscoverVideoBinding = DataBindingUtil.bind(page);
                     if (currentShowIndex >= user.getUser_video().getList().size()) {
                         loadVideoAndChatRoom(user.getUser_video().getList().get(0).getPath(), currentShowIndex, (ViewGroup) viewGroup.findViewById(R.id.clyt_child_container));
+                        checkLock();
                     } else {
                         loadVideoAndChatRoom(user.getUser_video().getList().get(currentShowIndex).getPath(), currentShowIndex, (ViewGroup) viewGroup.findViewById(R.id.clyt_child_container));
 //                        RxBus.getInstance().post(new DiscoverEvent.DiscoverUpdateUserEvent(users.get(currentShowIndex)));
+                        checkLock();
                     }
 
 //                    if (layoutDiscoverVideoBinding != null) {
@@ -499,6 +494,9 @@ public class HomepageVideoFragment extends BaseFragment<FragmentDiscoverVideoBin
         if (StringUtils.isEmpty(url)) {
             doPauseAction(true);
             layoutDiscoverVideoBinding.pb.setProgress(0);
+            checkLock();
+        } else {
+            layoutDiscoverVideoBinding.ivLock.setVisibility(View.GONE);
         }
     }
 
@@ -519,7 +517,10 @@ public class HomepageVideoFragment extends BaseFragment<FragmentDiscoverVideoBin
         if (layoutDiscoverVideoBinding != null) {
             layoutDiscoverVideoBinding.ivCover.setVisibility(View.VISIBLE);
             if (!unlock) {
-                layoutDiscoverVideoBinding.ivPlay.setVisibility(View.VISIBLE);
+                if (!locking) {
+                    layoutDiscoverVideoBinding.ivPlay.setVisibility(View.VISIBLE);
+                }
+
             } else {
                 layoutDiscoverVideoBinding.ivLock.setVisibility(View.VISIBLE);
             }
@@ -533,6 +534,9 @@ public class HomepageVideoFragment extends BaseFragment<FragmentDiscoverVideoBin
     }
 
     private void doPlayAction() {
+        if (locking) {
+            return;
+        }
         if (layoutDiscoverVideoBinding != null) {
             layoutDiscoverVideoBinding.ivCover.setVisibility(View.GONE);
             layoutDiscoverVideoBinding.ivPlay.setVisibility(View.GONE);
@@ -579,7 +583,7 @@ public class HomepageVideoFragment extends BaseFragment<FragmentDiscoverVideoBin
         @Override
         public void onPageSelected(int position) {
             weakReference.get().currentShowIndex = position;
-            weakReference.get().checkLock();
+//            weakReference.get().checkLock();
             if ((weakReference.get().sp * 10) - weakReference.get().currentShowIndex < 3) {
                 if (weakReference.get().sp < weakReference.get().totalPage) {
                     weakReference.get().sp = weakReference.get().sp + 1;
@@ -666,6 +670,8 @@ public class HomepageVideoFragment extends BaseFragment<FragmentDiscoverVideoBin
 
     private int lockTioIndex = -1;
 
+    private boolean locking = false;
+
     private void checkLock() {
         if (currentShowIndex == lockTioIndex) {
             return;
@@ -679,6 +685,7 @@ public class HomepageVideoFragment extends BaseFragment<FragmentDiscoverVideoBin
                     layoutDiscoverVideoBinding.ivPlay.setVisibility(View.GONE);
                     layoutDiscoverVideoBinding.ivLock.setVisibility(View.VISIBLE);
                 }
+                locking = true;
                 doPauseAction(true);
                 lockTipDialog = new TipCustomDialog.Builder(_mActivity, new Consumer<Integer>() {
                     @Override
@@ -692,25 +699,26 @@ public class HomepageVideoFragment extends BaseFragment<FragmentDiscoverVideoBin
                     lockTipDialog.show();
                 }
             }
-        } else {
-            if (user.getUser_video() != null && user.getUser_video().getList() != null && user.getUser_video().getList().get(currentShowIndex).getUnlock() == 0) {
-                if (layoutDiscoverVideoBinding != null) {
-                    layoutDiscoverVideoBinding.ivPlay.setVisibility(View.GONE);
-                    layoutDiscoverVideoBinding.ivLock.setVisibility(View.VISIBLE);
-                }
-                doPauseAction(true);
-                lockTipDialog = new TipCustomDialog.Builder(_mActivity, new Consumer<Integer>() {
-                    @Override
-                    public void accept(Integer integer) throws Exception {
-                        if (integer == 1) {
-                            unlockVideo(user.getUser_video().getList().get(currentShowIndex).getId());
-                        }
-                    }
-                }, "观看此视频需要" + user.getUser_video().getList().get(currentShowIndex).getPrice() + "钻", "取消", "确定").create();
-                if (!lockTipDialog.isShowing()) {
-                    lockTipDialog.show();
-                }
+        } else if (user.getUser_video() != null && user.getUser_video().getList() != null && user.getUser_video().getList().get(currentShowIndex).getUnlock() == 0) {
+            if (layoutDiscoverVideoBinding != null) {
+                layoutDiscoverVideoBinding.ivPlay.setVisibility(View.GONE);
+                layoutDiscoverVideoBinding.ivLock.setVisibility(View.VISIBLE);
             }
+            locking = true;
+            doPauseAction(true);
+            lockTipDialog = new TipCustomDialog.Builder(_mActivity, new Consumer<Integer>() {
+                @Override
+                public void accept(Integer integer) throws Exception {
+                    if (integer == 1) {
+                        unlockVideo(user.getUser_video().getList().get(currentShowIndex).getId());
+                    }
+                }
+            }, "观看此视频需要" + user.getUser_video().getList().get(currentShowIndex).getPrice() + "钻", "取消", "确定").create();
+            if (!lockTipDialog.isShowing()) {
+                lockTipDialog.show();
+            }
+        } else {
+            locking = false;
         }
 
     }
@@ -756,7 +764,7 @@ public class HomepageVideoFragment extends BaseFragment<FragmentDiscoverVideoBin
                 if (tempView != null && tempView.getParent() != null && tempView.getParent() instanceof ViewGroup) {
                     ((ViewGroup) (tempView.getParent())).removeView(tempView);
                 }
-
+                locking = false;
                 layoutDiscoverVideoBinding.ivLock.setVisibility(View.GONE);
                 RxBus.getInstance().post(UserEvent.UPDATE_USER_PAGE_BY_UNLOCK_VIDEO);
                 RxBus.getInstance().post(UserEvent.UPDATE_USER_VIDEOS_BY_UNLOCK_VIDEO);

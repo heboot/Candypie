@@ -15,6 +15,8 @@ public class DiscoverEvent {
 
     public static final String DISCOVER_PAUSE_PLAY_EVENT = "DISCOVER_PAUSE_PLAY_EVENT";
 
+    public static final String DISCOVER_PAUSE_PLAY_EVENT_VIDEOS = "DISCOVER_PAUSE_PLAY_EVENT_VIDEOS";
+
     public static final String DISCOVER_PAUSE_PLAY_EVENT_BY_USER_VIDEOS = "DISCOVER_PAUSE_PLAY_EVENT_BY_USER_VIDEOS";
 
     public static final String DISCOVER_PAUSE_PLAY_EVENT_BY_HOMEOTHER_USER_VIDEOS = "DISCOVER_PAUSE_PLAY_EVENT_BY_HOMEOTHER_USER_VIDEOS";
@@ -31,7 +33,7 @@ public class DiscoverEvent {
         }
     }
 
-    public static class DiscoverNextpageEvent{
+    public static class DiscoverNextpageEvent {
         private User user;
         private View v;
         private Fragment fragment;
@@ -67,7 +69,7 @@ public class DiscoverEvent {
         }
     }
 
-    public static class DiscoverUpdatePositionEvent{
+    public static class DiscoverUpdatePositionEvent {
         private int position;
 
         public DiscoverUpdatePositionEvent(int position) {
@@ -79,15 +81,15 @@ public class DiscoverEvent {
         }
     }
 
-    public static class DiscoverUpdateDatasEvent{
+    public static class DiscoverUpdateDatasEvent {
 
-       private  List<User> usres;
+        private List<User> usres;
 
-       private int position;
+        private int position;
 
-       private int currentSp;
+        private int currentSp;
 
-        public DiscoverUpdateDatasEvent(List<User> usres,int po,int sp) {
+        public DiscoverUpdateDatasEvent(List<User> usres, int po, int sp) {
             this.usres = usres;
             this.position = po;
             this.currentSp = sp;
