@@ -20,6 +20,6 @@ public enum MessageToAction {
     send_gift,
     update_video_service,
     push_user_tip, play_turntable_result//转盘结果
-    , invite_play_turntable, refuse_turntable_invite, post_service, servicer_profile, update_camera_status
+    , invite_play_turntable, refuse_turntable_invite, post_service, servicer_profile, update_camera_status,profile
 
 }

@@ -684,6 +684,8 @@ public class HomepageVideoFragment extends BaseFragment<FragmentDiscoverVideoBin
                 if (layoutDiscoverVideoBinding != null) {
                     layoutDiscoverVideoBinding.ivPlay.setVisibility(View.GONE);
                     layoutDiscoverVideoBinding.ivLock.setVisibility(View.VISIBLE);
+                    binding.ivShare.setVisibility(View.GONE);
+                    binding.tvShareContent.setVisibility(View.GONE);
                 }
                 locking = true;
                 doPauseAction(true);
@@ -698,11 +700,17 @@ public class HomepageVideoFragment extends BaseFragment<FragmentDiscoverVideoBin
                 if (!lockTipDialog.isShowing()) {
                     lockTipDialog.show();
                 }
+            } else {
+                locking = false;
+                binding.ivShare.setVisibility(View.VISIBLE);
+                binding.clytShare.setVisibility(View.VISIBLE);
             }
         } else if (user.getUser_video() != null && user.getUser_video().getList() != null && user.getUser_video().getList().get(currentShowIndex).getUnlock() == 0) {
             if (layoutDiscoverVideoBinding != null) {
                 layoutDiscoverVideoBinding.ivPlay.setVisibility(View.GONE);
                 layoutDiscoverVideoBinding.ivLock.setVisibility(View.VISIBLE);
+                binding.ivShare.setVisibility(View.GONE);
+                binding.tvShareContent.setVisibility(View.GONE);
             }
             locking = true;
             doPauseAction(true);
@@ -719,6 +727,8 @@ public class HomepageVideoFragment extends BaseFragment<FragmentDiscoverVideoBin
             }
         } else {
             locking = false;
+            binding.ivShare.setVisibility(View.VISIBLE);
+            binding.tvShareContent.setVisibility(View.VISIBLE);
         }
 
     }

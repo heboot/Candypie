@@ -275,26 +275,13 @@ public class IndexListFragment extends BaseFragment<FragmentIndexListBinding> {
     @Override
     public void onSupportVisible() {
         super.onSupportVisible();
-        LogUtil.e(TAG, "onSupportVisible1");
         if (testAdapter == null || testAdapter.getData() == null || testAdapter.getData().size() == 0) {
-            LogUtil.e(TAG, "onSupportVisible2");
             if (binding.nodataLayout.getVisibility() != View.VISIBLE) {
                 binding.srytIndex.setRefreshing(true);
                 initIndexData();
             }
         }
 
-        if (pageName.equals("r")) {
-            if (UserService.getInstance().isServicer()) {
-                if (dongtaiServicerTipDialog == null) {
-                    dongtaiServicerTipDialog = new DongtaiServicerTipDialog();
-                }
-                if (!dongtaiServicerTipDialog.isAdded()) {
-                    dongtaiServicerTipDialog.show(getFragmentManager(), "");
-                }
-
-            }
-        }
     }
 
     @Override
@@ -397,7 +384,22 @@ public class IndexListFragment extends BaseFragment<FragmentIndexListBinding> {
                     }
                     womenTipDialog.show();
                 }
+
+
+                //上传视频弹出
+                if (pageName.equals("r")) {
+                    if (UserService.getInstance().isServicer() && indexBean.getVideo_tip() == 1) {
+                        if (dongtaiServicerTipDialog == null) {
+                            dongtaiServicerTipDialog = new DongtaiServicerTipDialog();
+                        }
+                        if (!dongtaiServicerTipDialog.isAdded()) {
+                            dongtaiServicerTipDialog.show(getFragmentManager(), "");
+                        }
+
+                    }
+                }
             }
+
 
             @Override
             public void onError(BaseBean<IndexV5Bean> baseBean) {

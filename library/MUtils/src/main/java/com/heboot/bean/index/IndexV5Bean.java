@@ -23,7 +23,16 @@ public class IndexV5Bean extends BaseBeanEntity {
     private IndexRecommendConfigBean recommend_config;
     private int service_auth_tip;
     private int service_auth;
-    private Map<String,String> tag;
+    private Map<String, String> tag;
+    private int video_tip;
+
+    public int getVideo_tip() {
+        return video_tip;
+    }
+
+    public void setVideo_tip(int video_tip) {
+        this.video_tip = video_tip;
+    }
 
     public Map<String, String> getTag() {
         return tag;

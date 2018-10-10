@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.View;
 
+import com.alibaba.fastjson.JSON;
 import com.gdlife.candypie.MAPP;
 import com.gdlife.candypie.R;
 import com.gdlife.candypie.base.BaseFragment;
@@ -21,7 +22,8 @@ import java.util.List;
 
 public class IndexFragment extends BaseFragment<FragmentIndexBinding> {
 
-    private PermissionUtils permissionUtils;
+    private int currentTabIndex = 0;
+
 
     public static IndexFragment newInstance() {
         Bundle args = new Bundle();
@@ -38,13 +40,10 @@ public class IndexFragment extends BaseFragment<FragmentIndexBinding> {
 
     @Override
     public void initUI() {
-        permissionUtils = new PermissionUtils();
-
     }
 
     @Override
     public void initData() {
-        LogUtil.e(TAG, "initData");
         List<String> titles = new ArrayList();
 
         ArrayList<Fragment> fragments = new ArrayList<>();
@@ -53,9 +52,15 @@ public class IndexFragment extends BaseFragment<FragmentIndexBinding> {
             return;
         }
 
+        int index = -1;
+
         for (TopMenuBean topMenuBean : MAPP.mapp.getConfigBean().getIndex_top_menu()) {
             titles.add(topMenuBean.getTitle());
+            index = index + 1;
             fragments.add(IndexListFragment.newInstance(topMenuBean.getName()));
+            if (topMenuBean.getIs_default() == 1) {
+                currentTabIndex = index;
+            }
         }
 
 
@@ -65,21 +70,18 @@ public class IndexFragment extends BaseFragment<FragmentIndexBinding> {
 
         binding.stTitle.setViewPager(binding.rvList, strings, _mActivity, fragments);
 
+        binding.stTitle.setCurrentTab(currentTabIndex);
+
     }
 
     @Override
     public void initListener() {
-
 
         binding.clytFirst.setOnClickListener((v) -> {
             binding.clytFirst.setVisibility(View.GONE);
             UserService.getInstance().setFirstIndex();
         });
 
-//
-//        binding.vSearchbg.setOnClickListener((v) -> {
-//            IntentUtils.toSearchActivity(getContext());
-//        });
         binding.vSearchbg2.setOnClickListener((v) -> {
             if (UserService.getInstance().checkTourist(getContext())) {
                 return;
@@ -87,7 +89,6 @@ public class IndexFragment extends BaseFragment<FragmentIndexBinding> {
             CustomEventUtil.onEvent(CustomEvent.INDEX_CLICK_SEARCH);
             IntentUtils.toSearchActivity(getContext());
         });
-
 
     }
 

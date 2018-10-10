@@ -218,6 +218,8 @@ public class MessageService {
                     IntentUtils.toNewThemeServiceActivity(MAPP.mapp.getCurrentActivity(), listBean, listBean.getType().equals(MValue.ORDER_TYPE_VIDEO) ? MValue.NEW_SERVICE_TYPE_VIDEO : MValue.NEW_SERVICE_TYPE_NORMAL, null);
                 }
 
+            } else if (toAction.equals(MessageToAction.profile.toString())) {
+                IntentUtils.toUserPageActivity(MAPP.mapp.getCurrentActivity(), String.valueOf(systemMessage.getUid()));
             }
         }
 

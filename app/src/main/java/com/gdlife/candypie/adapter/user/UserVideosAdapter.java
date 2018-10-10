@@ -77,9 +77,9 @@ public class UserVideosAdapter extends BaseRecyclerViewAdapter {
         this.isReplace = false;
         this.user = user;
         data.addAll(datas);
-        if (isMe) {
-            data.add(0, new HomepageVideoBean());
-        }
+//        if (isMe) {
+//            data.add(0, new HomepageVideoBean());
+//        }
 
     }
 
