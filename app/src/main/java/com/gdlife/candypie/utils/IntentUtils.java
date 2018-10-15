@@ -452,9 +452,9 @@ public class IntentUtils {
     public static void toLoginActivity(Context context) {
 //        RxBus.getInstance().post(NormalEvent.FINISH_INDEX_PAGE);
         Intent intent = new Intent(context, LoginActivity.class);
-//        if (context.getClass().getSimpleName().equals(MAPP.mapp.getClass().getSimpleName())) {
-//            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//        }
+        if (context.getClass().getSimpleName().equals(MAPP.mapp.getClass().getSimpleName())) {
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        }
         context.startActivity(intent);
     }
 

@@ -582,7 +582,7 @@ public class RecentContactsFragment extends TFragment {
             }
 
             items.add(r);
-            if (ConfigValue.getKf_uids() != null && ConfigValue.getKf_uids().indexOf(r.getFromAccount().replace("cdp", "")) > -1) {
+            if (ConfigValue.getKf_uids() != null && r.getFromAccount() != null && ConfigValue.getKf_uids().indexOf(r.getFromAccount().replace("cdp", "")) > -1) {
                 if (!isTagSet(r, (1000000 - Integer.parseInt(r.getFromAccount().replace("cdp", ""))))) {
                     addTag(r, (1000000 - Integer.parseInt(r.getFromAccount().replace("cdp", ""))));
                     NIMClient.getService(MsgService.class).updateRecent(r);

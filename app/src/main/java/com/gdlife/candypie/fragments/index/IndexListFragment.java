@@ -388,14 +388,9 @@ public class IndexListFragment extends BaseFragment<FragmentIndexListBinding> {
 
                 //上传视频弹出
                 if (pageName.equals("r")) {
-                    if (UserService.getInstance().isServicer() && indexBean.getVideo_tip() == 1) {
-                        if (dongtaiServicerTipDialog == null) {
-                            dongtaiServicerTipDialog = new DongtaiServicerTipDialog();
-                        }
-                        if (!dongtaiServicerTipDialog.isAdded()) {
-                            dongtaiServicerTipDialog.show(getFragmentManager(), "");
-                        }
-
+                    if (indexBean.getVideo_tip() != null) {//UserService.getInstance().isServicer() &&
+                        freeVideoDialog = new FreeVideoDialog.Builder(_mActivity, indexBean.getVideo_tip(), null).create();
+                        freeVideoDialog.show();
                     }
                 }
             }

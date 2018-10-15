@@ -8,7 +8,9 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 
+import com.gdlife.candypie.MAPP;
 import com.gdlife.candypie.R;
+import com.gdlife.candypie.common.UserVideoActivityFrom;
 import com.gdlife.candypie.databinding.DialogFreeVideoBinding;
 import com.gdlife.candypie.databinding.DialogTipTitleBinding;
 import com.gdlife.candypie.serivce.AuthService;
@@ -80,6 +82,10 @@ public class FreeVideoDialog extends Dialog {
                     dialog.dismiss();
                     if (indexPopTipBean.getAction().equals("service_auth")) {
                         AuthService.toAuthPageByIndex(context);
+                    } else if (indexPopTipBean.getAction().equals("video_list")) {
+                        if (!UserService.getInstance().checkTourist()) {
+                            IntentUtils.toUserVideosActivity(MAPP.mapp.getCurrentActivity(), UserService.getInstance().getUser(), UserVideoActivityFrom.NORMAL);
+                        }
                     }
 
 //                    observer.accept(1);

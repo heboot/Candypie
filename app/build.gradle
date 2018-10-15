@@ -58,7 +58,6 @@ android {
 
     buildTypes {
         release {
-            debuggable config.DEBUGENABLE
             signingConfig signingConfigs.releaseConfig
             buildConfigField 'String', 'OSSBUCKET', "\"candypie-img\""
             buildConfigField 'String', 'BUGLY_APPID', "\"5025108b4a\""

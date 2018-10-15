@@ -57,6 +57,10 @@ public class UserUnlockVideosActivity extends BaseActivity<ActivityUserVideosBin
     @Override
     public void initListener() {
 
+        binding.includeToolbar.vBack.setOnClickListener((v) -> {
+            finish();
+        });
+
     }
 
     private void initVideos() {

@@ -24,13 +24,13 @@ public class IndexV5Bean extends BaseBeanEntity {
     private int service_auth_tip;
     private int service_auth;
     private Map<String, String> tag;
-    private int video_tip;
+    private IndexPopTipBean video_tip;
 
-    public int getVideo_tip() {
+    public IndexPopTipBean getVideo_tip() {
         return video_tip;
     }
 
-    public void setVideo_tip(int video_tip) {
+    public void setVideo_tip(IndexPopTipBean video_tip) {
         this.video_tip = video_tip;
     }
 

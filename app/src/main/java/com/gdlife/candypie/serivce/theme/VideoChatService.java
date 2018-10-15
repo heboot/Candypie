@@ -51,7 +51,7 @@ public class VideoChatService {
         HttpClient.Builder.getGuodongServer()._check_run_service(params).observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribe(new HttpObserver<BaseBeanEntity>() {
             @Override
             public void onSuccess(BaseBean<BaseBeanEntity> baseBean) {
-                if (baseBean.getData().getRun_service_tip() != null) {
+                if (baseBean.getData() != null && baseBean.getData().getRun_service_tip() != null) {
                     IntentUtils.toVideoChatActivity(MAPP.mapp, baseBean.getData().getRun_service_tip().getUser_service_id(), baseBean.getData().getRun_service_tip().getChat_room_config(), VideoChatFrom.SERVICER);
                 }
 
@@ -282,20 +282,20 @@ public class VideoChatService {
             @Override
             public void onSuccess(BaseBean<VideoChatTipBean> baseBean) {
                 if (baseBean.getData().getStatus() == 1) {
-                videoChatTipDialog = new TipCustomDialog.Builder(MAPP.mapp.getCurrentActivity(), new Consumer<Integer>() {
-                    @Override
-                    public void accept(Integer integer) throws Exception {
-                        if (integer == 1) {
-                            if (permissionUtils == null) {
-                                permissionUtils = new PermissionUtils();
+                    videoChatTipDialog = new TipCustomDialog.Builder(MAPP.mapp.getCurrentActivity(), new Consumer<Integer>() {
+                        @Override
+                        public void accept(Integer integer) throws Exception {
+                            if (integer == 1) {
+                                if (permissionUtils == null) {
+                                    permissionUtils = new PermissionUtils();
+                                }
+                                postVideoService(permissionUtils, MAPP.mapp.getCurrentActivity(), user, null);
                             }
-                            postVideoService(permissionUtils, MAPP.mapp.getCurrentActivity(), user, null);
-                        }
 
-                    }
-                },  baseBean.getData().getTip_message() , "再看看", "视频聊天").create();
-                videoChatTipDialog.show();
-            }
+                        }
+                    }, baseBean.getData().getTip_message(), "再看看", "视频聊天").create();
+                    videoChatTipDialog.show();
+                }
             }
 
             @Override

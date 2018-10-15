@@ -93,10 +93,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
         setUnreadText();
         mDelegate.loadMultipleRootFragment(binding.flytContainer.getId(), 0, indexFragment, rankContainerFragment, messageContainerFragment, myFragment);
         currentFragment = indexFragment;
-
-        if (UserService.getInstance().isServicer()) {
-            startFService();
-        }
+        startFService();
         AudioUtil2.getInstance(this);
     }
 
@@ -104,12 +101,9 @@ public class MainActivity extends BaseActivity<ActivityMainBinding> {
     public void initData() {
         pushService.initPushService();
         DialogUtils.showIndexDialog(this, permissionUtils, false, null);
-
-        if (UserService.getInstance().isServicer()) {
-            mScreenListener = new ScreenReceiverUtil(this);
-            mScreenManager = ScreenManager.getScreenManagerInstance(this);
-            mScreenListener.setScreenReceiverListener(mScreenListenerer);
-        }
+        mScreenListener = new ScreenReceiverUtil(this);
+        mScreenManager = ScreenManager.getScreenManagerInstance(this);
+        mScreenListener.setScreenReceiverListener(mScreenListenerer);
 
     }
 

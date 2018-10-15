@@ -113,12 +113,14 @@ public class PushService {
 
     public void initHuawei(Activity context) {
 
-        huaweiApiClient = new HuaweiApiClient.Builder(context).addApi(HuaweiPush.PUSH_API).addConnectionCallbacks(callbacks)
-                .addOnConnectionFailedListener(onConnectionFailedListener)
-                .build();
-        huaweiApiClient.connect(context);
+        if (context != null) {
+            huaweiApiClient = new HuaweiApiClient.Builder(context).addApi(HuaweiPush.PUSH_API).addConnectionCallbacks(callbacks)
+                    .addOnConnectionFailedListener(onConnectionFailedListener)
+                    .build();
+            huaweiApiClient.connect(context);
+            getTokenAsyn();
+        }
 
-        getTokenAsyn();
     }
 
     public void initOPPO() {
