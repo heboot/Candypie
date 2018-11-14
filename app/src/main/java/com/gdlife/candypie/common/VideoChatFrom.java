@@ -7,5 +7,7 @@ package com.gdlife.candypie.common;
 public enum VideoChatFrom {
 
     USER,
-    SERVICER
+    SERVICER,
+    SEND,//发送方
+    ACCEPT//接收方
 }

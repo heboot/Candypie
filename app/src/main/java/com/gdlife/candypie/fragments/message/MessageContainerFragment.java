@@ -54,10 +54,10 @@ public class MessageContainerFragment extends BaseFragment<FragmentMessageContai
             titles.add("活跃");
             fragments.add(MessageActiveFragment.newInstance());
         } else {
-            titles.add("接单");
-            fragments.add(MessageOrderFragment.newInstance());
             titles.add("活跃");
             fragments.add(MessageActiveFragment.newInstance());
+            titles.add("通话");
+            fragments.add(MessageOrderFragment.newInstance());
         }
 
         String[] strings = new String[titles.size()];

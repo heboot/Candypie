@@ -611,7 +611,7 @@ public class NewThemeActivity extends BaseActivity<ActivityNewTheme2Binding> imp
                     tipDialog.dismiss();
                     if (selectUser != null) {
                         postThemeBean.setServiceId(listBean.getId());
-                        IntentUtils.toVideoChatActivity(NewThemeActivity.this, postThemeBean.getUser_service_id(), postThemeBean.getChat_room_config(), VideoChatFrom.USER);
+                        IntentUtils.toVideoChatActivity(NewThemeActivity.this, postThemeBean.getUser_service_id(), postThemeBean.getChat_room_config(),UserService.getInstance().isServicer() ? VideoChatFrom.SERVICER : VideoChatFrom.USER, true);
                         finish();
                     }
                 }

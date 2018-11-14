@@ -45,7 +45,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/x10"
-                android:text="111"
+                android:text=""
                 android:textColor="@color/white"
                 android:textSize="@dimen/x48"
                 android:textStyle="bold" />
@@ -204,6 +204,7 @@
                     android:layout_height="@dimen/y30"
                     android:layout_marginRight="@dimen/x16"
                     android:layout_marginTop="@dimen/y9"
+                    android:visibility="gone"
                     android:text="充值"
                     android:textColor="@color/white"
                     app:layout_constraintRight_toRightOf="parent"

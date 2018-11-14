@@ -63,7 +63,7 @@ android {
             buildConfigField 'String', 'BUGLY_APPID', "\"5025108b4a\""
             buildConfigField 'String', 'CURRENT_CHANNEL', "\"oppo\""
             multiDexEnabled true
-
+            debuggable true
             shrinkResources false
 
             minifyEnabled false

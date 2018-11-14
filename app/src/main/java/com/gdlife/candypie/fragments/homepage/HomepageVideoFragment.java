@@ -735,7 +735,7 @@ public class HomepageVideoFragment extends BaseFragment<FragmentDiscoverVideoBin
 
 
     public void unlockVideo(String vid) {
-        if (Integer.parseInt(UserService.getInstance().getUser().getCoin()) < Integer.parseInt(user.getUser_video().getList().get(currentShowIndex).getPrice())) {
+        if (Integer.parseInt(StringUtils.isEmpty(UserService.getInstance().getUser().getCoin()) ? "0" : UserService.getInstance().getUser().getCoin()) < Integer.parseInt(user.getUser_video().getList().get(currentShowIndex).getPrice())) {
             if (coinDialog == null) {
                 coinDialog = new TipDialog.Builder(_mActivity, new Consumer<Integer>() {
                     @Override

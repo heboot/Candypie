@@ -60,6 +60,7 @@ import com.heboot.bean.video.UserVideosBean;
 import com.heboot.bean.video.VideoChatStratEndBean;
 import com.heboot.bean.video.VideoPlayerURLBean;
 import com.heboot.bean.video.VideoUploadConfigBean;
+import com.heboot.bean.videochat.VideoChatOrderBean;
 import com.heboot.bean.videochat.VideoChatTipBean;
 
 import java.util.Map;
@@ -528,6 +529,11 @@ public interface HttpClient {
     @FormUrlEncoded
     @POST("user/user/unlock_video_list")
     Observable<BaseBean<UserVideosBean>> unlock_video_list(@FieldMap Map<String, Object> params);
+
+
+    @FormUrlEncoded
+    @POST("order/order/video_chat_list")
+    Observable<BaseBean<VideoChatOrderBean>> video_chat_list(@FieldMap Map<String, Object> params);
 
 
 //    /**

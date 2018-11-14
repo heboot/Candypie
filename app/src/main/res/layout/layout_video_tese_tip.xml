@@ -18,7 +18,8 @@
         android:layout_width="@dimen/x300"
         android:layout_height="wrap_content"
         android:alpha="0"
-        android:background="@drawable/bg_video_gift_gradient">
+        android:background="@drawable/bg_video_gift_gradient"
+        android:minHeight="@dimen/y78">
 
         <TextView
             android:id="@+id/tv1"
@@ -37,8 +38,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/x16"
-            android:layout_marginRight="@dimen/x16"
             android:layout_marginTop="@dimen/y13"
+            android:layout_marginRight="@dimen/x16"
             android:gravity="left|center_vertical"
             android:text="@{`                  ` + info2}"
             android:textColor="@color/white"
@@ -46,6 +47,23 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_price"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x16"
+            android:layout_marginTop="@dimen/y2"
+            android:layout_marginBottom="@dimen/y18"
+            android:gravity="left"
+            android:text="价格"
+            android:textColor="@color/color_FF5252"
+            android:textSize="@dimen/x17"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv2" />
 
 
     </android.support.constraint.ConstraintLayout>

@@ -511,7 +511,7 @@ public class DiscoverVideoFragment extends BaseFragment<FragmentDiscoverVideoBin
             @Override
             public void onSuccess(BaseBean<PostThemeBean> baseBean) {
                 tipDialog.dismiss();
-                IntentUtils.toVideoChatActivity(getContext(), baseBean.getData().getUser_service_id(), baseBean.getData().getChat_room_config(), VideoChatFrom.USER);
+                IntentUtils.toVideoChatActivity(getContext(), baseBean.getData().getUser_service_id(), baseBean.getData().getChat_room_config(), UserService.getInstance().isServicer() ? VideoChatFrom.SERVICER : VideoChatFrom.USER, true);
             }
 
             @Override

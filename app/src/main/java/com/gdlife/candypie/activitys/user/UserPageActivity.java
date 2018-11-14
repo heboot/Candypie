@@ -464,7 +464,12 @@ public class UserPageActivity extends BaseActivity<ActivityUserpageBinding> {
         } else {
             binding.includeBottom.vVideoBg.setBackgroundResource(R.drawable.bg_rect_d6d6df_22);
         }
-        binding.includeBottom.tvPrice.setText("聊天" + user.getVideo_chat_price() + "钻/分钟");
+        if (user.getService_auth_status().intValue() != MValue.AUTH_STATUS_SUC) {
+            binding.includeBottom.tvPrice.setText("视频聊天");
+        } else {
+            binding.includeBottom.tvPrice.setText("聊天" + user.getVideo_chat_price() + "钻/分钟");
+        }
+
     }
 
 

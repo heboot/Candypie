@@ -239,10 +239,11 @@ public class IntentUtils {
         context.startActivity(intent);
     }
 
-    public static void toVideoChatActivity(Context context, String userServiceId, PostVideoChatBean postThemeBean, VideoChatFrom from) {
+    public static void toVideoChatActivity(Context context, String userServiceId, PostVideoChatBean postThemeBean, VideoChatFrom from, boolean isMe) {
         Intent intent = new Intent(context, VideoChatActivity.class);
         intent.putExtra(MKey.POST_THEME_BEAN, postThemeBean);
         intent.putExtra(MKey.USER_SERVICE_ID, userServiceId);
+        intent.putExtra(MKey.IS_AUTH, isMe);
         intent.putExtra(MKey.FROM, from);
         if (context.getClass().getSimpleName().equals(MAPP.mapp.getClass().getSimpleName())) {
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -711,7 +712,7 @@ public class IntentUtils {
                 if (StringUtils.isEmpty(price)) {
                     price = "0";
                 }
-                NimUIKit.startP2PSession(context, account, null, hide, price, is_im_chat, isBlack, user, UserService.getInstance().getUser());
+                NimUIKit.startP2PSession(context, account, null, null, price, is_im_chat, isBlack, user, UserService.getInstance().getUser());
             }
 
         }

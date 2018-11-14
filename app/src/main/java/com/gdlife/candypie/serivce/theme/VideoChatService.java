@@ -52,7 +52,7 @@ public class VideoChatService {
             @Override
             public void onSuccess(BaseBean<BaseBeanEntity> baseBean) {
                 if (baseBean.getData() != null && baseBean.getData().getRun_service_tip() != null) {
-                    IntentUtils.toVideoChatActivity(MAPP.mapp, baseBean.getData().getRun_service_tip().getUser_service_id(), baseBean.getData().getRun_service_tip().getChat_room_config(), VideoChatFrom.SERVICER);
+                    IntentUtils.toVideoChatActivity(MAPP.mapp, baseBean.getData().getRun_service_tip().getUser_service_id(), baseBean.getData().getRun_service_tip().getChat_room_config(), UserService.getInstance().isServicer() ? VideoChatFrom.SERVICER : VideoChatFrom.USER, false);
                 }
 
             }
@@ -130,7 +130,7 @@ public class VideoChatService {
      * @param coinDialog
      */
     private boolean checkVideoChatCoin(Activity activity, User user, TipDialog coinDialog) {
-        int minCoin = ThemeService.getVideoMinReqCoin(ThemeService.getVideoServiceMinPrice());
+//        int minCoin = ThemeService.getVideoMinReqCoin(ThemeService.getVideoServiceMinPrice());
 
         if (user != null && !StringUtils.isEmpty(user.getVideo_chat_price())) {
             int myCoin = Integer.parseInt(UserService.getInstance().getUser().getCoin());
@@ -159,27 +159,29 @@ public class VideoChatService {
             } else {
                 return true;
             }
-        } else if (Integer.parseInt(UserService.getInstance().getUser().getCoin()) < minCoin) {
-            // TODO: 2018/3/22 提示去充值钻石
-            if (coinDialog == null) {
-                coinDialog = new TipDialog.Builder(activity, new Consumer<Integer>() {
-                    @Override
-                    public void accept(Integer integer) throws Exception {
-                        if (integer == 1) {
-                            IntentUtils.toAccountActivity(MAPP.mapp.getCurrentActivity());
-                        }
-
-                    }
-                }, activity.getString(R.string.new_video_service_coin_tip_title), "充值"
-                ).create();
-                coinDialog.show();
-                return false;
-            } else {
-                coinDialog.show();
-            }
-            return false;
         }
         return true;
+//        else if (user != null && StringUtils.isEmpty(user.getVideo_chat_price()) && Integer.parseInt(UserService.getInstance().getUser().getCoin()) < minCoin) {
+//            // TODO: 2018/3/22 提示去充值钻石
+//            if (coinDialog == null) {
+//                coinDialog = new TipDialog.Builder(activity, new Consumer<Integer>() {
+//                    @Override
+//                    public void accept(Integer integer) throws Exception {
+//                        if (integer == 1) {
+//                            IntentUtils.toAccountActivity(MAPP.mapp.getCurrentActivity());
+//                        }
+//
+//                    }
+//                }, activity.getString(R.string.new_video_service_coin_tip_title), "充值"
+//                ).create();
+//                coinDialog.show();
+//                return false;
+//            } else {
+//                coinDialog.show();
+//            }
+//            return false;
+//        }
+//        return true;
     }
 
     private QMUITipDialog tipDialog;
@@ -211,7 +213,7 @@ public class VideoChatService {
                     observable.onSuccess(baseBean);
                 } else {
                     tipDialog.dismiss();
-                    IntentUtils.toVideoChatActivity(activity, baseBean.getData().getUser_service_id(), baseBean.getData().getChat_room_config(), VideoChatFrom.USER);
+                    IntentUtils.toVideoChatActivity(activity, baseBean.getData().getUser_service_id(), baseBean.getData().getChat_room_config(), UserService.getInstance().isServicer() ? VideoChatFrom.SERVICER : VideoChatFrom.USER, true);
                 }
             }
 

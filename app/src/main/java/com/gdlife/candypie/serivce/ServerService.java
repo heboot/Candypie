@@ -52,7 +52,7 @@ public class ServerService {
 
     public void doRuningService(Context context, RunServiceTipBean runServiceTipBean) {
         if (runServiceTipBean.getAction().equals(RunServiceAction.start_video_chat.toString())) {
-            IntentUtils.toVideoChatActivity(context, runServiceTipBean.getUser_service_id(), runServiceTipBean.getChat_room_config(), VideoChatFrom.SERVICER);
+            IntentUtils.toVideoChatActivity(context, runServiceTipBean.getUser_service_id(), runServiceTipBean.getChat_room_config(), UserService.getInstance().isServicer() ? VideoChatFrom.SERVICER : VideoChatFrom.USER, false);
         }
     }
 

@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.gdlife.candypie.MAPP;
 import com.gdlife.candypie.R;
 import com.gdlife.candypie.adapter.message.ActiveAdapter2;
 import com.gdlife.candypie.adapter.index.IndexVisitAdapter;
@@ -156,7 +157,7 @@ public class MessageActiveFragment extends BaseFragment<FragmentMessageActiveBin
 
     private void initHeadView(IndexPopTipBean topAdListBean, VisitListBean visitListBean) {
         if (headView == null) {
-            LayoutIndexActiveHeadBinding cbinding = DataBindingUtil.inflate(LayoutInflater.from(getActivity()), R.layout.layout_index_active_head, null, false);
+            LayoutIndexActiveHeadBinding cbinding = DataBindingUtil.inflate(LayoutInflater.from(MAPP.mapp.getApplicationContext()), R.layout.layout_index_active_head, null, false);
             //没有广告 没有访客
             if (visitListBean == null || visitListBean.getList() == null || visitListBean.getList().size() <= 0 && topAdListBean == null) {
 //                cbinding.getRoot().setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, getResources().getDimensionPixelOffset(R.dimen.y160)));

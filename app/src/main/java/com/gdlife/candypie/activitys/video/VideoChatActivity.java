@@ -2,30 +2,22 @@ package com.gdlife.candypie.activitys.video;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.graphics.Rect;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.media.AudioManager;
-import android.opengl.GLSurfaceView;
 import android.os.Handler;
 import android.os.Message;
-import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.widget.ViewDragHelper;
 import android.util.Log;
-import android.view.GestureDetector;
 import android.view.KeyEvent;
-import android.view.MotionEvent;
 import android.view.SurfaceView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
@@ -56,6 +48,7 @@ import com.gdlife.candypie.utils.PermissionUtils;
 import com.gdlife.candypie.utils.SignUtils;
 import com.gdlife.candypie.utils.StringUtils;
 import com.gdlife.candypie.utils.ToastUtils;
+import com.gdlife.candypie.widget.common.TipDialog;
 import com.gdlife.candypie.widget.gift.BottomVideoGiftSheetDialogHehe;
 import com.gdlife.candypie.widget.luckpan.LuckpanDialog;
 import com.gdlife.candypie.widget.luckpan.TurntableIntiveTipDialog;
@@ -71,10 +64,8 @@ import com.heboot.event.OrderEvent;
 import com.heboot.event.TurntableEvent;
 import com.heboot.event.VideoChatEvent;
 import com.heboot.faceunity_unit.fulivedemo.renderer.CameraRenderer;
-import com.heboot.faceunity_unit.fulivedemo.utils.ToastUtil;
 import com.heboot.rxbus.RxBus;
 import com.heboot.utils.LogUtil;
-import com.heboot.utils.ViewUtils;
 import com.jakewharton.rxbinding2.view.RxView;
 import com.opensource.svgaplayer.SVGACallback;
 import com.opensource.svgaplayer.SVGADrawable;
@@ -187,6 +178,11 @@ public class VideoChatActivity extends BaseActivity<ActivityVideoChatBinding> im
     protected CameraRenderer mCameraRenderer; //摄像头采集
     private boolean userJoined = false;
 
+    /**
+     * 是否是自己发起的
+     */
+    private boolean isMeSendVideo = false;
+
 
     @Override
     public void initUI() {
@@ -203,6 +199,8 @@ public class VideoChatActivity extends BaseActivity<ActivityVideoChatBinding> im
         DaggerServiceComponent.builder().build().inject(this);
 
         postVideoChatBean = (PostVideoChatBean) getIntent().getExtras().get(MKey.POST_THEME_BEAN);
+
+        isMeSendVideo = getIntent().getExtras().getBoolean(MKey.IS_AUTH);
 
         MValue.currentVideoCoinAmount = postVideoChatBean.getCoin();
 
@@ -222,31 +220,120 @@ public class VideoChatActivity extends BaseActivity<ActivityVideoChatBinding> im
         ImageUtils.showImage(binding.ivAvatarBg, postVideoChatBean.getUser().getAvatar());
 
 
-        if (videoChatFrom == VideoChatFrom.SERVICER) {
-            ImageUtils.showImage(binding.userAvatar, postVideoChatBean.getUser().getAvatar());
-            binding.ivPublishCancel.setVisibility(View.GONE);
-            binding.ivReject.setVisibility(View.VISIBLE);
-            binding.tvReject.setVisibility(View.VISIBLE);
-            binding.ivApply.setVisibility(View.VISIBLE);
-            binding.tvApply.setVisibility(View.VISIBLE);
-            binding.tvWait.setText("蜜糖号：" + postVideoChatBean.getUser().getId());
+        initBeforeUI();
 
-            binding.tvWaitInfo.setText("对方正在邀请您视频聊天～");
-//            AudioUtil.playSound(R.raw.voip_called, 1, -1);
-            AudioUtil2.getInstance(this).playServicerCalling();
-            if (permissionUtils.hasCameraPermission(MAPP.mapp)) {
-                initGLSurfaceView();
-            } else {
-                permissionUtils.getCameraPermission(this);
-                initGLSurfaceView();
-            }
+//        if (videoChatFrom == VideoChatFrom.SERVICER) {
+//            ImageUtils.showImage(binding.userAvatar, postVideoChatBean.getUser().getAvatar());
+//            binding.ivPublishCancel.setVisibility(View.GONE);
+//            binding.ivReject.setVisibility(View.VISIBLE);
+//            binding.tvReject.setVisibility(View.VISIBLE);
+//            binding.ivApply.setVisibility(View.VISIBLE);
+//            binding.tvApply.setVisibility(View.VISIBLE);
+//            binding.tvWait.setText("蜜糖号：" + postVideoChatBean.getUser().getId());
+//
+//            binding.tvWaitInfo.setText("对方正在邀请您视频聊天～");
+////            AudioUtil.playSound(R.raw.voip_called, 1, -1);
+//            AudioUtil2.getInstance(this).playServicerCalling();
+//            if (permissionUtils.hasCameraPermission(MAPP.mapp)) {
+//                initGLSurfaceView();
+//            } else {
+//                permissionUtils.getCameraPermission(this);
+//                initGLSurfaceView();
+//            }
+//
+//        } else {
+//            ImageUtils.showImage(binding.userAvatar, UserService.getInstance().getUser().getAvatar());
+//            setCancelEnable(false);
+////            AudioUtil.playSound(R.raw.voip_calling_stay, 1, 0);
+//            AudioUtil2.getInstance(this).playUserCalling();
+////            joinChannel();
+//            initGLSurfaceView();
+//            binding.ivPublishCancel.setVisibility(View.VISIBLE);
+//            binding.ivReject.setVisibility(View.GONE);
+//            binding.tvReject.setVisibility(View.GONE);
+//            binding.ivApply.setVisibility(View.GONE);
+//            binding.tvApply.setVisibility(View.GONE);
+//            binding.tvWait.setText("蜜糖号：" + postVideoChatBean.getUser().getId());
+//            binding.tvWaitInfo.setText("正在接通，请耐心等待～");
+//            /**
+//             * 未接通之前如果对方有特色 显示特色
+//             */
+//            showTeseTip();
+//            /**
+//             * 未接通之前10秒 不可取消
+//             */
+//            beforeCancelHandler.sendEmptyMessage(400001);
+//            timeoutObserable = ObserableUtils.countdownBySECONDS(120);
+//            timeoutObserable.subscribe(new Observer<Long>() {
+//                @Override
+//                public void onSubscribe(Disposable d) {
+//                    disposable = d;
+//                    addDisposable(disposable);
+//                }
+//
+//                @Override
+//                public void onNext(Long o) {
+//                    if (o == 0) {
+//                        MAPP.mapp.getM_agoraAPI().channelInviteEnd(postVideoChatBean.getChannel_name(), String.valueOf(postVideoChatBean.getUser().getId()), 0);
+//                        isTimeout = true;
+//                        orderService.cancelOrder(userServiceId);
+//                        timeoutTipDialog = new TipCustomDialog.Builder(VideoChatActivity.this, new Consumer<Integer>() {
+//                            @Override
+//                            public void accept(Integer integer) throws Exception {
+//                                timeoutTipDialog.dismiss();
+//                                if (integer == 1) {
+//                                    IntentUtils.intent2ChatActivity(VideoChatActivity.this, MValue.CHAT_PRIEX + postVideoChatBean.getUser().getId());
+//                                }
+//
+//                            }
+//                        }, "对方不方便接听，可直接和对方私信", "取消", "确认").create();
+//                        timeoutTipDialog.setOnDismissListener(onDismissListener);
+//                        timeoutTipDialog.show();
+//                    }
+//                }
+//
+//                @Override
+//                public void onError(Throwable e) {
+//
+//                }
+//
+//                @Override
+//                public void onComplete() {
+//
+//                }
+//            });
+//        }
+//
+//        ImageUtils.showImage(binding.ivAvatar, postVideoChatBean.getUser().getAvatar());
+//
+//        binding.tvName.setText(postVideoChatBean.getUser().getNickname());
+//
+//        binding.userAvatar.clearAnimation();
 
-        } else {
+    }
+
+    /**
+     * 接通之前的UI
+     */
+    private void initBeforeUI() {
+
+        /**
+         * 未接通之前如果对方有特色 显示特色
+         */
+        showTeseTip();
+
+
+        if (videoChatFrom == VideoChatFrom.USER || postVideoChatBean.getPayment_uid() == UserService.getInstance().getUser().getId().intValue()) {
             ImageUtils.showImage(binding.userAvatar, UserService.getInstance().getUser().getAvatar());
+        }
+
+        //如果是发起者，就显示正在等待对方接听，如果对方有服务特色等，就显示 没有则 不显示
+        //发起者
+        if (isMeSendVideo) {
+            joinChannel();
+
             setCancelEnable(false);
-//            AudioUtil.playSound(R.raw.voip_calling_stay, 1, 0);
             AudioUtil2.getInstance(this).playUserCalling();
-//            joinChannel();
             initGLSurfaceView();
             binding.ivPublishCancel.setVisibility(View.VISIBLE);
             binding.ivReject.setVisibility(View.GONE);
@@ -255,62 +342,87 @@ public class VideoChatActivity extends BaseActivity<ActivityVideoChatBinding> im
             binding.tvApply.setVisibility(View.GONE);
             binding.tvWait.setText("蜜糖号：" + postVideoChatBean.getUser().getId());
             binding.tvWaitInfo.setText("正在接通，请耐心等待～");
-            /**
-             * 未接通之前如果对方有特色 显示特色
-             */
-            showTeseTip();
-            /**
-             * 未接通之前10秒 不可取消
-             */
-            beforeCancelHandler.sendEmptyMessage(400001);
-            timeoutObserable = ObserableUtils.countdownBySECONDS(120);
-            timeoutObserable.subscribe(new Observer<Long>() {
-                @Override
-                public void onSubscribe(Disposable d) {
-                    disposable = d;
-                    addDisposable(disposable);
-                }
+        }
+        //接收者
+        else {
+            binding.ivPublishCancel.setVisibility(View.GONE);
+            binding.ivReject.setVisibility(View.VISIBLE);
+            binding.tvReject.setVisibility(View.VISIBLE);
+            binding.ivApply.setVisibility(View.VISIBLE);
+            binding.tvApply.setVisibility(View.VISIBLE);
 
-                @Override
-                public void onNext(Long o) {
-                    if (o == 0) {
-                        MAPP.mapp.getM_agoraAPI().channelInviteEnd(postVideoChatBean.getChannel_name(), String.valueOf(postVideoChatBean.getUser().getId()), 0);
-                        isTimeout = true;
-                        orderService.cancelOrder(userServiceId);
-                        timeoutTipDialog = new TipCustomDialog.Builder(VideoChatActivity.this, new Consumer<Integer>() {
-                            @Override
-                            public void accept(Integer integer) throws Exception {
-                                timeoutTipDialog.dismiss();
-                                if (integer == 1) {
-                                    IntentUtils.intent2ChatActivity(VideoChatActivity.this, MValue.CHAT_PRIEX + postVideoChatBean.getUser().getId());
-                                }
+            if (UserService.getInstance().isServicer()) {
+                binding.tvWait.setText("蜜糖号：" + postVideoChatBean.getUser().getId());
+                binding.tvWaitInfo.setText("对方正在邀请您视频聊天～");
+            } else {
+                binding.tvWait.setText("邀请你视频聊天");
+                binding.tvWaitInfo.setText("视频通话，" + postVideoChatBean.getCoin() + "钻/分钟");
+            }
 
-                            }
-                        }, "对方不方便接听，可直接和对方私信", "取消", "确认").create();
-                        timeoutTipDialog.setOnDismissListener(onDismissListener);
-                        timeoutTipDialog.show();
-                    }
-                }
-
-                @Override
-                public void onError(Throwable e) {
-
-                }
-
-                @Override
-                public void onComplete() {
-
-                }
-            });
+            AudioUtil2.getInstance(this).playServicerCalling();
+//            if (videoChatFrom == VideoChatFrom.SERVICER) {
+            if (permissionUtils.hasCameraPermission(MAPP.mapp)) {
+                initGLSurfaceView();
+            } else {
+                permissionUtils.getCameraPermission(this);
+                initGLSurfaceView();
+            }
+//            }
         }
 
+        /**
+         * 未接通之前10秒 不可取消
+         */
+        beforeCancelHandler.sendEmptyMessage(400001);
+        timeoutObserable = ObserableUtils.countdownBySECONDS(120);
+        timeoutObserable.subscribe(new Observer<Long>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+                disposable = d;
+                addDisposable(disposable);
+            }
+
+            @Override
+            public void onNext(Long o) {
+                if (o == 0) {
+                    MAPP.mapp.getM_agoraAPI().channelInviteEnd(postVideoChatBean.getChannel_name(), String.valueOf(postVideoChatBean.getUser().getId()), 0);
+                    isTimeout = true;
+                    if (orderService == null) {
+                        orderService = new OrderService();
+                    }
+                    orderService.cancelOrder(userServiceId);
+                    timeoutTipDialog = new TipCustomDialog.Builder(VideoChatActivity.this, new Consumer<Integer>() {
+                        @Override
+                        public void accept(Integer integer) throws Exception {
+                            timeoutTipDialog.dismiss();
+                            if (integer == 1) {
+                                IntentUtils.intent2ChatActivity(VideoChatActivity.this, MValue.CHAT_PRIEX + postVideoChatBean.getUser().getId());
+                            }
+
+                        }
+                    }, "对方不方便接听，可直接和对方私信", "取消", "确认").create();
+                    timeoutTipDialog.setOnDismissListener(onDismissListener);
+                    timeoutTipDialog.show();
+                }
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
+
         ImageUtils.showImage(binding.ivAvatar, postVideoChatBean.getUser().getAvatar());
-
         binding.tvName.setText(postVideoChatBean.getUser().getNickname());
-
         binding.userAvatar.clearAnimation();
-
     }
+
+    private TipDialog coinDialog;
 
     @Override
     public void initListener() {
@@ -363,7 +475,7 @@ public class VideoChatActivity extends BaseActivity<ActivityVideoChatBinding> im
                     });
                 } else if (o.equals(VideoChatEvent.VIDEO_CHAT_END_EVENT)) {
                     timeHandler.removeCallbacksAndMessages(null);
-                    completeOrder();
+                    completeOrder(false);
                 } else if (o instanceof VideoChatEvent.UPDATE_VIDEO_STATE_EVENT) {
                     if (((VideoChatEvent.UPDATE_VIDEO_STATE_EVENT) o).getUser_service_id().equals(userServiceId)) {
                         runOnUiThread(new Runnable() {
@@ -499,7 +611,47 @@ public class VideoChatActivity extends BaseActivity<ActivityVideoChatBinding> im
                 videoChatService = new VideoChatService();
             }
 
-            checkVideoService();
+            if (postVideoChatBean.getPayment_uid() == UserService.getInstance().getUser().getId().intValue()) {
+                if (!StringUtils.isEmpty(UserService.getInstance().getUser().getCoin()) && Integer.parseInt(UserService.getInstance().getUser().getCoin()) < postVideoChatBean.getCoin()) {
+                    if (coinDialog == null) {
+                        coinDialog = new TipDialog.Builder(this, new Consumer<Integer>() {
+                            @Override
+                            public void accept(Integer integer) throws Exception {
+                                if (integer == 1) {
+                                    IntentUtils.toAccountActivity(MAPP.mapp.getCurrentActivity());
+                                }
+
+                            }
+                        }, getString(R.string.new_video_service_coin_tip_title), "充值"
+                        ).create();
+                        coinDialog.show();
+                    } else {
+                        coinDialog.show();
+                    }
+                } else if (StringUtils.isEmpty(UserService.getInstance().getUser().getCoin())) {
+                    if (coinDialog == null) {
+                        coinDialog = new TipDialog.Builder(this, new Consumer<Integer>() {
+                            @Override
+                            public void accept(Integer integer) throws Exception {
+                                if (integer == 1) {
+                                    IntentUtils.toAccountActivity(MAPP.mapp.getCurrentActivity());
+                                }
+
+                            }
+                        }, getString(R.string.new_video_service_coin_tip_title), "充值"
+                        ).create();
+                        coinDialog.show();
+                    } else {
+                        coinDialog.show();
+                    }
+                } else {
+                    checkVideoService();
+                }
+            } else {
+
+                checkVideoService();
+            }
+
 
 //
 //            MAPP.mapp.getM_agoraAPI().channelInviteAccept(postVideoChatBean.getChannel_name(), String.valueOf(postVideoChatBean.getUser().getId()), 0, "");
@@ -510,7 +662,7 @@ public class VideoChatActivity extends BaseActivity<ActivityVideoChatBinding> im
 //            AudioUtil.stop();
             AudioUtil2.getInstance(this).stopRinging();
             MAPP.mapp.getM_agoraAPI().channelInviteRefuse(postVideoChatBean.getChannel_name(), String.valueOf(postVideoChatBean.getUser().getId()), 0, "");
-            completeOrder();
+            completeOrder(true);
         });
 
         binding.ivIngCancel.setOnClickListener((v) -> {
@@ -518,7 +670,7 @@ public class VideoChatActivity extends BaseActivity<ActivityVideoChatBinding> im
                 @Override
                 public void accept(Integer integer) throws Exception {
                     if (integer == 1) {
-                        completeOrder();
+                        completeOrder(false);
                     }
                 }
             }, "确定要结束通话吗？", getString(R.string.go_on_next), "挂断").create();
@@ -660,7 +812,9 @@ public class VideoChatActivity extends BaseActivity<ActivityVideoChatBinding> im
                 if (baseBean.getData().getRun_service_tip() != null) {
                     MAPP.mapp.getM_agoraAPI().channelInviteAccept(postVideoChatBean.getChannel_name(), String.valueOf(postVideoChatBean.getUser().getId()), 0, "");
                     joinChannel();
-                    setupLocalVideo();
+                    if (videoChatFrom == VideoChatFrom.SERVICER) {
+                        setupLocalVideo();
+                    }
                 } else {
                     finish();
                 }
@@ -682,7 +836,7 @@ public class VideoChatActivity extends BaseActivity<ActivityVideoChatBinding> im
 
         if (!localViewFullFlag) {
             //服务者点击了视频区域
-            if (videoChatFrom == VideoChatFrom.SERVICER) {
+            if (videoChatFrom == VideoChatFrom.SERVICER && postVideoChatBean.getPayment_uid() != UserService.getInstance().getUser().getId()) {
                 //用户大头像还在显示状态 说明用户没有开摄像头
                 if (binding.ivAvatarBg.getVisibility() == View.VISIBLE) {
                     //点击后把用户的头像展示到右上角 把自己的视频全屏
@@ -739,7 +893,7 @@ public class VideoChatActivity extends BaseActivity<ActivityVideoChatBinding> im
                 }
             }
             //用户点击了本地视频区域
-            else if (videoChatFrom == VideoChatFrom.USER) {
+            else if (videoChatFrom == VideoChatFrom.USER || postVideoChatBean.getPayment_uid() == UserService.getInstance().getUser().getId()) {
                 //用户自己没有开摄像头 默认显示的是头像区域的情况下 点击了头像区域
                 if (!localVideoEnable) {
                     //把头像最大化，把服务者的视频 移动到右上角
@@ -819,7 +973,7 @@ public class VideoChatActivity extends BaseActivity<ActivityVideoChatBinding> im
                 }
             }
             //用户在自己的视频全屏 或者头像全屏状态下 点击了右上角的服务者视频
-            else if (videoChatFrom == VideoChatFrom.USER) {
+            else if (videoChatFrom == VideoChatFrom.USER || postVideoChatBean.getPayment_uid() == UserService.getInstance().getUser().getId()) {
                 //用户打开了视频
                 if (localVideoEnable) {
                     //先把自己的全屏视频缩小，移动到右上角
@@ -994,7 +1148,7 @@ public class VideoChatActivity extends BaseActivity<ActivityVideoChatBinding> im
             @Override
             public void onSuccess(BaseBean<TurntableConfigBean> baseBean) {
                 turntableConfigBean = baseBean.getData();
-                luckpanDialog = new LuckpanDialog.Builder(VideoChatActivity.this, userServiceId, baseBean.getData().getTurntable_config(), false, -1, videoChatFrom == VideoChatFrom.USER ? MValue.USER_ROLE_NORMAL : MValue.USER_ROLE_SERVICER).create();
+                luckpanDialog = new LuckpanDialog.Builder(VideoChatActivity.this, userServiceId, baseBean.getData().getTurntable_config(), false, -1, (videoChatFrom == VideoChatFrom.USER || postVideoChatBean.getPayment_uid() == UserService.getInstance().getUser().getId()) ? MValue.USER_ROLE_NORMAL : MValue.USER_ROLE_SERVICER).create();
                 luckpanDialog.show();
             }
 
@@ -1130,11 +1284,11 @@ public class VideoChatActivity extends BaseActivity<ActivityVideoChatBinding> im
         });
     }
 
-    private void completeOrder() {
+    private void completeOrder(boolean isre) {
         videoChatService.completeVideoChatOrder(userServiceId, new HttpObserver<VideoChatStratEndBean>() {
             @Override
             public void onSuccess(BaseBean<VideoChatStratEndBean> baseBean) {
-                if (videoChatFrom == VideoChatFrom.USER) {
+                if (videoChatFrom == VideoChatFrom.USER || postVideoChatBean.getPayment_uid() == UserService.getInstance().getUser().getId()) {
                     if (mRtcEngine != null) {
                         mRtcEngine.leaveChannel();
                     }
@@ -1143,7 +1297,12 @@ public class VideoChatActivity extends BaseActivity<ActivityVideoChatBinding> im
                     }
 
                     destoryTimeHandler();
-                    doComment();
+                    if (!isre) {
+                        doComment();
+                    } else {
+                        finish();
+                    }
+
                 } else {
                     finish();
                 }
@@ -1346,13 +1505,13 @@ public class VideoChatActivity extends BaseActivity<ActivityVideoChatBinding> im
                 @Override
                 public void run() {
 //                    onRemoteUserLeft();
-                    if (videoChatFrom == VideoChatFrom.USER) {
+                    if (videoChatFrom == VideoChatFrom.USER || postVideoChatBean.getPayment_uid() == UserService.getInstance().getUser().getId()) {
                         if (reason == 0) {
                             if (disposable != null && !disposable.isDisposed()) {
                                 disposable.dispose();
                             }
                         }
-                        completeOrder();
+                        completeOrder(false);
                     } else {
                         if (reason == 0) {
                             tipDialog = DialogUtils.getInfolDialog(VideoChatActivity.this, "对方已取消", true);
@@ -1381,19 +1540,21 @@ public class VideoChatActivity extends BaseActivity<ActivityVideoChatBinding> im
                     binding.tvReject.setVisibility(View.GONE);
                     binding.ivApply.setVisibility(View.GONE);
                     binding.tvApply.setVisibility(View.GONE);
-                    if (videoChatFrom == VideoChatFrom.USER) {
+                    if (videoChatFrom == VideoChatFrom.USER || postVideoChatBean.getPayment_uid() == UserService.getInstance().getUser().getId()) {
                         userJoined = true;
 //                        AudioUtil.playSound(R.raw.voip_calling_ring, 1, -1);
-                    } else {
+                    }
+
+                    //如果不是自己发的 加入房间成功说明开始聊了
+                    if (!isMeSendVideo) {
                         currentState = VideoCatState.ing;
                         binding.ivPublishCancel.setVisibility(View.GONE);
                         binding.ivIngCancel.setVisibility(View.VISIBLE);
                         binding.ivPan.getRoot().setVisibility(View.VISIBLE);
                         binding.bgb.setVisibility(View.GONE);
                         binding.tvWait.setVisibility(View.GONE);
-                        timeHandler.sendEmptyMessageDelayed(0, 1000);
-
                     }
+
                 }
             });
 
@@ -1420,16 +1581,25 @@ public class VideoChatActivity extends BaseActivity<ActivityVideoChatBinding> im
                         binding.ivPublishCancel.setVisibility(View.GONE);
                         binding.ivIngCancel.setVisibility(View.VISIBLE);
                         binding.tvWaitInfo.setVisibility(View.GONE);
-                        if (videoChatFrom == VideoChatFrom.USER) {
-                            binding.ivPan.getRoot().setVisibility(View.VISIBLE);
-                            binding.ivGift.getRoot().setVisibility(View.VISIBLE);
-                            binding.bgb.setVisibility(View.GONE);
+                        // 11.5注释 判断
+//                        if (videoChatFrom == VideoChatFrom.USER) {
+                        binding.ivPan.getRoot().setVisibility(View.VISIBLE);
+
+                        binding.bgb.setVisibility(View.GONE);
+
+
+//                            setRemoteVideoShow();
+                        hideTeseTip();
+//                        }
+
+                        if (videoChatFrom == VideoChatFrom.USER || postVideoChatBean.getPayment_uid() == UserService.getInstance().getUser().getId().intValue()) {
                             binding.ivAvatarBg.setVisibility(View.INVISIBLE);
                             binding.ivEnableLocalvideo.setVisibility(View.VISIBLE);
                             binding.remoteVideoViewContainer.setVisibility(View.VISIBLE);
+                            binding.ivGift.getRoot().setVisibility(View.VISIBLE);
                             binding.userAvatar.setVisibility(View.VISIBLE);
-//                            setRemoteVideoShow();
-                            hideTeseTip();
+                        } else if (videoChatFrom == VideoChatFrom.SERVICER) {
+                            setupLocalVideo();
                         }
 
                         //隐藏掉头像和昵称
@@ -1439,9 +1609,10 @@ public class VideoChatActivity extends BaseActivity<ActivityVideoChatBinding> im
 //                        AudioUtil.stop();
                         AudioUtil2.getInstance(VideoChatActivity.this).stopRinging();
                         if (!timeFlag) {
-
-                            if (videoChatFrom == VideoChatFrom.USER) {
+                            if (videoChatFrom == VideoChatFrom.USER || postVideoChatBean.getPayment_uid() == UserService.getInstance().getUser().getId().intValue()) {
                                 startOrder();
+                            } else {
+                                timeHandler.sendEmptyMessageDelayed(0, 1000);
                             }
                             timeFlag = true;
                         }
@@ -1631,7 +1802,9 @@ public class VideoChatActivity extends BaseActivity<ActivityVideoChatBinding> im
         public void handleMessage(Message msg) {
             time = time + 1;
             if (time >= 10) {
-                weakReference.get().setCancelEnable(true);
+                if (weakReference.get() != null) {
+                    weakReference.get().setCancelEnable(true);
+                }
                 removeMessages(400001);
             } else {
                 sendEmptyMessageDelayed(1, 1000);
@@ -1722,11 +1895,11 @@ public class VideoChatActivity extends BaseActivity<ActivityVideoChatBinding> im
 
         @Override
         public void onCameraChange(int currentCameraType, int cameraOrientation) {
-            if (weakReference.get() != null && !weakReference.get().userJoined) {
-                if (weakReference.get().videoChatFrom == VideoChatFrom.USER) {
-                    weakReference.get().joinChannel();
-                }
-            }
+//            if (weakReference.get() != null && !weakReference.get().userJoined) {
+//                if (weakReference.get().videoChatFrom == VideoChatFrom.USER) {
+//                    weakReference.get().joinChannel();
+//                }
+//            }
             weakReference.get().mCustomizedCameraRenderer.onCameraChange(currentCameraType, cameraOrientation);
         }
     }
@@ -1778,8 +1951,11 @@ public class VideoChatActivity extends BaseActivity<ActivityVideoChatBinding> im
     private void showTeseTip() {
         if (postVideoChatBean.getUser().getVideo_tags() != null && postVideoChatBean.getUser().getVideo_tags().size() > 0) {
             binding.includeTipTese.setInfo1("视频特色");
+            binding.includeTipTese.tvPrice.setVisibility(View.VISIBLE);
+            binding.includeTipTese.tvPrice.setText("视频通话，" + postVideoChatBean.getCoin() + "钻/分钟");
             binding.includeTipTese.setInfo2(UserInfoService.getTagsString(postVideoChatBean.getUser().getVideo_tags()));
             YoYo.with(Techniques.SlideInLeft).duration(500).playOn(binding.includeTipTese.getRoot());
+        } else {
         }
     }
 

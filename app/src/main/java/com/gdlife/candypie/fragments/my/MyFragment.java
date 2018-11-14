@@ -86,6 +86,8 @@ public class MyFragment extends BaseFragment<FragmentMyBinding> {
 
     private TipCustomDialog womenTipDialog;
 
+    private TipCustomDialog userCloseTipDialog;
+
     public static MyFragment newInstance() {
         Bundle args = new Bundle();
         MyFragment fragment = new MyFragment();
@@ -265,28 +267,26 @@ public class MyFragment extends BaseFragment<FragmentMyBinding> {
         binding.includeMyMenuCenter.sbVideoEnable.setOnCheckedChangeListener(new SwitchButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(SwitchButton view, boolean isChecked) {
-                if (UserService.getInstance().isServicer()) {
-                    if (isChecked) {
-                        if (UserService.getInstance().getUser().getVideo_chat_status() == 1) {
-                            return;
-                        }
-                        if (videoChatService == null) {
-                            videoChatService = new VideoChatService();
-                        }
-                        videoChatService.switch_video_chat_status(binding.includeMyMenuCenter.sbVideoEnable);
-                    } else {
-                        if (UserService.getInstance().getUser().getVideo_chat_status() == 0) {
-                            return;
-                        }
-                        if (videoChatService == null) {
-                            videoChatService = new VideoChatService();
-                        }
-                        videoChatService.switch_video_chat_status(binding.includeMyMenuCenter.sbVideoEnable);
+//                if (UserService.getInstance().isServicer()) {
+                if (isChecked) {
+                    if (UserService.getInstance().getUser().getVideo_chat_status() == 1) {
+                        return;
                     }
-
+                    if (videoChatService == null) {
+                        videoChatService = new VideoChatService();
+                    }
+                    videoChatService.switch_video_chat_status(binding.includeMyMenuCenter.sbVideoEnable);
                 } else {
-                    showAuthDialog();
+                    if (UserService.getInstance().getUser().getVideo_chat_status() == 0) {
+                        return;
+                    }
+                    if (videoChatService == null) {
+                        videoChatService = new VideoChatService();
+                    }
+                    videoChatService.switch_video_chat_status(binding.includeMyMenuCenter.sbVideoEnable);
                 }
+
+//                }
 
 
             }
@@ -335,7 +335,31 @@ public class MyFragment extends BaseFragment<FragmentMyBinding> {
                     binding.includeMyMenuCenter.sbVideoEnable.setChecked(true);
                 }
             } else {
-                showAuthDialog();
+//                showAuthDialog();
+                if (videoChatService == null) {
+                    videoChatService = new VideoChatService();
+                }
+                if (UserService.getInstance().getUser().getVideo_chat_status() == 1) {
+                    //                        关闭接听后无法接受主播来电 （再想想、关闭）
+                    if (userCloseTipDialog == null) {
+                        userCloseTipDialog = new TipCustomDialog.Builder(_mActivity, new Consumer<Integer>() {
+                            @Override
+                            public void accept(Integer integer) throws Exception {
+                                if (integer == 0) {
+                                    userCloseTipDialog.dismiss();
+                                } else {
+//                                    videoChatService.switch_video_chat_status(binding.includeMyMenuCenter.sbVideoEnable);
+                                    binding.includeMyMenuCenter.sbVideoEnable.setChecked(false);
+                                }
+                            }
+                        }, "关闭接听后无法接受主播来电", "再想想", "关闭").create();
+                    }
+                    userCloseTipDialog.show();
+                } else {
+//                    videoChatService.switch_video_chat_status(binding.includeMyMenuCenter.sbVideoEnable);
+                    binding.includeMyMenuCenter.sbVideoEnable.setChecked(true);
+                }
+
             }
 
         });
@@ -398,7 +422,7 @@ public class MyFragment extends BaseFragment<FragmentMyBinding> {
             binding.includeMyMenuCenter.sbVideoEnable.setEnabled(true);
             binding.includeMyMenuTop.tvVerStatus.setText(getString(R.string.ver_ok));
         } else {
-            binding.includeMyMenuCenter.sbVideoEnable.setEnabled(false);
+            binding.includeMyMenuCenter.sbVideoEnable.setEnabled(true);
             VerService.showServiceVerStatus(binding.includeMyMenuTop.tvVerStatus, UserService.getInstance().getUser());
         }
 

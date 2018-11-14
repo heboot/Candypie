@@ -12,6 +12,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.gdlife.candypie.MAPP;
 import com.gdlife.candypie.R;
 import com.gdlife.candypie.adapter.message.MessageOrderAdapter;
+import com.gdlife.candypie.adapter.message.MessageVideoOrderListAdapter;
 import com.gdlife.candypie.base.BaseFragment;
 import com.gdlife.candypie.base.BaseObserver;
 import com.gdlife.candypie.base.HttpObserver;
@@ -23,6 +24,7 @@ import com.gdlife.candypie.http.HttpCallBack;
 import com.gdlife.candypie.http.HttpClient;
 import com.gdlife.candypie.serivce.ServerService;
 import com.gdlife.candypie.serivce.UIService;
+import com.gdlife.candypie.serivce.UserService;
 import com.gdlife.candypie.utils.DialogUtils;
 import com.gdlife.candypie.utils.IntentUtils;
 import com.gdlife.candypie.utils.PermissionUtils;
@@ -31,6 +33,7 @@ import com.gdlife.candypie.utils.StringUtils;
 import com.heboot.base.BaseBean;
 import com.heboot.bean.theme.ApplyOrderBean;
 import com.heboot.bean.theme.OrderListBean;
+import com.heboot.bean.videochat.VideoChatOrderBean;
 import com.heboot.utils.PreferencesUtils;
 
 import java.util.ArrayList;
@@ -41,7 +44,7 @@ import io.reactivex.schedulers.Schedulers;
 
 public class MessageOrderFragment extends BaseFragment<FragmentMessageOrderBinding> {
 
-    private MessageOrderAdapter messageOrderAdapter;
+    private MessageVideoOrderListAdapter messageOrderAdapter;
 
     private PermissionUtils permissionUtils;
 
@@ -89,7 +92,7 @@ public class MessageOrderFragment extends BaseFragment<FragmentMessageOrderBindi
 
     @Override
     public void initData() {
-        messageOrderAdapter = new MessageOrderAdapter(R.layout.item_order_rob, new ArrayList<>());
+        messageOrderAdapter = new MessageVideoOrderListAdapter(R.layout.item_video_order, new ArrayList<>());
         binding.rList.setAdapter(messageOrderAdapter);
     }
 
@@ -125,16 +128,15 @@ public class MessageOrderFragment extends BaseFragment<FragmentMessageOrderBindi
         params.put(MKey.PAGESIZE, pageSize);
         String sign = SignUtils.doSign(params);
         params.put(MKey.SIGN, sign);
-        HttpClient.Builder.getGuodongServer().push_list(params).observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribe(new BaseObserver(new HttpCallBack<OrderListBean>() {
+        HttpClient.Builder.getGuodongServer().video_chat_list(params).observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribe(new BaseObserver(new HttpCallBack<VideoChatOrderBean>() {
             @Override
             public void onSubscribe(Disposable disposable) {
                 addDisposable(disposable);
             }
 
             @Override
-            public void onSuccess(OrderListBean orderListBean) {
+            public void onSuccess(VideoChatOrderBean orderListBean) {
 
-                DialogUtils.showIndexDialog(getActivity(), permissionUtils, PreferencesUtils.getBoolean(MAPP.mapp, MKey.FIRST_ROB, true), serverService, orderListBean.getInit_setting() == 1, false);
 
                 total = orderListBean.getTotalPages();
                 pageSize = orderListBean.getPageSize();
@@ -146,7 +148,7 @@ public class MessageOrderFragment extends BaseFragment<FragmentMessageOrderBindi
 
                 if (orderListBean != null && orderListBean.getList() != null && orderListBean.getList().size() > 0) {
                     if (messageOrderAdapter == null) {
-                        messageOrderAdapter = new MessageOrderAdapter(R.layout.item_order_rob, orderListBean.getList());
+                        messageOrderAdapter = new MessageVideoOrderListAdapter(R.layout.item_video_order, orderListBean.getList());
                         binding.rList.setAdapter(messageOrderAdapter);
                     } else {
                         if (sp == 1) {
@@ -166,7 +168,7 @@ public class MessageOrderFragment extends BaseFragment<FragmentMessageOrderBindi
                             messageOrderAdapter.notifyDataSetChanged();
                         }
                     } else {
-                        messageOrderAdapter = new MessageOrderAdapter(R.layout.item_order_rob, new ArrayList<>());
+                        messageOrderAdapter = new MessageVideoOrderListAdapter(R.layout.item_order_rob, new ArrayList<>());
                         binding.rList.setAdapter(messageOrderAdapter);
                     }
 
@@ -188,7 +190,7 @@ public class MessageOrderFragment extends BaseFragment<FragmentMessageOrderBindi
             }
 
             @Override
-            public void onError(BaseBean<OrderListBean> basebean) {
+            public void onError(BaseBean<VideoChatOrderBean> basebean) {
                 if (tipDialog != null && tipDialog.isShowing()) {
                     tipDialog.dismiss();
                 }
@@ -221,7 +223,7 @@ public class MessageOrderFragment extends BaseFragment<FragmentMessageOrderBindi
 
 //                money.setTextColor(ContextCompat.getColor(binding.getRoot().getContext(), R.color.color_898A9E));
                 if (applyOrderBean.getChat_room_config() != null && !StringUtils.isEmpty(applyOrderBean.getChat_room_config().getChannel_key())) {
-                    IntentUtils.toVideoChatActivity(getContext(), userServiceId, applyOrderBean.getChat_room_config(), VideoChatFrom.SERVICER);
+                    IntentUtils.toVideoChatActivity(getContext(), userServiceId, applyOrderBean.getChat_room_config(), UserService.getInstance().isServicer() ? VideoChatFrom.SERVICER : VideoChatFrom.USER, false);
                 } else if (s.getStatus() == MValue.ORDER_STATUS_DAICHULI) {
                     IntentUtils.intent2ChatActivity(getContext(), MValue.CHAT_PRIEX + s.getUser().getId());
                 }

@@ -5,6 +5,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.gdlife.candypie.BuildConfig;
 import com.gdlife.candypie.MAPP;
 import com.gdlife.candypie.R;
 import com.gdlife.candypie.adapter.account.AccountCoinAdapter;
@@ -31,6 +32,7 @@ import com.heboot.bean.pay.ServicePaymentBean;
 import com.heboot.event.NormalEvent;
 import com.heboot.event.PayEvent;
 import com.heboot.event.UserEvent;
+import com.heboot.utils.LogUtil;
 import com.heboot.utils.MStatusBarUtils;
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
 
@@ -239,6 +241,13 @@ public class AccountActivity extends BaseActivity<ActivityAccountBinding> {
 //            }
 //
 //        }
+
+
+        if (BuildConfig.DEBUG) {
+            binding.qrbRecharge.setVisibility(View.VISIBLE);
+        } else {
+            binding.qrbRecharge.setVisibility(View.GONE);
+        }
 
         binding.tvCouponNum.setText("（" + UserService.getInstance().getUser().getCoupons_nums() + getString(R.string.unit_coupon) + ")");
 

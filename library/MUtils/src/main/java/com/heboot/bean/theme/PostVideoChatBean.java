@@ -24,6 +24,15 @@ public class PostVideoChatBean implements Serializable {
 
     private Integer min_time;
     private Integer coin;
+    private int payment_uid;
+
+    public int getPayment_uid() {
+        return payment_uid;
+    }
+
+    public void setPayment_uid(int payment_uid) {
+        this.payment_uid = payment_uid;
+    }
 
     public String getChannel_key() {
         return channel_key;
