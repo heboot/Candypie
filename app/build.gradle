@@ -21,7 +21,7 @@ android {
         renderscriptSupportModeEnabled true
 
         ndk {
-            abiFilters "armeabi-v7a"
+            abiFilters "armeabi-v7a"//,"arm64-v8a"
         }
 
         manifestPlaceholders = [
@@ -58,12 +58,13 @@ android {
 
     buildTypes {
         release {
+            debuggable false
             signingConfig signingConfigs.releaseConfig
             buildConfigField 'String', 'OSSBUCKET', "\"candypie-img\""
             buildConfigField 'String', 'BUGLY_APPID', "\"5025108b4a\""
             buildConfigField 'String', 'CURRENT_CHANNEL', "\"oppo\""
             multiDexEnabled true
-            debuggable true
+//            debuggable true
             shrinkResources false
 
             minifyEnabled false

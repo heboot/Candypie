@@ -28,6 +28,8 @@ import com.gdlife.candypie.common.VideoUploadType;
 import com.gdlife.candypie.component.DaggerUtilsComponent;
 import com.gdlife.candypie.component.UtilsComponent;
 import com.gdlife.candypie.http.HttpClient;
+import com.gdlife.candypie.nim.NIMInitManager;
+import com.gdlife.candypie.nim.NimSDKOptionConfig;
 import com.gdlife.candypie.serivce.AuthService;
 import com.gdlife.candypie.serivce.MessageService;
 import com.gdlife.candypie.serivce.OrderService;
@@ -42,6 +44,7 @@ import com.gdlife.candypie.utils.PermissionUtils;
 import com.gdlife.candypie.utils.SDCardUtils;
 import com.gdlife.candypie.utils.SignUtils;
 import com.gdlife.candypie.utils.StringUtils;
+import com.gdlife.candypie.utils.ToastUtils;
 import com.gdlife.candypie.widget.PopupNotificationSnack;
 import com.gdlife.candypie.widget.gift.BottomVideoGiftSheetDialogHehe;
 import com.heboot.base.BaseBean;
@@ -53,10 +56,14 @@ import com.heboot.event.IMEvent;
 import com.heboot.event.MessageEvent;
 import com.heboot.event.OrderEvent;
 import com.heboot.event.VideoEvent;
+import com.heboot.faceunity_unit.fulivedemo.utils.ToastUtil;
 import com.heboot.message.MessageToAction;
 import com.heboot.rxbus.RxBus;
 import com.heboot.utils.PreferencesUtils;
 import com.mob.MobSDK;
+import com.netease.nim.uikit.business.contact.core.query.PinYin;
+import com.netease.nimlib.sdk.NIMClient;
+import com.netease.nimlib.sdk.util.NIMUtil;
 import com.tencent.bugly.crashreport.CrashReport;
 import com.umeng.commonsdk.UMConfigure;
 
@@ -127,8 +134,9 @@ public class MAPP extends Application {
         utilsComponent = DaggerUtilsComponent.create();
         utilsComponent.inject(this);
         messageService = new MessageService();
-        initUtils.registerActivityLifecycleCallbacks(this);
+//        initUtils.registerActivityLifecycleCallbacks(this);
         initUtils.initSDK(this, messageService);
+
         UMConfigure.init(MAPP.mapp, UMConfigure.DEVICE_TYPE_PHONE, "a84de7f77834b3084be55710846d4f48");
         //初始化播放器（只需调用一次即可，建议在application中初始化）
         AliVcMediaPlayer.init(getApplicationContext());
@@ -181,6 +189,33 @@ public class MAPP extends Application {
 
             }
         });
+
+        initNIM(this, messageService);
+//        // 异常处理，不需要处理时注释掉这两句即可！
+//        CrashHandler crashHandler = CrashHandler.getInstance();
+//        // 注册crashHandler
+//        crashHandler.init(getApplicationContext());
+
+    }
+
+    public void initNIM(Application application, MessageService messageService) {
+        NIMClient.init(application, null, NimSDKOptionConfig.getSDKOptions(MAPP.mapp));// NimSDKOptionConfig.getSDKOptions(MAPP.mapp)
+        if (NIMUtil.isMainProcess(application)) {
+            // 注册自定义推送消息处理，这个是可选项
+//            NIMPushClient.registerMixPushMessageHandler(new DemoMixPushMessageHandler());
+
+            // init pinyin
+            PinYin.init(application);
+            PinYin.validate();
+            // 初始化UIKit模块
+//            initUIKit(application, messageService);
+            initUtils.initUIKit(this, messageService);
+            // 初始化消息提醒
+            NIMClient.toggleNotification(false);
+            // 云信sdk相关业务初始化
+            NIMInitManager.getInstance().init(true);
+        }
+
 
     }
 

@@ -56,17 +56,12 @@ import io.reactivex.schedulers.Schedulers;
 public class InitUtils {
 
 
-    public void registerActivityLifecycleCallbacks(final MAPP mapp) {
-        mapp.activityLinkedList = new LinkedList<>();
-    }
-
-
     public void initSDK(Application application, MessageService messageService) {
-//        initLeakCanary(application);
-//        initQuPai();
+//        initLeakCanary(application);需要的时候打开
+//        initQuPai(); //需要的时候打开
         initMeiyan();
         initBugly(application);
-        initNIM(application, messageService);
+//        initNIM(application, messageService);
         initCrash();
     }
 
@@ -108,7 +103,7 @@ public class InitUtils {
 
     }
 
-    private void initUIKit(Application application, MessageService messageService) {
+    public void initUIKit(Application application, MessageService messageService) {
         // 初始化
         NimUIKit.init(application, buildUIKitOptions());
 
@@ -264,7 +259,7 @@ public class InitUtils {
 //        Observable.create(new ObservableOnSubscribe<Object>() {
 //            @Override
 //            public void subscribe(ObservableEmitter<Object> emitter) throws Exception {
-        CrashReport.initCrashReport(context, BuildConfig.BUGLY_APPID, BuildConfig.DEBUG);
+        CrashReport.initCrashReport(context, BuildConfig.BUGLY_APPID, false);
 //            }
 //        }).subscribe();
     }

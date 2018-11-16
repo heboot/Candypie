@@ -17,7 +17,7 @@ android {
 
     buildTypes {
         release {
-            debuggable config.DEBUGENABLE
+//            debuggable config.DEBUGENABLE
         }
         debug {
             debuggable true

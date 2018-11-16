@@ -19,7 +19,7 @@ android {
             buildConfigField 'String', 'URL_VER', "\"\""
             buildConfigField 'String', 'HELP_URL', "\"http://www.guodonglife.cn/public/static/help/\""
             minifyEnabled config.MINIFY_DISABLED
-            debuggable config.DEBUGENABLE
+//            debuggable config.DEBUGENABLE
             buildConfigField 'Integer', 'LOC_TIME', "300000"
             buildConfigField 'boolean', 'LOGDEBUG', "true"
 //            signingConfig signingConfigs.releaseConfig
