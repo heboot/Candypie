@@ -595,7 +595,7 @@
 
         <meta-data
             android:name="UMENG_CHANNEL"
-            android:value="guodong" />
+            android:value="vivo" />
 
         <meta-data
             android:name="UMENG_APPKEY"

@@ -147,7 +147,7 @@ public class SignUtils {
         }
 
 
-        params.put(MKey.TO_CHANNEL, StringUtils.isEmpty(msg) ? "guddong" : msg);
+        params.put(MKey.TO_CHANNEL, StringUtils.isEmpty(msg) ? "guodong" : msg);
 
         params.put(MKey.LAN, com.gdlife.candypie.utils.MiscUtils.getLanguage());
 
