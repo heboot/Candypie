@@ -648,7 +648,6 @@ public class VideoChatActivity extends BaseActivity<ActivityVideoChatBinding> im
                     checkVideoService();
                 }
             } else {
-
                 checkVideoService();
             }
 
