@@ -28,23 +28,44 @@ public class IndexUserWhite3ItemDecoration extends RecyclerView.ItemDecoration {
     @Override
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
         int position = parent.getChildAdapterPosition(view); // item position
-        if (includeEdge) {
-            if (position > 0) {
+        if (spanCount == 2) {
+            if (includeEdge) {
+                if (position > 0) {
+                    if (position % 2 == 0) {
+                        outRect.right = spacing;
+                    } else {
+                        outRect.left = spacing;
+                        outRect.right = spacing;
+                    }
+                }
+            } else {
                 if (position % 2 == 0) {
+                    outRect.left = spacing;
                     outRect.right = spacing;
                 } else {
-                    outRect.left = spacing;
                     outRect.right = spacing;
                 }
             }
-        } else {
-            if (position % 2 == 0) {
-                outRect.left = spacing;
-                outRect.right = spacing;
+        } else if (spanCount == 3) {
+            if (includeEdge) {
+                if (position > 0) {
+                    if (position % 3 == 0) {
+                        outRect.right = spacing;
+                    } else {
+                        outRect.left = spacing;
+                        outRect.right = spacing;
+                    }
+                }
             } else {
-                outRect.right = spacing;
+                if (position % 3 == 0) {
+                    outRect.left = spacing;
+                    outRect.right = spacing;
+                } else {
+                    outRect.right = spacing;
+                }
             }
         }
+
     }
 
     //

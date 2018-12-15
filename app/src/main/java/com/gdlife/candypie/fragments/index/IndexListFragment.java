@@ -95,12 +95,24 @@ public class IndexListFragment extends BaseFragment<FragmentIndexListBinding> {
 
         pageName = getArguments().getString(MKey.NAME);
 
-        staggeredGridLayoutManager = new GridLayoutManager(_mActivity, 2);
+
+        /**
+         * 新人为三列显示
+         */
+        if (pageName.equals("n")) {
+            staggeredGridLayoutManager = new GridLayoutManager(_mActivity, 3);
+        } else {
+            //测完改成2
+            staggeredGridLayoutManager = new GridLayoutManager(_mActivity, 2);
+        }
+
 
         binding.rvList.setLayoutManager(staggeredGridLayoutManager);
 
         if (pageName.equals("a")) {
             binding.rvList.addItemDecoration(new IndexUserWhite3ItemDecoration(2, getResources().getDimensionPixelOffset(R.dimen.x3), true));
+        } else if (pageName.equals("n")) {
+            binding.rvList.addItemDecoration(new IndexUserWhite3ItemDecoration(3, getResources().getDimensionPixelOffset(R.dimen.x3), false));
         } else {
             binding.rvList.addItemDecoration(new IndexUserWhite3ItemDecoration(2, getResources().getDimensionPixelOffset(R.dimen.x3), false));
         }
