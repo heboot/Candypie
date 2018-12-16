@@ -56,6 +56,7 @@ import com.gdlife.candypie.activitys.user.SetPriceActivity;
 import com.gdlife.candypie.activitys.user.TagUserListActivity;
 import com.gdlife.candypie.activitys.user.UserBlackListActivity;
 import com.gdlife.candypie.activitys.user.UserFavsListActivity;
+import com.gdlife.candypie.activitys.user.UserFollowActivity;
 import com.gdlife.candypie.activitys.user.UserInfoActivity;
 import com.gdlife.candypie.activitys.user.UserInfoInputActivity;
 import com.gdlife.candypie.activitys.user.UserPageActivity;
@@ -639,6 +640,16 @@ public class IntentUtils {
         context.startActivity(intent);
     }
 
+    public static void toUserFollowActivity(Context context, User user,int num) {
+        Intent intent = new Intent(context, UserFollowActivity.class);
+        intent.putExtra(MKey.USER, user);
+        intent.putExtra(MKey.NUM,num);
+        context.startActivity(intent);
+    }
+
+
+
+
     public static void toServerCancelCauseActivity(Context context, String userServiceId) {
         Intent intent = new Intent(context, ServerCancelCauseActivity.class);
         intent.putExtra(MKey.USER_SERVICE_ID, userServiceId);
@@ -743,6 +754,7 @@ public class IntentUtils {
     public static void toNav() {
 
     }
+
 
 
 //    public static void toForgetCodeActivity(Context context, String mobile, int interval_time) {

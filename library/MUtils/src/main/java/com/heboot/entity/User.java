@@ -13,6 +13,8 @@ import com.heboot.bean.user.UserProfileBean;
 import com.heboot.bean.user.UserSkillBean;
 import com.heboot.bean.video.HomepageVideoBean;
 import com.heboot.bean.video.UserVideosBean;
+import com.heboot.entity.user.FollowLoveConfig;
+import com.heboot.entity.user.FollowLoveListModel;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -153,6 +155,37 @@ public class User implements Serializable {
 
     //三方登录
     private HashMap syncMap;
+
+    //守护配置
+    private FollowLoveConfig follow_love_config;
+
+    private FollowLoveListModel follow_love_list;
+
+    private int nums;
+
+    public int getNums() {
+        return nums;
+    }
+
+    public void setNums(int nums) {
+        this.nums = nums;
+    }
+
+    public FollowLoveListModel getFollow_love_list() {
+        return follow_love_list;
+    }
+
+    public void setFollow_love_list(FollowLoveListModel follow_love_list) {
+        this.follow_love_list = follow_love_list;
+    }
+
+    public FollowLoveConfig getFollow_love_config() {
+        return follow_love_config;
+    }
+
+    public void setFollow_love_config(FollowLoveConfig follow_love_config) {
+        this.follow_love_config = follow_love_config;
+    }
 
     public HashMap getSyncMap() {
         return syncMap;

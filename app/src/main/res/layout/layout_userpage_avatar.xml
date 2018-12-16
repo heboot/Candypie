@@ -58,8 +58,8 @@
             android:id="@+id/tv_mt_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/y15"
             android:layout_marginLeft="@dimen/x16"
+            android:layout_marginBottom="@dimen/y15"
             android:text="111"
             android:textColor="@color/white"
             android:textSize="@dimen/x18"
@@ -82,13 +82,28 @@
             app:layout_constraintLeft_toRightOf="@+id/tv_mt_id"
             app:layout_constraintTop_toTopOf="@+id/tv_mt_id" />
 
+
+        <TextView
+            android:id="@+id/tv_follow"
+            android:layout_width="@dimen/x80"
+            android:layout_height="@dimen/y36"
+            android:layout_marginRight="@dimen/x16"
+            android:layout_marginBottom="@dimen/y8"
+            android:background="@drawable/bg_gradient_fav"
+            android:gravity="center"
+            android:text="守护Ta"
+            android:textSize="@dimen/x16"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toTopOf="@+id/include_fav"
+            app:layout_constraintRight_toRightOf="parent"></TextView>
+
         <include
             android:id="@+id/include_fav"
             layout="@layout/layout_userpage_avatar_fav"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/y26"
             android:layout_marginRight="@dimen/x16"
+            android:layout_marginBottom="@dimen/y26"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent"></include>
 

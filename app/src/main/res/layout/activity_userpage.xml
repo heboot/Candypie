@@ -60,6 +60,15 @@
                             app:layout_constraintTop_toBottomOf="@+id/include_avatar"></include>
 
                         <include
+                            android:id="@+id/include_follow"
+                            layout="@layout/layout_userpage_visit"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/include_info"></include>
+
+                        <include
                             android:id="@+id/include_gift"
                             layout="@layout/layout_userpage_gift"
                             android:layout_width="match_parent"
@@ -67,7 +76,7 @@
                             android:layout_marginTop="@dimen/y20"
                             app:layout_constraintLeft_toLeftOf="parent"
                             app:layout_constraintRight_toRightOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/include_avatar"></include>
+                            app:layout_constraintTop_toBottomOf="@+id/include_follow"></include>
 
                         <include
                             android:id="@+id/include_abst"
@@ -122,8 +131,8 @@
                     android:id="@+id/iv_share"
                     android:layout_width="@dimen/x30"
                     android:layout_height="@dimen/y30"
-                    android:layout_marginRight="@dimen/x16"
                     android:layout_marginTop="@dimen/y25"
+                    android:layout_marginRight="@dimen/x16"
                     android:background="@drawable/icon_share_white"
                     app:layout_constraintBottom_toBottomOf="@+id/include_toolbar"
                     app:layout_constraintRight_toRightOf="parent"
@@ -133,8 +142,8 @@
                     android:id="@+id/iv_more"
                     android:layout_width="@dimen/x30"
                     android:layout_height="@dimen/y30"
-                    android:layout_marginRight="@dimen/x16"
                     android:layout_marginTop="@dimen/y25"
+                    android:layout_marginRight="@dimen/x16"
                     android:background="@drawable/icon_homepage_more_white"
                     app:layout_constraintBottom_toBottomOf="@+id/include_toolbar"
                     app:layout_constraintRight_toLeftOf="@+id/iv_share"
@@ -177,14 +186,14 @@
                     app:layout_constraintRight_toRightOf="parent"></include>
 
                 <View
-                    android:visibility="gone"
                     android:id="@+id/v_tip_msg"
                     android:layout_width="@dimen/x200"
                     android:layout_height="@dimen/y40"
-                    android:layout_marginBottom="@dimen/y50"
                     android:layout_marginLeft="@dimen/x8"
                     android:layout_marginRight="@dimen/x10"
+                    android:layout_marginBottom="@dimen/y50"
                     android:background="@drawable/tip_userpage_video"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintRight_toRightOf="parent"></View>
 

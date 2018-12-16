@@ -11,6 +11,15 @@ public class BaseBean<T> {
     private String time;
     private String sign_key;
     private T data;
+    private String service_time;
+
+    public String getService_time() {
+        return service_time;
+    }
+
+    public void setService_time(String service_time) {
+        this.service_time = service_time;
+    }
 
     public int getError_code() {
         return error_code;

@@ -92,7 +92,7 @@ public class UserService {
         if (puser == null || user == null) {
             return false;
         }
-        if (puser.getId() != null && puser.getId() == user.getId()) {
+        if (puser.getId() != null && puser.getId().intValue() == user.getId().intValue()) {
             return true;
         }
         return false;

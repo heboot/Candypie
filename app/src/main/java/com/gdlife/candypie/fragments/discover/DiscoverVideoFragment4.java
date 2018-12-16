@@ -621,6 +621,7 @@ public class DiscoverVideoFragment4 extends BaseFragment<FragmentDiscoverVideoBi
     private boolean locking = false;
 
     private void checkLock() {
+        binding.includeBottom.tvPrice.setText("聊天" + user.getVideo_chat_price() + "钻/分钟");
         if (currentShowIndex == lockTioIndex) {
             return;
         }

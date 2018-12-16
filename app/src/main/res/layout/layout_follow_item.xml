@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/y13"
+        android:paddingRight="@dimen/x9">
+
+
+        <TextView
+            android:id="@+id/tv_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x16"
+            android:gravity="center"
+            android:textColor="@color/color_343445"
+            android:textSize="@dimen/x16"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_avatar"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/iv_avatar" />
+
+        <com.qmuiteam.qmui.widget.QMUIRadiusImageView
+            android:id="@+id/iv_avatar"
+            android:layout_width="@dimen/x50"
+            android:layout_height="@dimen/y50"
+            android:layout_marginLeft="@dimen/x54"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:qmui_border_width="0dp"
+            app:qmui_is_circle="true" />
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x10"
+            android:layout_marginTop="@dimen/y3"
+            android:textColor="@color/color_343445"
+            android:textSize="@dimen/x17"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toRightOf="@+id/iv_avatar"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <include
+            android:id="@+id/include_sexage"
+            layout="@layout/layout_sex_age"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x4"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_name"
+            app:layout_constraintLeft_toRightOf="@+id/tv_name"
+            app:layout_constraintTop_toTopOf="parent"></include>
+
+
+        <TextView
+            android:id="@+id/tv_abst"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/y2"
+            android:layout_marginRight="@dimen/x16"
+            android:ellipsize="end"
+            android:gravity="left"
+            android:maxLines="1"
+            android:textColor="@color/color_898A9E"
+            android:textSize="@dimen/x12"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="@+id/tv_name"
+            app:layout_constraintRight_toLeftOf="@+id/llyt_right"
+            app:layout_constraintTop_toBottomOf="@+id/tv_name" />
+
+
+        <LinearLayout
+            android:id="@+id/llyt_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/y7"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tv_action"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y2"
+                android:gravity="center"
+                android:text="守护符数量"
+                android:textColor="@color/color_898A9E"
+                android:textSize="@dimen/x12"
+                android:textStyle="bold"
+                app:layout_constraintRight_toRightOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/y3"
+                android:text="3000000"
+                android:textColor="@color/color_343445"
+                android:textSize="@dimen/x14"
+                android:textStyle="bold"
+                app:layout_constraintRight_toRightOf="parent" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="@dimen/y1"
+            android:layout_marginTop="@dimen/y14"
+            android:background="@color/line_color"
+            app:layout_constraintLeft_toLeftOf="@+id/tv_name"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_avatar"></View>
+
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

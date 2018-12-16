@@ -11,7 +11,7 @@
             android:id="@+id/v_unfav_bg"
             android:layout_width="@dimen/x80"
             android:layout_height="@dimen/y36"
-            android:background="@drawable/bg_gradient_fav"></View>
+            android:background="@drawable/bg_gradient_fav_themecolor"></View>
 
         <View
             android:id="@+id/iv_unfav"
@@ -43,7 +43,7 @@
             android:background="@drawable/bg_rect_white_22"
             android:gravity="center"
             android:text="已关注"
-            android:textColor="@color/color_FF5252"
+            android:textColor="@color/theme_color"
             android:textSize="@dimen/x16"
             android:visibility="gone"
             app:layout_constraintLeft_toLeftOf="parent"

@@ -535,6 +535,14 @@ public interface HttpClient {
     @POST("order/order/video_chat_list")
     Observable<BaseBean<VideoChatOrderBean>> video_chat_list(@FieldMap Map<String, Object> params);
 
+    @FormUrlEncoded
+    @POST("app/user_follow_love/follow_love")
+    Observable<BaseBean<VideoChatOrderBean>> follow_love(@FieldMap Map<String, Object> params);
+
+    @FormUrlEncoded
+    @POST("app/user_follow_love/follow_love_list")
+    Observable<BaseBean<UserVisitListBean>> follow_love_list(@FieldMap Map<String, Object> params);
+
 
 //    /**
 

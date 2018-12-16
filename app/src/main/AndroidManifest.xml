@@ -109,6 +109,9 @@
             android:screenOrientation="portrait"></activity>
 
         <activity
+            android:name=".activitys.user.UserFollowActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
             android:name=".activitys.theme.ThemeListActivity"
             android:screenOrientation="portrait"></activity>
 

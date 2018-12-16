@@ -77,6 +77,8 @@ public class MyBottomMenuAdapter extends BaseQuickAdapter<MyBottomMenuModel, Bas
                 IntentUtils.toReportActivity(helper.itemView.getContext(), null, ReportFromType.FEEBACK);
             } else if (item.getName().equals("解锁视频")) {
                 IntentUtils.toUserUnlockVideosActivity(helper.itemView.getContext());
+            } else if (item.getName().equals("我的守护")) {
+                IntentUtils.toUserFollowActivity(helper.itemView.getContext(), UserService.getInstance().getUser(), UserService.getInstance().getUser().getNums());
             }
         });
     }

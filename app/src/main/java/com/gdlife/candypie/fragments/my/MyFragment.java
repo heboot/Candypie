@@ -524,8 +524,9 @@ public class MyFragment extends BaseFragment<FragmentMyBinding> {
         MyBottomMenuModel fav = new MyBottomMenuModel("我的收藏", R.drawable.icon_my_menu_fav);
         myBottomMenuModels.add(fav);
 
-        MyBottomMenuModel setting = new MyBottomMenuModel("设置", R.drawable.icon_my_menu_setting);
-        myBottomMenuModels.add(setting);
+        MyBottomMenuModel foller = new MyBottomMenuModel("我的守护", R.drawable.icon_follow_me);
+        myBottomMenuModels.add(foller);
+
 
         MyBottomMenuModel zhinan = new MyBottomMenuModel("新手指南", R.drawable.icon_my_menu_zhinan);
         myBottomMenuModels.add(zhinan);
@@ -535,6 +536,10 @@ public class MyFragment extends BaseFragment<FragmentMyBinding> {
 
         MyBottomMenuModel feeback = new MyBottomMenuModel("意见反馈", R.drawable.icon_my_menu_feedback);
         myBottomMenuModels.add(feeback);
+
+        MyBottomMenuModel setting = new MyBottomMenuModel("设置", R.drawable.icon_my_menu_setting);
+        myBottomMenuModels.add(setting);
+
 
         binding.includeMyMenuBottom.rvList.setLayoutManager(new GridLayoutManager(_mActivity, 3) {
             @Override

@@ -15,6 +15,7 @@ import com.gdlife.candypie.MAPP;
 import com.gdlife.candypie.R;
 import com.gdlife.candypie.adapter.discover.HomepageBottomVideosAdapter;
 import com.gdlife.candypie.adapter.index.IndexVisitAdapter;
+import com.gdlife.candypie.adapter.user.UserFollowAdapter;
 import com.gdlife.candypie.adapter.user.UserGiftAdapter;
 import com.gdlife.candypie.base.BaseFragment;
 import com.gdlife.candypie.base.HttpObserver;
@@ -27,21 +28,27 @@ import com.gdlife.candypie.http.HttpClient;
 import com.gdlife.candypie.serivce.UIService;
 import com.gdlife.candypie.serivce.UserService;
 import com.gdlife.candypie.serivce.theme.VideoChatService;
+import com.gdlife.candypie.serivce.user.FollowService;
 import com.gdlife.candypie.serivce.user.UserPageService;
 import com.gdlife.candypie.utils.DialogUtils;
 import com.gdlife.candypie.utils.ImageUtils;
 import com.gdlife.candypie.utils.IntentUtils;
 import com.gdlife.candypie.utils.PermissionUtils;
 import com.gdlife.candypie.utils.SignUtils;
+import com.gdlife.candypie.utils.StringUtils;
 import com.gdlife.candypie.widget.common.BottomSheetDialog;
 import com.gdlife.candypie.widget.common.ShareDialog;
+import com.gdlife.candypie.widget.dialog.follow.FollowTipDialog;
 import com.gdlife.candypie.widget.gift.BottomVideoGiftSheetDialogHehe;
 import com.heboot.base.BaseBean;
 import com.heboot.base.BaseBeanEntity;
 import com.heboot.bean.user.UserInfoBean;
 import com.heboot.bean.video.HomepageVideoBean;
+import com.heboot.dialog.TipDialog;
 import com.heboot.entity.User;
 import com.heboot.event.DiscoverEvent;
+import com.heboot.event.VideoChatEvent;
+import com.heboot.rxbus.RxBus;
 import com.heboot.utils.LogUtil;
 import com.heboot.utils.MStatusBarUtils;
 import com.qmuiteam.qmui.util.QMUIStatusBarHelper;
@@ -85,6 +92,16 @@ public class HomepageBottomFragment extends BaseFragment<ActivityUserpageBinding
     private UserPageService userPageService = new UserPageService();
 
     private boolean flag = false;
+
+    //守护弹窗
+    private FollowTipDialog followTipDialog;
+
+    private HttpObserver<BaseBeanEntity> followObs;
+
+    private com.gdlife.candypie.widget.common.TipDialog coinDialog;
+
+    private FollowService followService;
+
 
     @SuppressLint("ValidFragment")
     public HomepageBottomFragment(User other) {
@@ -243,6 +260,73 @@ public class HomepageBottomFragment extends BaseFragment<ActivityUserpageBinding
 
             }
         });
+        binding.includeAvatar.tvFollow.setOnClickListener((v) -> {
+            if (UserService.getInstance().checkTourist(getActivity())) {
+                return;
+            }
+            if (followTipDialog == null) {
+                if (followObs == null) {
+                    followObs = new HttpObserver<BaseBeanEntity>() {
+                        @Override
+                        public void onSuccess(BaseBean<BaseBeanEntity> baseBean) {
+                            if (!StringUtils.isEmpty(baseBean.getService_time())) {
+                                RxBus.getInstance().post(new VideoChatEvent.UPDATE_VIDEO_SERVICE_TIME_ENENT(baseBean.getService_time()));
+                            }
+                            if (followTipDialog != null && followTipDialog.isVisible()) {
+                                followTipDialog.dismiss();
+                            }
+                            if (tipDialog != null) {
+                                tipDialog.dismiss();
+                            }
+                            tipDialog = DialogUtils.getSuclDialog(_mActivity, baseBean.getMessage(), true);
+                            tipDialog.show();
+                        }
+
+                        @Override
+                        public void onError(BaseBean<BaseBeanEntity> baseBean) {
+                            if (followTipDialog != null && followTipDialog.isVisible()) {
+                                followTipDialog.dismiss();
+                            }
+                            if (tipDialog != null) {
+                                tipDialog.dismiss();
+                            }
+                            tipDialog = DialogUtils.getFailDialog(_mActivity, baseBean.getMessage(), true);
+                            tipDialog.show();
+                        }
+                    };
+                }
+                followTipDialog = new FollowTipDialog(String.valueOf(user.getId()), user.getFollow_love_config().getPrice(), new Consumer<Integer>() {
+                    @Override
+                    public void accept(Integer integer) throws Exception {
+                        if (StringUtils.isEmpty(UserService.getInstance().getUser().getCoin()) || Integer.parseInt(UserService.getInstance().getUser().getCoin()) < Integer.parseInt(user.getFollow_love_config().getPrice())) {
+                            // TODO: 2018/3/22 提示去充值钻石
+                            if (coinDialog == null) {
+                                coinDialog = new com.gdlife.candypie.widget.common.TipDialog.Builder(getContext(), new Consumer<Integer>() {
+                                    @Override
+                                    public void accept(Integer integer) throws Exception {
+                                        if (integer == 1) {
+                                            IntentUtils.toAccountActivity(MAPP.mapp.getCurrentActivity());
+                                        }
+
+                                    }
+                                }, getString(R.string.new_video_service_coin_tip_title), "充值").create();
+                                coinDialog.show();
+                            } else {
+                                coinDialog.show();
+                            }
+                        } else {
+                            if (followService == null) {
+                                followService = new FollowService();
+                            }
+                            followService.doFollowLove(String.valueOf(user.getId()), followObs);
+                        }
+                    }
+                });
+            }
+            followTipDialog.show(getFragmentManager(), "follow");
+
+        });
+
         binding.vMore.setOnClickListener((v) -> {
             if (UserService.getInstance().checkTourist()) {
                 return;
@@ -428,6 +512,7 @@ public class HomepageBottomFragment extends BaseFragment<ActivityUserpageBinding
         initTop();
         initUserVideo();
         initInfo();
+        initFollowList();
         initUserGifts();
         initUserAbst();
         initVisitUsers();
@@ -436,6 +521,11 @@ public class HomepageBottomFragment extends BaseFragment<ActivityUserpageBinding
     }
 
     private void initUserVideo() {
+        //守护
+        //如果守护不可用就不显示了
+        if (user.getFollow_love_config() == null || user.getFollow_love_config().getStatus() == 0) {
+            binding.includeAvatar.tvFollow.setVisibility(View.GONE);
+        }
 
         if (user.getUser_video() != null && user.getUser_video().getList() != null && user.getUser_video().getList().size() > 0) {
             binding.includeVideos.includeTitle.setTitle(user.getUser_video().getTitle());
@@ -595,6 +685,33 @@ public class HomepageBottomFragment extends BaseFragment<ActivityUserpageBinding
             uiService.initMeetSelectedTagsLayout(user.getProfile().getList(), binding.includeInfo.qfytContainerMeetTag, getResources().getDimensionPixelOffset(R.dimen.y12), getResources().getDimensionPixelOffset(R.dimen.x10));
         }
 
+    }
+
+    /**
+     * 初始化最近守护
+     */
+    private void initFollowList() {
+        if (user.getFollow_love_list() != null && user.getFollow_love_list().getList() != null && user.getFollow_love_list().getList().size() > 0) {
+            binding.includeFollow.getRoot().setVisibility(View.VISIBLE);
+
+            binding.includeFollow.includeVisit.rvList.setLayoutManager(new LinearLayoutManager(_mActivity, LinearLayoutManager.HORIZONTAL, false) {
+                @Override
+                public boolean canScrollHorizontally() {
+                    return false;
+                }
+            });
+
+            binding.includeFollow.includeVisit.rvList.setAdapter(new UserFollowAdapter(user.getFollow_love_list().getList(), user));
+
+            binding.includeFollow.includeVisit.tvTitle.setText(user.getFollow_love_list().getTitle());
+            binding.includeFollow.includeVisit.tvSubTitle.setVisibility(View.VISIBLE);
+            binding.includeFollow.includeVisit.tvSubTitle.setText("(" + user.getFollow_love_list().getNums() + ")");
+            binding.includeFollow.includeVisit.getRoot().setOnClickListener((v) -> {
+                IntentUtils.toUserFollowActivity(_mActivity, user, user.getFollow_love_list().getNums());
+            });
+        } else {
+            binding.includeFollow.getRoot().setVisibility(View.GONE);
+        }
     }
 //
 
