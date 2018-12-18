@@ -33,7 +33,12 @@ public class IndexUsersAdapter3 extends BaseQuickAdapter<User, BaseViewHolder> {
     public IndexUsersAdapter3(int layoutResId, List data, String name) {
         super(layoutResId, data);
         this.name = name;
-        normalHeight = (QMUIDisplayHelper.getScreenWidth(MAPP.mapp) - MAPP.mapp.getResources().getDimensionPixelOffset(R.dimen.x9)) / 2;
+        if (name.equals("n")) {
+            normalHeight = (QMUIDisplayHelper.getScreenWidth(MAPP.mapp) - MAPP.mapp.getResources().getDimensionPixelOffset(R.dimen.x9)) / 3;
+        } else {
+            normalHeight = (QMUIDisplayHelper.getScreenWidth(MAPP.mapp) - MAPP.mapp.getResources().getDimensionPixelOffset(R.dimen.x9)) / 2;
+        }
+
     }
 
 

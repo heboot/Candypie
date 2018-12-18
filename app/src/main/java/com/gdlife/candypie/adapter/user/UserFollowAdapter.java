@@ -43,7 +43,7 @@ public class UserFollowAdapter extends BaseRecyclerViewAdapter {
         public void onBindViewHolder(final User s, int position) {
             binding.setUser(s);
             binding.getRoot().setOnClickListener((v) -> {
-                IntentUtils.toUserFollowActivity(binding.getRoot().getContext(), s,s.getFollow_love_list().getNums());
+                IntentUtils.toUserFollowActivity(binding.getRoot().getContext(), toUser, toUser.getFollow_love_list().getNums());
             });
         }
 

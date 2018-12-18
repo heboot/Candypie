@@ -598,7 +598,7 @@
 
         <meta-data
             android:name="UMENG_CHANNEL"
-            android:value="vivo" />
+            android:value="tencent" />
 
         <meta-data
             android:name="UMENG_APPKEY"
