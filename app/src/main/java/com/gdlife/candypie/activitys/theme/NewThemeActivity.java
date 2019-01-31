@@ -1,6 +1,7 @@
 package com.gdlife.candypie.activitys.theme;
 
 import android.animation.ObjectAnimator;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import com.alibaba.fastjson.JSON;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
+import com.gdlife.candypie.MAPP;
 import com.gdlife.candypie.R;
 import com.gdlife.candypie.adapter.theme.NewThemeRecommendUserAdapter;
 import com.gdlife.candypie.base.BaseActivity;
@@ -558,17 +560,32 @@ public class NewThemeActivity extends BaseActivity<ActivityNewTheme2Binding> imp
                 @Override
                 public void onSuccess(BaseBean<PostThemeBean> baseBean) {
                     PostThemeBean resultBean = baseBean.getData();
+                    tipDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                        @Override
+                        public void onDismiss(DialogInterface dialog) {
+
+                        }
+                    });
                     tipDialog.dismiss();
-                    if (resultBean.getIs_first_order() == 1) {
-                        serverService.showFirstServerDialog(new WeakReference<NewThemeActivity>(NewThemeActivity.this), resultBean, resultBean.getFirst_order_rate(), resultBean.getPayable_amount());
-                    } else {
-                        IntentUtils.toPayActivity(NewThemeActivity.this, resultBean, selectUser == null ? PayFrom.NEW_SERVICE : PayFrom.NEW_SERVICE_ONE_USER, false);
-                        /**
-                         * 发单后不关闭发单页面
-                         * 2018.05.11 10:38
-                         */
-//                        finish();
-                    }
+
+                    tipDialog = DialogUtils.getSuclDialog(NewThemeActivity.this, "发布成功，服务者正在应约中...", true);
+                    tipDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                        @Override
+                        public void onDismiss(DialogInterface dialog) {
+                            finish();
+                        }
+                    });
+                    tipDialog.show();
+//                    if (resultBean.getIs_first_order() == 1) {
+//                        serverService.showFirstServerDialog(new WeakReference<NewThemeActivity>(NewThemeActivity.this), resultBean, resultBean.getFirst_order_rate(), resultBean.getPayable_amount());
+//                    } else {
+//                        IntentUtils.toPayActivity(NewThemeActivity.this, resultBean, selectUser == null ? PayFrom.NEW_SERVICE : PayFrom.NEW_SERVICE_ONE_USER, false);
+//                        /**
+//                         * 发单后不关闭发单页面
+//                         * 2018.05.11 10:38
+//                         */
+////                        finish();
+//                    }
                 }
 
                 @Override
@@ -576,6 +593,7 @@ public class NewThemeActivity extends BaseActivity<ActivityNewTheme2Binding> imp
                     if (tipDialog != null) {
                         tipDialog.dismiss();
                     }
+
 
                     if (baseBean.getData() != null && baseBean.getData().getRun_service_tip() != null && !StringUtils.isEmpty(baseBean.getData().getRun_service_tip().getUser_service_id())) {
                         ServerService serverService = new ServerService();
@@ -597,10 +615,20 @@ public class NewThemeActivity extends BaseActivity<ActivityNewTheme2Binding> imp
                         tipDialog = DialogUtils.getFailDialog(NewThemeActivity.this, baseBean.getMessage(), true);
                         tipDialog.show();
                     }
+
                 }
             });
 
         } else {
+            if (!permissionUtils.hasCameraPermission(MAPP.mapp)) {
+                tipDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialog) {
+
+                    }
+                });
+                tipDialog.dismiss();
+            }
             /**
              * 视频聊天
              */
@@ -608,20 +636,35 @@ public class NewThemeActivity extends BaseActivity<ActivityNewTheme2Binding> imp
                 @Override
                 public void onSuccess(BaseBean<PostThemeBean> baseBean) {
                     PostThemeBean postThemeBean = baseBean.getData();
+                    tipDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                        @Override
+                        public void onDismiss(DialogInterface dialog) {
+
+                        }
+                    });
                     tipDialog.dismiss();
                     if (selectUser != null) {
                         postThemeBean.setServiceId(listBean.getId());
-                        IntentUtils.toVideoChatActivity(NewThemeActivity.this, postThemeBean.getUser_service_id(), postThemeBean.getChat_room_config(),UserService.getInstance().isServicer() ? VideoChatFrom.SERVICER : VideoChatFrom.USER, true);
+                        IntentUtils.toVideoChatActivity(NewThemeActivity.this, postThemeBean.getUser_service_id(), postThemeBean.getChat_room_config(), UserService.getInstance().isServicer() ? VideoChatFrom.SERVICER : VideoChatFrom.USER, true);
                         finish();
                     }
                 }
 
                 @Override
                 public void onError(BaseBean<PostThemeBean> baseBean) {
+                    if (tipDialog != null && tipDialog.isShowing()) {
+                        tipDialog.dismiss();
+                    }
                     if (baseBean.getError_code() == MCode.ERROR_CODE.SERVICE_CANCEL_MORE) {
                         serverService.showCancelMoreDialog(NewThemeActivity.this, baseBean.getData().getExpire_time());
                     } else {
                         tipDialog = DialogUtils.getFailDialog(NewThemeActivity.this, baseBean.getMessage(), true);
+                        tipDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                            @Override
+                            public void onDismiss(DialogInterface dialog) {
+                                finish();
+                            }
+                        });
                         tipDialog.show();
                     }
                 }

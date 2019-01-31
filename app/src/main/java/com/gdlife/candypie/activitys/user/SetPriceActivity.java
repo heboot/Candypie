@@ -94,10 +94,12 @@ public class SetPriceActivity extends BaseActivity<ActivitySetPriceBinding> {
 
 
                 if (baseBean.getData().getVideo_chat_config() != null) {
-                    ImageUtils.showAvatar(binding.ivImgVideo, setPriceInitBean.getVideo_chat_config().getIcon());
-                    if (!StringUtils.isEmpty(baseBean.getData().getVideo_chat_config().getPrice())) {
-                        currentVideoPrice = baseBean.getData().getVideo_chat_config().getPrice();
-                        setUIPrice();
+                    if (!SetPriceActivity.this.isDestroyed()) {
+                        ImageUtils.showAvatar(binding.ivImgVideo, setPriceInitBean.getVideo_chat_config().getIcon());
+                        if (!StringUtils.isEmpty(baseBean.getData().getVideo_chat_config().getPrice())) {
+                            currentVideoPrice = baseBean.getData().getVideo_chat_config().getPrice();
+                            setUIPrice();
+                        }
                     }
 //                    setPriceCoinDialog = new SetPriceCoinDialog.Builder(SetPriceActivity.this, setPriceService.getSetVideoCoinPriceList(baseBean.getData().getVideo_tags_config().getItems()), consumer).create();
 //                    setPriceCoinDialog.show();

@@ -519,32 +519,37 @@ public class UserPageActivity extends BaseActivity<ActivityUserpageBinding> {
             binding.includeAvatar.tvFollow.setVisibility(View.GONE);
         }
 
-        if (user.getUser_video() != null && user.getUser_video().getList() != null && user.getUser_video().getList().size() > 0) {
-            binding.includeVideos.includeTitle.setTitle(user.getUser_video().getTitle());
-            binding.includeVideos.tvVideoNum.setText("( " + user.getUser_video().getNums() + " )");
-            binding.includeVideos.getRoot().setVisibility(View.VISIBLE);
-            binding.includeVideos.getRoot().setFocusable(false);
-            binding.includeVideos.rvList.setFocusable(false);
-            videosAdapter = new UserVideosAdapter(new WeakReference(this), UserService.isMe(user), user.getUser_video().getList(), user);
-            binding.includeVideos.rvList.addItemDecoration(new TransparentItemHorDecoration());
-            binding.includeVideos.rvList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false) {
-                @Override
-                public boolean canScrollVertically() {
-                    return false;
-                }
-
-                @Override
-                public boolean canScrollHorizontally() {
-                    if (user.getUser_video() != null && user.getUser_video().getList() != null && user.getUser_video().getList().size() >= 4) {
-                        return true;
-                    }
-                    return false;
-                }
-            });
-            binding.includeVideos.rvList.setAdapter(videosAdapter);
-        } else {
+        if (user.getVideo_chat_status() == 1) {
             binding.includeVideos.getRoot().setVisibility(View.GONE);
+        } else {
+            if (user.getUser_video() != null && user.getUser_video().getList() != null && user.getUser_video().getList().size() > 0) {
+                binding.includeVideos.includeTitle.setTitle(user.getUser_video().getTitle());
+                binding.includeVideos.tvVideoNum.setText("( " + user.getUser_video().getNums() + " )");
+                binding.includeVideos.getRoot().setVisibility(View.VISIBLE);
+                binding.includeVideos.getRoot().setFocusable(false);
+                binding.includeVideos.rvList.setFocusable(false);
+                videosAdapter = new UserVideosAdapter(new WeakReference(this), UserService.isMe(user), user.getUser_video().getList(), user);
+                binding.includeVideos.rvList.addItemDecoration(new TransparentItemHorDecoration());
+                binding.includeVideos.rvList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false) {
+                    @Override
+                    public boolean canScrollVertically() {
+                        return false;
+                    }
+
+                    @Override
+                    public boolean canScrollHorizontally() {
+                        if (user.getUser_video() != null && user.getUser_video().getList() != null && user.getUser_video().getList().size() >= 4) {
+                            return true;
+                        }
+                        return false;
+                    }
+                });
+                binding.includeVideos.rvList.setAdapter(videosAdapter);
+            } else {
+                binding.includeVideos.getRoot().setVisibility(View.GONE);
+            }
         }
+
     }
 
     private void initBottom() {
@@ -557,7 +562,11 @@ public class UserPageActivity extends BaseActivity<ActivityUserpageBinding> {
         if (user.getService_auth_status().intValue() != MValue.AUTH_STATUS_SUC) {
             binding.includeBottom.tvPrice.setText("视频聊天");
         } else {
-            binding.includeBottom.tvPrice.setText("聊天" + user.getVideo_chat_price() + "钻/分钟");
+            if (MAPP.mapp.getConfigBean().getIs_review_status() == 1) {
+                binding.includeBottom.tvPrice.setText("视频聊天");
+            } else {
+                binding.includeBottom.tvPrice.setText("聊天" + user.getVideo_chat_price() + "钻/分钟");
+            }
         }
 
     }
@@ -654,6 +663,13 @@ public class UserPageActivity extends BaseActivity<ActivityUserpageBinding> {
      * 初始化顶部头像和收藏等区域
      */
     private void initTop() {
+
+        if (MAPP.mapp.getConfigBean().getIs_review_status() == 1) {
+            binding.includeAvatar.tvFollow.setVisibility(View.GONE);
+        } else {
+            binding.includeAvatar.tvFollow.setVisibility(View.VISIBLE);
+        }
+
         binding.includeAvatar.tvName.setText(user.getNickname());
         //展示头像
         ImageUtils.showImage(binding.includeAvatar.ivAvatar, user.getAvatar());

@@ -527,31 +527,37 @@ public class HomepageBottomFragment extends BaseFragment<ActivityUserpageBinding
             binding.includeAvatar.tvFollow.setVisibility(View.GONE);
         }
 
-        if (user.getUser_video() != null && user.getUser_video().getList() != null && user.getUser_video().getList().size() > 0) {
-            binding.includeVideos.includeTitle.setTitle(user.getUser_video().getTitle());
-            binding.includeVideos.tvVideoNum.setText("( " + user.getUser_video().getNums() + " )");
-            binding.includeVideos.getRoot().setVisibility(View.VISIBLE);
-            binding.includeVideos.getRoot().setFocusable(false);
-            binding.includeVideos.rvList.setFocusable(false);
-            videosAdapter = new HomepageBottomVideosAdapter(new WeakReference(this), false, user.getUser_video().getList(), user);
-            binding.includeVideos.rvList.setLayoutManager(new LinearLayoutManager(_mActivity, LinearLayoutManager.HORIZONTAL, false) {
-                @Override
-                public boolean canScrollVertically() {
-                    return false;
-                }
-
-                @Override
-                public boolean canScrollHorizontally() {
-                    if (user.getUser_video() != null && user.getUser_video().getList() != null && user.getUser_video().getList().size() >= 4) {
-                        return true;
-                    }
-                    return false;
-                }
-            });
-            binding.includeVideos.rvList.setAdapter(videosAdapter);
-        } else {
+        if (MAPP.mapp.getConfigBean().getIs_review_status() == 1) {
             binding.includeVideos.getRoot().setVisibility(View.GONE);
+        } else {
+            if (user.getUser_video() != null && user.getUser_video().getList() != null && user.getUser_video().getList().size() > 0) {
+                binding.includeVideos.includeTitle.setTitle(user.getUser_video().getTitle());
+                binding.includeVideos.tvVideoNum.setText("( " + user.getUser_video().getNums() + " )");
+                binding.includeVideos.getRoot().setVisibility(View.VISIBLE);
+                binding.includeVideos.getRoot().setFocusable(false);
+                binding.includeVideos.rvList.setFocusable(false);
+                videosAdapter = new HomepageBottomVideosAdapter(new WeakReference(this), false, user.getUser_video().getList(), user);
+                binding.includeVideos.rvList.setLayoutManager(new LinearLayoutManager(_mActivity, LinearLayoutManager.HORIZONTAL, false) {
+                    @Override
+                    public boolean canScrollVertically() {
+                        return false;
+                    }
+
+                    @Override
+                    public boolean canScrollHorizontally() {
+                        if (user.getUser_video() != null && user.getUser_video().getList() != null && user.getUser_video().getList().size() >= 4) {
+                            return true;
+                        }
+                        return false;
+                    }
+                });
+                binding.includeVideos.rvList.setAdapter(videosAdapter);
+            } else {
+                binding.includeVideos.getRoot().setVisibility(View.GONE);
+            }
         }
+
+
     }
 
     private void initBottom() {
@@ -561,7 +567,13 @@ public class HomepageBottomFragment extends BaseFragment<ActivityUserpageBinding
         } else {
             binding.includeBottom.vVideoBg.setBackgroundResource(R.drawable.bg_rect_d6d6df_22);
         }
-        binding.includeBottom.tvPrice.setText("聊天" + user.getVideo_chat_price() + "钻/分钟");
+
+        if (MAPP.mapp.getConfigBean().getIs_review_status() == 1) {
+            binding.includeBottom.tvPrice.setText("视频聊天");
+        } else {
+            binding.includeBottom.tvPrice.setText("聊天" + user.getVideo_chat_price() + "钻/分钟");
+        }
+
     }
 
 
@@ -658,6 +670,14 @@ public class HomepageBottomFragment extends BaseFragment<ActivityUserpageBinding
      * 初始化顶部头像和收藏等区域
      */
     private void initTop() {
+
+        if (MAPP.mapp.getConfigBean().getIs_review_status() == 1) {
+            binding.includeAvatar.tvFollow.setVisibility(View.GONE);
+        } else {
+            binding.includeAvatar.tvFollow.setVisibility(View.VISIBLE);
+        }
+
+
         binding.includeAvatar.tvName.setText(user.getNickname());
         //展示头像
         ImageUtils.showIndexUserImage(binding.includeAvatar.ivAvatar, user.getAvatar());

@@ -131,6 +131,7 @@ public class IndexPopMenuAdapter extends BaseRecyclerViewAdapter {
                             IntentUtils.toThemeListActivity(binding.getRoot().getContext(), false, null);
                         } else if (s.getId().equals("-1")) {
 //                            IntentUtils.toDiscoverActivity(binding.getRoot().getContext());
+                            IntentUtils.toUserRecommendVideoActivity(binding.getRoot().getContext());
                         } else {
                             IntentUtils.toNewThemeServiceActivity(binding.getRoot().getContext(), s, s.getType().equals(MValue.ORDER_TYPE_VIDEO) ? MValue.NEW_SERVICE_TYPE_VIDEO : MValue.NEW_SERVICE_TYPE_NORMAL, null);
                         }

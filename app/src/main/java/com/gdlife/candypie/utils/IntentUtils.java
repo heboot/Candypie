@@ -65,6 +65,7 @@ import com.gdlife.candypie.activitys.user.UserVideoAudioPlayActivity;
 import com.gdlife.candypie.activitys.user.UserYueAttitudeActivity;
 import com.gdlife.candypie.activitys.video.AutoPlayActivity;
 import com.gdlife.candypie.activitys.video.PlayerActivity2;
+import com.gdlife.candypie.activitys.video.UserRecommendVideoActivity;
 import com.gdlife.candypie.activitys.video.UserUnlockVideosActivity;
 import com.gdlife.candypie.activitys.video.UserVideosActivity;
 import com.gdlife.candypie.activitys.video.VideoChatActivity;
@@ -217,6 +218,12 @@ public class IntentUtils {
         intent.putExtra(MKey.TYPE, type);
         intent.putExtra(MKey.USER, user);
         context.startActivity(intent);
+    }
+
+    public static void toUserRecommendVideoActivity(Context context){
+        Intent intent = new Intent(context, UserRecommendVideoActivity.class);
+        context.startActivity(intent);
+
     }
 
     public static void toThemeListActivity(Context context, boolean isOne2One, User user) {

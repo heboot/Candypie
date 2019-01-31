@@ -28,7 +28,7 @@ android {
 
                 XG_ACCESS_ID : "2100281297",
                 XG_ACCESS_KEY: "AKQY85WG581T",
-                UMENG_APPKEY        : "5b39f786b27b0a0d9100002e",
+                UMENG_APPKEY : "5b39f786b27b0a0d9100002e",
         ]
 
         multiDexEnabled true

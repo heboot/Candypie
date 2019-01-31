@@ -621,7 +621,12 @@ public class DiscoverVideoFragment4 extends BaseFragment<FragmentDiscoverVideoBi
     private boolean locking = false;
 
     private void checkLock() {
-        binding.includeBottom.tvPrice.setText("聊天" + user.getVideo_chat_price() + "钻/分钟");
+        if (MAPP.mapp.getConfigBean().getIs_review_status() == 1) {
+            binding.includeBottom.tvPrice.setText("视频聊天");
+        } else {
+            binding.includeBottom.tvPrice.setText("聊天" + user.getVideo_chat_price() + "钻/分钟");
+        }
+
         if (currentShowIndex == lockTioIndex) {
             return;
         }

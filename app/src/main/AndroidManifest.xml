@@ -364,6 +364,10 @@
             android:screenOrientation="portrait"></activity>
 
         <activity
+            android:name=".activitys.video.UserRecommendVideoActivity"
+            android:screenOrientation="portrait"></activity>
+
+        <activity
             android:name=".activitys.common.CustomCrashActivity"
             android:process=":error_activity"
             android:screenOrientation="portrait"></activity>
@@ -598,7 +602,7 @@
 
         <meta-data
             android:name="UMENG_CHANNEL"
-            android:value="tencent" />
+            android:value="huawei" />
 
         <meta-data
             android:name="UMENG_APPKEY"
