@@ -72,7 +72,7 @@ public class ThemeListAdapter extends BaseRecyclerViewAdapter {
                     } else {
                         IntentUtils.toNewThemeServiceActivity(binding.getRoot().getContext(), s, s.getType().equals(MValue.ORDER_TYPE_VIDEO) ? MValue.NEW_SERVICE_TYPE_VIDEO : MValue.NEW_SERVICE_TYPE_ONE, user);
                     }
-//                    IntentUtils.toNewThemeServiceActivity(binding.getRoot().getContext(), s, s.getId().equals("1") ? MValue.NEW_SERVICE_TYPE_VIDEO : MValue.NEW_SERVICE_TYPE_ONE, user);
+                    IntentUtils.toNewThemeServiceActivity(binding.getRoot().getContext(), s, s.getId().equals("1") ? MValue.NEW_SERVICE_TYPE_VIDEO : MValue.NEW_SERVICE_TYPE_ONE, user);
                 } else if (user != null) {
                     if (s.getType().equals(MValue.ORDER_TYPE_VIDEO)) {
                         if (weakReference != null && weakReference.get() != null) {
@@ -82,12 +82,12 @@ public class ThemeListAdapter extends BaseRecyclerViewAdapter {
                         IntentUtils.toNewThemeServiceActivity(binding.getRoot().getContext(), s, s.getType().equals(MValue.ORDER_TYPE_VIDEO) ? MValue.NEW_SERVICE_TYPE_VIDEO : MValue.NEW_SERVICE_TYPE_ONE, user);
                     }
 
-//                    IntentUtils.toNewThemeServiceActivity(binding.getRoot().getContext(), s, s.getId().equals("1") ? MValue.NEW_SERVICE_TYPE_VIDEO : MValue.NEW_SERVICE_TYPE_NORMAL, null);
+                    IntentUtils.toNewThemeServiceActivity(binding.getRoot().getContext(), s, s.getId().equals("1") ? MValue.NEW_SERVICE_TYPE_VIDEO : MValue.NEW_SERVICE_TYPE_NORMAL, null);
                 }
-//                else {
-//                    IntentUtils.toNewThemeServiceActivity(binding.getRoot().getContext(), s, s.getType().equals(MValue.ORDER_TYPE_VIDEO) ? MValue.NEW_SERVICE_TYPE_VIDEO : MValue.NEW_SERVICE_TYPE_NORMAL, null);
-//
-//                }
+                else {
+                    IntentUtils.toNewThemeServiceActivity(binding.getRoot().getContext(), s, s.getType().equals(MValue.ORDER_TYPE_VIDEO) ? MValue.NEW_SERVICE_TYPE_VIDEO : MValue.NEW_SERVICE_TYPE_NORMAL, null);
+
+                }
 
             });
         }
