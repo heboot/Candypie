@@ -65,7 +65,12 @@ public class MyBottomMenuAdapter extends BaseQuickAdapter<MyBottomMenuModel, Bas
             } else if (item.getName().equals("设置")) {
                 IntentUtils.toSettingActivity(helper.itemView.getContext());
             } else if (item.getName().equals("新手指南")) {
-                IntentUtils.toHTMLActivity(binding.getRoot().getContext(), "", MAPP.mapp.getConfigBean().getStatic_url_config().getUser_help());
+                if (UserService.getInstance().isServicer()) {
+                    IntentUtils.toHTMLActivity(binding.getRoot().getContext(), "", MAPP.mapp.getConfigBean().getStatic_url_config().getServicer_help());
+                } else {
+                    IntentUtils.toHTMLActivity(binding.getRoot().getContext(), "", MAPP.mapp.getConfigBean().getStatic_url_config().getUser_help());
+                }
+
             } else if (item.getName().equals("常见问题")) {
                 if (UserService.getInstance().isServicer()) {
                     IntentUtils.toHTMLActivity(binding.getRoot().getContext(), "", MAPP.mapp.getConfigBean().getStatic_url_config().getServicer_qa());
