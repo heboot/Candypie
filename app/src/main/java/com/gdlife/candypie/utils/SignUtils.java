@@ -4,7 +4,6 @@ package com.gdlife.candypie.utils;
  * Created by heboot on 2018/2/7.
  */
 
-import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 
