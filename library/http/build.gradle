@@ -15,7 +15,7 @@ android {
     buildTypes {
         release {
             //"/yihaocar/"
-            buildConfigField 'String', 'HTTP_SERVER', "\"http://www.icandypie.com/\""
+            buildConfigField 'String', 'HTTP_SERVER', "\"http://www.malayaoji.com/\""
             buildConfigField 'String', 'URL_VER', "\"\""
             buildConfigField 'String', 'HELP_URL', "\"http://www.guodonglife.cn/public/static/help/\""
             minifyEnabled config.MINIFY_DISABLED

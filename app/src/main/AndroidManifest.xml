@@ -602,7 +602,7 @@
 
         <meta-data
             android:name="UMENG_CHANNEL"
-            android:value="huawei" />
+            android:value="oppo" />
 
         <meta-data
             android:name="UMENG_APPKEY"
